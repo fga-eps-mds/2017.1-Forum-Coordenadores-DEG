@@ -5900,6 +5900,10 @@ namespace ForumDEG.Droid
 					2130772229,
 					2130772230};
 			
+
+			// aapt resource value: 0
+			public const int BottomNavigationView_menu = 0;
+			
 			// aapt resource value: 1
 			public const int BottomSheetBehavior_Layout_behavior_hideable = 1;
 			
@@ -6170,6 +6174,25 @@ namespace ForumDEG.Droid
 					2130772261,
 					2130772262,
 					2130772263};
+
+			
+			// aapt resource value: 1
+			public const int FloatingActionButton_backgroundTint = 1;
+			
+			// aapt resource value: 2
+			public const int FloatingActionButton_backgroundTintMode = 2;
+			
+			// aapt resource value: 6
+			public const int FloatingActionButton_backgroundTint = 6;
+			
+			// aapt resource value: 7
+			public const int FloatingActionButton_backgroundTintMode = 7;
+			
+			// aapt resource value: 3
+			public const int FloatingActionButton_borderWidth = 3;
+			
+			// aapt resource value: 5
+			public const int FloatingActionButton_elevation = 5;
 			
 			// aapt resource value: 1
 			public const int FloatingActionButton_backgroundTint = 1;

@@ -74,6 +74,12 @@
     <Compile Include="Views\UserRegistrationPage.xaml.cs">
       <DependentUpon>UserRegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -150,6 +156,25 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\UserRegistrationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+    <ItemGroup>
+    <EmbeddedResource Include="Views\ForumDetailPage.xaml"/>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\LoginPage\background_image.png" />
+    <EmbeddedResource Include="Assets\LoginPage\background_transparency.png" />
+    <EmbeddedResource Include="Assets\LoginPage\Ellipse.png" />
+    <EmbeddedResource Include="Assets\LoginPage\Logo.png" />
+    <EmbeddedResource Include="Assets\LoginPage\Path.png" />
+    <EmbeddedResource Include="Assets\LoginPage\Rectangle 2.png" />
+    <EmbeddedResource Include="Assets\LoginPage\Rectangle 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
