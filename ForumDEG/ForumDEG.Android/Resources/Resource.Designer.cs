@@ -2836,6 +2836,8 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f02010b
 			public const int notification_template_icon_low_bg = 2130837771;
+
+			public const int notification_bg_normal = 2130837766;
 			
 			// aapt resource value: 0x7f020107
 			public const int notification_bg_normal_pressed = 2130837767;
