@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using ImageCircle.Forms.Plugin.iOS;
 
 namespace ForumDEG.iOS {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -20,6 +21,7 @@ namespace ForumDEG.iOS {
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
             global::Xamarin.Forms.Forms.Init();
+            ImageCircleRenderer.Init();
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
