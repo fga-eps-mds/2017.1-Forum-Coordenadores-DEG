@@ -10,11 +10,11 @@
                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                AbsoluteLayout.LayoutFlags="All" />
 
-        <Image Source="{local:EmbeddedImage ResourceId=ForumDEG.Images.logo.png }" 
+        <Image Source="logo.png" 
                AbsoluteLayout.LayoutBounds="0.5, 0.15, 136, 136"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Image Source="{local:EmbeddedImage ResourceId=ForumDEG.Images.entry_rectangle.png }" 
+        <Image Source="entry_rectangle.png" 
                AbsoluteLayout.LayoutBounds="0.5, 0.4, 315, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
         
@@ -25,7 +25,7 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.4, 270, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Image Source="{local:EmbeddedImage ResourceId=ForumDEG.Images.entry_rectangle.png }" 
+        <Image Source="entry_rectangle.png" 
                AbsoluteLayout.LayoutBounds="0.5, 0.55, 315, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
@@ -36,7 +36,7 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.55, 270, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
         
-        <Button Image="button_rectangle.png"
+        <Button Image="login_button.png"
                 BorderColor="Transparent"
                 BackgroundColor="Transparent"
                 AbsoluteLayout.LayoutBounds="0.5, 0.7, 315, 53"

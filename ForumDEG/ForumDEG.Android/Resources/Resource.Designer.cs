@@ -2265,7 +2265,7 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
-			
+
 			// aapt resource value: 0x7f020113
 			public const int avd_show_password_1 = 2130837779;
 			
@@ -2274,27 +2274,39 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f020115
 			public const int avd_show_password_3 = 2130837781;
+
+			// aapt resource value: 0x7f02010d
+			public const int avd_hide_password_1 = 2130837773;
+			
+			// aapt resource value: 0x7f02010e
+			public const int avd_hide_password_2 = 2130837774;
+			
+			// aapt resource value: 0x7f02010f
+			public const int avd_hide_password_3 = 2130837775;
+			
+			// aapt resource value: 0x7f020054
+			public const int avd_show_password = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int button_rectangle = 2130837589;
+			public const int design_bottom_navigation_item_background = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int design_bottom_navigation_item_background = 2130837590;
+			public const int design_fab_background = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int design_fab_background = 2130837591;
+			public const int design_ic_visibility = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int design_ic_visibility = 2130837592;
+			public const int design_ic_visibility_off = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int design_ic_visibility_off = 2130837593;
+			public const int design_password_eye = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int design_password_eye = 2130837594;
+			public const int design_snackbar_background = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int design_snackbar_background = 2130837595;
+			public const int entry_rectangle = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
 			public const int ic_audiotrack_dark = 2130837596;
@@ -2736,6 +2748,11 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f0200ed
 			public const int icon_android = 2130837741;
+
+			public const int login_button = 2130837740;
+			
+			// aapt resource value: 0x7f0200ed
+			public const int logo = 2130837741;
 			
 			// aapt resource value: 0x7f0200ee
 			public const int mr_button_connected_dark = 2130837742;
@@ -2811,6 +2828,14 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f020106
 			public const int notification_bg_normal = 2130837766;
+
+			public const int notification_icon_background = 2130837766;
+			
+			// aapt resource value: 0x7f02010a
+			public const int notification_template_icon_bg = 2130837770;
+			
+			// aapt resource value: 0x7f02010b
+			public const int notification_template_icon_low_bg = 2130837771;
 			
 			// aapt resource value: 0x7f020107
 			public const int notification_bg_normal_pressed = 2130837767;
@@ -2823,6 +2848,12 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f02010f
 			public const int notification_template_icon_low_bg = 2130837775;
+            
+			// aapt resource value: 0x7f020109
+			public const int notification_tile_bg = 2130837769;
+			
+			// aapt resource value: 0x7f02010a
+			public const int notify_panel_notification_icon_bg = 2130837770;
 			
 			// aapt resource value: 0x7f020109
 			public const int notification_tile_bg = 2130837769;
