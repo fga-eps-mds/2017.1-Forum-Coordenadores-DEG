@@ -13,5 +13,25 @@ namespace ForumDEG.Views {
         public LoginPage() {
             InitializeComponent();
         }
+
+        async void OnLoginButtonClicked(object sender, EventArgs e) {
+            var user = new Models.User {
+                email = emailEntry.Text,
+                password = passwordEntry.Text
+            };
+
+            if (isLoginInfoCorrect(user)) {
+                App.IsLoggedIn = true;
+                Navigation.InsertPageBefore(new Views.MainPage(), this);
+                await Navigation.PopAsync();
+            } else {
+                loginFailedLabel.Text = "Usuário ou senha incorretos!";
+                passwordEntry.Text = string.Empty;
+            }
+        }
+
+        private bool isLoginInfoCorrect (Models.User user) {
+            return ((user.email == "test@test.com") && (user.password == "testpass"));
+        }
     }
 }

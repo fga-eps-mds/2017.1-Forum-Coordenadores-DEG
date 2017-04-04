@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ForumDEG.MarkupExtensions"
              xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
-             x:Class="ForumDEG.Views.LoginPage">
+             x:Class="ForumDEG.Views.LoginPage"
+             NavigationPage.HasNavigationBar="false">
     <AbsoluteLayout>
 
         <Image Source="{local:EmbeddedImage ResourceId=ForumDEG.Images.login_background.png }"
@@ -21,7 +22,8 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.4, 315, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
         
-        <Entry Placeholder="Usuario"
+        <Entry x:Name="emailEntry"
+               Placeholder="Usuario"
                BackgroundColor="Transparent"
                Keyboard="Email"
                HorizontalTextAlignment="Center"
@@ -33,7 +35,8 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.55, 315, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Entry BackgroundColor="Transparent"
+        <Entry x:Name="passwordEntry"
+               BackgroundColor="Transparent"
                Placeholder="Senha"
                IsPassword="True"
                HorizontalTextAlignment="Center"
@@ -45,7 +48,13 @@
                 BorderColor="Transparent"
                 BackgroundColor="Transparent"
                 AbsoluteLayout.LayoutBounds="0.5, 0.7, 315, 53"
-                AbsoluteLayout.LayoutFlags="PositionProportional" />
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Clicked="OnLoginButtonClicked" />
+
+        <Label x:Name="loginFailedLabel" 
+               TextColor="Red"
+               AbsoluteLayout.LayoutBounds="0.5, 1, 0.5, 0.1" 
+               AbsoluteLayout.LayoutFlags="All" />
 
     </AbsoluteLayout>
 </ContentPage>

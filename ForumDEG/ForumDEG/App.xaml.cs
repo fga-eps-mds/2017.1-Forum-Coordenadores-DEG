@@ -8,13 +8,32 @@ namespace ForumDEG {
         static CoordinatorDatabase _coordinatorDatabase;
         //static ForumDatabase _forumDatabase;
 
+        static AdministratorDatabase _administratorDatabase;
+        //static CoordinatorDatabase _coordinatorDatabase;
+        //static ForumDatabase _forumDatabase;
+        public static bool IsLoggedIn { get; set; }
+
         public App() {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new AppMasterPage()) {
-                BarBackgroundColor = Color.FromHex("#ff8924")
-            };
-            //MainPage = new ForumDEG.MainPage();
+            if (!IsLoggedIn) {
+                MainPage = new NavigationPage(new Views.LoginPage());
+            } else {
+                MainPage = new NavigationPage(new Views.MainPage());
+            }
+
+            MainPage = new NavigationPage(new AdministratorsPage());
+
+        }
+
+        public static AdministratorDatabase AdministratorDatabase{
+            get {
+                if(_administratorDatabase == null){
+                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
+                }
+                return _administratorDatabase;
+
+            }
         }
 
         public static AdministratorDatabase AdministratorDatabase{
