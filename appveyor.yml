@@ -1,0 +1,72 @@
+version: 1.0.{build}
+
+# you can use {branch} name in version format too
+# version: 1.0.{build}-{branch}
+
+before_build:
+- ps: >-
+    nuget restore
+
+# .\src\XLabs.Framework.sln
+
+environment:
+    project_name: 'ForumDEG'
+
+# branches to build
+branches:
+  # whitelist
+  only:
+   - master
+   - development
+
+  # blacklist
+  # except:
+   # - gh-pages
+
+# Do not build on tags (GitHub and BitBucket)
+# skip_tags: true
+
+# Start builds on tags only (GitHub and BitBucket)
+# skip_non_tags: true
+
+# Do not build feature branch with open Pull Requests
+skip_branch_with_pr: false
+
+# Maximum number of concurrent jobs for the project
+max_jobs: 1
+
+# Build worker image (VM template)
+image: Visual Studio 2017
+
+# scripts that are called at very beginning, before repo cloning
+init:
+  - git config --global core.autocrlf input
+
+# build Configuration, i.e. Debug, Release, etc.
+configuration: Release
+
+artifacts:
+    # pushing a single file with environment variable in path and "Deployment name" specified
+  - path: ForumDEG\bin\$(configuration)
+    name: forumdeg
+
+  - path: forumdeg.zip
+
+  # pushing entire folder as a zip archive
+  - path: logs
+
+notifications:
+
+  # Email
+  - provider: Email
+    to:
+      - dan.b412@gmail.com
+      - vitorbertulucci@hotmail.com
+      - thiagocmoreira1@gmail.com
+      - lucasrufinotravassos@gmail.com
+      - '{{commitAuthorEmail}}'
+    subject: 'Build {{status}}'                  # optional
+    message: "{{message}}, {{commitId}}, ..."    # optional
+    on_build_success: true|false
+    on_build_failure: true|false
+    on_build_status_changed: true|false
