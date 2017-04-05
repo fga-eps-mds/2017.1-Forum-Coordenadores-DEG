@@ -15,7 +15,7 @@
         <circle:CircleImage Source="logo.png" 
                HeightRequest="136"
                WidthRequest="136"
-               AbsoluteLayout.LayoutBounds="0.5, 0.15, 136, 136"
+               AbsoluteLayout.LayoutBounds="0.5, 0.1, 136, 136"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
         <Image Source="entry_rectangle.png" 
@@ -23,7 +23,7 @@
                AbsoluteLayout.LayoutFlags="PositionProportional" />
         
         <Entry x:Name="emailEntry"
-               Placeholder="Usuario"
+               Placeholder="Usuário"
                BackgroundColor="Transparent"
                Keyboard="Email"
                HorizontalTextAlignment="Center"
@@ -43,11 +43,24 @@
                FontSize="22"
                AbsoluteLayout.LayoutBounds="0.5, 0.55, 270, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
-        
+
+        <Label Text="Esqueceu sua senha?"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               TextColor="White"
+               AbsoluteLayout.LayoutBounds="0.5, 0.63, 135, 25"
+               AbsoluteLayout.LayoutFlags="PositionProportional">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer 
+                       Tapped="OnForgotPasswordTapped"
+                       NumberOfTapsRequired="1" />
+            </Label.GestureRecognizers>
+        </Label>
+
         <Button Image="login_button.png"
                 BorderColor="Transparent"
                 BackgroundColor="Transparent"
-                AbsoluteLayout.LayoutBounds="0.5, 0.7, 315, 53"
+                AbsoluteLayout.LayoutBounds="0.5, 0.73, 315, 53"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 Clicked="OnLoginButtonClicked" />
 

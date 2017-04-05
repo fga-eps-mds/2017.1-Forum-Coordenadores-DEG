@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,12 @@ namespace ForumDEG.Views {
     public partial class LoginPage : ContentPage {
         public LoginPage() {
             InitializeComponent();
+        }
+
+        private async void OnForgotPasswordTapped(object sender, EventArgs e) {
+            var page = new Views.ForgotPasswordPopup();
+
+            await Navigation.PushPopupAsync(page);
         }
 
         async void OnLoginButtonClicked(object sender, EventArgs e) {
