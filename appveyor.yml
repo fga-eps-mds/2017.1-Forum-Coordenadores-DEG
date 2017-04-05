@@ -64,7 +64,7 @@ notifications:
       - vitorbertulucci@hotmail.com
       - thiagocmoreira1@gmail.com
       - lucasrufinotravassos@gmail.com
-      - '{{commitAuthorEmail}}'
+    #  - '{{commitAuthorEmail}}'
     subject: 'Build {{status}}'                  # optional
     message: "{{message}}, {{commitId}}, ..."    # optional
     on_build_success: true|false
