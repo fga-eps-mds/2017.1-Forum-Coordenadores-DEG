@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.Utils
 {
-    class UserDatabase  {
+    public class UserDatabase  {
         private SQLiteConnection _connection;
 
         public UserDatabase () {
@@ -26,6 +26,11 @@ namespace ForumDEG.Utils
         public IEnumerable<User> GetAllAdministrators()
         {
             return (from t in _connection.Table<Administrator>() select t).ToList();
+        }
+
+        internal void AddAdministrator(object thought)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<User> GetAllCoordinators()

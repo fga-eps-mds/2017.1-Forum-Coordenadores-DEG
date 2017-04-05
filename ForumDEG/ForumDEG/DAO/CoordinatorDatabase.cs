@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.Utils
 {
-    class CoordinatorDatabase
+    public class CoordinatorDatabase
     {
         private SQLiteConnection _connection;
 

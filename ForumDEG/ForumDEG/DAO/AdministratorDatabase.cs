@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.Utils
 {
-    class AdministratorDatabase
+    public class AdministratorDatabase
     {
         private SQLiteConnection _connection;
 
@@ -32,6 +32,11 @@ namespace ForumDEG.Utils
                 CreatedOn = DateTime.Now
             };
             _connection.Insert(newAdministrator);
+        }
+
+        public static explicit operator AdministratorDatabase(UserDatabase v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

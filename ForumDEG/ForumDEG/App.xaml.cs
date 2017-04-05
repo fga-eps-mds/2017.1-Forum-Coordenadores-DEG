@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ForumDEG.Utils;
+using ForumDEG.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +9,13 @@ using Xamarin.Forms;
 
 namespace ForumDEG {
     public partial class App : Application {
+
         public App() {
             InitializeComponent();
 
-            MainPage = new ForumDEG.MainPage();
+            var database = new UserDatabase();
+
+            MainPage = new NavigationPage (new UsersPage(database));
         }
 
         protected override void OnStart() {
