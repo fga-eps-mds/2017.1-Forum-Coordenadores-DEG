@@ -48,7 +48,7 @@
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
                TextColor="White"
-               AbsoluteLayout.LayoutBounds="0.5, 0.63, 135, 25"
+               AbsoluteLayout.LayoutBounds="0.5, 0.63, 315, 25"
                AbsoluteLayout.LayoutFlags="PositionProportional">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer 

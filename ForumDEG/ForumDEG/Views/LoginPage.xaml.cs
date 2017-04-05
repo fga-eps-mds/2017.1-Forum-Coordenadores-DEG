@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ForumDEG.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,23 +12,19 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage {
+        private LoginViewModel _lvm = new LoginViewModel();
+
         public LoginPage() {
             InitializeComponent();
         }
 
         private async void OnForgotPasswordTapped(object sender, EventArgs e) {
             var page = new Views.ForgotPasswordPopup();
-
             await Navigation.PushPopupAsync(page);
         }
 
         async void OnLoginButtonClicked(object sender, EventArgs e) {
-            var user = new Models.User {
-                email = emailEntry.Text,
-                password = passwordEntry.Text
-            };
-
-            if (isLoginInfoCorrect(user)) {
+            if (_lvm.MakeLogin(emailEntry.Text, passwordEntry.Text)) {
                 App.IsLoggedIn = true;
                 Navigation.InsertPageBefore(new Views.MainPage(), this);
                 await Navigation.PopAsync();
@@ -35,10 +32,6 @@ namespace ForumDEG.Views {
                 loginFailedLabel.Text = "Usuário ou senha incorretos!";
                 passwordEntry.Text = string.Empty;
             }
-        }
-
-        private bool isLoginInfoCorrect (Models.User user) {
-            return ((user.email == "test@test.com") && (user.password == "testpass"));
         }
     }
 }
