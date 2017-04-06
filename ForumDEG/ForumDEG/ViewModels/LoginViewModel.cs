@@ -9,12 +9,12 @@ using ForumDEG.Models;
 namespace ForumDEG.ViewModels {
     class LoginViewModel {
         private List<User> users = new List<User>() {
-            new User("John", "xablau@email.com", "passwordjohn", "150154647"),
-            new User("Romeu", "migue@email.com", "pequeno", "141405672"),
-            new User("Painillo", "danillo@pai.com", "paizao", "210213456"),
-            new User("Thiago Boy", "thiago@stickers.com", "10horasStickers", "456436798"),
-            new User("Clarissa Girl", "clarissa@doguinho.com", "savethedogs", "142345090"),
-            new User("Marigué, a Migueriana", "marigue@migueriana.com", "soumiguemsm", "099294545")
+            new Administrator("John", "xablau@email.com", "passwordjohn", "150154647"),
+            new Administrator("Romeu", "migue@email.com", "pequeno", "141405672"),
+            new Coordinator("Painillo", "danillo@pai.com", "paizao", "210213456","Engenharia de Software"),
+            new Coordinator("Thiago Boy", "thiago@stickers.com", "10horasStickers", "456436798","Engenharia de Stickers"),
+            new Administrator("Clarissa Girl", "clarissa@doguinho.com", "savethedogs", "142345090"),
+            new Administrator("Marigué, a Migueriana", "marigue@migueriana.com", "soumiguemsm", "099294545")
         };
 
         private User _user;
@@ -23,7 +23,7 @@ namespace ForumDEG.ViewModels {
             // TODO: check if email is valid with IsValidEmail when the method get fixed
             _user = FindUser(email);
             if (_user != null)
-                if (_user.password == password) return true;
+                if (_user._password == password) return true;
             return false;
         }
 
@@ -36,8 +36,15 @@ namespace ForumDEG.ViewModels {
 
         private User FindUser(string email) {
             foreach (var user in users)
-                if (user.email == email) return user;
+                if (user._email == email) return user;
             return null;
+        }
+
+        public bool IsAdmin() {
+            if (_user._role == 1)
+                return true;
+            else
+                return false;
         }
 
         // This method is for some unknown reason givind an exception

@@ -25,8 +25,12 @@ namespace ForumDEG.Views {
 
         async void OnLoginButtonClicked(object sender, EventArgs e) {
             if (_lvm.MakeLogin(emailEntry.Text, passwordEntry.Text)) {
-                App.IsLoggedIn = true;
-                Navigation.InsertPageBefore(new Views.MainPage(), this);
+                App.isLoggedIn = true;
+                if (_lvm.IsAdmin()) {
+                    Navigation.InsertPageBefore(new Views.MainPageAdministrator(), this);
+                } else {
+                    Navigation.InsertPageBefore(new Views.MainPageCoordinator(), this);
+                }
                 await Navigation.PopAsync();
             } else {
                 loginFailedLabel.Text = "Usuário ou senha incorretos!";

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ForumDEG.Views.MainPage"
+             x:Class="ForumDEG.Views.MainPageCoordinator"
              Title="Fórum DEG">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Logout" Clicked="OnLogoutButtonClicked" />
     </ContentPage.ToolbarItems>
-    <Label Text="Bem Vindo ao Fórum de Coordenadores DEG UnB!" 
+    <Label Text="Bem Vindo ao Fórum de Coordenadores DEG UnB(Coordenador)!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
 </ContentPage>
