@@ -7,8 +7,17 @@ namespace ForumDEG {
          
         public App() {
             InitializeComponent();
+            MainPage = new ForumDEG.Views.ForunsPage();
+            //MainPage = new ForumDEG.MainPage();
+        }
 
-            MainPage = new NavigationPage(new Views.NewForumPage());
+        public static AdministratorDatabase AdministratorDatabase {
+            get {
+                if(_administratorDatabase == null){
+                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
+                }
+                return _administratorDatabase;
+            }
         }
 
         protected override void OnStart() {
