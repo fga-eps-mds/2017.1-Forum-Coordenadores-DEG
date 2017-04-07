@@ -1,5 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MasterDetailPageNavigation;assembly=MasterDetailPageNavigation"
              x:Class="ForumDEG.Views.ForunsPage">
-</ContentPage>
+    <MasterDetailPage.Master>
+        
+        <ContentPage Title="Master"  BackgroundColor="Black" Padding="5,100,5,5">
+            <ContentPage.Content>
+                <StackLayout>
+                   <Label Text="Opções"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           FontSize="Medium"/>
+
+                    <Button Text="Home" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedHome" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Fóruns" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedForum" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Criar Fórum" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCriarForum" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Coordenadores" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCoordenador" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Cadastrar Coordenador" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCadastrarCoordenador" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Formulários" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedFormulario" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Criar Formulário" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCriarFormulario" HorizontalOptions="StartAndExpand"/>
+                
+                </StackLayout>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    
+    
+    <MasterDetailPage.Detail>
+        <ContentPage>
+            <ListView x:Name="ForumList"  SeparatorColor="Orange" HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      Refreshing="Handle_Refreshing">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding _title}" TextColor="Black"/>
+                                    <Label Text="{Binding _place}"/>
+                                </StackLayout>
+                             <Button Text="Pauta" BackgroundColor="Orange" TextColor="White" BorderColor="Orange" Clicked="Handle_ClieckedPauta"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ContentPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
