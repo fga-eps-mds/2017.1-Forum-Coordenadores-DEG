@@ -1,38 +1,47 @@
 ﻿using ForumDEG.Models;
-using SQLite.Net;
-using System;
+using SQLite;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace ForumDEG.Utils
 {
     public class CoordinatorDatabase
     {
-        private SQLiteConnection _connection;
+        readonly SQLiteAsyncConnection _connection;
 
-        public CoordinatorDatabase()
+        public CoordinatorDatabase(string databasePath)
         {
-            _connection = DependencyService.Get<InterfaceSQLite>().
-                GetConnection();
+            _connection = new SQLiteAsyncConnection(databasePath);
 
-            _connection.CreateTable<Coordinator>();
+            _connection.CreateTableAsync<Coordinator>().Wait();
         }
 
-        public void AddCoordinator(string name, string registration, 
-            string course, string email, string password) {
+        public Task<List<Coordinator>> GetAllCoordinators()
+        {
+            return _connection.Table<Coordinator>().ToListAsync();
+        }
 
-            var newCoordinator = new Coordinator {
-                Name = name,
-                Registration = registration,
-                Course = course,
-                Email = email,
-                Password = password,
-                CreatedOn = DateTime.Now
-            };
-            _connection.Insert(newCoordinator);
+        public Task<Coordinator> GetCoordinator(int id)
+        {
+            return _connection.Table<Coordinator>().Where(i => i.Id == id).FirstOrDefaultAsync();
+        }
+
+        public Task<int> SaveCoordinator(Coordinator newCoordinator)
+        {
+
+            if (newCoordinator.Id != 0)
+            {
+                return _connection.InsertAsync(newCoordinator);
+            }
+            else
+            {
+                return _connection.UpdateAsync(newCoordinator);
+            }
+        }
+
+        public Task<int> DeleteCoordinator(Coordinator coordinator)
+        {
+            return _connection.DeleteAsync(coordinator);
         }
     }
 }

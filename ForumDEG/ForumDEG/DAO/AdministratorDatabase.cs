@@ -1,42 +1,43 @@
 ﻿using ForumDEG.Models;
-using SQLite.Net;
-using System;
+using SQLite;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace ForumDEG.Utils
 {
     public class AdministratorDatabase
     {
-        private SQLiteConnection _connection;
+        readonly SQLiteAsyncConnection _connection;
 
-        public AdministratorDatabase()
+        public AdministratorDatabase(string databasePath)
         {
-            _connection = DependencyService.Get<InterfaceSQLite>().
-                GetConnection();
+            _connection = new SQLiteAsyncConnection(databasePath);
 
-            _connection.CreateTable<Administrator>();
+            _connection.CreateTableAsync<Administrator>().Wait();
         }
 
-        public void AddAdministrator(string name, string registration, 
-            string email, string password) {
-
-            var newAdministrator = new Administrator {
-                Name = name,
-                Registration = registration,
-                Email = email,
-                Password = password,
-                CreatedOn = DateTime.Now
-            };
-            _connection.Insert(newAdministrator);
+        public Task<List<Administrator>> GetAllAdministrators()
+        {
+            return _connection.Table<Administrator>().ToListAsync();
         }
 
-        public static explicit operator AdministratorDatabase(UserDatabase v)
+        public Task<Administrator> GetAdministrator(int id)
         {
-            throw new NotImplementedException();
+            return _connection.Table<Administrator>().Where(i => i.Id == id).FirstOrDefaultAsync();
+        }
+
+        public Task<int> SaveAdministrator(Administrator newAdministrator) {
+
+            if(newAdministrator.Id == 0) {
+                return _connection.InsertAsync(newAdministrator);
+            }
+            else {
+                return _connection.UpdateAsync(newAdministrator);
+            }
+        }
+
+        public Task<int> DeleteAdministrator(Administrator administrator) {
+            return _connection.DeleteAsync(administrator);
         }
     }
 }

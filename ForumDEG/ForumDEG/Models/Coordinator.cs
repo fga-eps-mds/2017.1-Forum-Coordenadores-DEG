@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace ForumDEG.Models
 {
     public class Coordinator : User {
-        private string _course;
-        public string Course { get => _course; set => _course = value; }
+        public string Course { get; set; }
     }
 }

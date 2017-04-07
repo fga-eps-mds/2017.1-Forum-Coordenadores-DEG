@@ -1,34 +1,20 @@
-﻿using SQLite.Net.Attributes;
+﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ForumDEG.Models
 {
     public class User {
         [PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        private string _name;
-        public string Name { get => _name; set => _name = value; }
+        public string Name { get; set; }
 
-        private string _registration;
-        public string Registration { get => _registration; set => _registration = value; }
+        public string Registration { get; set; }
 
-        private string _email;
-        public string Email { get => _email; set => _email = value; }
+        public string Email { get; set; }
 
-        private string _password;
-        public string Password { get => _password; set => _password = value; }
+        public string Password { get; set; }
 
-        private DateTime createdOn;
-        public DateTime CreatedOn { get => createdOn; set => createdOn = value; }
-        
-
-        public User () { 
-
-        }
+        public DateTime CreatedOn { get; set; }
     }
 }

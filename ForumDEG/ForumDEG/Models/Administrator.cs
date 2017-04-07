@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForumDEG.Models
 {
-    class Administrator : User  {
+    public class Administrator : User  {
+        
     }
 }
