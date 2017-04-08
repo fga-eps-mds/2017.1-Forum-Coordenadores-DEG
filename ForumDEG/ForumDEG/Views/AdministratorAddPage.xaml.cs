@@ -20,6 +20,7 @@ namespace ForumDEG.Views
 
         async void Save_Clicked(object sender, System.EventArgs e) {
             var personItem = (Administrator)BindingContext;
+            personItem.CreatedOn = DateTime.Now;
             await App.AdministratorDatabase.SaveAdministrator(personItem);
             await Navigation.PopAsync();
         }

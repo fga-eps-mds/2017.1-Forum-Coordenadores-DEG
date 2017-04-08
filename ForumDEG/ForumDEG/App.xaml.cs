@@ -1,9 +1,5 @@
 ﻿using ForumDEG.Utils;
 using ForumDEG.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace ForumDEG {
@@ -11,6 +7,7 @@ namespace ForumDEG {
 
         static AdministratorDatabase _administratorDatabase;
         static CoordinatorDatabase _coordinatorDatabase;
+        static ForumDatabase _forumDatabase;
 
         public App() {
             InitializeComponent();
