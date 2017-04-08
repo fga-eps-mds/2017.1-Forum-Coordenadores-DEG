@@ -7,37 +7,37 @@ namespace ForumDEG.Utils
 {
     public class AdministratorDatabase
     {
-        readonly SQLiteAsyncConnection _connection;
+        readonly SQLiteAsyncConnection _database;
 
         public AdministratorDatabase(string databasePath)
         {
-            _connection = new SQLiteAsyncConnection(databasePath);
+            _database = new SQLiteAsyncConnection(databasePath);
 
-            _connection.CreateTableAsync<Administrator>().Wait();
+            _database.CreateTableAsync<Administrator>().Wait();
         }
 
         public Task<List<Administrator>> GetAllAdministrators()
         {
-            return _connection.Table<Administrator>().ToListAsync();
+            return _database.Table<Administrator>().ToListAsync();
         }
 
         public Task<Administrator> GetAdministrator(int id)
         {
-            return _connection.Table<Administrator>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            return _database.Table<Administrator>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public Task<int> SaveAdministrator(Administrator newAdministrator) {
 
             if(newAdministrator.Id == 0) {
-                return _connection.InsertAsync(newAdministrator);
+                return _database.InsertAsync(newAdministrator);
             }
             else {
-                return _connection.UpdateAsync(newAdministrator);
+                return _database.UpdateAsync(newAdministrator);
             }
         }
 
         public Task<int> DeleteAdministrator(Administrator administrator) {
-            return _connection.DeleteAsync(administrator);
+            return _database.DeleteAsync(administrator);
         }
     }
 }

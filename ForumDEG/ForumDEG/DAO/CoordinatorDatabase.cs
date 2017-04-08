@@ -7,23 +7,23 @@ namespace ForumDEG.Utils
 {
     public class CoordinatorDatabase
     {
-        readonly SQLiteAsyncConnection _connection;
+        readonly SQLiteAsyncConnection _database;
 
         public CoordinatorDatabase(string databasePath)
         {
-            _connection = new SQLiteAsyncConnection(databasePath);
+            _database = new SQLiteAsyncConnection(databasePath);
 
-            _connection.CreateTableAsync<Coordinator>().Wait();
+            _database.CreateTableAsync<Coordinator>().Wait();
         }
 
         public Task<List<Coordinator>> GetAllCoordinators()
         {
-            return _connection.Table<Coordinator>().ToListAsync();
+            return _database.Table<Coordinator>().ToListAsync();
         }
 
         public Task<Coordinator> GetCoordinator(int id)
         {
-            return _connection.Table<Coordinator>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            return _database.Table<Coordinator>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public Task<int> SaveCoordinator(Coordinator newCoordinator)
@@ -31,17 +31,17 @@ namespace ForumDEG.Utils
 
             if (newCoordinator.Id != 0)
             {
-                return _connection.InsertAsync(newCoordinator);
+                return _database.InsertAsync(newCoordinator);
             }
             else
             {
-                return _connection.UpdateAsync(newCoordinator);
+                return _database.UpdateAsync(newCoordinator);
             }
         }
 
         public Task<int> DeleteCoordinator(Coordinator coordinator)
         {
-            return _connection.DeleteAsync(coordinator);
+            return _database.DeleteAsync(coordinator);
         }
     }
 }
