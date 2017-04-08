@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.NewForumPage"
+             NavigationPage.HasNavigationBar="True"
+             Title="Novo Fórum">
+    <StackLayout>
+        <Entry Placeholder="Título"/>
+        <DatePicker></DatePicker>
+        <TimePicker></TimePicker>
+        <Entry Placeholder="Local"/>
+        <Label Text="Pautas:"/>
+        <Editor HeightRequest="150" />
+        <Button Text="Criar fórum" 
+                Clicked="OnNewForumButtonClicked"/>
+    </StackLayout>
+</ContentPage>

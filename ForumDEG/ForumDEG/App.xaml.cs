@@ -12,17 +12,7 @@ namespace ForumDEG {
         public App() {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new AdministratorsPage());
-            //MainPage = new ForumDEG.MainPage();
-        }
-
-        public static AdministratorDatabase AdministratorDatabase{
-            get {
-                if(_administratorDatabase == null){
-                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
-                }
-                return _administratorDatabase;
-            }
+            MainPage = new NavigationPage(new Views.NewForumPage());
         }
 
         protected override void OnStart() {
