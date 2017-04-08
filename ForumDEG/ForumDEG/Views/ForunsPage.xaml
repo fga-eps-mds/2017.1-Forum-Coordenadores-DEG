@@ -4,11 +4,11 @@
              xmlns:local="clr-namespace:MasterDetailPageNavigation;assembly=MasterDetailPageNavigation"
              x:Class="ForumDEG.Views.ForunsPage">
     <MasterDetailPage.Master>
-        
+
         <ContentPage Title="Master"  BackgroundColor="Black" Padding="5,100,5,5">
             <ContentPage.Content>
                 <StackLayout>
-                   <Label Text="Opções"
+                    <Label Text="Opções"
                            TextColor="White"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
@@ -21,28 +21,38 @@
                     <Button Text="Cadastrar Coordenador" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCadastrarCoordenador" HorizontalOptions="StartAndExpand"/>
                     <Button Text="Formulários" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedFormulario" HorizontalOptions="StartAndExpand"/>
                     <Button Text="Criar Formulário" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCriarFormulario" HorizontalOptions="StartAndExpand"/>
-                
+
                 </StackLayout>
             </ContentPage.Content>
         </ContentPage>
     </MasterDetailPage.Master>
-    
-    
+
+
     <MasterDetailPage.Detail>
-        <ContentPage>
-            <ListView x:Name="ForumList"  SeparatorColor="Orange" HasUnevenRows="True"
+        <ContentPage Padding="5, 25, 5, 25">
+            <ListView x:Name="ForumList"  SeparatorVisibility="None" HasUnevenRows="False"
+                      RowHeight="60"
                       IsPullToRefreshEnabled="True"
-                      Refreshing="Handle_Refreshing">
+                      Refreshing="Handle_Refreshing"
+                      SelectedItem="Handle_Selected"
+                      ItemTapped="Handle_Selected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <StackLayout HorizontalOptions="StartAndExpand">
+
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding _title}" TextColor="Black"/>
-                                    <Label Text="{Binding _place}"/>
+                                    <Label Text="Ver detalhes"
+                                           TextColor="#3366BB"
+                                           HorizontalOptions="EndAndExpand"/>
                                 </StackLayout>
-                             <Button Text="Pauta" BackgroundColor="Orange" TextColor="White" BorderColor="Orange" Clicked="Handle_ClieckedPauta"/>
+                                <BoxView HeightRequest="1" Color="Gray"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="10/03/2017"/>
+                                </StackLayout>
                             </StackLayout>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

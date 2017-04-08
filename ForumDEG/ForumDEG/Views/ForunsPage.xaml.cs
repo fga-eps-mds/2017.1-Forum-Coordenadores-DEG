@@ -34,8 +34,13 @@ namespace ForumDEG.Views {
 
         public ForunsPage() {
             InitializeComponent();
-
+            
             ForumList.ItemsSource = GetForum();
+        }
+
+        void Handle_Selected(object sender, System.EventArgs e) {
+            if (e == null) return;
+            ((ListView)sender).SelectedItem = null;
         }
 
         void Handle_ClickedHome(object sender, System.EventArgs e) {
@@ -69,6 +74,5 @@ namespace ForumDEG.Views {
         void Handle_ClieckedPauta(object sender, System.EventArgs e) {
 
         }
-
     }
 }
