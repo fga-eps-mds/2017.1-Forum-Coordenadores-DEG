@@ -19,9 +19,13 @@ namespace ForumDEG.Views
         }
 
         async void Save_Clicked(object sender, System.EventArgs e) {
-            var personItem = (Administrator)BindingContext;
-            personItem.CreatedOn = DateTime.Now;
-            await App.AdministratorDatabase.SaveAdministrator(personItem);
+			var admUser = (Administrator)BindingContext;
+
+			// Check if there is no space in firsts characters
+			admUser.Registration.Trim();
+
+            admUser.CreatedOn = DateTime.Now;
+            await App.AdministratorDatabase.SaveAdministrator(admUser);
             await Navigation.PopAsync();
         }
 

@@ -9,6 +9,7 @@ namespace ForumDEG.Models
 
         public string Name { get; set; }
 
+		[Unique, NotNull]
         public string Registration { get; set; }
 
         public string Email { get; set; }
