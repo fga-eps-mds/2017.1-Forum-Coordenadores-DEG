@@ -29,7 +29,7 @@
 
 
     <MasterDetailPage.Detail>
-        <ContentPage Padding="5, 25, 5, 25">
+        <ContentPage Padding="15, 25, 15, 25">
             <ListView x:Name="ForumList"  SeparatorVisibility="None" HasUnevenRows="False"
                       RowHeight="60"
                       IsPullToRefreshEnabled="True"
@@ -49,7 +49,7 @@
                                 </StackLayout>
                                 <BoxView HeightRequest="1" Color="Gray"/>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="10/03/2017"/>
+                                    <Label Text="{Binding _date, StringFormat='{0:dd/MM/yyyy}'}"></Label>
                                 </StackLayout>
                             </StackLayout>
 
