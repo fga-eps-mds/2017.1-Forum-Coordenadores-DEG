@@ -4,14 +4,21 @@
              x:Class="ForumDEG.Views.NewForumPage"
              NavigationPage.HasNavigationBar="True"
              Title="Novo Fórum">
-    <StackLayout>
-        <Entry Placeholder="Título"/>
-        <DatePicker></DatePicker>
-        <TimePicker></TimePicker>
-        <Entry Placeholder="Local"/>
-        <Label Text="Pautas:"/>
-        <Editor HeightRequest="150" />
-        <Button Text="Criar fórum" 
+    <StackLayout Padding="20">
+        <Entry x:Name="titleEntry" Placeholder="Título"/>
+        <DatePicker x:Name="dateDatePicker"></DatePicker>
+        <TimePicker x:Name="timeTimePicker"></TimePicker>
+        <Entry x:Name="placeEntry" Placeholder="Local"/>
+        <Label Text="  Pautas:"/>
+        <Editor x:Name="schedulesEditor" HeightRequest="150" />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+            <Button Text="Cancelar" 
+                TextColor="White"
+                BackgroundColor="Orange"/>
+            <Button Text="Criar fórum" 
+                TextColor="White"
+                BackgroundColor="Orange"
                 Clicked="OnNewForumButtonClicked"/>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

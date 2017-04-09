@@ -15,7 +15,19 @@ namespace ForumDEG.Views {
         }
 
         private void OnNewForumButtonClicked(object sender, EventArgs e) {
-            DisplayAlert("Fórum Criado", "O novo fórum foi criado com sucesso. Os coordenadores serão notificados em breve.", "OK");
+            var forum = new Models.Forum {
+                _title = titleEntry.Text,
+                _place = placeEntry.Text,
+                _date = dateDatePicker.Date,
+                _hour = timeTimePicker.Time,
+                _schedules = schedulesEditor.Text
+            };
+            DisplayAlert("Fórum Criado", "Título: " + forum._title 
+                + "\nLocal: " + forum._place 
+                + "\nData: " + forum._date.ToString("dd/MM/yyyy")
+                + "\nHora: " + forum._hour.ToString()
+                + "\nPautas:\n" + forum._schedules
+                , "OK");
         }
     }
 }
