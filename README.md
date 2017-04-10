@@ -2,11 +2,11 @@
 
 <p align="center">
   <a href="https://ci.appveyor.com/project/DaniloBarros/2017-1-forum-coordenadores-deg"><img src="https://ci.appveyor.com/api/projects/status/pti794jc2425uq2g?svg=true" alt="Build Status"></a>
-  <a href=""><img src="https://badge.fury.io/gh/fga-gpp-mds%2F2017.1-Forum-Coordenadores-DEG.svg" alt="Version"></a>
+  <a href="#"><img src="https://badge.fury.io/gh/fga-gpp-mds%2F2017.1-Forum-Coordenadores-DEG.svg" alt="Version"></a>
   <a href="https://docs.microsoft.com/en-us/nuget/release-notes/nuget-4.0-rc"><img src="https://img.shields.io/badge/nuget-v4.0%20RC-blue.svg" alt="NuGet Version"></a>
   <a href=""><img src="https://img.shields.io/badge/c%23-v6.0-blue.svg" alt="C# Version"></a>
   <a href="http://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
-  <a href=""><img src="https://img.shields.io/badge/gpp--mds-2017.1-orange.svg" alt="GPP/MDS 2017.1"></a>
+  <a href="https://github.com/fga-gpp-mds"><img src="https://img.shields.io/badge/gpp--mds-2017.1-orange.svg" alt="GPP/MDS 2017.1"></a>
   
 </p>
 
