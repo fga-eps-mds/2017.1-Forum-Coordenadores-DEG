@@ -39,9 +39,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DAO\ForumDatabase.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Coordinator.cs" />
     <Compile Include="Models\Forum.cs" />
@@ -55,6 +52,7 @@
     </Compile>
     <Compile Include="Views\AdministratorsPage.xaml.cs">
       <DependentUpon>AdministratorsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewForumPage.xaml.cs">
       <DependentUpon>NewForumPage.xaml</DependentUpon>
     </Compile>

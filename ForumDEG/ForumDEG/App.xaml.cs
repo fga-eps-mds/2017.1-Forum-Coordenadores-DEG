@@ -15,6 +15,15 @@ namespace ForumDEG {
             MainPage = new NavigationPage(new Views.NewForumPage());
         }
 
+        public static AdministratorDatabase AdministratorDatabase {
+            get {
+                if (_administratorDatabase == null) {
+                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
+                }
+                return _administratorDatabase;
+            }
+        }
+
         protected override void OnStart() {
             // Handle when your app starts
         }
