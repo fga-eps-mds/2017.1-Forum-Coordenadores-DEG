@@ -3,13 +3,13 @@ version: 1.0.{build}
 # you can use {branch} name in version format too
 # version: 1.0.{build}-{branch}
 
-#install:
-#  - SET JAVA_HOME=C:\Program Files\Java\jdk1.6.0\bin
-#  - SET PATH=%JAVA_HOME%;%PATH%
-#  - java -version
+install:
+  - SET JAVA_HOME=C:\Program Files\Java\jdk1.7.0\bin
+  - SET PATH=%JAVA_HOME%;%PATH%
+  - java -version
 #  - echo %JDK_PATH%
-#  - echo %JAVA_HOME%
-#  - echo %PATH%
+  - echo %JAVA_HOME%
+  - echo %PATH%
 
 before_build:
 - ps: >-
