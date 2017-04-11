@@ -6,8 +6,8 @@ namespace ForumDEG {
     public partial class App : Application {
 
         static AdministratorDatabase _administratorDatabase;
-        static CoordinatorDatabase _coordinatorDatabase;
-        static ForumDatabase _forumDatabase;
+        //static CoordinatorDatabase _coordinatorDatabase;
+        //static ForumDatabase _forumDatabase;
 
         public App() {
             InitializeComponent();
