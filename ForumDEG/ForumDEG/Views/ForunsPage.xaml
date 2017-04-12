@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MasterDetailPageNavigation;assembly=MasterDetailPageNavigation"
              x:Class="ForumDEG.Views.ForunsPage">
+
+
     <MasterDetailPage.Master>
 
         <ContentPage Title="Master"  BackgroundColor="Black" Padding="5,100,5,5">
             <ContentPage.Content>
-                <StackLayout>
+                <StackLayout Padding="5">
                     <Label Text="Opções"
                            TextColor="White"
                            HorizontalOptions="Center"
@@ -28,31 +30,37 @@
     </MasterDetailPage.Master>
 
 
-    <MasterDetailPage.Detail>
-        <ContentPage Padding="15, 25, 15, 25">
-            <ListView x:Name="ForumList"  SeparatorVisibility="None" HasUnevenRows="False"
+    <MasterDetailPage.Detail >
+        <ContentPage Padding="15, 25, 15, 25" BackgroundColor="White">
+            <ListView x:Name="ForumList"  SeparatorVisibility="Default" HasUnevenRows="True"
                       RowHeight="60"
                       IsPullToRefreshEnabled="True"
                       Refreshing="Handle_Refreshing"
                       SelectedItem="Handle_Selected"
-                      ItemTapped="Handle_Selected">
+                      ItemTapped="Handle_Selected"
+                      SeparatorColor="Gray">
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-
-                            <StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding _title}" TextColor="Black"/>
-                                    <Label Text="Ver detalhes"
-                                           TextColor="#3366BB"
-                                           HorizontalOptions="EndAndExpand"/>
+                        <ViewCell >
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
+                                    <Label Text="{Binding _title}" TextColor="Black" />
+                                    <Label Text="{Binding _date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Gray"/>
                                 </StackLayout>
-                                <BoxView HeightRequest="1" Color="Gray"/>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding _date, StringFormat='{0:dd/MM/yyyy}'}"></Label>
-                                </StackLayout>
+                                
+                                <Label Text="Ver detalhes" 
+                                       TextColor="#3366BB" 
+                                       FontSize="Micro" 
+                                       VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                        Tapped="ShowDetail"
+                                        NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                
                             </StackLayout>
-
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
