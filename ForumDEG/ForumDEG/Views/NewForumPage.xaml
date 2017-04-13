@@ -5,13 +5,17 @@
              NavigationPage.HasNavigationBar="True"
              Title="Novo Fórum">
     <StackLayout Padding="20">
-        <Entry x:Name="titleEntry" Placeholder="Título"/>
-        <DatePicker x:Name="dateDatePicker"></DatePicker>
-        <TimePicker x:Name="timeTimePicker"></TimePicker>
-        <Entry x:Name="placeEntry" Placeholder="Local"/>
+        <Entry Text="{Binding _title}" Placeholder="Título"/>
+        <DatePicker Date="{Binding _date}" 
+                    x:Name="dateDatePicker"/>
+        <TimePicker Time="{Binding _hour}" />
+        <Entry Text="{Binding _place}" 
+               Placeholder="Local"/>
         <Label Text="  Pautas:"/>
-        <Editor x:Name="schedulesEditor" HeightRequest="150" />
-        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+        <Editor Text="{Binding _schedules}" 
+                HeightRequest="150" />
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="End">
             <Button Text="Cancelar" 
                 TextColor="White"
                 BackgroundColor="Orange"/>

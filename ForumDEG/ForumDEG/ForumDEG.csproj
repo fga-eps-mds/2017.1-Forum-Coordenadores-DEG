@@ -47,11 +47,8 @@
     <Compile Include="DAO\CoordinatorDatabase.cs" />
     <Compile Include="DAO\AdministratorDatabase.cs" />
     <Compile Include="Utils\IntefaceSQLite.cs" />
-    <Compile Include="Views\AdministratorAddPage.xaml.cs">
-      <DependentUpon>AdministratorAddPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AdministratorsPage.xaml.cs">
-      <DependentUpon>AdministratorsPage.xaml</DependentUpon>
+    <Compile Include="Views\ForumsPage.xaml.cs">
+      <DependentUpon>ForumsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewForumPage.xaml.cs">
       <DependentUpon>NewForumPage.xaml</DependentUpon>
@@ -90,22 +87,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AdministratorAddPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\AdministratorsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\NewForumPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ForumsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

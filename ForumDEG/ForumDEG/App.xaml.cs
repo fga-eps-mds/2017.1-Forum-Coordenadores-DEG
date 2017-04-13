@@ -5,9 +5,7 @@ using Xamarin.Forms;
 namespace ForumDEG {
     public partial class App : Application {
 
-        static AdministratorDatabase _administratorDatabase;
-        //static CoordinatorDatabase _coordinatorDatabase;
-        //static ForumDatabase _forumDatabase;
+        static ForumDatabase _forumDatabase;
 
         public App() {
             InitializeComponent();
@@ -15,12 +13,13 @@ namespace ForumDEG {
             MainPage = new NavigationPage(new Views.NewForumPage());
         }
 
-        public static AdministratorDatabase AdministratorDatabase {
+        public static ForumDatabase ForumDatabase {
             get {
-                if (_administratorDatabase == null) {
-                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
+                if (_forumDatabase == null) {
+                    _forumDatabase = new ForumDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Forum.db3"));
                 }
-                return _administratorDatabase;
+
+                return _forumDatabase;
             }
         }
 

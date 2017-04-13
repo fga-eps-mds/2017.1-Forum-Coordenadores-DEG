@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ForumDEG.Views.AdministratorsPage">
+             x:Class="ForumDEG.Views.ForumsPage">
     <ContentPage.Content>
-        <ListView x:Name="AdministratorListView" HorizontalOptions="FillAndExpand" ItemSelected="Administrator_ItemSelected">
+        <ListView x:Name="ForumListView" HorizontalOptions="FillAndExpand" ItemSelected="ForumListView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Registration}" />
+                    <TextCell Text="{Binding _title}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
