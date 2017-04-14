@@ -10,52 +10,24 @@ using ForumDEG.ViewModels;
 
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForunsPage : MasterDetailPage {
+    public partial class ForunsPage : ContentPage {
         private ForunsViewModel _fvm;
         
         public ForunsPage() {
             InitializeComponent();
 
             _fvm = new ForunsViewModel();
-            ForumList.ItemsSource = _fvm.GetUpdatedList();
+            forumList.ItemsSource = _fvm.GetUpdatedList();
         }
 
         void Handle_Refreshing(object sender, System.EventArgs e) {
-            ForumList.ItemsSource = _fvm.GetUpdatedList();
-            ForumList.EndRefresh();
+            forumList.ItemsSource = _fvm.GetUpdatedList();
+            forumList.EndRefresh();
         }
 
         void Handle_Selected(object sender, System.EventArgs e) {
             if (e == null) return;
             ((ListView)sender).SelectedItem = null;
-        }
-
-        void Handle_ClickedHome(object sender, System.EventArgs e) {
-            //            Implementation here
-        }
-
-        void Handle_ClickedForum(object sender, System.EventArgs e) {
-            //            Implementation here
-        }
-
-        void Handle_ClickedCriarForum(object sender, System.EventArgs e) {
-            //            Implementation here
-        }
-
-        void Handle_ClickedCoordenador(object sender, System.EventArgs e) {
-            //            Implementation here
-        }
-
-        void Handle_ClickedCadastrarCoordenador(object sender, System.EventArgs e) {
-            //            Implementation here
-        }
-
-        void Handle_ClickedFormulario(object sender, System.EventArgs e) {
-            //            Implementation here
-        }
-
-        void Handle_ClickedCriarFormulario(object sender, System.EventArgs e) {
-            //            Implementation here
         }
     }
 }
