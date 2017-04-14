@@ -48,16 +48,10 @@
                                     <Label Text="{Binding _title}" TextColor="Black" />
                                     <Label Text="{Binding _date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Gray"/>
                                 </StackLayout>
-                                
+
                                 <Label Text="Ver detalhes" 
-                                       TextColor="#3366BB" 
-                                       FontSize="Micro" 
+                                       TextColor="#3366BB"
                                        VerticalOptions="Center">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                        Tapped="ShowDetail"
-                                        NumberOfTapsRequired="1" />
-                                    </Label.GestureRecognizers>
                                 </Label>
                                 
                             </StackLayout>

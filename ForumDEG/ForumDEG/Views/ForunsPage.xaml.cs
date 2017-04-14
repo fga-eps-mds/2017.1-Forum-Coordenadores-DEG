@@ -20,10 +20,6 @@ namespace ForumDEG.Views {
             ForumList.ItemsSource = _fvm.GetUpdatedList();
         }
 
-        private async void ShowDetail(object sender, EventArgs e) {
-            //Implementation Here
-        }
-
         void Handle_Refreshing(object sender, System.EventArgs e) {
             ForumList.ItemsSource = _fvm.GetUpdatedList();
             ForumList.EndRefresh();
