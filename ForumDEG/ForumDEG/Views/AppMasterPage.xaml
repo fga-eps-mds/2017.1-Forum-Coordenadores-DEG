@@ -1,23 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:local="clr-namespace:ForumDEG;assembly=ForumDEG"
-             x:Class="ForumDEG.Views.AppMasterPage">
+                  x:Class="ForumDEG.Views.AppMasterPage">
 
     <MasterDetailPage.Master Title="Master Page">
-        <ContentPage Title="Menu">
-            <StackLayout Orientation="Vertical">
-                <Button Text="Sports"/>
-                <Button Text="Economy"/>
-                <Button Text="Education"/>
-                <Button Text="Science"/>
-            </StackLayout>
+        <ContentPage Title="Master"  BackgroundColor="Black" Padding="5,100,5,5">
+            <ContentPage.Content>
+                <StackLayout>
+                    <Label Text="Opções"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           FontSize="Medium"/>
+
+                    <Button Text="Home" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedHome" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Fóruns" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedForum" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Criar Fórum" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCriarForum" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Coordenadores" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCoordenador" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Cadastrar Coordenador" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCadastrarCoordenador" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Formulários" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedFormulario" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Criar Formulário" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCriarFormulario" HorizontalOptions="StartAndExpand"/>
+                </StackLayout>
+            </ContentPage.Content>
         </ContentPage>
     </MasterDetailPage.Master>
+
+
+
     <MasterDetailPage.Detail>
-        <NavigationPage>
+        <NavigationPage BarBackgroundColor="DarkOrange">
             <x:Arguments>
-                <ContentPage Title="This is a view"></ContentPage>
+                <ContentPage Title="Fórum DEG" Padding="0,50,0,0">
+                    <StackLayout>
+                        <Button Text="Fórum" TextColor="Gray" BorderColor="Gray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Medium"/>
+                        <Button Text="Coordenador" TextColor="Gray" BorderColor="Gray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium"/>
+                        <Button Text="Formulário" TextColor="Gray" BorderColor="Gray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="End" FontSize="Medium"/>
+                    </StackLayout>
+                </ContentPage>
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

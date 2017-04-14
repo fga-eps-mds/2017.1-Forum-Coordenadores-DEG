@@ -12,6 +12,33 @@ namespace ForumDEG.Views {
     public partial class AppMasterPage : MasterDetailPage {
         public AppMasterPage() {
             InitializeComponent();
+
+        }
+
+        void Handle_ClickedHome(object sender, System.EventArgs e) {
+            //            Implementation here
+        }
+
+        void Handle_ClickedForum(object sender, System.EventArgs e) {
+            //            Implementation here
+        }
+        void Handle_ClickedCriarForum(object sender, System.EventArgs e) {
+            //            Implementation here
+        }
+
+        void Handle_ClickedCoordenador(object sender, System.EventArgs e) {
+            //            Implementation here
+        }
+
+        void Handle_ClickedCadastrarCoordenador(object sender, System.EventArgs e) {
+            //            Implementation here
+        }
+        void Handle_ClickedFormulario(object sender, System.EventArgs e) {
+            //            Implementation here
+        }
+        void Handle_ClickedCriarFormulario(object sender, System.EventArgs e) {
+            //            Implementation here
         }
     }
 }
+
