@@ -47,6 +47,7 @@
     <Compile Include="DAO\CoordinatorDatabase.cs" />
     <Compile Include="DAO\AdministratorDatabase.cs" />
     <Compile Include="Utils\IntefaceSQLite.cs" />
+    <Compile Include="ViewModels\NewForumViewModel.cs" />
     <Compile Include="Views\ForumsPage.xaml.cs">
       <DependentUpon>ForumsPage.xaml</DependentUpon>
     </Compile>
@@ -86,9 +87,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Views\NewForumPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

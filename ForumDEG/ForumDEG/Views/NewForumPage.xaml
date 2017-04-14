@@ -5,14 +5,14 @@
              NavigationPage.HasNavigationBar="True"
              Title="Novo Fórum">
     <StackLayout Padding="20">
-        <Entry Text="{Binding _title}" Placeholder="Título"/>
-        <DatePicker Date="{Binding _date}" 
+        <Entry Text="{Binding Forum._title}" Placeholder="Título"/>
+        <DatePicker Date="{Binding Forum._date}" 
                     x:Name="dateDatePicker"/>
-        <TimePicker Time="{Binding _hour}" />
-        <Entry Text="{Binding _place}" 
+        <TimePicker Time="{Binding Forum._hour}" />
+        <Entry Text="{Binding Forum._place}" 
                Placeholder="Local"/>
         <Label Text="  Pautas:"/>
-        <Editor Text="{Binding _schedules}" 
+        <Editor Text="{Binding Forum._schedules}" 
                 HeightRequest="150" />
         <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">

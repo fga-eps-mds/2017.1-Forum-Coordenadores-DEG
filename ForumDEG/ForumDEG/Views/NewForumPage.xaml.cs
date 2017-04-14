@@ -12,14 +12,15 @@ namespace ForumDEG.Views {
     public partial class NewForumPage : ContentPage {
         public NewForumPage() {
             InitializeComponent();
-            BindingContext = new Models.Forum();
+            BindingContext = new ViewModels.NewForumViewModel();
             dateDatePicker.Date = DateTime.Now;
             dateDatePicker.MinimumDate = DateTime.Now;
         }
         
         private async void OnNewForumButtonClicked(object sender, EventArgs e) {
 
-            var forum = (Models.Forum)BindingContext;
+            var vm = (ViewModels.NewForumViewModel)BindingContext;
+            var forum = vm.Forum;
 
             await App.ForumDatabase.SaveForum(forum);
             await DisplayAlert("Fórum Criado", "Título: " + forum._title 
