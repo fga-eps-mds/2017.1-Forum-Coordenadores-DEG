@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForumDEG.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,15 +11,22 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewForumPage : ContentPage {
+        private NewForumViewModel _viewModel = new NewForumViewModel(new PageService());
+
         public NewForumPage() {
             InitializeComponent();
-            BindingContext = new ViewModels.NewForumViewModel(new ViewModels.PageService());
+
+            BindingContext = _viewModel;
+
             dateDatePicker.Date = DateTime.Now;
             dateDatePicker.MinimumDate = DateTime.Now;
         }
 
         private async void OnNewForumButtonClicked(object sender, EventArgs e) {
-            (BindingContext as ViewModels.NewForumViewModel).CreateForum();
+            if (_viewModel.IsAnyFieldBlank()) {
+                _viewModel.CreationFailed();
+            } else {
+                _viewModel.CreateForum();
 
                 Navigation.InsertPageBefore(new ForumsPage(), this);
                 await Navigation.PopAsync();

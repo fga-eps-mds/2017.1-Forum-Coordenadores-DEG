@@ -14,6 +14,12 @@ namespace ForumDEG.ViewModels {
             _pageService = pageService;
         }
 
+        public bool IsAnyFieldBlank() {
+            return (String.IsNullOrWhiteSpace(Forum._title) ||
+                    String.IsNullOrWhiteSpace(Forum._place) ||
+                    String.IsNullOrWhiteSpace(Forum._schedules));
+        }
+
         public async void CreateForum() {
             await App.ForumDatabase.SaveForum(Forum);
             await _pageService.DisplayAlert("Fórum Criado", "Título: " + Forum._title
@@ -22,6 +28,13 @@ namespace ForumDEG.ViewModels {
                 + "\nHora: " + Forum._hour.ToString()
                 + "\nPautas:\n" + Forum._schedules
                 , "OK");
+        }
+
+        public async void CreationFailed() {
+            await _pageService.DisplayAlert("O fórum não pôde ser criado"
+                    , "O fórum não pôde ser criado porque existem campos que não foram preenchidos. " +
+                    "Verifique e tente novamente."
+                    , "OK");
         }
     }
 }
