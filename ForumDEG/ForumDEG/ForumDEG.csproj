@@ -47,7 +47,9 @@
     <Compile Include="DAO\CoordinatorDatabase.cs" />
     <Compile Include="DAO\AdministratorDatabase.cs" />
     <Compile Include="Utils\IntefaceSQLite.cs" />
+    <Compile Include="ViewModels\IPageService.cs" />
     <Compile Include="ViewModels\NewForumViewModel.cs" />
+    <Compile Include="ViewModels\PageService.cs" />
     <Compile Include="Views\ForumsPage.xaml.cs">
       <DependentUpon>ForumsPage.xaml</DependentUpon>
     </Compile>
