@@ -7,7 +7,7 @@ namespace ForumDEG {
          
         public App() {
             InitializeComponent();
-            MainPage = new ForumDEG.Views.ForunsPage();
+            MainPage = new ForunsPage();
             //MainPage = new ForumDEG.MainPage();
         }
 
