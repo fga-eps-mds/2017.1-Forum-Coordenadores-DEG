@@ -16,12 +16,13 @@ namespace ForumDEG.Views {
             dateDatePicker.Date = DateTime.Now;
             dateDatePicker.MinimumDate = DateTime.Now;
         }
-        
+
         private async void OnNewForumButtonClicked(object sender, EventArgs e) {
             (BindingContext as ViewModels.NewForumViewModel).CreateForum();
 
-            Navigation.InsertPageBefore(new ForumsPage(), this);
-            await Navigation.PopAsync();
+                Navigation.InsertPageBefore(new ForumsPage(), this);
+                await Navigation.PopAsync();
+            }
         }
     }
 }

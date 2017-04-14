@@ -6,7 +6,7 @@ namespace ForumDEG {
     public partial class App : Application {
 
         static ForumDatabase _forumDatabase;
-
+         
         public App() {
             InitializeComponent();
 
