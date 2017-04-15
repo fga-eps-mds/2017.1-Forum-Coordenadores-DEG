@@ -67,6 +67,9 @@
     <Compile Include="Views\ForumsPage.xaml.cs">
       <DependentUpon>ForumsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserRegistrationPage.xaml.cs">
+      <DependentUpon>UserRegistrationPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -132,7 +135,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ForumDetailPage.xaml">
+    <EmbeddedResource Include="Views\ForumDetailPage.xaml"/>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\UserRegistrationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
