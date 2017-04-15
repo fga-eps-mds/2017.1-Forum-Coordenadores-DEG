@@ -4,25 +4,32 @@
              x:Class="ForumDEG.Views.NewForumPage"
              NavigationPage.HasNavigationBar="True"
              Title="Novo Fórum">
-    <StackLayout Padding="20">
-        <Entry Text="{Binding Forum._title}" Placeholder="Título"/>
-        <DatePicker Date="{Binding Forum._date}" 
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Título:" FontAttributes="Bold" />
+            <Entry Text="{Binding Forum._title}" Placeholder="Título"/>
+            <Label Text="Data:" FontAttributes="Bold"/>
+            <DatePicker Date="{Binding Forum._date}" 
                     x:Name="dateDatePicker"/>
-        <TimePicker Time="{Binding Forum._hour}" />
-        <Entry Text="{Binding Forum._place}" 
+            <Label Text="Horário:" FontAttributes="Bold"/>
+            <TimePicker Time="{Binding Forum._hour}" />
+            <Label Text="Local:" FontAttributes="Bold" />
+            <Entry Text="{Binding Forum._place}" 
                Placeholder="Local"/>
-        <Label Text="  Pautas:"/>
-        <Editor Text="{Binding Forum._schedules}" 
+            <Label Text="  Pautas:" FontAttributes="Bold"/>
+            <Editor Text="{Binding Forum._schedules}" 
                 HeightRequest="150" />
-        <StackLayout Orientation="Horizontal"
+            <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">
-            <Button Text="Cancelar" 
+                <Button Text="Cancelar" 
                 TextColor="White"
                 BackgroundColor="Orange"/>
-            <Button Text="Criar fórum" 
+                <Button Text="Criar fórum" 
                 TextColor="White"
                 BackgroundColor="Orange"
-                Clicked="OnNewForumButtonClicked"/>
+                Clicked="OnNewForumButtonClicked"
+                    />
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </ScrollView>
 </ContentPage>
