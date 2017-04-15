@@ -22,11 +22,8 @@ namespace ForumDEG.ViewModels {
 
         public async void CreateForum() {
             await App.ForumDatabase.SaveForum(Forum);
-            await _pageService.DisplayAlert("Fórum Criado", "Título: " + Forum._title
-                + "\nLocal: " + Forum._place
-                + "\nData: " + Forum._date.ToString("dd/MM/yyyy")
-                + "\nHora: " + Forum._hour.ToString()
-                + "\nPautas:\n" + Forum._schedules
+            await _pageService.DisplayAlert("Fórum Criado"
+                , "O fórum foi criado com sucesso. Os coordenadores serão notificados em breve."
                 , "OK");
         }
 
