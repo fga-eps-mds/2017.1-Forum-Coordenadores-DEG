@@ -57,6 +57,9 @@
       <DependentUpon>NewForumPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ForunsViewModel.cs" />
+    <Compile Include="Views\AppMasterPage.xaml.cs">
+      <DependentUpon>AppMasterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ForumDetailPage.xaml.cs">
       <DependentUpon>ForumDetailPage.xaml</DependentUpon>
     </Compile>
@@ -96,7 +99,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AppMasterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\NewForumPage.xaml">
     <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
