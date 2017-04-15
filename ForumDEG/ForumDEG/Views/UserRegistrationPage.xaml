@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.UserRegistrationPage"
+             NavigationPage.HasNavigationBar="True"
              Title="Cadastrar Coordenador">
 
     <ScrollView>
@@ -13,7 +14,8 @@
                 <Label Text="Nome Completo" FontAttributes="Bold" FontSize="18" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Placeholder="Nome completo"
+                <Entry Text="{Binding Coordinator.Name}"
+                    Placeholder="Nome completo"
                     Keyboard="Text"
                     HorizontalTextAlignment="Start"
                     FontSize="16"
@@ -26,7 +28,8 @@
                 <Label Text="Email" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Placeholder="Endereço de email"
+                <Entry Text="{Binding Coordinator.Email}" 
+                    Placeholder="Endereço de email"
                     Keyboard="Email"
                     HorizontalTextAlignment="Start"
                     FontSize="16"
@@ -39,7 +42,8 @@
                 <Label Text="Matrícula" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Placeholder="Matrícula"
+                <Entry Text="{Binding Coordinator.Registration}"
+                    Placeholder="Matrícula"
                     Keyboard="Numeric"
                     HorizontalTextAlignment="Start"
                     FontSize="16"
@@ -52,7 +56,8 @@
                 <Label Text="Senha" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Placeholder="Senha"
+                <Entry Text="{Binding Coordinator.Password}"
+                    Placeholder="Senha"
                     Keyboard="Text"
                     HorizontalTextAlignment="Start"
                     FontSize="16"
@@ -62,45 +67,24 @@
 
             <StackLayout Orientation="Vertical" Spacing="5">
 
-                <Label Text="Tipo de usuário" FontSize="18" FontAttributes="Bold" 
-                    HorizontalOptions="Start"></Label>
-
-                <Picker Title="Tipo de usuário" x:Name="User_Type" HorizontalOptions="Center" 
-                        WidthRequest="280" >
-                    <Picker.Items>
-                        <x:String>Coordenador</x:String>
-                        <x:String>Administrador</x:String>
-                    </Picker.Items>
-                </Picker>
-
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical" Spacing="5">
-
                 <Label Text="Curso" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Picker Title="Curso" x:Name="Curso" HorizontalOptions="Center" WidthRequest="280">
-                    <Picker.Items>
-                        <x:String>Engenharias</x:String>
-                        <x:String>Engenharia de Software</x:String>
-                        <x:String>Engenharia Aeroespacial</x:String>
-                        <x:String>Engenharia Automotiva</x:String>
-                        <x:String>Engenharia de Energia</x:String>
-                        <x:String>Engenharia Eletrônica</x:String>
-                    </Picker.Items>
-                </Picker>
+                <Entry Placeholder="Curso"
+                    Keyboard="Text"
+                    HorizontalTextAlignment="Start"
+                    FontSize="16"
+                    WidthRequest="280" HorizontalOptions="Center"></Entry>
 
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Margin="0, 0" Spacing="10" HorizontalOptions="Center">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
 
-                <Button x:Name="cancel"
-                        Text="Cancelar" TextColor="White" FontSize="17" 
+                <Button Text="Cancelar" TextColor="White" FontSize="17" 
                         BackgroundColor="Orange" WidthRequest="140"></Button>
 
-                <Button x:Name="confirmNewUser"
-                       Text="Confirmar" TextColor="White" FontSize="17"
+                <Button Clicked="Confirmation_Clicked"
+                        Text="Confirmar" TextColor="White" FontSize="17"
                         BackgroundColor="Orange" WidthRequest="140"></Button>
 
             </StackLayout>

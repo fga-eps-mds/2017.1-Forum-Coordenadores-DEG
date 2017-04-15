@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForumDEG.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace ForumDEG.Views
         public UserRegistrationPage()
         {
             InitializeComponent();
+
+            BindingContext = new UserRegistrationViewModel(new PageService());
+        }
+
+        private void Confirmation_Clicked(object sender, EventArgs e){
+           (BindingContext as UserRegistrationViewModel).CreateCoordinator();
         }
     }
 }
