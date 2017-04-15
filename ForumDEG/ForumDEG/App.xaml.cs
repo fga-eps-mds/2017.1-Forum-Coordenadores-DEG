@@ -9,7 +9,7 @@ namespace ForumDEG {
         //static ForumDatabase _forumDatabase;
 
         static AdministratorDatabase _administratorDatabase;
-        //static CoordinatorDatabase _coordinatorDatabase;
+        static CoordinatorDatabase _coordinatorDatabase;
         //static ForumDatabase _forumDatabase;
         public static bool IsLoggedIn { get; set; }
 
@@ -19,7 +19,7 @@ namespace ForumDEG {
             if (!IsLoggedIn) {
                 MainPage = new NavigationPage(new Views.LoginPage());
             } else {
-                MainPage = new NavigationPage(new Views.MainPage());
+                MainPage = new NavigationPage(new Views.());
             }
 
             MainPage = new NavigationPage(new AdministratorsPage());
@@ -53,6 +53,7 @@ namespace ForumDEG {
                 return _coordinatorDatabase;
             }
         }
+
 
         protected override void OnStart() {
             // Handle when your app starts

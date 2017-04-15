@@ -8,22 +8,20 @@ using ForumDEG.Models;
 
 namespace ForumDEG.ViewModels {
     class LoginViewModel {
-        private List<User> users = new List<User>() {
-            new Administrator("John", "xablau@email.com", "passwordjohn", "150154647"),
-            new Administrator("Romeu", "migue@email.com", "pequeno", "141405672"),
-            new Coordinator("Painillo", "danillo@pai.com", "paizao", "210213456","Engenharia de Software"),
-            new Coordinator("Thiago Boy", "thiago@stickers.com", "10horasStickers", "456436798","Engenharia de Stickers"),
-            new Administrator("Clarissa Girl", "clarissa@doguinho.com", "savethedogs", "142345090"),
-            new Administrator("Marigué, a Migueriana", "marigue@migueriana.com", "soumiguemsm", "099294545")
-        };
+        private List<Administrator> adminstrators = GetAllAdministrators();
+        private List<Coordinator> coordinators = GetAllCoordinator();
 
         private User _user;
 
-        public bool MakeLogin(string email, string password) {
+        public User MakeLogin(string email, string password) {
             // TODO: check if email is valid with IsValidEmail when the method get fixed
-            _user = FindUser(email);
-            if (_user != null)
+            _user = FindAdmin(email);
+            if (_user == null) {
+                _user = FindCoord(email);
+            }
+            if (_user != null) {
                 if (_user._password == password) return true;
+            }
             return false;
         }
 
@@ -34,17 +32,32 @@ namespace ForumDEG.ViewModels {
             return false;
         }
 
-        private User FindUser(string email) {
-            foreach (var user in users)
-                if (user._email == email) return user;
-            return null;
+        private bool FindCoord(string email) {
+            foreach (var coordinator in coordinators) {
+                if (coordinator._email == email) {
+                    _user = coordinator;
+                    return true;
+                }
+                    
+                
+            }
+                
+            return false;
         }
 
-        public bool IsAdmin() {
-            if (_user._role == 1)
-                return true;
-            else
-                return false;
+        public bool FindAdmin(string email) {
+            foreach (var administrator in administrators) {
+                if (administrator._email == email) {
+                    _user = administrator;
+                    return true;
+                }
+                
+            }
+            return false;
+        }
+
+        public bool IsAdmin(User user) {
+
         }
 
         // This method is for some unknown reason givind an exception
