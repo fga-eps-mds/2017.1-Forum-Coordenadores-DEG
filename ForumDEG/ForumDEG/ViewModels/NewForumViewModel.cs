@@ -5,13 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ForumDEG.ViewModels {
-    class NewForumViewModel {
+    public class NewForumViewModel {
         private readonly IPageService _pageService;
 
         public Models.Forum Forum { get; private set; } = new Models.Forum();
 
         public NewForumViewModel(IPageService pageService) {
             _pageService = pageService;
+        }
+
+        public NewForumViewModel() {
+            //
         }
 
         public bool IsAnyFieldBlank() {
