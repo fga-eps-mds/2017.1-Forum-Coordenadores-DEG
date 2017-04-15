@@ -15,12 +15,8 @@ namespace ForumDEG.Views {
 
         }
 
-        void Handle_ClickedHome(object sender, System.EventArgs e) {
-            //            Implementation here
-        }
-
-        void Handle_ClickedForum(object sender, System.EventArgs e) {
-            //            Implementation here
+        async void Handle_ClickedForum(object sender, System.EventArgs e) {
+            await Navigation.PushAsync(new ForunsPage());
         }
         void Handle_ClickedCriarForum(object sender, System.EventArgs e) {
             //            Implementation here

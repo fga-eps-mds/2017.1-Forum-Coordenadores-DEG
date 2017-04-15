@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DAO\ForumDatabase.cs" />
+    <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Coordinator.cs" />
     <Compile Include="Models\Forum.cs" />

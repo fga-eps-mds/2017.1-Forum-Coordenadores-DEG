@@ -15,13 +15,9 @@
                            VerticalOptions="Center"
                            FontSize="Medium"/>
 
-                        <Button Text="Home" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedHome" HorizontalOptions="StartAndExpand"/>
                         <Button Text="Fóruns" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedForum" HorizontalOptions="StartAndExpand"/>
-                        <Button Text="Criar Fórum" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCriarForum" HorizontalOptions="StartAndExpand"/>
                         <Button Text="Coordenadores" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCoordenador" HorizontalOptions="StartAndExpand"/>
-                        <Button Text="Cadastrar Coordenador" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCadastrarCoordenador" HorizontalOptions="StartAndExpand"/>
                         <Button Text="Formulários" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedFormulario" HorizontalOptions="StartAndExpand"/>
-                        <Button Text="Criar Formulário" TextColor="White" FontSize="Micro" BackgroundColor="Black" BorderWidth="0" Clicked="Handle_ClickedCriarFormulario" HorizontalOptions="StartAndExpand"/>
                     </StackLayout>
                 </ScrollView>
             </ContentPage.Content>
@@ -31,22 +27,18 @@
 
 
     <MasterDetailPage.Detail>
-        <NavigationPage BarBackgroundColor="DarkOrange">
-            <x:Arguments>
-                <ContentPage Title="Fórum DEG" Padding="0,50,0,0">
-                    <ScrollView>
-                        <StackLayout Padding="20">
-                            <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Medium" Clicked="Handle_ClickedHome"/>
-                            <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium" Clicked="Handle_ClickedCoordenador"/>
-                            <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="End" FontSize="Medium" Clicked="Handle_ClickedFormulario"/>
-                            <StackLayout BackgroundColor="Green" Padding="10">
-                                <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="DarkOrange" />
+        <ContentPage Title="Fórum DEG" Padding="0,50,0,0">
+            <ScrollView>
+                <StackLayout Padding="20">
+                    <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Medium" Clicked="Handle_ClickedForum"/>
+                    <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium" Clicked="Handle_ClickedCoordenador"/>
+                    <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="End" FontSize="Medium" Clicked="Handle_ClickedFormulario"/>
+                    <StackLayout BackgroundColor="Green" Padding="10">
+                        <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="DarkOrange" />
 
-                            </StackLayout>
-                        </StackLayout>
-                    </ScrollView>
-                </ContentPage>
-            </x:Arguments>
-        </NavigationPage>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>

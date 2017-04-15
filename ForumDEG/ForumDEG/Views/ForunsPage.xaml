@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.ForunsPage"
              Padding="15, 25, 15, 25"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             Title="Foruns">
     <ScrollView>
         <ListView x:Name="forumList"  SeparatorVisibility="Default" HasUnevenRows="True"
                       RowHeight="60"
