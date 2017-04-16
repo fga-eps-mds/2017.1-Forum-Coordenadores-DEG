@@ -1,18 +1,18 @@
 ﻿using NUnit.Framework;
 using ForumDEG.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ForumDEG.Utils;
+using Moq;
 
 namespace UnitTest {
     public class NewForumViewModelTests {
         private NewForumViewModel viewModel;
+        private Mock<IPageService> _pageService;
 
         [SetUp]
         public void Setup() {
-            viewModel = new NewForumViewModel();
+            _pageService = new Mock<IPageService>();
+            viewModel = new NewForumViewModel(_pageService.Object);
+
             viewModel.Forum._title = "Title";
             viewModel.Forum._place = "Place";
             viewModel.Forum._schedules = "Schedules";
