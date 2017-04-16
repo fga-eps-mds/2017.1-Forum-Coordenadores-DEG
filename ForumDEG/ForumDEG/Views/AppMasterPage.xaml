@@ -59,11 +59,11 @@
         <ContentPage Title="Fórum DEG" Padding="0,50,0,0">
             <ScrollView>
                 <StackLayout Padding="20">
-                    <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Medium" Clicked="Handle_ClickedForum"/>
-                    <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium" Clicked="Handle_ClickedCoordenador"/>
-                    <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="DarkGray" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="End" FontSize="Medium" Clicked="Handle_ClickedFormulario"/>
+                    <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Medium" Clicked="Handle_ClickedForum"/>
+                    <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium" Clicked="Handle_ClickedCoordenador"/>
+                    <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="End" FontSize="Medium" Clicked="Handle_ClickedFormulario"/>
                     <StackLayout BackgroundColor="Green" Padding="10">
-                        <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="DarkOrange" />
+                        <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="#ff8924" />
 
                     </StackLayout>
                 </StackLayout>

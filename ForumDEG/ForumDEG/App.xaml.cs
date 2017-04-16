@@ -8,7 +8,7 @@ namespace ForumDEG {
         public App() {
             InitializeComponent();
             MainPage = new NavigationPage(new AppMasterPage()) {
-                BarBackgroundColor = Color.DarkOrange,
+                BarBackgroundColor = Color.FromHex("#ff8924")
             };
             //MainPage = new ForumDEG.MainPage();
         }
