@@ -17,7 +17,7 @@ namespace ForumDEG.Views {
         protected async override void OnAppearing() {
             base.OnAppearing();
 
-            ForumListView.ItemsSource = await App.ForumDatabase.GetAllForums();
+            ForumListView.ItemsSource = await Utils.ForumDatabase.getForumDB.GetAllForums();
         }
 
         private void ForumListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) {

@@ -1,4 +1,5 @@
 ﻿using System;
+using ForumDEG.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,10 @@ namespace ForumDEG.ViewModels {
         private readonly IPageService _pageService;
 
         public Models.Forum Forum { get; private set; } = new Models.Forum();
+        public int forumId { get; private set; }
 
         public NewForumViewModel(IPageService pageService) {
             _pageService = pageService;
-        }
-
-        public NewForumViewModel() {
-            //
         }
 
         public bool IsAnyFieldBlank() {
@@ -25,9 +23,9 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void CreateForum() {
-            await App.ForumDatabase.SaveForum(Forum);
+            await ForumDatabase.getForumDB.SaveForum(Forum);
             await _pageService.DisplayAlert("Fórum Criado"
-                , "O fórum foi criado com sucesso. Os coordenadores serão notificados em breve."
+                , "O fórum foi criado com sucesso. Os coordenadores serão notificados em breve." + forumId
                 , "OK");
         }
 
