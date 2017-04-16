@@ -29,5 +29,9 @@ namespace ForumDEG.Views {
             if (e == null) return;
             ((ListView)sender).SelectedItem = null;
         }
+
+        private async void OnForunsDetail(object sender, EventArgs e) {
+            await Navigation.PushAsync(new ForumDetailPage());
+        }
     }
 }

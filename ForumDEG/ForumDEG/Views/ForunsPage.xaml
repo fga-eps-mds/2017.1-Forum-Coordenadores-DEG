@@ -27,6 +27,11 @@
                             <Label Text="Ver detalhes" 
                                        TextColor="#3366BB"
                                        VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnForunsDetail"
+                                        NumberOfTapsRequired="1"/>
+                                </Label.GestureRecognizers>
                             </Label>
 
                         </StackLayout>

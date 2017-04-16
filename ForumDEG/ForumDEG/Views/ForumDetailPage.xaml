@@ -1,5 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ForumDEG.Views.ForumDetailPage">
+             x:Class="ForumDEG.Views.ForumDetailPage"
+             Title="Ver Fórum">
+    <ScrollView>
+        <Frame OutlineColor="Black" HasShadow="True"  Margin="50" BackgroundColor="White" >
+                                                                            <!-- Set the Bindding content, 
+                                                                See if the button generates a page per forum  -->
+            <StackLayout  Padding="20" BackgroundColor="White">
+                <StackLayout BackgroundColor="White" Padding="5,5,0,0">
+                    <Label Text="Forum 01" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
+                    <Label Text="Data" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                    <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start" VerticalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="White" Padding="5,40,0,0">
+                    <Label Text="Pauta" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White"/>
+                    <Label Text="Assuntos da Pauta"  TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="White" Padding="5,40,0,0">
+                    <Label Text="Comentarios Adicionais" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
+                    <Label Text="Comentários adicionais existentes no fórum" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"  />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+    </ScrollView>
 </ContentPage>
