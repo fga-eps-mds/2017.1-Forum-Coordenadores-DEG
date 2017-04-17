@@ -26,10 +26,9 @@ namespace ForumDEG {
             }
         }
 
-        public static CoordinatorDatabase CoordinatorDatabase {
-            get {
-                if (_coordinatorDatabase == null)
-                {
+        public static CoordinatorDatabase CoordinatorDatabase{
+            get{
+                if (_coordinatorDatabase == null){
                     _coordinatorDatabase = new CoordinatorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Coordinator.db3"));
                 }
                 return _coordinatorDatabase;

@@ -30,8 +30,10 @@ namespace ForumDEG.Views
             }
         }
 
-        private void Confirmation_Clicked(object sender, EventArgs e){
+        private async void Confirmation_Clicked(object sender, EventArgs e){
             _userRegistrationViewModel.RegisterNewUser();
+            await DisplayAlert("Confirmou", "Confirmou novo usuário!", "ok");
+            await Navigation.PushAsync(new TestViewUsers());
         }
     }
 }

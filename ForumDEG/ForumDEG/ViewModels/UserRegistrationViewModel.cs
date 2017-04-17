@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ForumDEG.ViewModels
 {
-    class UserRegistrationViewModel
+    class UserRegistrationViewModel : INotifyPropertyChanged
     {
         private readonly IPageService _pageService;
 
@@ -17,12 +17,108 @@ namespace ForumDEG.ViewModels
             _pageService = PageService;
         }
 
-        int UserTypeIn;
-        string NameIn;
-        string RegistrationIn;
-        string EmailIn;
-        string PasswordIn;
-        string CourseIn;
+        int userTypeIn;
+        string nameIn;
+        string registrationIn;
+        string emailIn;
+        string passwordIn;
+        string courseIn;
+
+        public int UserTypeIn
+        {
+            get
+            {
+                return userTypeIn;
+            }
+            set
+            {
+                if (userTypeIn != value)
+                {
+                    userTypeIn = value;
+                    OnPropertyChanged("UserTypeIn");
+                }
+            }
+        }
+
+        public string NameIn
+        {
+            get
+            {
+                return nameIn;
+            }
+            set
+            {
+                if (nameIn != value)
+                {
+                    nameIn = value;
+                    OnPropertyChanged("NameIn");
+                }
+            }
+        }
+
+        public string RegistrationIn
+        {
+            get
+            {
+                return registrationIn;
+            }
+            set
+            {
+                if (registrationIn != value)
+                {
+                    registrationIn = value;
+                    OnPropertyChanged("RegistrationIn");
+                }
+            }
+        }
+
+        public string EmailIn
+        {
+            get
+            {
+                return emailIn;
+            }
+            set
+            {
+                if (emailIn != value)
+                {
+                    emailIn = value;
+                    OnPropertyChanged("EmailIn");
+                }
+            }
+        }
+
+        public string PasswordIn
+        {
+            get
+            {
+                return passwordIn;
+            }
+            set
+            {
+                if (passwordIn != value)
+                {
+                    passwordIn = value;
+                    OnPropertyChanged("PasswordIn");
+                }
+            }
+        }
+
+        public string CourseIn
+        {
+            get
+            {
+                return courseIn;
+            }
+            set
+            {
+                if (courseIn != value)
+                {
+                    courseIn = value;
+                    OnPropertyChanged("CourseIn");
+                }
+            }
+        }
 
         public bool HasEmptySpace()
         {
@@ -52,6 +148,9 @@ namespace ForumDEG.ViewModels
 
         public async void RegisterNewUser()
         {
+            await _pageService.DisplayAlert("Titulo", "nome " + NameIn + " tipo " + UserTypeIn + " email " + EmailIn +
+                " matricula " + RegistrationIn + " senha " + PasswordIn + " curso  " + CourseIn + " !", "ok");
+
             if (!HasEmptySpace())
             {
                 if (IsNewUserValid())
@@ -103,6 +202,17 @@ namespace ForumDEG.ViewModels
             };
             await App.CoordinatorDatabase.SaveCoordinator(Coord);
             await _pageService.DisplayAlert("Titulo", "Salvou coordenador ", "ok");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            var changed = PropertyChanged;
+            if (changed != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
