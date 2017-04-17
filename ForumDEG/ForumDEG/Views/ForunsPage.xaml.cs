@@ -22,6 +22,10 @@ namespace ForumDEG.Views {
             forumList.EndRefresh();
         }
 
+        override protected void OnAppearing() {
+            if (forumList.SelectedItem != null) forumList.SelectedItem = null;
+        }
+
         private async void forumList_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
             if (e.SelectedItem == null)
                 return;
