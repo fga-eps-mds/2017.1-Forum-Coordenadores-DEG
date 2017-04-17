@@ -27,7 +27,7 @@ namespace ForumDEG.Views {
                 themesStack.Children.Add(themeLabel);
             }
 
-            if (DateTime.Today >= _fvm.GetSelected()._date) {
+            if (HasPassed(DateTime.Now, _fvm.GetSelected()._date)) {
                 presenceButton.IsEnabled = false;
                 unpresenceButton.IsEnabled = false;
             }
@@ -36,6 +36,10 @@ namespace ForumDEG.Views {
         private void themesList_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
             var s = sender as ListView;
             s.SelectedItem = null;
+        }
+
+        public bool HasPassed(DateTime fromDate, DateTime expireDate) {
+            return expireDate - fromDate < TimeSpan.FromMinutes(0);
         }
     }
 }
