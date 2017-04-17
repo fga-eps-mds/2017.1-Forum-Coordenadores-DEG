@@ -23,6 +23,9 @@ namespace ForumDEG.Views {
         }
 
         private async void forumList_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            if (e.SelectedItem == null)
+                return;
+
             ForunsViewModel.GetInstance().Select(e.SelectedItem);
             await Navigation.PushAsync(new ForumDetailPage());
         }

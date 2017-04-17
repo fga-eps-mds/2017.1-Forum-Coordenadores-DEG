@@ -3,29 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.ForumDetailPage"
              Title="Ver Fórum">
-    <ScrollView>
-        <Frame OutlineColor="Black" HasShadow="True"  Margin="50" BackgroundColor="White" >
-                                                                            <!-- Set the Bindding content, 
-                                                                See if the button generates a page per forum  -->
-            <StackLayout  Padding="20" BackgroundColor="White">
-                <StackLayout BackgroundColor="White" Padding="5,5,0,0">
-                    <Label Text="{Binding _title}" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
-                    <Label Text="{Binding _date, StringFormat='Data {0:dd/MM/yyyy}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                    <Label Text="{Binding _date, StringFormat='Horário {0:HH:mm}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                    <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start" VerticalOptions="EndAndExpand"/>
-                </StackLayout>
+    <StackLayout>
+        <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
+            <ScrollView>
+                <StackLayout  Padding="5" BackgroundColor="White">
+                    <StackLayout BackgroundColor="White" Padding="5,5,0,0">
+                        <Label Text="{Binding _title}" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
+                        <Label Text="{Binding _date, StringFormat='Data {0:dd/MM/yyyy}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding _date, StringFormat='Horário {0:HH:mm}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding _place, StringFormat='Local {0}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start" VerticalOptions="EndAndExpand"/>
+                    </StackLayout>
 
-                <StackLayout BackgroundColor="White" Padding="5,40,0,0">
-                    <Label Text="Pauta" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White"/>
-                    <Label Text="Assuntos da Pauta"  TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" />
-                </StackLayout>
+                    <StackLayout BackgroundColor="White" Padding="5,20,0,0">
+                        <Label Text="Pauta" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White"/>
 
-                <StackLayout BackgroundColor="White" Padding="5,40,0,0">
-                    <Label Text="Comentarios Adicionais" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
-                    <Label Text="Comentários adicionais existentes no fórum" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"  />
+                        <StackLayout x:Name="themesStack" />
+
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
+            </ScrollView>
         </Frame>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
+            <Button x:Name="presenceButton" Text="Confirmar Presença" BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+            <Button x:Name="unpresenceButton" Text="Não Comparecerei" BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+        </StackLayout>
+    </StackLayout>
 
-    </ScrollView>
 </ContentPage>
