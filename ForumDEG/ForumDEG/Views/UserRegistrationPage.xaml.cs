@@ -13,28 +13,25 @@ namespace ForumDEG.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserRegistrationPage : ContentPage
     {
-        public UserRegistrationPage()
-        {
+        private UserRegistrationViewModel _userRegistrationViewModel = new UserRegistrationViewModel(new PageService());
+        public UserRegistrationPage(){
             InitializeComponent();
-            BindingContext = new UserRegistrationViewModel(new PageService());
+            BindingContext = _userRegistrationViewModel;
             User_Type.SelectedIndex = 0;
         }
 
-        private void User_Type_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (User_Type.SelectedIndex == 0)
-            {
+        private void User_Type_SelectedIndexChanged(object sender, EventArgs e){
+            if (User_Type.SelectedIndex == 0){
                 Course.IsEnabled = true;
             }
-            else
-            {
+            else{
                 Course.SelectedIndex = -1;
                 Course.IsEnabled = false;
             }
         }
 
         private void Confirmation_Clicked(object sender, EventArgs e){
-           (BindingContext as UserRegistrationViewModel).CreateCoordinator();
+            _userRegistrationViewModel.RegisterNewUser();
         }
     }
 }
