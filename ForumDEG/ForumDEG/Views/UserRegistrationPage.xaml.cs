@@ -16,8 +16,21 @@ namespace ForumDEG.Views
         public UserRegistrationPage()
         {
             InitializeComponent();
-
             BindingContext = new UserRegistrationViewModel(new PageService());
+            User_Type.SelectedIndex = 0;
+        }
+
+        private void User_Type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (User_Type.SelectedIndex == 0)
+            {
+                Course.IsEnabled = true;
+            }
+            else
+            {
+                Course.SelectedIndex = -1;
+                Course.IsEnabled = false;
+            }
         }
 
         private void Confirmation_Clicked(object sender, EventArgs e){

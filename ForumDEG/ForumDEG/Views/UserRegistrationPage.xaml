@@ -58,6 +58,7 @@
 
                 <Entry Text="{Binding Coordinator.Password}"
                     Placeholder="Senha"
+                    IsPassword="True"
                     Keyboard="Text"
                     HorizontalTextAlignment="Start"
                     FontSize="16"
@@ -67,14 +68,36 @@
 
             <StackLayout Orientation="Vertical" Spacing="5">
 
+                <Label Text="Tipo de usuário" FontSize="18" FontAttributes="Bold" 
+                    HorizontalOptions="Start"></Label>
+
+                <Picker Title="Tipo de usuário" x:Name="User_Type" HorizontalOptions="Center" 
+                        WidthRequest="280" SelectedIndexChanged="User_Type_SelectedIndexChanged" 
+                        SelectedIndex="{Binding UserType}">
+                    <Picker.Items>
+                        <x:String>Coordenador</x:String>
+                        <x:String>Administrador</x:String>
+                    </Picker.Items>
+                </Picker>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" Spacing="5">
+
                 <Label Text="Curso" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Placeholder="Curso"
-                    Keyboard="Text"
-                    HorizontalTextAlignment="Start"
-                    FontSize="16"
-                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+                <Picker Title="Curso" x:Name="Course" HorizontalOptions="Center" WidthRequest="280" 
+                        SelectedItem="{Binding CourseIn}">
+                    <Picker.Items>
+                        <x:String>Engenharias</x:String>
+                        <x:String>Engenharia de Software</x:String>
+                        <x:String>Engenharia Aeroespacial</x:String>
+                        <x:String>Engenharia Automotiva</x:String>
+                        <x:String>Engenharia de Energia</x:String>
+                        <x:String>Engenharia Eletrônica</x:String>
+                    </Picker.Items>
+                </Picker>
 
             </StackLayout>
 
