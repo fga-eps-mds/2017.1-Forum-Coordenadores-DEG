@@ -16,6 +16,31 @@
 
 <p align="justify">O Fórum Permanente de Planejamento e Estratégias na Graduação é uma reunião que ocorre mensalmente entre os Coordenadores dos cursos, que debatem sobre assuntos gerais referentes à <a href="http://www.unb.br">Universidade de Brasília (UnB)</a>, realizada pelo <a href="http://unb2.unb.br/administracao/decanatos/deg/">Decanato de Ensino de Graduação (DEG)</a>. O projeto visa automatizar a geração de reuniões, fórums, formulários, pautas, cadastros de coordenadores e análise de resultados através de uma aplicação mobile multiplataforma (iOS e Android), que seria de grande benefício para o seguimento deste projeto.</p>
 
+## Instruções de Uso
+
+<p align="justify">Inicialmente, o repositório deve ser clonado através do comando abaixo:</p>
+
+```
+git clone https://github.com/fga-gpp-mds/2017.1-Forum-Coordenadores-DEG.git
+```
+
+<p align="justify">Com o repositório clonado, o mesmo deve ser aberto no <a href="https://www.visualstudio.com/downloads/">Visual Studio Community 2015 </a>ou superior caso esteja utilizando o Windows. Caso esteja utilizando o MacOS, o diretório deve ser aberto no <a href="https://www.visualstudio.com/downloads/">Xamarin Studio</a>. </p>
+
+<p align="justify">Em seguida, no menu superior, clique na aba Project e selecione as seguintes opções para atualizar as versões dos NuGets Packages do projeto:</p>
+
+```
+Restore NuGet Packages
+
+Update NuGet Packages
+```
+
+Para limpar todos os arquivos gerados em builds anteriores e não haver conflitos posteriormente, recomenda-se seguir o seguinte passo no menu superior:
+```
+Build >> Clean All
+```
+
+Após isso, o projeto estará pronto para ser executado.
+
 ## Licença
 
 [GNU AGPL v3.0](https://www.gnu.org/licenses/agpl-3.0.html)
