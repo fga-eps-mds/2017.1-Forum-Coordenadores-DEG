@@ -13,6 +13,9 @@ namespace ForumDEG.Views {
     public partial class ForumDetailPage : ContentPage {
         public ForumDetailPage() {
             InitializeComponent();
+            if (ForunsViewModel.GetInstance().GetSelected() == null)
+                throw new Exception("Forum detail page with no selection");
+            BindingContext = ForunsViewModel.GetInstance().GetSelected();
         }
     }
 }

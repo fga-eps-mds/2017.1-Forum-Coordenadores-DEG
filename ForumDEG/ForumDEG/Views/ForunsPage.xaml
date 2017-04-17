@@ -9,9 +9,8 @@
         <ListView x:Name="forumList"  SeparatorVisibility="Default" HasUnevenRows="True"
                       RowHeight="60"
                       IsPullToRefreshEnabled="True"
+                      ItemSelected="forumList_ItemSelected"
                       Refreshing="Handle_Refreshing"
-                      SelectedItem="Handle_Selected"
-                      ItemTapped="Handle_Selected"
                       SeparatorColor="Gray">
 
             <ListView.ItemTemplate>
@@ -26,13 +25,7 @@
 
                             <Label Text="Ver detalhes" 
                                        TextColor="#3366BB"
-                                       VerticalOptions="Center">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Tapped="OnForunsDetail"
-                                        NumberOfTapsRequired="1"/>
-                                </Label.GestureRecognizers>
-                            </Label>
+                                       VerticalOptions="Center" />
 
                         </StackLayout>
                     </ViewCell>

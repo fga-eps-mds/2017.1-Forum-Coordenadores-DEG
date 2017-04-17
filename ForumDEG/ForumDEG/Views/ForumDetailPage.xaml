@@ -9,8 +9,9 @@
                                                                 See if the button generates a page per forum  -->
             <StackLayout  Padding="20" BackgroundColor="White">
                 <StackLayout BackgroundColor="White" Padding="5,5,0,0">
-                    <Label Text="Forum 01" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
-                    <Label Text="Data" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding _title}" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
+                    <Label Text="{Binding _date, StringFormat='Data {0:dd/MM/yyyy}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding _date, StringFormat='Horário {0:HH:mm}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                     <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start" VerticalOptions="EndAndExpand"/>
                 </StackLayout>
 

@@ -11,26 +11,19 @@ using ForumDEG.ViewModels;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForunsPage : ContentPage {
-        private ForunsViewModel _fvm;
         
         public ForunsPage() {
             InitializeComponent();
-
-            _fvm = new ForunsViewModel();
-            forumList.ItemsSource = _fvm.GetUpdatedList();
+            forumList.ItemsSource = ForunsViewModel.GetInstance().GetUpdatedList();
         }
 
         void Handle_Refreshing(object sender, System.EventArgs e) {
-            forumList.ItemsSource = _fvm.GetUpdatedList();
+            forumList.ItemsSource = ForunsViewModel.GetInstance().GetUpdatedList();
             forumList.EndRefresh();
         }
 
-        void Handle_Selected(object sender, System.EventArgs e) {
-            if (e == null) return;
-            ((ListView)sender).SelectedItem = null;
-        }
-
-        private async void OnForunsDetail(object sender, EventArgs e) {
+        private async void forumList_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            ForunsViewModel.GetInstance().Select(e.SelectedItem);
             await Navigation.PushAsync(new ForumDetailPage());
         }
     }
