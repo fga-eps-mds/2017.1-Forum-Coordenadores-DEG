@@ -14,6 +14,7 @@ namespace ForumDEG.Views {
         
         public ForunsPage() {
             InitializeComponent();
+
             forumList.ItemsSource = ForunsViewModel.GetInstance().GetUpdatedList();
         }
 

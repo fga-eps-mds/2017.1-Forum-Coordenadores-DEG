@@ -28,7 +28,7 @@ namespace ForumDEG.Views {
             } else {
                 _viewModel.CreateForum();
 
-                Navigation.InsertPageBefore(new ForumsPage(), this);
+                Navigation.InsertPageBefore(new ForunsPage(), this);
                 await Navigation.PopAsync();
             }
         }
