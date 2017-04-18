@@ -11,18 +11,19 @@ namespace ForumDEG {
         static AdministratorDatabase _administratorDatabase;
         static CoordinatorDatabase _coordinatorDatabase;
         //static ForumDatabase _forumDatabase;
-        public static bool IsLoggedIn { get; set; }
 
         public App() {
             InitializeComponent();
 
-            if (!IsLoggedIn) {
-                MainPage = new NavigationPage(new Views.LoginPage());
+            if (Helpers.Settings.IsLoggedIn) {
+                if (Helpers.Settings.IsAdmin) {
+                    MainPage = new NavigationPage(new Views.MainPageAdministrator());
+                } else {
+                    MainPage = new NavigationPage(new Views.MainPageCoordinator());
+                }
             } else {
-                MainPage = new NavigationPage(new Views.());
+                MainPage = new NavigationPage(new Views.LoginPage());
             }
-
-            MainPage = new NavigationPage(new AdministratorsPage());
 
         }
 
