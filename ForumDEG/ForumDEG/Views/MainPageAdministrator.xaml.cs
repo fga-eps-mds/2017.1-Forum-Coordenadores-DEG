@@ -14,7 +14,7 @@ namespace ForumDEG.Views {
             InitializeComponent();
         }
          async void OnLogoutButtonClicked(object sender, EventArgs e) {
-            App.IsLoggedIn = false;
+            Helpers.Settings.IsLoggedIn = false;
             Navigation.InsertPageBefore(new LoginPage(), this);
             await Navigation.PopAsync();
         }

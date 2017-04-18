@@ -6239,13 +6239,13 @@ namespace ForumDEG.Droid
 			public const int FloatingActionButton_backgroundTintMode = 2;
 			
 			// aapt resource value: 6
-			public const int FloatingActionButton_backgroundTint = 6;
+			public const int FloatingActionButton_borderWidth = 6;
 			
-			// aapt resource value: 7
-			public const int FloatingActionButton_backgroundTintMode = 7;
+			// aapt resource value: 0
+			public const int FloatingActionButton_elevation = 0;
 			
-			// aapt resource value: 3
-			public const int FloatingActionButton_borderWidth = 3;
+			// aapt resource value: 4
+			public const int FloatingActionButton_fabSize = 4;
 			
 			// aapt resource value: 5
 			public const int FloatingActionButton_elevation = 5;

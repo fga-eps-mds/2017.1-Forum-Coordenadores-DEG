@@ -25,8 +25,7 @@ namespace ForumDEG.Views {
 
         async void OnLoginButtonClicked(object sender, EventArgs e) {
             if (_lvm.MakeLogin(emailEntry.Text, passwordEntry.Text)) {
-                App.isLoggedIn = true;
-                if (_lvm._user.Corse != null) {
+                if (Helpers.Settings.IsAdmin) {
                     Navigation.InsertPageBefore(new Views.MainPageAdministrator(), this);
                 } else {
                     Navigation.InsertPageBefore(new Views.MainPageCoordinator(), this);

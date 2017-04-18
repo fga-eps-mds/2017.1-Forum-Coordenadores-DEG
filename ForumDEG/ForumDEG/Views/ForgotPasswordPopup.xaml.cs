@@ -20,7 +20,8 @@ namespace ForumDEG.Views {
         }
 
         private async void OnResetPasswordButtonClicked(object sender, EventArgs e) {
-            if (lvm.RecoverPassword(recoverEmailEntry.Text)) {
+            //if (lvm.RecoverPassword(recoverEmailEntry.Text)) {
+            if (2<3) {
                 await DisplayAlert("Restauração de senha", "Um email foi enviado com as instruções para recuperação da senha", "OK");
                 await PopupNavigation.PopAsync();
             }
