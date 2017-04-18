@@ -60,8 +60,7 @@
                     HorizontalOptions="Start"></Label>
 
                 <Picker Title="Tipo de usuário" SelectedIndex="{Binding UserTypeIn}" 
-                        x:Name="User_Type" HorizontalOptions="Center" WidthRequest="280" 
-                        SelectedIndexChanged="User_Type_SelectedIndexChanged" >
+                        x:Name="User_Type" HorizontalOptions="Center" WidthRequest="280">
                     <Picker.Items>
                         <x:String>Coordenador</x:String>
                         <x:String>Administrador</x:String>
@@ -75,8 +74,8 @@
                 <Label Text="Curso" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Picker Title="Curso" x:Name="Course" HorizontalOptions="Center" 
-                        WidthRequest="280" SelectedItem="{Binding CourseIn}">
+                <Picker Title="Curso" HorizontalOptions="Center" WidthRequest="280" 
+                        SelectedItem="{Binding CourseIn}" IsEnabled="{Binding IsCoord}">
                     <Picker.Items>
                         <x:String>Engenharias</x:String>
                         <x:String>Engenharia de Software</x:String>
@@ -94,7 +93,7 @@
                 <Button Text="Cancelar" TextColor="White" FontSize="17" 
                         BackgroundColor="Orange" WidthRequest="140"></Button>
 
-                <Button Clicked="Confirmation_Clicked" Text="Confirmar" TextColor="White" 
+                <Button Command="{Binding RegisterNewUserCommand}" Text="Confirmar" TextColor="White" 
                         FontSize="17" BackgroundColor="Orange" WidthRequest="140"></Button>
 
             </StackLayout>

@@ -5,22 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Android.Util;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels
 {
     class UserRegistrationViewModel : INotifyPropertyChanged{
         private readonly IPageService _pageService;
 
+        public ICommand RegisterNewUserCommand { get; private set; }
+
         public UserRegistrationViewModel(IPageService PageService){
             _pageService = PageService;
+            RegisterNewUserCommand = new Command(RegisterNewUser);
         }
-
+        
         int userTypeIn;
+        bool isCoord = true;
         string nameIn;
         string registrationIn;
         string emailIn;
         string passwordIn;
-        string courseIn;
+        string courseIn = "Coordenador";
 
         public int UserTypeIn{
             get{
@@ -29,7 +36,25 @@ namespace ForumDEG.ViewModels
             set{
                 if (userTypeIn != value){
                     userTypeIn = value;
+                    if(userTypeIn == 0) {
+                        IsCoord = true;
+                    } else {
+                        IsCoord = false;
+                        CourseIn = null;
+                    }
                     OnPropertyChanged("UserTypeIn");
+                }
+            }
+        }
+
+        public bool IsCoord{
+            get {
+                return isCoord;
+            }
+            set {
+                if (isCoord != value) {
+                    isCoord = value;
+                    OnPropertyChanged("IsCoord");
                 }
             }
         }
@@ -129,7 +154,7 @@ namespace ForumDEG.ViewModels
                     CleanFields();
                 }
                 else{
-                    await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok");
+                    await _pageService.DisplayAlert("Erro!", "Dados inseridos inválidos!", "ok");
                 }
             }
             else{
@@ -173,7 +198,7 @@ namespace ForumDEG.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName){
+        protected void OnPropertyChanged(string propertyName){
             var changed = PropertyChanged;
             if (changed != null){
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
