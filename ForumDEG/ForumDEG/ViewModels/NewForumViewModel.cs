@@ -10,7 +10,6 @@ namespace ForumDEG.ViewModels {
         private readonly IPageService _pageService;
 
         public Models.Forum Forum { get; private set; } = new Models.Forum();
-        public int forumId { get; private set; }
 
         public NewForumViewModel(IPageService pageService) {
             _pageService = pageService;
@@ -25,7 +24,7 @@ namespace ForumDEG.ViewModels {
         public async void CreateForum() {
             await ForumDatabase.getForumDB.SaveForum(Forum);
             await _pageService.DisplayAlert("Fórum Criado"
-                , "O fórum foi criado com sucesso. Os coordenadores serão notificados em breve." + forumId
+                , "O fórum foi criado com sucesso. Os coordenadores serão notificados em breve."
                 , "OK");
         }
 
