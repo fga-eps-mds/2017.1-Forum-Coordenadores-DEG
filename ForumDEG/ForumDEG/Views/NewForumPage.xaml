@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.NewForumPage"
+             NavigationPage.HasNavigationBar="True"
+             Title="Novo Fórum">
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Título:" FontAttributes="Bold" />
+            <Entry Text="{Binding Forum._title}" Placeholder="Título"/>
+            <Label Text="Data:" FontAttributes="Bold"/>
+            <DatePicker Date="{Binding Forum._date}" 
+                    x:Name="dateDatePicker"/>
+            <Label Text="Horário:" FontAttributes="Bold"/>
+            <TimePicker Time="{Binding Forum._hour}" />
+            <Label Text="Local:" FontAttributes="Bold" />
+            <Entry Text="{Binding Forum._place}" 
+               Placeholder="Local"/>
+            <Label Text="  Pautas:" FontAttributes="Bold"/>
+            <Editor Text="{Binding Forum._schedules}" 
+                HeightRequest="150" />
+            <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="End">
+                <Button Text="Cancelar" 
+                TextColor="White"
+                BackgroundColor="Orange"/>
+                <Button Text="Criar fórum" 
+                TextColor="White"
+                BackgroundColor="Orange"
+                Clicked="OnNewForumButtonClicked"
+                    />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
