@@ -44,19 +44,6 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.55, 270, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Label Text="Esqueceu sua senha?"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               TextColor="White"
-               AbsoluteLayout.LayoutBounds="0.5, 0.63, 315, 25"
-               AbsoluteLayout.LayoutFlags="PositionProportional">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer 
-                       Tapped="OnForgotPasswordTapped"
-                       NumberOfTapsRequired="1" />
-            </Label.GestureRecognizers>
-        </Label>
-
         <Button Image="login_button.png"
                 BorderColor="Transparent"
                 BackgroundColor="Transparent"

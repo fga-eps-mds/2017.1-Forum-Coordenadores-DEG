@@ -18,11 +18,6 @@ namespace ForumDEG.Views {
             InitializeComponent();
         }
 
-        private async void OnForgotPasswordTapped(object sender, EventArgs e) {
-            var page = new Views.ForgotPasswordPopup();
-            await Navigation.PushPopupAsync(page);
-        }
-
         async void OnLoginButtonClicked(object sender, EventArgs e) {
             if (_lvm.MakeLogin(emailEntry.Text, passwordEntry.Text)) {
                 if (Helpers.Settings.IsAdmin) {

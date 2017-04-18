@@ -77,9 +77,6 @@
     </Compile>
     <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="Views\ForgotPasswordPopup.xaml.cs">
-      <DependentUpon>ForgotPasswordPopup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -201,12 +198,6 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="Images\entry_rectangle.png" />
     <EmbeddedResource Include="Images\login_background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\ForgotPasswordPopup.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MainPageAdministrator.xaml">
