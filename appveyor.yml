@@ -4,21 +4,15 @@ version: 1.0.{build}
 # version: 1.0.{build}-{branch}
 
 install:
-  - SET JAVA_HOME=C:\Program Files\Java\jdk1.7.0\bin
-  - SET PATH=%JAVA_HOME%;%PATH%
   - java -version
-#  - echo %JDK_PATH%
-  - echo %JAVA_HOME%
-  - echo %PATH%
 
 before_build:
 - ps: >-
     nuget restore ForumDEG.sln
-    
-# .\src\XLabs.Framework.sln
 
 environment:
     project_name: 'ForumDEG'
+    JavaSdkDirectory: C:\Program Files (x86)\Java\jdk1.8.0
 
 # branches to build
 branches:
@@ -31,18 +25,6 @@ branches:
   # except:
    # - gh-pages
 
-# Do not build on tags (GitHub and BitBucket)
-# skip_tags: true
-
-# Start builds on tags only (GitHub and BitBucket)
-# skip_non_tags: true
-
-# Do not build feature branch with open Pull Requests
-skip_branch_with_pr: false
-
-# Maximum number of concurrent jobs for the project
-max_jobs: 1
-
 # Build worker image (VM template)
 image: Visual Studio 2017
 
@@ -53,15 +35,15 @@ init:
 # build Configuration, i.e. Debug, Release, etc.
 configuration: Release
 
-artifacts:
+#artifacts:
     # pushing a single file with environment variable in path and "Deployment name" specified
-  - path: ForumDEG\bin\$(configuration)
-    name: forumdeg
+  #- path: ForumDEG\bin\$(configuration)
+  #  name: forumdeg
 
-  - path: forumdeg.zip
+  #- path: forumdeg.zip
 
   # pushing entire folder as a zip archive
-  - path: logs
+  #- path: logs
 
 notifications:
 
