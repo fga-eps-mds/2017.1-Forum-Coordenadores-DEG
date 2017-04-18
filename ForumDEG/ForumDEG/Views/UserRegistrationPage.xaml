@@ -7,19 +7,16 @@
 
     <ScrollView>
 
-        <StackLayout Orientation="Vertical" Margin="40, 40" Spacing="25">
+        <StackLayout Orientation="Vertical" Margin="40, 25, 40, 30" Spacing="25">
 
             <StackLayout Orientation="Vertical" Spacing="5">
 
                 <Label Text="Nome Completo" FontAttributes="Bold" FontSize="18" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Text="{Binding NameIn}"
-                    Placeholder="Nome completo"
-                    Keyboard="Text"
-                    HorizontalTextAlignment="Start"
-                    FontSize="16"
-                    HeightRequest="50" WidthRequest="280" HorizontalOptions="Center"></Entry>
+                <Entry Text="{Binding NameIn}" Placeholder="Nome completo" Keyboard="Text"
+                    HorizontalTextAlignment="Start" FontSize="16" HeightRequest="50" 
+                    WidthRequest="280" HorizontalOptions="Center"></Entry>
 
             </StackLayout>
 
@@ -29,11 +26,9 @@
                     HorizontalOptions="Start"></Label>
 
                 <Entry Text="{Binding EmailIn}" 
-                    Placeholder="Endereço de email"
-                    Keyboard="Email"
-                    HorizontalTextAlignment="Start"
-                    FontSize="16"
-                    HeightRequest="50" WidthRequest="280" HorizontalOptions="Center"></Entry>
+                    Placeholder="Endereço de email" Keyboard="Email"
+                    HorizontalTextAlignment="Start" FontSize="16" HeightRequest="50" 
+                    WidthRequest="280" HorizontalOptions="Center"></Entry>
 
             </StackLayout>
 
@@ -42,11 +37,8 @@
                 <Label Text="Matrícula" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Text="{Binding RegistrationIn}"
-                    Placeholder="Matrícula"
-                    Keyboard="Numeric"
-                    HorizontalTextAlignment="Start"
-                    FontSize="16"
+                <Entry Text="{Binding RegistrationIn}" Placeholder="Matrícula" 
+                    Keyboard="Numeric" HorizontalTextAlignment="Start" FontSize="16"
                     WidthRequest="280" HorizontalOptions="Center"></Entry>
 
             </StackLayout>
@@ -56,12 +48,8 @@
                 <Label Text="Senha" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Entry Text="{Binding PasswordIn}"
-                    Placeholder="Senha"
-                    IsPassword="True"
-                    Keyboard="Text"
-                    HorizontalTextAlignment="Start"
-                    FontSize="16"
+                <Entry Text="{Binding PasswordIn}" Placeholder="Senha" IsPassword="True"
+                    Keyboard="Text" HorizontalTextAlignment="Start" FontSize="16"
                     WidthRequest="280" HorizontalOptions="Center"></Entry>
 
             </StackLayout>
@@ -71,9 +59,9 @@
                 <Label Text="Tipo de usuário" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Picker Title="Tipo de usuário" x:Name="User_Type" HorizontalOptions="Center" 
-                        WidthRequest="280" SelectedIndexChanged="User_Type_SelectedIndexChanged" 
-                        SelectedIndex="{Binding UserTypeIn}">
+                <Picker Title="Tipo de usuário" SelectedIndex="{Binding UserTypeIn}" 
+                        x:Name="User_Type" HorizontalOptions="Center" WidthRequest="280" 
+                        SelectedIndexChanged="User_Type_SelectedIndexChanged" >
                     <Picker.Items>
                         <x:String>Coordenador</x:String>
                         <x:String>Administrador</x:String>
@@ -87,8 +75,8 @@
                 <Label Text="Curso" FontSize="18" FontAttributes="Bold" 
                     HorizontalOptions="Start"></Label>
 
-                <Picker Title="Curso" x:Name="Course" HorizontalOptions="Center" WidthRequest="280" 
-                        SelectedItem="{Binding CourseIn}">
+                <Picker Title="Curso" x:Name="Course" HorizontalOptions="Center" 
+                        WidthRequest="280" SelectedItem="{Binding CourseIn}">
                     <Picker.Items>
                         <x:String>Engenharias</x:String>
                         <x:String>Engenharia de Software</x:String>
@@ -101,14 +89,13 @@
 
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 0, 0, 30">
 
                 <Button Text="Cancelar" TextColor="White" FontSize="17" 
                         BackgroundColor="Orange" WidthRequest="140"></Button>
 
-                <Button Clicked="Confirmation_Clicked"
-                        Text="Confirmar" TextColor="White" FontSize="17"
-                        BackgroundColor="Orange" WidthRequest="140"></Button>
+                <Button Clicked="Confirmation_Clicked" Text="Confirmar" TextColor="White" 
+                        FontSize="17" BackgroundColor="Orange" WidthRequest="140"></Button>
 
             </StackLayout>
 

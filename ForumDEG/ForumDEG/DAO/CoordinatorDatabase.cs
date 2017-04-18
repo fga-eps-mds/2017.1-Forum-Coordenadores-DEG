@@ -29,7 +29,7 @@ namespace ForumDEG.Utils
         public Task<int> SaveCoordinator(Coordinator newCoordinator)
         {
 
-            if (newCoordinator.Id != 0)
+            if (newCoordinator.Id == 0)
             {
                 return _database.InsertAsync(newCoordinator);
             }

@@ -8,7 +8,7 @@
             <ListView x:Name="AdministratorListView" HorizontalOptions="FillAndExpand" ItemSelected="AdministratorListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" Detail="{Binding Registration}" />
+                        <TextCell Text="{Binding Name}" Detail="{Binding Id}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -16,7 +16,7 @@
             <ListView x:Name="CoordinatorListView" HorizontalOptions="FillAndExpand" ItemSelected="CoordListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" Detail="{Binding Registration}" />
+                        <TextCell Text="{Binding Name}" Detail="{Binding Id}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
