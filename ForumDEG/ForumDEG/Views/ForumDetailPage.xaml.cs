@@ -24,7 +24,7 @@ namespace ForumDEG.Views {
                     Text = "- " + theme,
                     TextColor = Color.Gray
                 };
-                themesStack.Children.Add(themeLabel);
+                
             }
 
             if (HasPassed(DateTime.Now, _fvm.GetSelected()._date)) {

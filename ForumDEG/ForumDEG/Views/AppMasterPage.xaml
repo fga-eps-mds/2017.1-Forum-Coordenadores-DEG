@@ -65,6 +65,13 @@
                     <StackLayout BackgroundColor="Green" Padding="10">
                         <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="#ff8924" />
 
+                        <RelativeLayout>
+                            <Button Text="abc0" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="35" HeightRequest="100"/>
+                            <Button Text="abc1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="35" HeightRequest="100"/>
+                            <Button Text="abc2" HorizontalOptions="Center" VerticalOptions="End" WidthRequest="35" HeightRequest="100"/>
+
+                        </RelativeLayout>
+
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

@@ -17,8 +17,9 @@
 
                     <StackLayout BackgroundColor="White" Padding="5,20,0,0">
                         <Label Text="Pauta" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White"/>
+                        <Label Text="{Binding _schedules}" TextColor="Gray"  HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White"/>
 
-                        <StackLayout x:Name="themesStack" />
+                        
 
                     </StackLayout>
                 </StackLayout>

@@ -24,21 +24,8 @@ namespace ForumDEG.ViewModels {
 
         public ObservableCollection<Forum> GetUpdatedList() {
             if (_foruns.Count == 0) {
-                List<string> schedules = new List<string> {
-                    "Que tal uma pauta com o texto bem grande de teste?",
-                    "Lidando com o migué",
-                    "Que tal uma pauta com o texto bem grande de teste?",
-                    "Lidando com o migué",
-                    "Que tal uma pauta com o texto bem grande de teste?",
-                    "Lidando com o migué",
-                    "Que tal uma pauta com o texto bem grande de teste?",
-                    "Lidando com o migué",
-                    "Que tal uma pauta com o texto bem grande de teste?",
-                    "Lidando com o migué",
-                    "Que tal uma pauta com o texto bem grande de teste?",
-                    "Lidando com o migué",
-                    "Eleições do DCE"
-                };
+               string schedules = "O migué do falcão ta sem condicão. Como Proceder ?";
+                
                 _foruns = new ObservableCollection<Forum> {
                     new Forum { _title = "Nome do Forum", _place = "Departamento de Audiovisual", _date = new DateTime(2017, 1, 1), _schedules = schedules },
                     new Forum { _title = "Forum 02", _place = "Place 02", _date = new DateTime(2017, 4, 17, 22, 00, 00), _schedules = schedules },
