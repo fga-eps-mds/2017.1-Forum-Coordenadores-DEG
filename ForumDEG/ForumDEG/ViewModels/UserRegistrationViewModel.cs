@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels
 {
-    class UserRegistrationViewModel : INotifyPropertyChanged{
+   public class UserRegistrationViewModel : INotifyPropertyChanged{
         private readonly IPageService _pageService;
 
         public ICommand RegisterNewUserCommand { get; private set; }
