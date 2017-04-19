@@ -1,52 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ForumDEG.Models;
 using System.Collections.ObjectModel;
+using ForumDEG.Interfaces;
+using ForumDEG.Views;
+using System.Threading.Tasks;
 
 namespace ForumDEG.ViewModels {
     class ForunsViewModel : BaseViewModel {
-        public ObservableCollection<Forum> Foruns { get ; private set; } = new ObservableCollection<Forum>();
+        public ObservableCollection<ForumDetailViewModel> Forums { get; private set; } = new ObservableCollection<ForumDetailViewModel>();
 
-        private Forum _selectedForum;
-        public Forum SelectedForum {
+        private ForumDetailViewModel _selectedForum;
+        public ForumDetailViewModel SelectedForum {
             get { return _selectedForum; }
             set { SetValue(ref _selectedForum, value); }
         }
 
+        private readonly IPageService _pageService;
+
         private static ForunsViewModel _instance = null;
-
-        private ForunsViewModel() {
-
+        private ForunsViewModel(IPageService pageService) {
+            _pageService = pageService;
         }
 
         public static ForunsViewModel GetInstance() {
-            if (_instance == null) _instance = new ForunsViewModel();
+            if (_instance == null) _instance = new ForunsViewModel(new PageService());
             return _instance;
         }
 
-        public ObservableCollection<Forum> GetUpdatedList() {
-                string schedules = "O migué do falcão ta sem condicão. Como Proceder ?";
-
-                Foruns = new ObservableCollection<Forum> {
-                    new Forum { _title = "Nome do Forum", _place = "Departamento de Audiovisual", _date = new DateTime(2017, 1, 1), _schedules = schedules },
-                    new Forum { _title = "Forum 02", _place = "Place 02", _date = new DateTime(2017, 4, 17, 22, 00, 00), _schedules = schedules },
-                    new Forum { _title = "Forum 03", _place = "Place 03", _date = new DateTime(2017, 4, 17, 10, 00, 00), _schedules = schedules },
-                    new Forum { _title = "Forum 04", _place = "Place 04", _date = new DateTime(1996, 3, 25), _schedules = schedules },
-                    new Forum { _title = "Forum 05", _place = "Place 05", _date = new DateTime(2017, 4, 17, 18, 15, 00), _schedules = schedules },
-                    new Forum { _title = "Forum 06", _place = "Place 06", _date = new DateTime(2525, 8, 5), _schedules = schedules }
-                };
-            return Foruns;
+        public async Task SelectForum(ForumDetailViewModel forum) {
+            if (forum == null)
+                return;
+            SelectedForum = forum;
+            await _pageService.PushAsync(new ForumDetailPage());
         }
 
-        public void Select(object sender) {
-            _selectedForum = sender as Forum;
-        }
-
-        public Forum GetSelected() {
-            return _selectedForum;
+        // method for simulating local database
+        public void UpdateForumsList() {
+            var theme = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
+                "Curabitur ultrices fringilla quam, at dignissim enim eleifend ut." +
+                "Nunc vitae purus luctus, gravida sem quis, blandit nisi." +
+                "Quisque vestibulum mollis massa, eget scelerisque orci placerat ut." +
+                "Aliquam erat volutpat. Donec quis tortor pulvinar,";
+            Forums = new ObservableCollection<ForumDetailViewModel> {
+                new ForumDetailViewModel { Title = "Forum X", Place = "Somewhere Over The Rainbow", Schedules = theme, Date = DateTime.Now },
+                new ForumDetailViewModel { Title = "Forum Y", Place = "Somewhere Over The Rainbow", Schedules = theme, Date = new DateTime(2025, 4, 19, 00, 00, 00) },
+                new ForumDetailViewModel { Title = "Forum W", Place = "Somewhere Over The Rainbow", Schedules = theme, Date = new DateTime(1996, 4, 19, 19, 00, 00) }
+            };
         }
     }
 }

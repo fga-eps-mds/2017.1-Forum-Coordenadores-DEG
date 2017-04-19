@@ -5,30 +5,47 @@
              Title="Ver Fórum">
     <StackLayout>
         <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
+            
             <ScrollView>
+                
                 <StackLayout  Padding="5" BackgroundColor="White">
+                    
                     <StackLayout BackgroundColor="White" Padding="5,5,0,0">
-                        <Label Text="{Binding _title}" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White" />
-                        <Label Text="{Binding _date, StringFormat='Data {0:dd/MM/yyyy}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                        <Label Text="{Binding _date, StringFormat='Horário {0:HH:mm}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                        <Label Text="{Binding _place, StringFormat='Local {0}'}" TextColor="Gray" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                        <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start" VerticalOptions="EndAndExpand"/>
+                        <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"
+                               HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                               BackgroundColor="White" />
+                        <Label Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding Date, StringFormat='Horário {0:HH:mm}'}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding Place, StringFormat='Local {0}'}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start"
+                               VerticalOptions="EndAndExpand"/>
                     </StackLayout>
 
                     <StackLayout BackgroundColor="White" Padding="5,20,0,0">
-                        <Label Text="Pauta" TextColor="Black" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White"/>
-                        <Label Text="{Binding _schedules}" TextColor="Gray"  HorizontalOptions="Start" VerticalOptions="StartAndExpand" BackgroundColor="White"/>
-
-                        
-
+                        <Label Text="Pauta" TextColor="Black" FontSize="Medium"
+                               HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                               BackgroundColor="White"/>
+                        <Label Text="{Binding Schedules}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                               BackgroundColor="White"/>
                     </StackLayout>
+                    
                 </StackLayout>
+                
             </ScrollView>
+            
         </Frame>
+        
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
-            <Button x:Name="presenceButton" Text="Confirmar Presença" BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
-            <Button x:Name="unpresenceButton" Text="Não Comparecerei" BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+            <Button IsEnabled="{Binding IsPast}" Text="Confirmar Presença"
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+            <Button IsEnabled="{Binding IsPast}" Text="Não Comparecerei"
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
         </StackLayout>
+        
     </StackLayout>
 
 </ContentPage>
