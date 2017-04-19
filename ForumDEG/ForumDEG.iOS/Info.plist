@@ -32,7 +32,15 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>Fórum DEG</string>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleShortVersionString</key>
+	<string></string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Default.png</string>
+		<string>Default@2x.png</string>
+		<string>Default-568h@2x.png</string>
+		<string>Default-Portrait.png</string>
+		<string>Default-Portrait@2x.png</string>
+	</array>
 </dict>
 </plist>
