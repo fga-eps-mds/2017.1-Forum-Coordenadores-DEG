@@ -5,38 +5,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Android.Util;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace ForumDEG.ViewModels
-{
-   public class UserRegistrationViewModel : INotifyPropertyChanged{
+namespace ForumDEG.ViewModels {
+    public class UserRegistrationViewModel : INotifyPropertyChanged {
         private readonly IPageService _pageService;
 
         public ICommand RegisterNewUserCommand { get; private set; }
 
-        public UserRegistrationViewModel(IPageService PageService){
+        public UserRegistrationViewModel(IPageService PageService) {
             _pageService = PageService;
             RegisterNewUserCommand = new Command(RegisterNewUser);
         }
-        
+
         int userTypeIn;
         bool isCoord = true;
         string nameIn;
+
         string registrationIn;
         string emailIn;
         string passwordIn;
         string courseIn = "Coordenador";
 
-        public int UserTypeIn{
-            get{
+        public int UserTypeIn {
+            get {
                 return userTypeIn;
             }
-            set{
-                if (userTypeIn != value){
+            set {
+                if (userTypeIn != value) {
                     userTypeIn = value;
-                    if(userTypeIn == 0) {
+                    if (userTypeIn == 0) {
                         IsCoord = true;
                     } else {
                         IsCoord = false;
@@ -47,7 +46,7 @@ namespace ForumDEG.ViewModels
             }
         }
 
-        public bool IsCoord{
+        public bool IsCoord {
             get {
                 return isCoord;
             }
@@ -59,81 +58,79 @@ namespace ForumDEG.ViewModels
             }
         }
 
-        public string NameIn{
-            get{
+        public string NameIn {
+            get {
                 return nameIn;
             }
-            set{
-                if (nameIn != value){
+            set {
+                if (nameIn != value) {
                     nameIn = value;
                     OnPropertyChanged("NameIn");
                 }
             }
         }
 
-        public string RegistrationIn{
-            get{
+        public string RegistrationIn {
+            get {
                 return registrationIn;
             }
-            set{
-                if (registrationIn != value){
+            set {
+                if (registrationIn != value) {
                     registrationIn = value;
                     OnPropertyChanged("RegistrationIn");
                 }
             }
         }
 
-        public string EmailIn{
-            get{
+        public string EmailIn {
+            get {
                 return emailIn;
             }
-            set{
-                if (emailIn != value){
+            set {
+                if (emailIn != value) {
                     emailIn = value;
                     OnPropertyChanged("EmailIn");
                 }
             }
         }
 
-        public string PasswordIn{
-            get{
+        public string PasswordIn {
+            get {
                 return passwordIn;
             }
-            set{
-                if (passwordIn != value){
+            set {
+                if (passwordIn != value) {
                     passwordIn = value;
                     OnPropertyChanged("PasswordIn");
                 }
             }
         }
 
-        public string CourseIn{
-            get{
+        public string CourseIn {
+            get {
                 return courseIn;
             }
-            set{
-                if (courseIn != value){
+            set {
+                if (courseIn != value) {
                     courseIn = value;
                     OnPropertyChanged("CourseIn");
                 }
             }
         }
 
-        public bool HasEmptySpace(){
-            if (UserTypeIn == 0){
-                return (String.IsNullOrWhiteSpace(NameIn) ||
-                        String.IsNullOrWhiteSpace(RegistrationIn) ||
-                        String.IsNullOrWhiteSpace(EmailIn) ||
-                        String.IsNullOrWhiteSpace(PasswordIn) ||
-                        String.IsNullOrWhiteSpace(CourseIn));
+        public bool HasEmptySpace() {
+            if (String.IsNullOrWhiteSpace(NameIn) ||
+                String.IsNullOrWhiteSpace(RegistrationIn) ||
+                String.IsNullOrWhiteSpace(EmailIn) ||
+                String.IsNullOrWhiteSpace(PasswordIn)) {
+              return true;
+            } else {
+                if(UserTypeIn == 0) {
+                    return (String.IsNullOrWhiteSpace(CourseIn));
+                } else {
+                    return false;
+                }
             }
-            else{
-                return (String.IsNullOrWhiteSpace(NameIn) ||
-                        String.IsNullOrWhiteSpace(RegistrationIn) ||
-                        String.IsNullOrWhiteSpace(EmailIn) ||
-                        String.IsNullOrWhiteSpace(PasswordIn));
-            }
-
         }
 
         public bool IsNewUserValid(){
