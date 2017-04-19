@@ -56,15 +56,15 @@
     <Compile Include="Views\NewForumPage.xaml.cs">
       <DependentUpon>NewForumPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ForunsViewModel.cs" />
+    <Compile Include="ViewModels\ForumsViewModel.cs" />
     <Compile Include="Views\AppMasterPage.xaml.cs">
       <DependentUpon>AppMasterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ForumDetailPage.xaml.cs">
       <DependentUpon>ForumDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ForunsPage.xaml.cs">
-      <DependentUpon>ForunsPage.xaml</DependentUpon>
+    <Compile Include="Views\ForumsPage.xaml.cs">
+      <DependentUpon>ForumsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -116,7 +116,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Views\ForunsPage.xaml">
+    <EmbeddedResource Include="Views\ForumsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

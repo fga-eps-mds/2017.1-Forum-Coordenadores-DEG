@@ -16,7 +16,7 @@ namespace ForumDEG.Views {
         }
 
         async void Handle_ClickedForum(object sender, System.EventArgs e) {
-            await Navigation.PushAsync(new ForunsPage());
+            await Navigation.PushAsync(new ForumsPage());
         }
         void Handle_ClickedCriarForum(object sender, System.EventArgs e) {
             //            Implementation here

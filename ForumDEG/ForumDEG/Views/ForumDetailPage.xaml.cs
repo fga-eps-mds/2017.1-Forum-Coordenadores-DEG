@@ -6,7 +6,7 @@ namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumDetailPage : ContentPage {
         public ForumDetailPage() {
-            BindingContext = ForunsViewModel.GetInstance().SelectedForum;
+            BindingContext = ForumsViewModel.GetInstance().SelectedForum;
             InitializeComponent();
         }
     }

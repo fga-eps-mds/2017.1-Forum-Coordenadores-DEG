@@ -8,7 +8,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class ForunsViewModel : BaseViewModel {
+    class ForumsViewModel : BaseViewModel {
         public ObservableCollection<ForumDetailViewModel> Forums { get; private set; } = new ObservableCollection<ForumDetailViewModel>();
 
         private ForumDetailViewModel _selectedForum;
@@ -21,14 +21,14 @@ namespace ForumDEG.ViewModels {
 
         public ICommand SelectForumCommand { get; private set; }
 
-        private static ForunsViewModel _instance = null;
-        private ForunsViewModel(IPageService pageService) {
+        private static ForumsViewModel _instance = null;
+        private ForumsViewModel(IPageService pageService) {
             _pageService = pageService;
             SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
         }
 
-        public static ForunsViewModel GetInstance() {
-            if (_instance == null) _instance = new ForunsViewModel(new PageService());
+        public static ForumsViewModel GetInstance() {
+            if (_instance == null) _instance = new ForumsViewModel(new PageService());
             return _instance;
         }
 

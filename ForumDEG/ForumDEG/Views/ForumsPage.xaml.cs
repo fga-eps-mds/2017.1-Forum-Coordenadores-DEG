@@ -4,9 +4,9 @@ using ForumDEG.ViewModels;
 
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForunsPage : ContentPage {   
-        public ForunsPage() {
-            BindingContext = ForunsViewModel.GetInstance();
+    public partial class ForumsPage : ContentPage {   
+        public ForumsPage() {
+            BindingContext = ForumsViewModel.GetInstance();
             // calling simulation method
             ViewModel.UpdateForumsList();
             InitializeComponent();
@@ -21,8 +21,8 @@ namespace ForumDEG.Views {
             ViewModel.SelectForumCommand.Execute(e.SelectedItem);
         }
 
-        private ForunsViewModel ViewModel {
-            get { return (BindingContext as ForunsViewModel); }
+        private ForumsViewModel ViewModel {
+            get { return (BindingContext as ForumsViewModel); }
             set { BindingContext = value; }
         }
     }
