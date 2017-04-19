@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class ForumDetailViewModel {
+    public class ForumDetailViewModel {
         public string Title { get; set; }
         public string Place { get; set; }
         public string Schedules { get; set; }

@@ -8,7 +8,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class ForumsViewModel : BaseViewModel {
+    public class ForumsViewModel : BaseViewModel {
         public ObservableCollection<ForumDetailViewModel> Forums { get; private set; } = new ObservableCollection<ForumDetailViewModel>();
 
         private ForumDetailViewModel _selectedForum;
