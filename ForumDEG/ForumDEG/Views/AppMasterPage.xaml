@@ -59,18 +59,32 @@
         <ContentPage Title="Fórum DEG" Padding="0,50,0,0">
             <ScrollView>
                 <StackLayout Padding="20">
-                    <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Start" FontSize="Medium" Clicked="Handle_ClickedForum"/>
-                    <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Medium" Clicked="Handle_ClickedCoordenador"/>
-                    <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" VerticalOptions="End" FontSize="Medium" Clicked="Handle_ClickedFormulario"/>
-                    <StackLayout BackgroundColor="Green" Padding="10">
-                        <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="#ff8924" />
+                    <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
+                            HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
+                            VerticalOptions="Start" FontSize="Medium" Clicked="Handle_ClickedForum"/>
+                    <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
+                            HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
+                            VerticalOptions="Center" FontSize="Medium" Clicked="Handle_ClickedCoordenador"/>
+                    <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
+                            HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
+                            VerticalOptions="End" FontSize="Medium" Clicked="Handle_ClickedFormulario"/>
+                    <StackLayout  Orientation="Horizontal">
 
-                        <RelativeLayout>
-                            <Button Text="abc0" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="35" HeightRequest="100"/>
-                            <Button Text="abc1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="35" HeightRequest="100"/>
-                            <Button Text="abc2" HorizontalOptions="Center" VerticalOptions="End" WidthRequest="35" HeightRequest="100"/>
+                        <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
+                            <Button  Text=" Novo Fórum" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
+                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" />
+                            <Button  Text="Cadastrar Coordenador" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
+                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro"/>
+                            <Button  Text="Criar Formulário" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
+                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro"/>
+                        </StackLayout>
 
-                        </RelativeLayout>
+                        <StackLayout Orientation="Vertical" Padding="20">
+                            <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  
+                                    HorizontalOptions="End" VerticalOptions="End"
+                                    BackgroundColor="#ff8924" x:Name="ButtonPlus"/>
+
+                        </StackLayout>
 
                     </StackLayout>
                 </StackLayout>
