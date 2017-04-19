@@ -4,8 +4,7 @@ using ForumDEG.ViewModels;
 
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForunsPage : ContentPage {
-        
+    public partial class ForunsPage : ContentPage {   
         public ForunsPage() {
             BindingContext = ForunsViewModel.GetInstance();
             // calling simulation method
@@ -18,8 +17,8 @@ namespace ForumDEG.Views {
                 ViewModel.SelectedForum = null;
         }
 
-        private async void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
-            await ViewModel.SelectForum(e.SelectedItem as ForumDetailViewModel);
+        private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            ViewModel.SelectForumCommand.Execute(e.SelectedItem);
         }
 
         private ForunsViewModel ViewModel {

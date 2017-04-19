@@ -40,9 +40,9 @@
         </Frame>
         
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
-            <Button IsEnabled="{Binding IsPast}" Text="Confirmar Presença"
+            <Button IsEnabled="{Binding IsPast}" Text="Confirmar Presença" Command="{Binding ConfirmCommand}"
                     BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
-            <Button IsEnabled="{Binding IsPast}" Text="Não Comparecerei"
+            <Button IsEnabled="{Binding IsPast}" Text="Não Comparecerei" Command="{Binding DisconfirmCommand}"
                     BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
         </StackLayout>
         

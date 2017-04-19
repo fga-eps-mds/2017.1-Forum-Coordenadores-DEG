@@ -1,9 +1,6 @@
-﻿using ForumDEG.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
     class ForumDetailViewModel {
@@ -11,14 +8,23 @@ namespace ForumDEG.ViewModels {
         public string Place { get; set; }
         public string Schedules { get; set; }
         public DateTime Date { get; set; }
-        public bool IsPast { get; }
+        public bool IsPast { get; private set; }
+
+        public ICommand ConfirmCommand { get; private set; }
+        public ICommand DisconfirmCommand { get; private set; }
 
         public ForumDetailViewModel() {
+            ConfirmCommand = new Command(ConfirmPresence);
+            DisconfirmCommand = new Command(DisconfirmPresence);
             IsPast = HasPassed();
         }
 
         public bool HasPassed() {
-            return DateTime.Now - Date > TimeSpan.FromMinutes(0);
+            return DateTime.Now > Date;
         }
+
+        private void ConfirmPresence() { }
+
+        private void DisconfirmPresence() { }
     }
 }

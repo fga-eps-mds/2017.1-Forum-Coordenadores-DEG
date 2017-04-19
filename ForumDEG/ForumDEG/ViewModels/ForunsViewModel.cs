@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using ForumDEG.Interfaces;
 using ForumDEG.Views;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
     class ForunsViewModel : BaseViewModel {
@@ -17,9 +19,12 @@ namespace ForumDEG.ViewModels {
 
         private readonly IPageService _pageService;
 
+        public ICommand SelectForumCommand { get; private set; }
+
         private static ForunsViewModel _instance = null;
         private ForunsViewModel(IPageService pageService) {
             _pageService = pageService;
+            SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
         }
 
         public static ForunsViewModel GetInstance() {
@@ -27,7 +32,7 @@ namespace ForumDEG.ViewModels {
             return _instance;
         }
 
-        public async Task SelectForum(ForumDetailViewModel forum) {
+        private async Task SelectForum(ForumDetailViewModel forum) {
             if (forum == null)
                 return;
             SelectedForum = forum;
