@@ -22,7 +22,7 @@
                                HorizontalOptions="FillAndExpand">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Tapped="Handle_ClickedForum"
+                                    Command="{Binding ForumsClickedCommand}"
                                     NumberOfTapsRequired="1" />
                             </Label.GestureRecognizers>
                         </Label>
@@ -32,7 +32,7 @@
                                HorizontalOptions="FillAndExpand">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Tapped="Handle_ClickedCoordenador"
+                                    Command="{Binding CoordinatorsClickedCommand}"
                                     NumberOfTapsRequired="1" />
                             </Label.GestureRecognizers>
                         </Label>
@@ -42,7 +42,7 @@
                                HorizontalOptions="FillAndExpand">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Tapped="Handle_ClickedFormulario"
+                                    Command="{Binding FormsClickedCommand}"
                                     NumberOfTapsRequired="1" />
                             </Label.GestureRecognizers>
                         </Label>
@@ -61,22 +61,22 @@
                 <StackLayout Padding="20">
                     <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
-                            VerticalOptions="Start" FontSize="Medium" Clicked="Handle_ClickedForum"/>
+                            VerticalOptions="Start" FontSize="Medium" Command="{Binding ForumsClickedCommand}"/>
                     <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
-                            VerticalOptions="Center" FontSize="Medium" Clicked="Handle_ClickedCoordenador"/>
+                            VerticalOptions="Center" FontSize="Medium" Command="{Binding CoordinatorsClickedCommand}"/>
                     <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
-                            VerticalOptions="End" FontSize="Medium" Clicked="Handle_ClickedFormulario"/>
+                            VerticalOptions="End" FontSize="Medium" Command="{Binding FormsClickedCommand}"/>
                     <StackLayout  Orientation="Horizontal">
 
                         <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
                             <Button  Text=" Novo Fórum" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
-                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" />
+                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewForumClickedCommand}" />
                             <Button  Text="Cadastrar Coordenador" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
-                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro"/>
+                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding RegisterUserClickedCommand}" />
                             <Button  Text="Criar Formulário" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
-                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro"/>
+                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewFormClickedCommand}" />
                         </StackLayout>
 
                         <StackLayout Orientation="Vertical" Padding="20">

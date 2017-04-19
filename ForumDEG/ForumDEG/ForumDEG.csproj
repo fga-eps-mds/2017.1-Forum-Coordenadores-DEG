@@ -49,6 +49,7 @@
     <Compile Include="DAO\CoordinatorDatabase.cs" />
     <Compile Include="DAO\AdministratorDatabase.cs" />
     <Compile Include="Utils\IntefaceSQLite.cs" />
+    <Compile Include="ViewModels\AppMasterViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ForumDetailViewModel.cs" />
     <Compile Include="ViewModels\NewForumViewModel.cs" />
