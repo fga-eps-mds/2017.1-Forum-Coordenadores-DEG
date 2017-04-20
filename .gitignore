@@ -1,5 +1,7 @@
 # Autosave files
 *~
+
+UpgradeLog*
 .vs/
 # build
 [Oo]bj/
