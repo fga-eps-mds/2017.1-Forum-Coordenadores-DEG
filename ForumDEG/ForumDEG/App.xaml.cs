@@ -4,11 +4,13 @@ using Xamarin.Forms;
 
 namespace ForumDEG {
     public partial class App : Application {
-         
+
         public App() {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new Views.NewForumPage());
+            MainPage = new NavigationPage(new AppMasterPage()) {
+                BarBackgroundColor = Color.FromHex("#ff8924")
+            };
+            //MainPage = new ForumDEG.MainPage();
         }
 
         protected override void OnStart() {

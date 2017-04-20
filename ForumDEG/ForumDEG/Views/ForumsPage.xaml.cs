@@ -1,27 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ForumDEG.ViewModels;
 
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForumsPage : ContentPage {
+    public partial class ForumsPage : ContentPage {   
         public ForumsPage() {
+            BindingContext = ForumsViewModel.GetInstance();
+            // calling simulation method
+            ViewModel.UpdateForumsList();
             InitializeComponent();
         }
 
-        protected async override void OnAppearing() {
-            base.OnAppearing();
-
-            ForumListView.ItemsSource = await Utils.ForumDatabase.getForumDB.GetAllForums();
+        override protected void OnAppearing() {
+            if (ViewModel.SelectedForum != null)
+                ViewModel.SelectedForum = null;
         }
 
-        private void ForumListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+        private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            ViewModel.SelectForumCommand.Execute(e.SelectedItem);
+        }
 
+        private ForumsViewModel ViewModel {
+            get { return (BindingContext as ForumsViewModel); }
+            set { BindingContext = value; }
         }
     }
 }

@@ -1,14 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ForumDEG.Views.ForumsPage">
-    <ContentPage.Content>
-        <ListView x:Name="ForumListView" HorizontalOptions="FillAndExpand" ItemSelected="ForumListView_ItemSelected">
+             x:Class="ForumDEG.Views.ForumsPage"
+             Padding="15, 25, 15, 25"
+             BackgroundColor="White"
+             Title="Foruns">
+    <ScrollView>
+        <ListView SeparatorVisibility="Default"
+                  ItemsSource="{Binding Forums}"
+                  HasUnevenRows="True"
+                  RowHeight="60"
+                  IsPullToRefreshEnabled="True"
+                  SelectedItem="{Binding SelectedForum}"
+                  ItemSelected="ItemSelected"
+                  SeparatorColor="Gray">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding _title}" />
+                    <ViewCell >
+
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
+                                <Label Text="{Binding Title}" TextColor="Black" />
+                                <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Gray"/>
+                            </StackLayout>
+
+                            <Label Text="Ver detalhes" 
+                                       TextColor="#3366BB"
+                                       VerticalOptions="Center" />
+
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>

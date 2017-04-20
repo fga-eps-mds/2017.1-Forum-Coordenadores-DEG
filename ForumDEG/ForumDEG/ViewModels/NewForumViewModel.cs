@@ -1,5 +1,6 @@
 ﻿using System;
 using ForumDEG.Utils;
+using ForumDEG.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

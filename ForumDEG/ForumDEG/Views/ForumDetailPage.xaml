@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.ForumDetailPage"
+             Title="Ver Fórum">
+    <StackLayout>
+        <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
+            
+            <ScrollView>
+                
+                <StackLayout  Padding="5" BackgroundColor="White">
+                    
+                    <StackLayout BackgroundColor="White" Padding="5,5,0,0">
+                        <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"
+                               HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                               BackgroundColor="White" />
+                        <Label Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding Date, StringFormat='Horário {0:HH:mm}'}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding Place, StringFormat='Local {0}'}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start"
+                               VerticalOptions="EndAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout BackgroundColor="White" Padding="5,20,0,0">
+                        <Label Text="Pauta" TextColor="Black" FontSize="Medium"
+                               HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                               BackgroundColor="White"/>
+                        <Label Text="{Binding Schedules}" TextColor="Gray"
+                               HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                               BackgroundColor="White"/>
+                    </StackLayout>
+                    
+                </StackLayout>
+                
+            </ScrollView>
+            
+        </Frame>
+        
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
+            <Button IsEnabled="{Binding IsPast}" Text="Confirmar Presença" Command="{Binding ConfirmCommand}"
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+            <Button IsEnabled="{Binding IsPast}" Text="Não Comparecerei" Command="{Binding DisconfirmCommand}"
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+        </StackLayout>
+        
+    </StackLayout>
+
+</ContentPage>
