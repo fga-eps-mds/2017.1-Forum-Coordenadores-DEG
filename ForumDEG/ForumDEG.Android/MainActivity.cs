@@ -8,7 +8,7 @@ using Android.Widget;
 using Android.OS;
 
 namespace ForumDEG.Droid {
-    [Activity(Label = "Fórum DEG", Icon = "@drawable/icon_android", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Fórum DEG", Icon = "@drawable/icon_android", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity {
         protected override void OnCreate(Bundle bundle) {
             TabLayoutResource = Resource.Layout.Tabbar;
