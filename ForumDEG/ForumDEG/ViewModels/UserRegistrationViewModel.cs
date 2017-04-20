@@ -7,16 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using ForumDEG.Interfaces;
 
 namespace ForumDEG.ViewModels {
-    public class UserRegistrationViewModel : INotifyPropertyChanged {
+    public class UserRegistrationViewModel : BaseViewModel {
         private readonly IPageService _pageService;
 
         public ICommand RegisterNewUserCommand { get; private set; }
 
         public UserRegistrationViewModel(IPageService PageService) {
             _pageService = PageService;
-            RegisterNewUserCommand = new Command(RegisterNewUser);
+            RegisterNewUserCommand = new Command(async () => await RegisterNewUser());
         }
 
         int userTypeIn;
@@ -138,8 +139,7 @@ namespace ForumDEG.ViewModels {
             return true;
         }
 
-        public async void RegisterNewUser(){
-
+        public async Task RegisterNewUser(){
             if (!HasEmptySpace()){
                 if (IsNewUserValid()){
                     if (UserTypeIn == 0){
@@ -151,11 +151,11 @@ namespace ForumDEG.ViewModels {
                     CleanFields();
                 }
                 else{
-                    await _pageService.DisplayAlert("Erro!", "Dados inseridos inválidos!", "ok");
+                    await _pageService.DisplayAlert("Erro!", "Dados inseridos inválidos!", "ok", "cancel");
                 }
             }
             else{
-                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok");
+                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
             }
         }
 
@@ -168,7 +168,7 @@ namespace ForumDEG.ViewModels {
                 CreatedOn = DateTime.Now
             };
             await App.AdministratorDatabase.SaveAdministrator(Admin);
-            await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo adminstrador com sucesso! ", "ok");
+            await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo adminstrador com sucesso! ", "ok", "cancel");
         }
 
         public async void RegisterNewCoordinator(){
@@ -181,7 +181,7 @@ namespace ForumDEG.ViewModels {
                 Course = CourseIn
             };
             await App.CoordinatorDatabase.SaveCoordinator(Coord);
-            await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo Coordenador com sucesso!", "ok");
+            await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo Coordenador com sucesso!", "ok", "cancel");
         }
 
         public void CleanFields(){
@@ -191,15 +191,6 @@ namespace ForumDEG.ViewModels {
             EmailIn = null;
             PasswordIn = null;
             CourseIn = null;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName){
-            var changed = PropertyChanged;
-            if (changed != null){
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
     }
 }
