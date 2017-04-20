@@ -40,8 +40,8 @@
     </Compile>
     <Compile Include="DAO\ForumDatabase.cs" />
     <Compile Include="Interfaces\IPageService.cs" />
-    <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Coordinator.cs" />
     <Compile Include="Models\Forum.cs" />
@@ -75,7 +75,6 @@
     <Compile Include="Views\UserRegistrationPage.xaml.cs">
       <DependentUpon>UserRegistrationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -147,9 +146,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\AppMasterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -161,7 +157,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\LoginPage\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ForumsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -186,7 +184,7 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\LoginPage\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\LoginPage.xaml">
@@ -195,8 +193,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <EmbeddedResource Include="Images\entry_rectangle.png" />
     <EmbeddedResource Include="Images\login_background.png" />
   </ItemGroup>
   <ItemGroup>

@@ -225,9 +225,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\splashscreen.png" />
   </ItemGroup>
-    <ItemGroup>
-    <AndroidResource Include="Resources\drawable\button_rectangle.png" />
-    </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logo.png" />
   </ItemGroup>

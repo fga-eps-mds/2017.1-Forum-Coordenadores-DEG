@@ -6,71 +6,57 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ForumDEG.Models;
 using ForumDEG.Utils;
-using Android.Util;
 
 namespace ForumDEG.ViewModels {
     class LoginViewModel {
 
-        private List<Administrator> administrators = null;
-        private List<Coordinator> coordinators = null ;
         private User _user;
 
-        protected async void LoadCoordinators() {
-            Log.Info("LoadCoordinators", "Carregando lista de coord");
-
-            coordinators = await App.CoordinatorDatabase.GetAllCoordinators();
-
+        protected async Task <List<Coordinator>> LoadCoordinators() {
+            List<Coordinator> coor;
+            coor = await App.CoordinatorDatabase.GetAllCoordinators();
+            return coor;
         }
 
-        protected async void LoadAdminstrators() {
-            Log.Info("LoadAdminstrators", "Carregando lista de Admin");
-            administrators = await App.AdministratorDatabase.GetAllAdministrators();
+        protected async Task<List<Administrator>> LoadAdminstrators() {
+
+            return await App.AdministratorDatabase.GetAllAdministrators();
         }
 
-        private bool FindCoord(string email) {
-            LoadCoordinators();
-            Log.Info("FindCoord", "Carregado lista de Coord");
+        private async Task<bool> FindCoord(string email) {
+            List<Coordinator> coordinators = null;
+            coordinators = await LoadCoordinators();
             if(coordinators != null)
             foreach (var coordinator in coordinators) {
                 if (coordinator.Email == email) {
-                    Log.Info("FindCoord", "Coord encontrado");
                     _user = coordinator;
                     return true;
                 }
             }
-            Log.Info("FindCoord", "Coord não encontrado");
             return false;
         }
 
-        public bool FindAdmin(string email) {
-            LoadAdminstrators();
-            int i = 1;
-            Log.Info("FindAdmin", "Lista de Admin Carregada");
+        public async Task<bool> FindAdmin(string email) {
+            List<Administrator> administrators = null;
+            administrators = await LoadAdminstrators();
             if(administrators != null) {
                 foreach (Administrator administrator in administrators.Where(
                 administrator => administrator != null)) {
-                    Log.Info("Adminstrator", i.ToString());
+ 
                     if (administrator.Email == email) {
-                        Log.Info("FindAdmin", "Admin encontrado");
                         _user = administrator;
                         return true;
                     }
                 }
             }
-            Log.Info("FindAdmin", "Admin nao encontrado");
             return false;
         }
 
-        public bool MakeLogin(string email, string password) { 
-            Administrator adm = new Administrator();
-            App.AdministratorDatabase.SaveAdministrator(adm);
-            Log.Info("MakeLogin", "Procurando admin");
-            FindAdmin(email);
-            if (_user == null) {
-               FindCoord(email);
-            }
-            if (_user != null) {
-                Log.Info("MakeLogin", "salvando info de user logado");
+        public async Task<bool> MakeLogin(string email, string password) {
+            bool adm = await FindAdmin(email);
+            bool coor = await FindCoord(email);
+
+            if (adm || coor) {
                 if (_user.Password == password) {
                     Helpers.Settings.IsLoggedIn = true;
                     Helpers.Settings.UserId = _user.Id;
