@@ -8,6 +8,7 @@ namespace ForumDEG.ViewModels {
         public string Place { get; set; }
         public string Schedules { get; set; }
         public DateTime Date { get; set; }
+        public TimeSpan Hour { get; set; }
         public bool IsPast { get; private set; }
 
         public ICommand ConfirmCommand { get; private set; }

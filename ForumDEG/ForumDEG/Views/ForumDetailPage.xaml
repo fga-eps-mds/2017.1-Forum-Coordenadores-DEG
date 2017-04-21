@@ -14,11 +14,11 @@
                         <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"
                                HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                                BackgroundColor="White" />
-                        <Label Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}" TextColor="Gray"
+                        <Label Text="{Binding Date, StringFormat='Data: {0:dd/MM/yyyy}'}" TextColor="Gray"
                                HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                        <Label Text="{Binding Date, StringFormat='Horário {0:HH:mm}'}" TextColor="Gray"
+                        <Label Text="{Binding Hour, StringFormat='Horário: {0}'}" TextColor="Gray"
                                HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                        <Label Text="{Binding Place, StringFormat='Local {0}'}" TextColor="Gray"
+                        <Label Text="{Binding Place, StringFormat='Local: {0}'}" TextColor="Gray"
                                HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                         <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start"
                                VerticalOptions="EndAndExpand"/>

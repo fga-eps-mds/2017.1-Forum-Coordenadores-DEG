@@ -50,7 +50,8 @@ namespace ForumDEG.ViewModels {
                     Title = forum._title,
                     Place = forum._place,
                     Schedules =  forum._schedules,
-                    Date = forum._date
+                    Date = forum._date,
+                    Hour = forum._hour
                 });
             }
         }
