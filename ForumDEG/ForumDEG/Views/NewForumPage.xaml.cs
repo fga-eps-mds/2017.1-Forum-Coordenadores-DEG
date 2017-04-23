@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewForumPage : ContentPage {
-        private NewForumViewModel _viewModel = new NewForumViewModel(UserDialogs.Instance);
+        private NewForumViewModel _viewModel = new NewForumViewModel(UserDialogs.Instance, new PageService());
 
         public NewForumPage() {
             InitializeComponent();
