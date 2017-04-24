@@ -22,12 +22,13 @@
             <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">
                 <Button Text="Cancelar" 
-                TextColor="White"
-                BackgroundColor="Orange"/>
+                        TextColor="White"
+                        BackgroundColor="Orange"
+                        Command="{Binding CancelCommand}"/>  
                 <Button Text="Criar fórum" 
-                TextColor="White"
-                BackgroundColor="Orange"
-                Clicked="OnNewForumButtonClicked"
+                        TextColor="White"
+                        BackgroundColor="Orange"
+                        Clicked="OnNewForumButtonClicked"
                     />
             </StackLayout>
         </StackLayout>

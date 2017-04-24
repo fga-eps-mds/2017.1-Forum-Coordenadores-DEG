@@ -3,16 +3,19 @@ using ForumDEG.ViewModels;
 using ForumDEG.Utils;
 using Moq;
 using ForumDEG.Interfaces;
+using Acr.UserDialogs;
 
 namespace UnitTest {
     public class NewForumViewModelTests {
         private NewForumViewModel viewModel;
-        private Mock<IPageService> _pageService;
+        private Mock<IUserDialogs> _mockDialogs;
+        private Mock<IPageService> _mockPageService;
 
         [SetUp]
         public void Setup() {
-            _pageService = new Mock<IPageService>();
-            viewModel = new NewForumViewModel(_pageService.Object);
+            _mockDialogs = new Mock<IUserDialogs>();
+            _mockPageService = new Mock<IPageService>();
+            viewModel = new NewForumViewModel(_mockDialogs.Object, _mockPageService.Object);
 
             viewModel.Forum._title = "Title";
             viewModel.Forum._place = "Place";

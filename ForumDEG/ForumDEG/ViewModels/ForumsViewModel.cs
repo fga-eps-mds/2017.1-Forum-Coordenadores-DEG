@@ -1,5 +1,6 @@
 ﻿using System;
 using ForumDEG.Models;
+using ForumDEG.Utils;
 using System.Collections.ObjectModel;
 using ForumDEG.Interfaces;
 using ForumDEG.Views;
@@ -9,7 +10,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
     public class ForumsViewModel : BaseViewModel {
-        public ObservableCollection<ForumDetailViewModel> Forums { get; private set; } = new ObservableCollection<ForumDetailViewModel>();
+        public ObservableCollection<ForumDetailViewModel> Forums { get; private set; }
 
         private ForumDetailViewModel _selectedForum;
         public ForumDetailViewModel SelectedForum {
@@ -40,17 +41,19 @@ namespace ForumDEG.ViewModels {
         }
 
         // method for simulating local database
-        public void UpdateForumsList() {
-            var theme = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-                "Curabitur ultrices fringilla quam, at dignissim enim eleifend ut." +
-                "Nunc vitae purus luctus, gravida sem quis, blandit nisi." +
-                "Quisque vestibulum mollis massa, eget scelerisque orci placerat ut." +
-                "Aliquam erat volutpat. Donec quis tortor pulvinar,";
-            Forums = new ObservableCollection<ForumDetailViewModel> {
-                new ForumDetailViewModel { Title = "Forum X", Place = "Somewhere Over The Rainbow", Schedules = theme, Date = DateTime.Now },
-                new ForumDetailViewModel { Title = "Forum Y", Place = "Somewhere Over The Rainbow", Schedules = theme, Date = new DateTime(2025, 4, 19, 00, 00, 00) },
-                new ForumDetailViewModel { Title = "Forum W", Place = "Somewhere Over The Rainbow", Schedules = theme, Date = new DateTime(1996, 4, 19, 19, 00, 00) }
-            };
+        public async void UpdateForumsList() {
+            Forums = new ObservableCollection<ForumDetailViewModel>();
+            var forumsList = await ForumDatabase.getForumDB.GetAllForums();
+
+            foreach (Forum forum in forumsList) {
+                Forums.Add(new ForumDetailViewModel {
+                    Title = forum._title,
+                    Place = forum._place,
+                    Schedules =  forum._schedules,
+                    Date = forum._date,
+                    Hour = forum._hour
+                });
+            }
         }
     }
 }

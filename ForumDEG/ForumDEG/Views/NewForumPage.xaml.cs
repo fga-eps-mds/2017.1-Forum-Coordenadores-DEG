@@ -1,4 +1,5 @@
-﻿using ForumDEG.ViewModels;
+﻿using Acr.UserDialogs;
+using ForumDEG.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewForumPage : ContentPage {
-        private NewForumViewModel _viewModel = new NewForumViewModel(new PageService());
+        private NewForumViewModel _viewModel = new NewForumViewModel(UserDialogs.Instance, new PageService());
 
         public NewForumPage() {
             InitializeComponent();
