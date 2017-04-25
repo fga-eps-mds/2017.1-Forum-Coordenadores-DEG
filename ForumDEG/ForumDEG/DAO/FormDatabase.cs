@@ -1,11 +1,7 @@
 ﻿using ForumDEG.Models;
 using ForumDEG.Utils;
 using SQLite;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
