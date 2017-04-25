@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.UserRegistrationPage"
+             NavigationPage.HasNavigationBar="True"
+             Title="Cadastrar Coordenador">
+
+    <ScrollView>
+
+        <StackLayout Orientation="Vertical" Margin="40, 25, 40, 30" Spacing="25">
+
+            <StackLayout Orientation="Vertical" Spacing="5">
+
+                <Label Text="Nome Completo" FontAttributes="Bold" FontSize="18" 
+                    HorizontalOptions="Start"></Label>
+
+                <Entry Text="{Binding NameIn}" Placeholder="Nome completo" Keyboard="Text"
+                    HorizontalTextAlignment="Start" FontSize="16" HeightRequest="50" 
+                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" Spacing="5">
+
+                <Label Text="Email" FontSize="18" FontAttributes="Bold" 
+                    HorizontalOptions="Start"></Label>
+
+                <Entry Text="{Binding EmailIn}" 
+                    Placeholder="Endereço de email" Keyboard="Email"
+                    HorizontalTextAlignment="Start" FontSize="16" HeightRequest="50" 
+                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" Spacing="5">
+
+                <Label Text="Matrícula" FontSize="18" FontAttributes="Bold" 
+                    HorizontalOptions="Start"></Label>
+
+                <Entry Text="{Binding RegistrationIn}" Placeholder="Matrícula" 
+                    Keyboard="Numeric" HorizontalTextAlignment="Start" FontSize="16"
+                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" Spacing="5">
+
+                <Label Text="Senha" FontSize="18" FontAttributes="Bold" 
+                    HorizontalOptions="Start"></Label>
+
+                <Entry Text="{Binding PasswordIn}" Placeholder="Senha" IsPassword="True"
+                    Keyboard="Text" HorizontalTextAlignment="Start" FontSize="16"
+                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" Spacing="5">
+
+                <Label Text="Tipo de usuário" FontSize="18" FontAttributes="Bold" 
+                    HorizontalOptions="Start"></Label>
+
+                <Picker Title="Tipo de usuário" SelectedIndex="{Binding UserTypeIn}" 
+                        x:Name="User_Type" HorizontalOptions="Center" WidthRequest="280">
+                    <Picker.Items>
+                        <x:String>Coordenador</x:String>
+                        <x:String>Administrador</x:String>
+                    </Picker.Items>
+                </Picker>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" Spacing="5">
+
+                <Label Text="Curso" FontSize="18" FontAttributes="Bold" 
+                    HorizontalOptions="Start"></Label>
+
+                <Picker Title="Curso" HorizontalOptions="Center" WidthRequest="280" 
+                        SelectedItem="{Binding CourseIn}" IsEnabled="{Binding IsCoord}">
+                    <Picker.Items>
+                        <x:String>Engenharias</x:String>
+                        <x:String>Engenharia de Software</x:String>
+                        <x:String>Engenharia Aeroespacial</x:String>
+                        <x:String>Engenharia Automotiva</x:String>
+                        <x:String>Engenharia de Energia</x:String>
+                        <x:String>Engenharia Eletrônica</x:String>
+                    </Picker.Items>
+                </Picker>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 0, 0, 30">
+
+                <Button Text="Cancelar" TextColor="White" FontSize="17" 
+                        BackgroundColor="Orange" WidthRequest="140"></Button>
+
+                <Button Command="{Binding RegisterNewUserCommand}" Text="Confirmar" TextColor="White" 
+                        FontSize="17" BackgroundColor="Orange" WidthRequest="140"></Button>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
