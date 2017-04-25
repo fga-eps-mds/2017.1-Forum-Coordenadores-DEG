@@ -31,7 +31,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task CoordinatorsClicked() {
-            await _pageService.PushAsync(new ForumsPage());
+            await _pageService.PushAsync(new TestViewUsers());
         }
 
         private async Task FormsClicked() {
@@ -43,7 +43,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task RegisterUserClicked() {
-            await _pageService.PushAsync(new ForumsPage());
+            await _pageService.PushAsync(new UserRegistrationPage());
         }
 
         private async Task NewFormClicked() {
