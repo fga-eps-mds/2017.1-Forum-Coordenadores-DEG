@@ -2,6 +2,7 @@
 using ForumDEG.ViewModels;
 using ForumDEG.Utils;
 using Moq;
+using ForumDEG.Interfaces;
 
 namespace UnitTest {
     public class UserRegistrationViewModelTests {
