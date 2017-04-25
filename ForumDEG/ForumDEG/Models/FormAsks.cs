@@ -13,6 +13,9 @@ namespace ForumDEG.Models {
         [Indexed]
         public int FormId { get; set; }
 
+        [Indexed]
+        public int UserId { get; set; }
+
         public int AskType { get; set; }
 
         public List<String> Asks { get; set; }
@@ -25,7 +28,7 @@ namespace ForumDEG.Models {
         */
         public override string ToString() {
 
-            return string.Format("[ForumAsks: ID={0}, FormId={1}, AskType={2}, Asks={3}, Answers={4}]", Id, FormId, AskType, Asks.ToList(), Answers.ToList());
+            return string.Format("[ForumAsks: ID={0}, FormId={1}, UserId={2}, AskType={3}, Asks={4}, Answers={5}]", Id, FormId, UserId, AskType, Asks.ToList(), Answers.ToList());
         }
     }
 }

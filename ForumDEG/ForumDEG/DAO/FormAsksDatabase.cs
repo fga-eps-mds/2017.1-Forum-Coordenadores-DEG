@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ForumDEG.DAO {
-    class FormAsksDatabase {
+    public class FormAsksDatabase {
 
         readonly SQLiteAsyncConnection _database;
 
@@ -33,6 +33,27 @@ namespace ForumDEG.DAO {
                 Debug.WriteLine("FormAsksDatabase getFormDB: returning _formAsksDatabase.");
                 return _formAsksDatabase;
             }
+        }
+
+        public Task<List<FormAsks>> GetAllFormsAsks() {
+            return _database.Table<FormAsks>().ToListAsync();
+        }
+
+        public Task<FormAsks> GetFormAsks(int id) {
+            return _database.Table<FormAsks>().Where(i => i.Id == id).FirstOrDefaultAsync();
+        }
+
+        public Task<int> SaveFormAsks(FormAsks newFormAsks) {
+
+            if (newFormAsks.Id == 0) {
+                return _database.InsertAsync(newFormAsks);
+            } else {
+                return _database.UpdateAsync(newFormAsks);
+            }
+        }
+
+        public Task<int> DeleteFormAsks(FormAsks formAsks) {
+            return _database.DeleteAsync(formAsks);
         }
     }
 }
