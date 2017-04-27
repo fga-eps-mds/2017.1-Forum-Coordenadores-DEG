@@ -8,16 +8,12 @@ namespace ForumDEG {
         static CoordinatorDatabase _coordinatorDatabase;
         //static ForumDatabase _forumDatabase;
 
-        static AdministratorDatabase _administratorDatabase;
-        static CoordinatorDatabase _coordinatorDatabase;
-        //static ForumDatabase _forumDatabase;
-
         public App() {
             InitializeComponent();
 
             if (Helpers.Settings.IsLoggedIn) {
                 if (Helpers.Settings.IsAdmin) {
-                    MainPage = new NavigationPage(new Views.MainPageAdministrator());
+                    MainPage = new NavigationPage(new Views.AppMasterPage());
                 } else {
                     MainPage = new NavigationPage(new Views.MainPageCoordinator());
                 }
@@ -34,15 +30,6 @@ namespace ForumDEG {
                 }
                 return _administratorDatabase;
 
-            }
-        }
-
-        public static AdministratorDatabase AdministratorDatabase{
-            get {
-                if(_administratorDatabase == null){
-                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
-                }
-                return _administratorDatabase;
             }
         }
 
