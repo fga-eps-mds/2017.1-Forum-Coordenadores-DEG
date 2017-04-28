@@ -29,31 +29,25 @@ namespace ForumDEG.Utils
             }
         }
 
-        public Task<List<Forum>> GetAllForums()
-        {
+        public Task<List<Forum>> GetAllForums() {
             return _database.Table<Forum>().ToListAsync();
         }
 
-        public Task<Forum> GetForum(int id)
-        {
+        public Task<Forum> GetForum(int id) {
             return _database.Table<Forum>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveForum(Forum newForum)
-        {
+        public Task<int> SaveForum(Forum newForum) {
 
-            if (newForum.Id == 0)
-            {
+            if (newForum.Id == 0) {
                 return _database.InsertAsync(newForum);
             }
-            else
-            {
+            else {
                 return _database.UpdateAsync(newForum);
             }
         }
 
-        public Task<int> DeleteForum(Forum Forum)
-        {
+        public Task<int> DeleteForum(Forum Forum) {
             return _database.DeleteAsync(Forum);
         }
     }

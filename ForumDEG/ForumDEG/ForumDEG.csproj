@@ -38,12 +38,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DAO\FormDatabase.cs" />
+    <Compile Include="DAO\FormAsksDatabase.cs" />
     <Compile Include="DAO\ForumDatabase.cs" />
+    <Compile Include="DAO\ForumNotificationDatabase.cs" />
     <Compile Include="Interfaces\IPageService.cs" />
     <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Coordinator.cs" />
+    <Compile Include="Models\Form.cs" />
+    <Compile Include="Models\FormAsks.cs" />
     <Compile Include="Models\Forum.cs" />
+    <Compile Include="Models\ForumNotification.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAO\CoordinatorDatabase.cs" />
