@@ -1,4 +1,4 @@
-﻿using SQLite;
+using SQLite;
 using System;
 
 namespace ForumDEG.Models

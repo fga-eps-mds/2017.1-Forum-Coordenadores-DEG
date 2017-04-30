@@ -11,10 +11,16 @@ namespace ForumDEG {
         public App() {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new AppMasterPage()) {
-                BarBackgroundColor = Color.FromHex("#ff8924")
-            };
-            //MainPage = new ForumDEG.MainPage();
+            if (Helpers.Settings.IsLoggedIn) {
+                if (Helpers.Settings.IsAdmin) {
+                    MainPage = new NavigationPage(new Views.AppMasterPage());
+                } else {
+                    MainPage = new NavigationPage(new Views.MainPageCoordinator());
+                }
+            } else {
+                MainPage = new NavigationPage(new Views.LoginPage());
+            }
+
         }
 
         public static AdministratorDatabase AdministratorDatabase{
@@ -23,6 +29,7 @@ namespace ForumDEG {
                     _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
                 }
                 return _administratorDatabase;
+
             }
         }
 
@@ -34,6 +41,7 @@ namespace ForumDEG {
                 return _coordinatorDatabase;
             }
         }
+
 
         protected override void OnStart() {
             // Handle when your app starts

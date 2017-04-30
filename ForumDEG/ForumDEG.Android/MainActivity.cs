@@ -7,9 +7,11 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Acr.UserDialogs;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace ForumDEG.Droid {
-    [Activity(Label = "Fórum DEG", Icon = "@drawable/icon_android", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+
+    [Activity(Label = "Fórum DEG", Icon = "@drawable/icon_android", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity {
         protected override void OnCreate(Bundle bundle) {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -18,7 +20,11 @@ namespace ForumDEG.Droid {
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
             UserDialogs.Init(this);
+
+            ImageCircleRenderer.Init();
+
             LoadApplication(new App());
         }
     }
