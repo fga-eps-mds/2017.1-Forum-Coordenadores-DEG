@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.ForumDetailPage"
-             Title="Ver Fórum">
+             Title="Ver Fórum"
+             x:Name="SeeForumPage">
     <StackLayout>
         <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
             
@@ -50,9 +51,11 @@
         
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
             <Button IsEnabled="{Binding IsPast}" Text="Confirmar Presença" Command="{Binding ConfirmCommand}"
-                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"
+                    x:Name="ConfirmPresenceButton"/>
             <Button IsEnabled="{Binding IsPast}" Text="Não Comparecerei" Command="{Binding DisconfirmCommand}"
-                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"/>
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"
+                    x:Name="DenyPresenceButton"/>
         </StackLayout>
         
     </StackLayout>
