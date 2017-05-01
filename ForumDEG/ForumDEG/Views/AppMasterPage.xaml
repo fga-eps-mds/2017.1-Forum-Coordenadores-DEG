@@ -93,13 +93,13 @@
                         <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
                             <Button  Text=" Novo Fórum" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewForumClickedCommand}" 
-                                     x:Name="NewForumButton"/>
+                                     x:Name="NewForumButtonOnPageMaster"/>
                             <Button  Text="Cadastrar Coordenador" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding RegisterUserClickedCommand}" 
-                                     x:Name="NewCoordenadorButton"/>
+                                     x:Name="NewCoordenadorButtonOnPageMaster"/>
                             <Button  Text="Criar Formulário" HorizontalOptions="EndAndExpand" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewFormClickedCommand}" 
-                                     x:Name="NewFormularioButton"/>
+                                     x:Name="NewFormularioButtonOnPageMaster"/>
                         </StackLayout>
 
                         <StackLayout Orientation="Vertical" Padding="20">
