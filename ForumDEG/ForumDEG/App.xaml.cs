@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace ForumDEG {
     public partial class App : Application {
+        static AdministratorDatabase _administratorDatabase;
+        static CoordinatorDatabase _coordinatorDatabase;
+        static ForumDatabase _forumDatabase;
 
         public App() {
             InitializeComponent();
@@ -20,6 +23,33 @@ namespace ForumDEG {
                 MainPage = new NavigationPage(new LoginPage()) {
                     BarBackgroundColor = Color.FromHex("#ff8924")
                 };
+            }
+        }
+
+        public static AdministratorDatabase AdministratorDatabase{
+            get {
+                if(_administratorDatabase == null){
+                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
+                }
+                return _administratorDatabase;
+            }
+        }
+
+        public static CoordinatorDatabase CoordinatorDatabase{
+            get{
+                if (_coordinatorDatabase == null){
+                    _coordinatorDatabase = new CoordinatorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Coordinator.db3"));
+                }
+                return _coordinatorDatabase;
+            }
+        }
+
+        public static ForumDatabase ForumDatabase {
+            get {
+                if (_forumDatabase == null) {
+                    _forumDatabase = new ForumDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Forum.db3"));
+                }
+                return _forumDatabase;
             }
         }
 
