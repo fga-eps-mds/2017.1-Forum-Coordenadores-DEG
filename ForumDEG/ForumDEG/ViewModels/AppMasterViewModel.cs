@@ -12,6 +12,7 @@ namespace ForumDEG.ViewModels {
         public ICommand NewForumClickedCommand { get; private set; }
         public ICommand RegisterUserClickedCommand { get; private set; }
         public ICommand NewFormClickedCommand { get; private set; }
+        public ICommand ChangePasswordClickedCommand { get; set; }
 
         private readonly IPageService _pageService;
 
@@ -24,6 +25,7 @@ namespace ForumDEG.ViewModels {
             NewForumClickedCommand = new Command(async () => await NewForumClicked());
             RegisterUserClickedCommand = new Command(async () => await RegisterUserClicked());
             NewFormClickedCommand = new Command(async () => await NewFormClicked());
+            ChangePasswordClickedCommand = new Command(async () => await ChangePasswordClicked());
         }
         
         private async Task ForumsClicked() {
@@ -48,6 +50,10 @@ namespace ForumDEG.ViewModels {
 
         private async Task NewFormClicked() {
             await _pageService.PushAsync(new ForumsPage());
+        }
+
+        private async Task ChangePasswordClicked() {
+            await _pageService.PushAsync(new ChangePasswordPage());
         }
     }
 }
