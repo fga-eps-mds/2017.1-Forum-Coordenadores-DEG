@@ -25,9 +25,9 @@ namespace ForumDEG.ViewModels {
         }
 
         public bool IsAnyFieldBlank() {
-            return (String.IsNullOrWhiteSpace(Forum._title) ||
-                    String.IsNullOrWhiteSpace(Forum._place) ||
-                    String.IsNullOrWhiteSpace(Forum._schedules));
+            return (String.IsNullOrWhiteSpace(Forum.Title) ||
+                    String.IsNullOrWhiteSpace(Forum.Place) ||
+                    String.IsNullOrWhiteSpace(Forum.Schedules));
         }
 
         public async void CreateForum() {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace ForumDEG.Models {
-    class FormAnswer {
+    public class FormAnswer {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 

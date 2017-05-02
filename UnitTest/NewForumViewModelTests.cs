@@ -17,25 +17,25 @@ namespace UnitTest {
             _mockPageService = new Mock<IPageService>();
             viewModel = new NewForumViewModel(_mockDialogs.Object, _mockPageService.Object);
 
-            viewModel.Forum._title = "Title";
-            viewModel.Forum._place = "Place";
-            viewModel.Forum._schedules = "Schedules";
+            viewModel.Forum.Title = "Title";
+            viewModel.Forum.Place = "Place";
+            viewModel.Forum.Schedules = "Schedules";
         }
         [Test()]
         public void IsAnyFieldBlank_TitleFieldIsBlank() {
-            viewModel.Forum._title = "";
+            viewModel.Forum.Title = "";
 
             Assert.True(viewModel.IsAnyFieldBlank());
         }
         [Test()]
         public void IsAnyFieldBlank_PlaceFieldIsBlank() {
-            viewModel.Forum._place = "";
+            viewModel.Forum.Place = "";
 
             Assert.True(viewModel.IsAnyFieldBlank());
         }
         [Test()]
         public void IsAnyFieldBlank_SchedulesFieldIsBlank() {
-            viewModel.Forum._schedules = "";
+            viewModel.Forum.Schedules = "";
 
             Assert.True(viewModel.IsAnyFieldBlank());
         }
