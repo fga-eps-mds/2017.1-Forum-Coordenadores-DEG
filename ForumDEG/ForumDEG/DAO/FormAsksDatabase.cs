@@ -16,7 +16,7 @@ namespace ForumDEG.DAO {
         private FormAsksDatabase(string databasePath) {
             _database = new SQLiteAsyncConnection(databasePath);
 
-            _database.CreateTableAsync<FormAsks>().Wait();
+            _database.CreateTableAsync<FormAsk>().Wait();
             Debug.WriteLine("FormAsksDatabase: Database created.");
         }
 
@@ -32,15 +32,15 @@ namespace ForumDEG.DAO {
             }
         }
 
-        public Task<List<FormAsks>> GetAllFormsAsks() {
-            return _database.Table<FormAsks>().ToListAsync();
+        public Task<List<FormAsk>> GetAllFormsAsks() {
+            return _database.Table<FormAsk>().ToListAsync();
         }
 
-        public Task<FormAsks> GetFormAsks(int id) {
-            return _database.Table<FormAsks>().Where(i => i.Id == id).FirstOrDefaultAsync();
+        public Task<FormAsk> GetFormAsks(int id) {
+            return _database.Table<FormAsk>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveFormAsks(FormAsks newFormAsks) {
+        public Task<int> SaveFormAsks(FormAsk newFormAsks) {
 
             if (newFormAsks.Id == 0) {
                 return _database.InsertAsync(newFormAsks);
@@ -49,7 +49,7 @@ namespace ForumDEG.DAO {
             }
         }
 
-        public Task<int> DeleteFormAsks(FormAsks formAsks) {
+        public Task<int> DeleteFormAsks(FormAsk formAsks) {
             return _database.DeleteAsync(formAsks);
         }
     }

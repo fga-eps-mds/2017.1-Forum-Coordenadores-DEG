@@ -47,7 +47,8 @@
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Coordinator.cs" />
     <Compile Include="Models\Form.cs" />
-    <Compile Include="Models\FormAsks.cs" />
+    <Compile Include="Models\FormAnswer.cs" />
+    <Compile Include="Models\FormAsk.cs" />
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ForumNotification.cs" />
     <Compile Include="Models\User.cs" />
