@@ -20,8 +20,8 @@ namespace ForumDEG.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            AdministratorListView.ItemsSource = await App.AdministratorDatabase.GetAllAdministrators();
-            CoordinatorListView.ItemsSource = await App.CoordinatorDatabase.GetAllCoordinators();
+            AdministratorListView.ItemsSource = await App.AdministratorDatabase.GetAll();
+            CoordinatorListView.ItemsSource = await App.CoordinatorDatabase.GetAll();
         }
 
         private void CoordListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

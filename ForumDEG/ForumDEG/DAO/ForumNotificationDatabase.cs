@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using ForumDEG.Interfaces;
 
 namespace ForumDEG.DAO {
-    public class ForumNotificationDatabase {
+    public class ForumNotificationDatabase : IDatabase<ForumNotification> {
         readonly SQLiteAsyncConnection _database;
 
         private static ForumNotificationDatabase _forumNotificationDatabase = null;
@@ -19,10 +20,10 @@ namespace ForumDEG.DAO {
             Debug.WriteLine("FormAsksDatabase: Database created.");
         }
 
-        public static ForumNotificationDatabase getFormDB {
+        public static ForumNotificationDatabase getForumNotificationDB {
             get {
                 if (_forumNotificationDatabase == null) {
-                    _forumNotificationDatabase = new ForumNotificationDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("ForumNotification.db3"));
+                    _forumNotificationDatabase = new ForumNotificationDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("ForumNotification.db3"));
                     Debug.WriteLine("ForumNotificationDatabase getFormDB: _forumNotificationDatabase getted.");
                 }
 
@@ -31,15 +32,15 @@ namespace ForumDEG.DAO {
             }
         }
 
-        public Task<List<ForumNotification>> GetAllForumNotifications() {
+        public Task<List<ForumNotification>> GetAll() {
             return _database.Table<ForumNotification>().ToListAsync();
         }
 
-        public Task<ForumNotification> GetForumNotification(int id) {
+        public Task<ForumNotification> Get(int id) {
             return _database.Table<ForumNotification>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveForumNotification(ForumNotification newForumNotification) {
+        public Task<int> Save(ForumNotification newForumNotification) {
 
             if (newForumNotification.Id == 0) {
                 return _database.InsertAsync(newForumNotification);
@@ -48,7 +49,7 @@ namespace ForumDEG.DAO {
             }
         }
 
-        public Task<int> DeleteForumNotification(ForumNotification forumNotification) {
+        public Task<int> Delete(ForumNotification forumNotification) {
             return _database.DeleteAsync(forumNotification);
         }
     }

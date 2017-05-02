@@ -11,7 +11,7 @@ using Foundation;
 
 namespace ForumDEG.iOS
 {
-    public class LocalSQLHelper : ForumDEG.Utils.InterfaceSQLite
+    public class LocalSQLHelper : ForumDEG.Utils.ISQLite
     {
         public string GetLocalFilePath(string filename)
         {

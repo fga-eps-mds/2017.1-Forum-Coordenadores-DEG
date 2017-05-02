@@ -43,7 +43,7 @@ namespace ForumDEG.ViewModels {
         // method for simulating local database
         public async void UpdateForumsList() {
             Forums = new ObservableCollection<ForumDetailViewModel>();
-            var forumsList = await ForumDatabase.getForumDB.GetAllForums();
+            var forumsList = await ForumDatabase.getForumDB.GetAll();
 
             foreach (Forum forum in forumsList) {
                 Forums.Add(new ForumDetailViewModel {

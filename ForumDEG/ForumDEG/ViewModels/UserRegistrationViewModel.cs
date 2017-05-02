@@ -167,7 +167,7 @@ namespace ForumDEG.ViewModels {
                 Password = PasswordIn,
                 CreatedOn = DateTime.Now
             };
-            await App.AdministratorDatabase.SaveAdministrator(Admin);
+            await App.AdministratorDatabase.Save(Admin);
             await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo adminstrador com sucesso! ", "ok", "cancel");
         }
 
@@ -180,7 +180,7 @@ namespace ForumDEG.ViewModels {
                 CreatedOn = DateTime.Now,
                 Course = CourseIn
             };
-            await App.CoordinatorDatabase.SaveCoordinator(Coord);
+            await App.CoordinatorDatabase.Save(Coord);
             await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo Coordenador com sucesso!", "ok", "cancel");
         }
 

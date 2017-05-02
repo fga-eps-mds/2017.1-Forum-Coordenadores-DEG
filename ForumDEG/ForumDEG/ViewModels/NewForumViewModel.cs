@@ -31,7 +31,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void CreateForum() {
-            await ForumDatabase.getForumDB.SaveForum(Forum);
+            await ForumDatabase.getForumDB.Save(Forum);
 
             await _dialog.AlertAsync("O fórum foi criado com sucesso. Os coordenadores serão notificados em breve."
                 , "Fórum Criado"

@@ -38,10 +38,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DAO\FormAnswerDatabase.cs" />
     <Compile Include="DAO\FormDatabase.cs" />
-    <Compile Include="DAO\FormAsksDatabase.cs" />
+    <Compile Include="DAO\FormAskDatabase.cs" />
     <Compile Include="DAO\ForumDatabase.cs" />
     <Compile Include="DAO\ForumNotificationDatabase.cs" />
+    <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\IPageService.cs" />
     <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
     <Compile Include="Models\Administrator.cs" />
@@ -55,7 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAO\CoordinatorDatabase.cs" />
     <Compile Include="DAO\AdministratorDatabase.cs" />
-    <Compile Include="Utils\IntefaceSQLite.cs" />
+    <Compile Include="Utils\ISQLite.cs" />
     <Compile Include="ViewModels\AppMasterViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ForumDetailViewModel.cs" />

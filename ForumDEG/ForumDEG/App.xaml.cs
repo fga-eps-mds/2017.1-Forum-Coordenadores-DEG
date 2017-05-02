@@ -22,7 +22,7 @@ namespace ForumDEG {
         public static AdministratorDatabase AdministratorDatabase{
             get {
                 if(_administratorDatabase == null){
-                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Administrator.db3"));
+                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("Administrator.db3"));
                 }
                 return _administratorDatabase;
             }
@@ -31,7 +31,7 @@ namespace ForumDEG {
         public static CoordinatorDatabase CoordinatorDatabase{
             get{
                 if (_coordinatorDatabase == null){
-                    _coordinatorDatabase = new CoordinatorDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Coordinator.db3"));
+                    _coordinatorDatabase = new CoordinatorDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("Coordinator.db3"));
                 }
                 return _coordinatorDatabase;
             }

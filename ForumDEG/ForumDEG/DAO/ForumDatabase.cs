@@ -3,10 +3,11 @@ using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using ForumDEG.Interfaces;
 
 namespace ForumDEG.Utils
 {
-    public class ForumDatabase
+    public class ForumDatabase : IDatabase<Forum>
     {
         readonly SQLiteAsyncConnection _database;
 
@@ -22,22 +23,22 @@ namespace ForumDEG.Utils
         public static ForumDatabase getForumDB {
             get {
                 if (_forumDatabase == null) {
-                    _forumDatabase = new ForumDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("Forum.db3"));
+                    _forumDatabase = new ForumDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("Forum.db3"));
                 }
 
                 return _forumDatabase;
             }
         }
 
-        public Task<List<Forum>> GetAllForums() {
+        public Task<List<Forum>> GetAll() {
             return _database.Table<Forum>().ToListAsync();
         }
 
-        public Task<Forum> GetForum(int id) {
+        public Task<Forum> Get(int id) {
             return _database.Table<Forum>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveForum(Forum newForum) {
+        public Task<int> Save(Forum newForum) {
 
             if (newForum.Id == 0) {
                 return _database.InsertAsync(newForum);
@@ -47,7 +48,7 @@ namespace ForumDEG.Utils
             }
         }
 
-        public Task<int> DeleteForum(Forum Forum) {
+        public Task<int> Delete(Forum Forum) {
             return _database.DeleteAsync(Forum);
         }
     }

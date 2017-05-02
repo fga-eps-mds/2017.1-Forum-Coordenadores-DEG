@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using ForumDEG.Interfaces;
 
 namespace ForumDEG.DAO {
-    public class FormAskDatabase {
+    public class FormAskDatabase : IDatabase<FormAsk> {
 
         readonly SQLiteAsyncConnection _database;
 
@@ -23,7 +24,7 @@ namespace ForumDEG.DAO {
         public static FormAskDatabase getFormDB {
             get {
                 if (_formAskDatabase == null) {
-                    _formAskDatabase = new FormAskDatabase(DependencyService.Get<InterfaceSQLite>().GetLocalFilePath("FormAsk.db3"));
+                    _formAskDatabase = new FormAskDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("FormAsk.db3"));
                     Debug.WriteLine("FormAskDatabase getFormDB: _formAskDatabase getted.");
                 }
 
@@ -32,15 +33,15 @@ namespace ForumDEG.DAO {
             }
         }
 
-        public Task<List<FormAsk>> GetAllFormAsks() {
+        public Task<List<FormAsk>> GetAll() {
             return _database.Table<FormAsk>().ToListAsync();
         }
 
-        public Task<FormAsk> GetFormAsk(int id) {
+        public Task<FormAsk> Get(int id) {
             return _database.Table<FormAsk>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveFormAsk(FormAsk newFormAsk) {
+        public Task<int> Save(FormAsk newFormAsk) {
 
             if (newFormAsk.Id == 0) {
                 return _database.InsertAsync(newFormAsk);
@@ -49,7 +50,7 @@ namespace ForumDEG.DAO {
             }
         }
 
-        public Task<int> DeleteFormAsk(FormAsk formAsk) {
+        public Task<int> Delete(FormAsk formAsk) {
             return _database.DeleteAsync(formAsk);
         }
     }

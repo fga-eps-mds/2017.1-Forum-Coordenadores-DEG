@@ -2,7 +2,7 @@
 
 namespace ForumDEG.Utils
 {
-    public interface InterfaceSQLite
+    public interface ISQLite
     {
         string GetLocalFilePath(string filename);
     }
