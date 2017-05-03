@@ -1,4 +1,5 @@
-﻿using ForumDEG.ViewModels;
+﻿using Acr.UserDialogs;
+using ForumDEG.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,9 +9,9 @@ namespace ForumDEG.Views {
         ChangePasswordViewModel _viewModel;
 
         public ChangePasswordPage() {
-            InitializeComponent();
-            _viewModel = new ChangePasswordViewModel();
+            _viewModel = new ChangePasswordViewModel(new PageService());
             BindingContext = _viewModel;
+            InitializeComponent();
         }
     }
 }
