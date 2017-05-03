@@ -7,17 +7,17 @@
     <ScrollView>
         <StackLayout Padding="20">
             <Label Text="Título:" FontAttributes="Bold" />
-            <Entry Text="{Binding Forum._title}" Placeholder="Título"/>
+            <Entry Text="{Binding Forum.Title}" Placeholder="Título"/>
             <Label Text="Data:" FontAttributes="Bold"/>
-            <DatePicker Date="{Binding Forum._date}" 
+            <DatePicker Date="{Binding Forum.Date}" 
                     x:Name="dateDatePicker"/>
             <Label Text="Horário:" FontAttributes="Bold"/>
-            <TimePicker Time="{Binding Forum._hour}" />
+            <TimePicker Time="{Binding Forum.Hour}" />
             <Label Text="Local:" FontAttributes="Bold" />
-            <Entry Text="{Binding Forum._place}" 
+            <Entry Text="{Binding Forum.Place}" 
                Placeholder="Local"/>
             <Label Text="  Pautas:" FontAttributes="Bold"/>
-            <Editor Text="{Binding Forum._schedules}" 
+            <Editor Text="{Binding Forum.Schedules}" 
                 HeightRequest="150" />
             <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">

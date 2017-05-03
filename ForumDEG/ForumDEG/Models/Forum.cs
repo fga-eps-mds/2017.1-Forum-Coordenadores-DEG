@@ -21,8 +21,5 @@ namespace ForumDEG.Models {
 
         // Current coordinator that confirmed to a forum
         public int UserIdConfirmed { get; set; }
-
-        // List of coordinators confirmed to a forum
-        public List<int> UsersIdConfirmed { get; set; }
     }
 }
