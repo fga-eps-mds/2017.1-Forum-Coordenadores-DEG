@@ -3,15 +3,11 @@ using ForumDEG.Models;
 using ForumDEG.Utils;
 using ForumDEG.Views;
 using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace ForumDEG {
     public partial class App : Application {
-        static AdministratorDatabase _administratorDatabase;
-        static CoordinatorDatabase _coordinatorDatabase;
-        static FormAskDatabase _formAsksDatabase;
-        static FormDatabase _formDatabase;
-        static ForumConfirmationDatabase _forumConfirmationDatabase;
 
         public App() {
             InitializeComponent();
@@ -22,26 +18,10 @@ namespace ForumDEG {
             //MainPage = new ForumDEG.MainPage();
         }
 
-        public static AdministratorDatabase AdministratorDatabase{
-            get {
-                if(_administratorDatabase == null){
-                    _administratorDatabase = new AdministratorDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("Administrator.db3"));
-                }
-                return _administratorDatabase;
-            }
-        }
-
-        public static CoordinatorDatabase CoordinatorDatabase{
-            get{
-                if (_coordinatorDatabase == null){
-                    _coordinatorDatabase = new CoordinatorDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("Coordinator.db3"));
-                }
-                return _coordinatorDatabase;
-            }
-        }
-
         protected override void OnStart() {
-            PopulateForTest();
+            if (AdministratorDatabase.getAdmDB.Get(1) == null) {
+                PopulateForTest();
+            }
             // Handle when your app starts
         }
 
@@ -54,18 +34,23 @@ namespace ForumDEG {
         }
 
         // Testing Database
-        private void PopulateForTest() {
+        private async void PopulateForTest() {
             
             // Test for administrator
+            Debug.WriteLine("Begin adm");
             Administrator administrator = new Administrator();
-            administrator.Name = "João";
-            administrator.Password = "123";
+            Debug.WriteLine("Adm constructor called");
+            administrator.Name = "Adm";
+            administrator.Password = "adm";
             administrator.Registration = "456";
-            administrator.Email = "Joao@oi.com";
+            administrator.Email = "adm@adm.adm";
             administrator.CreatedOn = DateTime.Now;
+            Debug.WriteLine("Adminstrator attr created");
 
-            _administratorDatabase.Save(administrator);
+            await AdministratorDatabase.getAdmDB.Save(administrator);
+            Debug.WriteLine("End adm"); 
 
+            Debug.WriteLine("Begin coord");
             // Test for coordinator
             Coordinator coordinator = new Coordinator();
             coordinator.Name = "Maria";
@@ -74,8 +59,10 @@ namespace ForumDEG {
             coordinator.Email = "Maria@oi.com";
             coordinator.CreatedOn = DateTime.Now;
 
-            _coordinatorDatabase.Save(coordinator);
+            await CoordinatorDatabase.getCoordinatorDB.Save(coordinator);
+            Debug.WriteLine("End coord"); 
 
+            Debug.WriteLine("Begin Forum");
             // Test for Forum
             Forum forum = new Forum();
             forum.Title = "Forum 1";
@@ -84,67 +71,84 @@ namespace ForumDEG {
             forum.Hour = DateTime.Now.TimeOfDay;
             forum.Date = DateTime.Now;
 
-            ForumDatabase.getForumDB.Save(forum);
+            await ForumDatabase.getForumDB.Save(forum);
+            Debug.WriteLine("End Forum");
 
+            Debug.WriteLine("Begin Form");
             // Test for Form
             Form form = new Form();
             form.ForumId = forum.Id;
             form.CreatedOn = DateTime.Now;
             
-            FormDatabase.getFormDB.Save(form);
+            await FormDatabase.getFormDB.Save(form);
+            Debug.WriteLine("End Form");
 
+            Debug.WriteLine("Begin FormAsk1");
             // Test for FormAsk
             FormAsk formAsk1 = new FormAsk();
             formAsk1.AskType = 1;
             formAsk1.Options = "opçao1; opçao2; opçao3;";
             formAsk1.FormId = form.Id;
 
-            FormAskDatabase.getFormDB.Save(formAsk1);
+            await FormAskDatabase.getFormDB.Save(formAsk1);
+            Debug.WriteLine("End FormAsk1");
 
+            Debug.WriteLine("Begin FormAsk2");
             FormAsk formAsk2 = new FormAsk();
             formAsk2 = new FormAsk();
             formAsk2.AskType = 2;
             formAsk2.Options = "opçao1; opçao2; opçao3;";
             formAsk2.FormId = form.Id;
 
-            FormAskDatabase.getFormDB.Save(formAsk2);
+            await FormAskDatabase.getFormDB.Save(formAsk2);
+            Debug.WriteLine("End FormAsk2");
 
+            Debug.WriteLine("Begin FormAsk3");
             FormAsk formAsk3 = new FormAsk();
             formAsk3 = new FormAsk();
             formAsk3.AskType = 3;
             formAsk3.Options = "Opçao dissertativa";
             formAsk3.FormId = form.Id;
 
-            FormAskDatabase.getFormDB.Save(formAsk3);
+            await FormAskDatabase.getFormDB.Save(formAsk3);
+            Debug.WriteLine("End FormAsk3");
 
+            Debug.WriteLine("Begin ForumConfirmation");
             // Test for forum confirmation
             ForumConfirmation forumConfirmation = new ForumConfirmation();
             forumConfirmation.ForumId = forum.Id;
             forumConfirmation.UserId = coordinator.Id;
 
-            ForumConfirmationDatabase.getForumConfirmationDB.Save(forumConfirmation);
+            await ForumConfirmationDatabase.getForumConfirmationDB.Save(forumConfirmation);
+            Debug.WriteLine("End ForumConfirmation");
 
+            Debug.WriteLine("Begin FormAn1");
             // Test for form answers
             FormAnswer formAnswer1 = new FormAnswer();
             formAnswer1.FormAskId = formAsk1.Id;
             formAnswer1.OptionAnswerPosition = 1;
             formAnswer1.UserId = coordinator.Id;
 
-            FormAnswerDatabase.getFormDB.Save(formAnswer1);
+            await FormAnswerDatabase.getFormDB.Save(formAnswer1);
+            Debug.WriteLine("End FormAn1");
 
+            Debug.WriteLine("Begin FormAn2");
             FormAnswer formAnswer2 = new FormAnswer();
             formAnswer2.FormAskId = formAsk2.Id;
             formAnswer2.MultipleAnswerPositions = "1; 2;";
             formAnswer2.UserId = coordinator.Id;
 
-            FormAnswerDatabase.getFormDB.Save(formAnswer2);
+            await FormAnswerDatabase.getFormDB.Save(formAnswer2);
+            Debug.WriteLine("End FormAn2");
 
+            Debug.WriteLine("Begin FormAn3");
             FormAnswer formAnswer3 = new FormAnswer();
-            formAnswer3.FormAskId = formAsk1.Id;
+            formAnswer3.FormAskId = formAsk3.Id;
             formAnswer3.TextAnswer = "Resposta da pergunta.";
             formAnswer3.UserId = coordinator.Id;
 
-            FormAnswerDatabase.getFormDB.Save(formAnswer3);
+            await FormAnswerDatabase.getFormDB.Save(formAnswer3);
+            Debug.WriteLine("End FormAn3");
         }
     }
 }

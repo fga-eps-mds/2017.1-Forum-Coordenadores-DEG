@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForumDEG.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,8 @@ namespace ForumDEG.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            AdministratorListView.ItemsSource = await App.AdministratorDatabase.GetAll();
-            CoordinatorListView.ItemsSource = await App.CoordinatorDatabase.GetAll();
+            AdministratorListView.ItemsSource = await AdministratorDatabase.getAdmDB.GetAll();
+            CoordinatorListView.ItemsSource = await CoordinatorDatabase.getCoordinatorDB.GetAll();
         }
 
         private void CoordListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ForumDEG.Interfaces;
+using ForumDEG.Utils;
 
 namespace ForumDEG.ViewModels {
     public class UserRegistrationViewModel : BaseViewModel {
@@ -167,7 +168,7 @@ namespace ForumDEG.ViewModels {
                 Password = PasswordIn,
                 CreatedOn = DateTime.Now
             };
-            await App.AdministratorDatabase.Save(Admin);
+            await AdministratorDatabase.getAdmDB.Save(Admin);
             await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo adminstrador com sucesso! ", "ok", "cancel");
         }
 
@@ -180,7 +181,7 @@ namespace ForumDEG.ViewModels {
                 CreatedOn = DateTime.Now,
                 Course = CourseIn
             };
-            await App.CoordinatorDatabase.Save(Coord);
+            await CoordinatorDatabase.getCoordinatorDB.Save(Coord);
             await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo Coordenador com sucesso!", "ok", "cancel");
         }
 

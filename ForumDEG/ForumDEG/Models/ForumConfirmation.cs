@@ -5,10 +5,10 @@ namespace ForumDEG.Models {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [Indexed, Unique]
+        [Indexed]
         public int ForumId { get; set; }
 
-        [Indexed, Unique]
+        [Indexed]
         public int UserId { get; set; }
     }
 }

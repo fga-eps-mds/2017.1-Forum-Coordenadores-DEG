@@ -3,6 +3,7 @@ using ForumDEG.Models;
 using ForumDEG.Utils;
 using SQLite;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -20,11 +21,14 @@ namespace ForumDEG.DAO {
 
         public static ForumConfirmationDatabase getForumConfirmationDB {
             get {
+                Debug.WriteLine("getForumConfirmationDB: Inside singleton");
                 if (_forumConfirmationDatabase == null) {
                     _forumConfirmationDatabase = new ForumConfirmationDatabase(DependencyService.Get<ISQLite>().GetLocalFilePath("ForumConfirmation.db3"));
                 }
 
                 return _forumConfirmationDatabase;
+
+                Debug.WriteLine("getForumConfirmationDB: Create/Get table");
             }
         }
 
@@ -37,7 +41,7 @@ namespace ForumDEG.DAO {
         }
 
         public Task<int> Save(ForumConfirmation newForumConfirmation) {
-
+            Debug.WriteLine("Save: newForumConfirmation");
             if (newForumConfirmation.Id == 0) {
                 return _database.InsertAsync(newForumConfirmation);
             } else {
