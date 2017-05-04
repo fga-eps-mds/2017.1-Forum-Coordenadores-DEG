@@ -43,15 +43,15 @@ namespace ForumDEG.ViewModels {
         // method for simulating local database
         public async void UpdateForumsList() {
             Forums = new ObservableCollection<ForumDetailViewModel>();
-            var forumsList = await ForumDatabase.getForumDB.GetAllForums();
+            var forumsList = await ForumDatabase.getForumDB.GetAll();
 
             foreach (Forum forum in forumsList) {
                 Forums.Add(new ForumDetailViewModel {
-                    Title = forum._title,
-                    Place = forum._place,
-                    Schedules =  forum._schedules,
-                    Date = forum._date,
-                    Hour = forum._hour
+                    Title = forum.Title,
+                    Place = forum.Place,
+                    Schedules =  forum.Schedules,
+                    Date = forum.Date,
+                    Hour = forum.Hour
                 });
             }
         }
