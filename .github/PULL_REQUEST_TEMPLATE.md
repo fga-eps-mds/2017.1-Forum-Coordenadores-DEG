@@ -14,4 +14,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 - [ ] Testes passando
 - [ ] Build passando
 - [ ] Não existem conflitos com a `master` - Se sim utilize do `git rebase`
-- [ ] tarefa 02
+
+resolve #ISSUE_NUMBER (Ex: resolve #01 Resolve/fecha a issue de numero 01 automaticamente)
