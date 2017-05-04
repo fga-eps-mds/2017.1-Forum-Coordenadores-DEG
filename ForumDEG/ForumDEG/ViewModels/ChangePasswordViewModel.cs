@@ -16,9 +16,9 @@ namespace ForumDEG.ViewModels {
         private readonly IPageService _pageService;
         private readonly IUserDialogs _dialog;
 
-        string _actualPassword { get; set; }
-        string _newPassword { get; set; }
-        string _repeatedPassword { get; set; }
+        public string _actualPassword { get; set; }
+        public string _newPassword { get; set; }
+        public string _repeatedPassword { get; set; }
 
         public ChangePasswordViewModel(IPageService pageService, IUserDialogs dialog) {
             _pageService = pageService;
@@ -32,12 +32,54 @@ namespace ForumDEG.ViewModels {
         }
 
         private void UpdatePassword() {
-            if (string.IsNullOrWhiteSpace(_actualPassword) || string.IsNullOrWhiteSpace(_newPassword)) {
-                _dialog.Alert("Campos em brancos!", "Erro");
+            if(MakeVerifications()) {
+                // updates password
+                _dialog.ShowSuccess("Senha trocada com sucesso");
             }
-            else {
-                _dialog.Alert("Senha alterada.", "Feito");
+        }
+
+        private bool MakeVerifications() {
+            if (!ValidateFields(_actualPassword) || !ValidateFields(_newPassword) || !ValidateFields(_repeatedPassword)) {
+                _dialog.ShowError("Campos em branco não são permitidos!");
+                return false;
             }
+            if (!MatchPasswords(_newPassword, _repeatedPassword)) {
+                _dialog.ShowError("A nova senha não está igual nos dois campos!");
+                return false;
+            }
+            if (!VerifyActualPassword(_actualPassword)) {
+                _dialog.ShowError("Senha atual está errada!");
+                return false;
+            }
+            if(!ValidatePassword(_newPassword)) {
+                _dialog.Alert("A senha deve conter pelo menos 8 caracteres com números e letras obrigatoriamente!");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateFields(string field) {
+            if (string.IsNullOrWhiteSpace(field))
+                return false;
+            return true;
+        }
+
+        private bool VerifyActualPassword(string password) {
+            // TODO: verifies if password inserted as actual is really logged user password
+            return true;
+        }
+
+        private bool MatchPasswords(string password1, string password2) {
+            if (!string.Equals(password1, password2))
+                return false;
+            return true;
+        }
+
+        private bool ValidatePassword(string password) {
+            // TODO: regex for checking if password contains necessary chars
+            if(password.Length < 8)
+                return false;
+            return true;
         }
     }
 }
