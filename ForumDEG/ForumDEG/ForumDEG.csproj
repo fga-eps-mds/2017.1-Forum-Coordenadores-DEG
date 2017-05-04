@@ -41,6 +41,7 @@
     <Compile Include="DAO\FormAnswerDatabase.cs" />
     <Compile Include="DAO\FormDatabase.cs" />
     <Compile Include="DAO\FormAskDatabase.cs" />
+    <Compile Include="DAO\ForumConfirmationDatabase.cs" />
     <Compile Include="DAO\ForumDatabase.cs" />
     <Compile Include="DAO\ForumNotificationDatabase.cs" />
     <Compile Include="Interfaces\IDatabase.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Models\FormAnswer.cs" />
     <Compile Include="Models\FormAsk.cs" />
     <Compile Include="Models\Forum.cs" />
+    <Compile Include="Models\ForumConfirmation.cs" />
     <Compile Include="Models\ForumNotification.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

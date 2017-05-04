@@ -17,7 +17,7 @@ namespace ForumDEG.Models {
 
         public int OptionAnswerPosition { get; set; }
 
-        public List<int> MultipleAnswerPositions { get; set; }
+        public string MultipleAnswerPositions { get; set; }
 
         // Override ToString to debug database.
         /* Usage:
@@ -25,7 +25,7 @@ namespace ForumDEG.Models {
         */
         public override string ToString() {
 
-            return string.Format("[FormAnswers: ID={0}, FormAskId={1}, UserId={2}, TextAnswer={3}, OptionAnswerPosition={4}, MultipleAnswerPositions={5}]", Id, FormAskId, UserId, TextAnswer, OptionAnswerPosition, MultipleAnswerPositions.ToList());
+            return string.Format("[FormAnswers: ID={0}, FormAskId={1}, UserId={2}, TextAnswer={3}, OptionAnswerPosition={4}, MultipleAnswerPositions={5}]", Id, FormAskId, UserId, TextAnswer, OptionAnswerPosition, MultipleAnswerPositions);
         }
     }
 }

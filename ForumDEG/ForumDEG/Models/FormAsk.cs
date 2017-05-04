@@ -11,9 +11,10 @@ namespace ForumDEG.Models {
         [Indexed]
         public int FormId { get; set; }
 
+        // 1 = Multiple choices; 2 = Multiple Answers; 3 = Text
         public int AskType { get; set; }
 
-        public List<String> Options { get; set; }
+        public String Options { get; set; }
 
         // Override ToString to debug database.
         /* Usage:
@@ -21,7 +22,7 @@ namespace ForumDEG.Models {
         */
         public override string ToString() {
 
-            return string.Format("[ForumAsks: ID={0}, FormId={1}, AskType={2}, Options={3}]", Id, FormId, AskType, Options.ToList());
+            return string.Format("[ForumAsks: ID={0}, FormId={1}, AskType={2}, Options={3}]", Id, FormId, AskType, Options);
         }
     }
 }
