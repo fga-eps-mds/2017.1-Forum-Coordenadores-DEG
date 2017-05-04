@@ -1,6 +1,5 @@
 ﻿﻿using SQLite;
 using System;
-using System.Collections.Generic;
 
 namespace ForumDEG.Models {
     public class Forum {
