@@ -105,8 +105,8 @@
                         <StackLayout Orientation="Vertical" Padding="20">
                             <Button Text="+"  HeightRequest="70" WidthRequest="70" BorderRadius="50"  
                                     HorizontalOptions="End" VerticalOptions="End"
-                                    BackgroundColor="#ff8924" x:Name="ButtonPlus"
-                                    x:Name="NewPlusButton"/>
+                                    BackgroundColor="#ff8924" 
+                                    x:Name="NewPlusButtonOnPageMaster"/>
 
                         </StackLayout>
 
