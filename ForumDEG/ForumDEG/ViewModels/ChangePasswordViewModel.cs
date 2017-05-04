@@ -1,10 +1,10 @@
 ﻿using Acr.UserDialogs;
 using ForumDEG.Interfaces;
 using ForumDEG.Models;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
     class ChangePasswordViewModel {
@@ -52,7 +52,7 @@ namespace ForumDEG.ViewModels {
                 return false;
             }
             if(!ValidatePassword(_newPassword)) {
-                _dialog.Alert("A senha deve conter pelo menos 8 caracteres com números e letras obrigatoriamente!");
+                _dialog.Alert("A senha deve conter:\n  - De 8 a 15 caracteres\n  - Pelo menos uma letra maiúscula e uma minúscula\n  - Pelo menos um número");
                 return false;
             }
             return true;
@@ -76,9 +76,15 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool ValidatePassword(string password) {
-            // TODO: regex for checking if password contains necessary chars
             if(password.Length < 8)
                 return false;
+
+            var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
+            var match = Regex.Match(password, regex);
+
+            if (!match.Success)
+                return false;
+
             return true;
         }
     }
