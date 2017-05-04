@@ -10,26 +10,33 @@ namespace ForumDEG.ViewModels {
     class ChangePasswordViewModel {
         public Coordinator UpdatedCoordinator { get; private set; } = new Coordinator();
 
-        public ICommand ChangePasswordClickedCommand;
+        public ICommand ChangePasswordClickedCommand { get; private set; }
+        public ICommand CancelClickedCommand { get; private set; }
 
         private readonly IPageService _pageService;
-        private readonly IUserDialogs _userDialogs;
+        private readonly IUserDialogs _dialog;
 
-        string _actualPassword;
-        string _newPassword;
-        string _repeatedPassword;
+        string _actualPassword { get; set; }
+        string _newPassword { get; set; }
+        string _repeatedPassword { get; set; }
 
-        public ChangePasswordViewModel(IPageService pageService) {
+        public ChangePasswordViewModel(IPageService pageService, IUserDialogs dialog) {
             _pageService = pageService;
-            ChangePasswordClickedCommand = new Command(async () => await UpdatePassword());
+            _dialog = dialog;
+            ChangePasswordClickedCommand = new Command(UpdatePassword);
+            CancelClickedCommand = new Command(async () => await CancelAsync());
         }
 
-        private async Task UpdatePassword() {
+        private async Task CancelAsync() {
+            await _pageService.PopAsync();
+        }
+
+        private void UpdatePassword() {
             if (string.IsNullOrWhiteSpace(_actualPassword) || string.IsNullOrWhiteSpace(_newPassword)) {
-                await _pageService.DisplayAlert("Erro", "Campos em branco!", "OK");
+                _dialog.Alert("Campos em brancos!", "Erro");
             }
             else {
-                await _pageService.DisplayAlert("Pronto", "Senha alterada.", "OK");
+                _dialog.Alert("Senha alterada.", "Feito");
             }
         }
     }

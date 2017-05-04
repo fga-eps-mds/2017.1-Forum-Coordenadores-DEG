@@ -9,7 +9,7 @@ namespace ForumDEG.Views {
         ChangePasswordViewModel _viewModel;
 
         public ChangePasswordPage() {
-            _viewModel = new ChangePasswordViewModel(new PageService());
+            _viewModel = new ChangePasswordViewModel(new PageService(), UserDialogs.Instance);
             BindingContext = _viewModel;
             InitializeComponent();
         }
