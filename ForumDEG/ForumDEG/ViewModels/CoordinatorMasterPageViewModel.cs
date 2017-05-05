@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using Android.Util;
 
 namespace ForumDEG.ViewModels {
     public class CoordinatorMasterPageViewModel : ContentView {
@@ -15,7 +16,6 @@ namespace ForumDEG.ViewModels {
         private static CoordinatorMasterPageViewModel _instance = null;
         public ObservableCollection<ForumDetailViewModel> Forums { get; private set; }
         public ForumDetailViewModel SelectedForum { get; private set; }
-
 
         public CoordinatorMasterPageViewModel() {
             Content = new Label { Text = "Hello View" };
@@ -34,20 +34,45 @@ namespace ForumDEG.ViewModels {
             SelectedForum = forum;
         }
 
-        public void UpdateForumsList() {
-            List<Forum> listforum;
-            listforum = App.ForumDatabase.GetAllForums().Result;
-            Forum latestForum = new Forum();
-                latestForum._title = "Teste";
-            latestForum._date = DateTime.Parse("08-05-2017");
-            latestForum._hour = TimeSpan.Parse("10:00");
-            SelectForum(new ForumDetailViewModel {
+        private Forum SelectNextForum(List<Forum> listforum) {
+            Forum latestForum = null;
+            Log.Info("SelectForum", "passou1");
+            foreach (Forum forum in  listforum) {
+                Log.Info("SelectForum", "passou");
+                if (DateTime.Compare(DateTime.Now, forum._date) <= 0) {
+                    if (latestForum == null)
+                        latestForum = forum;
+                    else {
+                        if (DateTime.Compare(forum._date, latestForum._date)<0)
+                            latestForum = forum;
+                    }
+                }
+            }
+            return latestForum;
+        }
+
+
+        public void SelectForum() {
+            List<Forum> listforum = null;
+            Task<List<Forum>> task;
+            task = ForumDatabase.getForumDB.GetAllForums();
+            listforum = task.Result;
+            Forum latestForum = null;
+            if (listforum.Count >0)
+                 latestForum = SelectNextForum(listforum);
+            if(latestForum==null){
+                latestForum = new Forum();
+                Log.Info("SelectForum", "Nao passou");
+                latestForum._title = "Nenhum forum disponivel";
+            }
+            
+            SelectedForum = new ForumDetailViewModel {
                 Title = latestForum._title,
                 Place = latestForum._place,
                 Schedules = latestForum._schedules,
                 Date = latestForum._date,
                 Hour = latestForum._hour
-            });
+            };
         }
 
     }

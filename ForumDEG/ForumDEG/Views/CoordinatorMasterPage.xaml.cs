@@ -12,10 +12,10 @@ namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CoordinatorMasterPage : ContentPage {
 
-        public CoordinatorMasterPage() {
+        public  CoordinatorMasterPage() {
             CoordinatorMasterPageViewModel ViewModel = CoordinatorMasterPageViewModel.GetInstance();
-            ViewModel.UpdateForumsList();
-            BindingContext = CoordinatorMasterPageViewModel.GetInstance().SelectedForum;
+            BindingContext = ViewModel;
+            ViewModel.SelectForum();
             InitializeComponent();
         }
 

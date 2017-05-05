@@ -7,13 +7,13 @@
     <ScrollView>
         <StackLayout Padding="20">
             <Label
-                Text="{Binding Title}"/>
+                Text="{Binding SelectedForum.Title}"/>
             <Label
-                Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}"
+                Text="{Binding SelectedForum.Date, StringFormat='Data {0:dd/MM/yyyy}'}"
                 HorizontalOptions="Start" 
                 VerticalOptions="CenterAndExpand"/>
             <Label 
-                Text="{Binding Date, StringFormat='Horário {0:HH:mm}'}" 
+                Text="{Binding SelectedForum.Date, StringFormat='Horário {0:HH:mm}'}" 
                 HorizontalOptions="Start" 
                 VerticalOptions="CenterAndExpand"/>
             <Button
