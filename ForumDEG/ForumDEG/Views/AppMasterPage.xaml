@@ -32,7 +32,7 @@
                                HorizontalOptions="FillAndExpand">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Command="{Binding CoordinatorsClickedCommand}"
+                                    Command="{Binding UsersClickedCommand}"
                                     NumberOfTapsRequired="1" />
                             </Label.GestureRecognizers>
                         </Label>
@@ -62,9 +62,9 @@
                     <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="Start" FontSize="Medium" Command="{Binding ForumsClickedCommand}"/>
-                    <Button Text="Coordenador" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
+                    <Button Text="Usuários" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
-                            VerticalOptions="Center" FontSize="Medium" Command="{Binding CoordinatorsClickedCommand}"/>
+                            VerticalOptions="Center" FontSize="Medium" Command="{Binding UsersClickedCommand}"/>
                     <Button Text="Formulário" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="End" FontSize="Medium" Command="{Binding FormsClickedCommand}"/>

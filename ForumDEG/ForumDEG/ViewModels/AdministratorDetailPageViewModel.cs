@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForumDEG.ViewModels {
     class AdministratorDetailPageViewModel {
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Registration { get; set; }
         public string Email { get; set; }
