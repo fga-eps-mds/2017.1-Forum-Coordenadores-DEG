@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace ForumDEG.ViewModels {
     class AppMasterViewModel {
         public ICommand ForumsClickedCommand { get; private set; }
-        public ICommand CoordinatorsClickedCommand { get; private set; }
+        public ICommand UsersClickedCommand { get; private set; }
         public ICommand FormsClickedCommand { get; private set; }
         public ICommand NewForumClickedCommand { get; private set; }
         public ICommand RegisterUserClickedCommand { get; private set; }
@@ -19,7 +19,7 @@ namespace ForumDEG.ViewModels {
             _pageService = pageService;
 
             ForumsClickedCommand = new Command(async () => await ForumsClicked());
-            CoordinatorsClickedCommand = new Command(async () => await CoordinatorsClicked());
+            UsersClickedCommand = new Command(async () => await UsersClicked());
             FormsClickedCommand = new Command(async () => await FormsClicked());
             NewForumClickedCommand = new Command(async () => await NewForumClicked());
             RegisterUserClickedCommand = new Command(async () => await RegisterUserClicked());
@@ -30,7 +30,7 @@ namespace ForumDEG.ViewModels {
             await _pageService.PushAsync(new ForumsPage());
         }
 
-        private async Task CoordinatorsClicked() {
+        private async Task UsersClicked() {
             await _pageService.PushAsync(new TestViewUsers());
         }
 
