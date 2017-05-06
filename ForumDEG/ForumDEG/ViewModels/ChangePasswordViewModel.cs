@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
     class ChangePasswordViewModel {
-        public Coordinator Coordinator { get; private set; }
+        public User User { get; private set; }
 
         public ICommand ChangePasswordClickedCommand { get; private set; }
         public ICommand CancelClickedCommand { get; private set; }
@@ -24,23 +24,23 @@ namespace ForumDEG.ViewModels {
             _pageService = pageService;
             _dialog = dialog;
 
-            Coordinator = GetLoggedCoordinator();
+            User = GetLoggedUser();
 
             ChangePasswordClickedCommand = new Command(UpdatePassword);
             CancelClickedCommand = new Command(async () => await CancelAsync());
         }
 
-        private Coordinator GetLoggedCoordinator() {
-            Coordinator LoggedCoordinator = new Coordinator(); 
+        private Coordinator GetLoggedUser() {
+            Coordinator LoggedUser = new Coordinator();
 
-            LoggedCoordinator.Id = 123;
-            LoggedCoordinator.Course = "Engenharia";
-            LoggedCoordinator.Email = "email@email.com";
-            LoggedCoordinator.Name = "Marigué";
-            LoggedCoordinator.Password = "123456aA";
-            LoggedCoordinator.Registration = "150151624";
+            LoggedUser.Id = 123;
+            LoggedUser.Course = "Engenharia";
+            LoggedUser.Email = "email@email.com";
+            LoggedUser.Name = "Marigué";
+            LoggedUser.Password = "123456aA";
+            LoggedUser.Registration = "150151624";
 
-            return LoggedCoordinator;
+            return LoggedUser;
         }
 
         private async Task CancelAsync() {
@@ -49,7 +49,7 @@ namespace ForumDEG.ViewModels {
 
         private void UpdatePassword() {
             if (MakeVerifications()) {
-                Coordinator.Password = _newPassword; // fake update
+                User.Password = _newPassword; // fake update
                 // must update on database
                 _dialog.ShowSuccess("Senha trocada com sucesso");
             }
@@ -82,7 +82,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool VerifyActualPassword(string password) {
-            if (Coordinator.Password == password)
+            if (User.Password == password)
                 return true;
             return false;
         }
