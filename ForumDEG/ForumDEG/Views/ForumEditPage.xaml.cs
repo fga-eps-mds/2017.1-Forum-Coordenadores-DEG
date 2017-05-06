@@ -12,12 +12,11 @@ namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumEditPage : ContentPage {
         private ForumEditViewModel _viewModel = new ForumEditViewModel(new PageService());
-        public ForumEditPage() {
+        public ForumEditPage(int ForumId) {
             InitializeComponent();
 
             BindingContext = _viewModel;
-
-            dateDatePicker.Date = DateTime.Now;
+            _viewModel.setOldForumFields(ForumId);
             dateDatePicker.MinimumDate = DateTime.Now;
         }
     }

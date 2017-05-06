@@ -27,7 +27,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async void ConfirmPresence() {
-            await PushAsync(new ForumEditPage()); 
+            await PushAsync(new ForumEditPage(Registration)); 
         }
 
         private void DisconfirmPresence() { }
