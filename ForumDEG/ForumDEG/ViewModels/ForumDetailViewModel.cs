@@ -1,15 +1,17 @@
 ﻿using System;
+using ForumDEG.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    public class ForumDetailViewModel {
+    public class ForumDetailViewModel : PageService {
         public string Title { get; set; }
         public string Place { get; set; }
         public string Schedules { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Hour { get; set; }
         public bool IsPast { get; private set; }
+        public int Registration { get; set; }
 
         public ICommand ConfirmCommand { get; private set; }
         public ICommand DisconfirmCommand { get; private set; }
@@ -24,7 +26,9 @@ namespace ForumDEG.ViewModels {
             return DateTime.Now > Date;
         }
 
-        private void ConfirmPresence() { }
+        private async void ConfirmPresence() {
+            await PushAsync(new ForumEditPage()); 
+        }
 
         private void DisconfirmPresence() { }
     }
