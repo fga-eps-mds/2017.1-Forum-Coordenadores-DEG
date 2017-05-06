@@ -19,7 +19,7 @@ namespace ForumDEG {
         }
 
         protected override void OnStart() {
-            if (AdministratorDatabase.getAdmDB.Get(1) == null) {
+            if (AdministratorDatabase.getAdmDB.GetAll().Result.Count == 0) {
                 PopulateForTest();
             }
             // Handle when your app starts
