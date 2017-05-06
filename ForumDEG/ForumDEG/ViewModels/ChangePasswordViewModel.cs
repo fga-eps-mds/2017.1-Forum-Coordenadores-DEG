@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
     class ChangePasswordViewModel {
-        public Coordinator UpdatedCoordinator { get; private set; } = new Coordinator();
+        public Coordinator Coordinator { get; private set; }
 
         public ICommand ChangePasswordClickedCommand { get; private set; }
         public ICommand CancelClickedCommand { get; private set; }
@@ -23,8 +23,24 @@ namespace ForumDEG.ViewModels {
         public ChangePasswordViewModel(IPageService pageService, IUserDialogs dialog) {
             _pageService = pageService;
             _dialog = dialog;
+
+            Coordinator = GetLoggedCoordinator();
+
             ChangePasswordClickedCommand = new Command(UpdatePassword);
             CancelClickedCommand = new Command(async () => await CancelAsync());
+        }
+
+        private Coordinator GetLoggedCoordinator() {
+            Coordinator LoggedCoordinator = new Coordinator(); 
+
+            LoggedCoordinator.Id = 123;
+            LoggedCoordinator.Course = "Engenharia";
+            LoggedCoordinator.Email = "email@email.com";
+            LoggedCoordinator.Name = "Marigué";
+            LoggedCoordinator.Password = "123456aA";
+            LoggedCoordinator.Registration = "150151624";
+
+            return LoggedCoordinator;
         }
 
         private async Task CancelAsync() {
@@ -32,8 +48,9 @@ namespace ForumDEG.ViewModels {
         }
 
         private void UpdatePassword() {
-            if(MakeVerifications()) {
-                // updates password
+            if (MakeVerifications()) {
+                Coordinator.Password = _newPassword; // fake update
+                // must update on database
                 _dialog.ShowSuccess("Senha trocada com sucesso");
             }
         }
@@ -51,7 +68,7 @@ namespace ForumDEG.ViewModels {
                 _dialog.ShowError("Senha atual está errada!");
                 return false;
             }
-            if(!ValidatePassword(_newPassword)) {
+            if (!ValidatePassword(_newPassword)) {
                 _dialog.Alert("A senha deve conter:\n  - De 8 a 15 caracteres\n  - Pelo menos uma letra maiúscula e uma minúscula\n  - Pelo menos um número");
                 return false;
             }
@@ -65,8 +82,9 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool VerifyActualPassword(string password) {
-            // TODO: verifies if password inserted as actual is really logged user password
-            return true;
+            if (Coordinator.Password == password)
+                return true;
+            return false;
         }
 
         private bool MatchPasswords(string password1, string password2) {
@@ -76,7 +94,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool ValidatePassword(string password) {
-            if(password.Length < 8)
+            if (password.Length < 8)
                 return false;
 
             var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
