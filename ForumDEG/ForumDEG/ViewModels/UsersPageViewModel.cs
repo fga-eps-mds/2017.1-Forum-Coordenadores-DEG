@@ -12,7 +12,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class UsersPageViewModel : BaseViewModel {
+    public class UsersPageViewModel : BaseViewModel {
         public ObservableCollection<AdministratorDetailPageViewModel> Administrators { get; private set; }
         public ObservableCollection<CoordinatorDetailPageViewModel> Coordinators { get; private set; }
 

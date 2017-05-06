@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ForumDEG.ViewModels {
-    class CoordinatorDetailPageViewModel {
+     public class CoordinatorDetailPageViewModel {
         public int Id { get;  set; }
         public string Name { get; set; }
         public string Registration { get; set; }

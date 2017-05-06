@@ -1,4 +1,5 @@
 ﻿using ForumDEG.Utils;
+using ForumDEG.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,24 +16,24 @@ namespace ForumDEG.Views
     {
         public TestViewUsers()
         {
+            BindingContext = UsersPageViewModel.GetInstance();
+            ViewModel.UpdateUsersLists();
             InitializeComponent();
         }
 
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            AdministratorListView.ItemsSource = await AdministratorDatabase.getAdmDB.GetAll();
-            CoordinatorListView.ItemsSource = await CoordinatorDatabase.getCoordinatorDB.GetAll();
+        override protected void OnAppearing() {
+            if (ViewModel.SelectedAdministrator != null)
+                ViewModel.SelectedAdministrator = null;
+            if (ViewModel.SelectedCoordinator != null)
+                ViewModel.SelectedCoordinator = null;
         }
 
-        private void CoordListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            return;
+        private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
         }
 
-        private void AdministratorListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            return;
+        private UsersPageViewModel ViewModel {
+            get { return (BindingContext as UsersPageViewModel); }
+            set { BindingContext = value; }
         }
     }
 }
