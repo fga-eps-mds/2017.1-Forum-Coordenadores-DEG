@@ -4,7 +4,9 @@
              x:Class="ForumDEG.Views.ForumsPage"
              Padding="15, 25, 15, 25"
              BackgroundColor="White"
-             Title="Foruns">
+             Title="Foruns"
+             x:Name="ForunsListPage">
+    
     <ScrollView>
         <ListView SeparatorVisibility="Default"
                   ItemsSource="{Binding Forums}"

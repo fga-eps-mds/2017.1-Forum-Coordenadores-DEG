@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.NewForumPage"
              NavigationPage.HasNavigationBar="True"
-             Title="Novo Fórum">
+             Title="Novo Fórum"
+             x:Name="NewForunsPage">
+
     <ScrollView>
         <StackLayout Padding="20">
             <Label Text="Título:" FontAttributes="Bold" />
@@ -24,12 +26,14 @@
                 <Button Text="Cancelar" 
                         TextColor="White"
                         BackgroundColor="Orange"
-                        Command="{Binding CancelCommand}"/>  
+                        Command="{Binding CancelCommand}"
+                        x:Name="CancelButton"
+                        />
                 <Button Text="Criar fórum" 
                         TextColor="White"
                         BackgroundColor="Orange"
                         Clicked="OnNewForumButtonClicked"
-                    />
+                        x:Name="NewForumButtonOnPageNewForum"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>

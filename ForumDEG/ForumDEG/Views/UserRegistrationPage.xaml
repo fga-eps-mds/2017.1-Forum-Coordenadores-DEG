@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.UserRegistrationPage"
              NavigationPage.HasNavigationBar="True"
-             Title="Cadastrar Coordenador">
+             Title="Cadastrar Coordenador"
+             x:Name="UserRegistrationPage">
 
     <ScrollView>
 
@@ -91,10 +92,12 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 0, 0, 30">
 
                 <Button Text="Cancelar" TextColor="White" FontSize="17" 
-                        BackgroundColor="Orange" WidthRequest="140"></Button>
+                        BackgroundColor="Orange" WidthRequest="140"
+                        x:Name="CancelButtonOnUserResgistrationPage"></Button>
 
                 <Button Command="{Binding RegisterNewUserCommand}" Text="Confirmar" TextColor="White" 
-                        FontSize="17" BackgroundColor="Orange" WidthRequest="140"></Button>
+                        FontSize="17" BackgroundColor="Orange" WidthRequest="140"
+                        x:Name="ConfirmButtonOnUserRegistrationPage"></Button>
 
             </StackLayout>
 
