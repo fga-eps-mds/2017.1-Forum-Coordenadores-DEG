@@ -64,11 +64,15 @@
     <Compile Include="ViewModels\AppMasterViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CoordinatorDetailPageViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ForumDetailViewModel.cs" />
     <Compile Include="ViewModels\NewForumViewModel.cs" />
     <Compile Include="ViewModels\PageService.cs" />
     <Compile Include="ViewModels\UserRegistrationViewModel.cs" />
     <Compile Include="ViewModels\UsersPageViewModel.cs" />
+    <Compile Include="Views\ChangePasswordPage.xaml.cs">
+      <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ForumsPage.xaml.cs">
       <DependentUpon>ForumsPage.xaml</DependentUpon>
     </Compile>
@@ -148,7 +152,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ChangePasswordPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ForumsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
