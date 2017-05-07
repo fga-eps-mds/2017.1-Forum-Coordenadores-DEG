@@ -15,7 +15,7 @@
                             <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"
                                    HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                                    BackgroundColor="White" />
-                            <Label Text="Editar Usuário" TextColor="#3366BB" FontSize="Small"
+                            <Label Text="Editar Fórum" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
                                    BackgroundColor="White">
                                 <Label.GestureRecognizers>
