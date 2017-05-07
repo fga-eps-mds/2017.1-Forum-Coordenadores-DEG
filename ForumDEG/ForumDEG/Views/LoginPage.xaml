@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ForumDEG.MarkupExtensions"
+             x:Class="ForumDEG.Views.LoginPage"
+             NavigationPage.HasNavigationBar="false">
+    <AbsoluteLayout>
+
+        <Image Source="{local:EmbeddedImage ResourceId=ForumDEG.Images.login_background.png}"
+               Aspect="AspectFill" 
+               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+               AbsoluteLayout.LayoutFlags="All" />
+
+        <Image Source="logo.png" 
+               HeightRequest="136"
+               WidthRequest="136"
+               AbsoluteLayout.LayoutBounds="0.5, 0.1, 136, 136"
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <Image Source="entry_rectangle.png" 
+               AbsoluteLayout.LayoutBounds="0.5, 0.4, 315, 53"
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <Entry x:Name="emailEntry"
+               Placeholder="Usuário"
+               BackgroundColor="Transparent"
+               Keyboard="Email"
+               HorizontalTextAlignment="Center"
+               FontSize="22"
+               AbsoluteLayout.LayoutBounds="0.5, 0.4, 270, 53"
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <Image Source="entry_rectangle.png" 
+               AbsoluteLayout.LayoutBounds="0.5, 0.55, 315, 53"
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <Entry x:Name="passwordEntry"
+               BackgroundColor="Transparent"
+               Placeholder="Senha"
+               IsPassword="True"
+               HorizontalTextAlignment="Center"
+               FontSize="22"
+               AbsoluteLayout.LayoutBounds="0.5, 0.55, 270, 53"
+               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <Button Image="login_button.png"
+                BorderColor="Transparent"
+                BackgroundColor="Transparent"
+                AbsoluteLayout.LayoutBounds="0.5, 0.73, 315, 53"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                 />
+
+        <Label x:Name="loginFailedLabel" 
+               TextColor="Red"
+               AbsoluteLayout.LayoutBounds="0.5, 1, 0.5, 0.1" 
+               AbsoluteLayout.LayoutFlags="All" />
+
+    </AbsoluteLayout>
+</ContentPage>
