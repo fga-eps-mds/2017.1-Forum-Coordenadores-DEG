@@ -11,9 +11,18 @@
                 <StackLayout  Padding="5" BackgroundColor="White">
                     
                     <StackLayout BackgroundColor="White" Padding="5,5,0,0">
-                        <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"
-                               HorizontalOptions="Start" VerticalOptions="StartAndExpand"
-                               BackgroundColor="White" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" />
+                            <Label Text="Editar Usuário" TextColor="#3366BB" FontSize="Small"
+                                   HorizontalOptions="EndAndExpand" VerticalOptions="Start"
+                                   BackgroundColor="White">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditComand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                         <Label Text="{Binding Date, StringFormat='Data: {0:dd/MM/yyyy}'}" TextColor="Gray"
                                HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                         <Label Text="{Binding Hour, StringFormat='Horário: {0}'}" TextColor="Gray"

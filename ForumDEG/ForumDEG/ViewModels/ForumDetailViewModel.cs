@@ -15,10 +15,12 @@ namespace ForumDEG.ViewModels {
 
         public ICommand ConfirmCommand { get; private set; }
         public ICommand DisconfirmCommand { get; private set; }
+        public ICommand EditComand { get; private set; }
 
         public ForumDetailViewModel() {
             ConfirmCommand = new Command(ConfirmPresence);
             DisconfirmCommand = new Command(DisconfirmPresence);
+            EditComand = new Command(EditForum);
             IsPast = HasPassed();
         }
 
@@ -26,10 +28,12 @@ namespace ForumDEG.ViewModels {
             return DateTime.Now > Date;
         }
 
-        private async void ConfirmPresence() {
-            await PushAsync(new ForumEditPage(Registration)); 
-        }
+        private void ConfirmPresence() { }
 
         private void DisconfirmPresence() { }
+
+        private async void EditForum() {
+            await PushAsync(new ForumEditPage(Registration)); 
+        }
     }
 }
