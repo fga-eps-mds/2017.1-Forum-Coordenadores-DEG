@@ -51,7 +51,8 @@ namespace ForumDEG.ViewModels {
                     Place = forum.Place,
                     Schedules =  forum.Schedules,
                     Date = forum.Date,
-                    Hour = forum.Hour
+                    Hour = forum.Hour,
+                    Registration = forum.Id
                 });
             }
         }
