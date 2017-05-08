@@ -1,4 +1,5 @@
 ﻿using ForumDEG.ViewModels;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

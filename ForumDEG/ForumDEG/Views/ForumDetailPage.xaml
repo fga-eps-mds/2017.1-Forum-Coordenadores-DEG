@@ -50,12 +50,11 @@
         </Frame>
         
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
-            <Button IsEnabled="{Binding IsPast}" Text="Confirmar Presença" Command="{Binding ConfirmCommand}"
-                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"
-                    x:Name="ConfirmPresenceButton"/>
-            <Button IsEnabled="{Binding IsPast}" Text="Não Comparecerei" Command="{Binding DisconfirmCommand}"
-                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"
-                    x:Name="DenyPresenceButton"/>
+            <Button IsEnabled="{Binding IsPast}" 
+                    Text="{Binding ButtonText}" TextColor="White" FontSize="Small"
+                    BackgroundColor="{Binding ButtonColor}" 
+                    x:Name="ConfirmPresenceButton"
+                    Command="{Binding PresenceCommand}"/>
         </StackLayout>
         
     </StackLayout>
