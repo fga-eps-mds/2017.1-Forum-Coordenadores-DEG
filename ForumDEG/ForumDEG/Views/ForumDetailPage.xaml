@@ -4,8 +4,8 @@
              x:Class="ForumDEG.Views.ForumDetailPage"
              Title="Ver Fórum"
              x:Name="SeeForumPage">
-    <StackLayout>
-        <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
+    <StackLayout Margin="20">
+        <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" >
 
             <ScrollView>
 
@@ -20,7 +20,7 @@
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
                                    BackgroundColor="White"  IsVisible="{Binding IsAdiministrator}">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding EditComand}"/>
+                                    <TapGestureRecognizer Command="{Binding EditCommand}"/>
                                 </Label.GestureRecognizers>
                             </Label>
                         </StackLayout>
@@ -58,6 +58,12 @@
 
         </StackLayout>
 
+
+        <Button Text="Deletar Fórum" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small" 
+                    x:Name="DeleteButton" IsVisible="{Binding IsAdiministrator}">
+        </Button>
+        
     </StackLayout>
 
 </ContentPage>

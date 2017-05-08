@@ -66,9 +66,10 @@ namespace ForumDEG.ViewModels {
             }
         }
         private bool _isCoordinator;
-
+        
         public ICommand PresenceCommand { get; private set; }
         public ICommand EditComand { get; private set; }
+        public ICommand DeleteCommand { get; private set;}
         
         public ForumDetailViewModel() {
             coordinatorService = new Helpers.Coordinator();
@@ -105,6 +106,7 @@ namespace ForumDEG.ViewModels {
             DisconfirmCommand = new Command(DisconfirmPresence);
             EditComand = new Command(EditForum);
             PresenceCommand = new Command(HandlePresence);
+            DeleteCommand = new Command(DeleteForum);
             IsPast = HasPassed();
 
             //GetConfirmation();
@@ -157,6 +159,12 @@ namespace ForumDEG.ViewModels {
         private async void EditForum() {
             await PushAsync(new ForumEditPage(RemoteId)); 
             await _pageService.PushAsync(new ForumEditPage(Registration));
+        }
+
+        private async void DeleteForum() {
+            var _toDeleteForum = await ForumDatabase.getForumDB.Get(Registration);
+            await ForumDatabase.getForumDB.Delete(_toDeleteForum);
+            await _pageService.PopAsync();
         }
     }
 }
