@@ -1,14 +1,18 @@
 ﻿using System;
+using ForumDEG.Utils;
 using ForumDEG.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
 using ForumDEG.Helpers;
+using ForumDEG.Interfaces;
 
 namespace ForumDEG.ViewModels {
     public class ForumDetailViewModel : PageService, INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
+        private readonly IPageService _pageService;
+        private string _currentUser = App.Current.Properties["registration"].ToString();
 
         private string _buttonText;
         private Color _buttonColor;
@@ -25,6 +29,7 @@ namespace ForumDEG.ViewModels {
         private Helpers.Coordinator coordinatorService;
 
         /* Forum properties */
+        
         public string Title { get; set; }
         public string Place { get; set; }
         public string Schedules { get; set; }
@@ -60,13 +65,44 @@ namespace ForumDEG.ViewModels {
                 }
             }
         }
+        private bool _isCoordinator;
 
         public ICommand PresenceCommand { get; private set; }
         public ICommand EditComand { get; private set; }
-
+        
         public ForumDetailViewModel() {
             coordinatorService = new Helpers.Coordinator();
 
+        public bool IsCoordinator {
+            get {
+                return _isCoordinator;
+            }
+            set {
+                if (_isCoordinator != value) {
+                    _isCoordinator = value;
+                    OnPropertyChanged("IsCoordinator");
+                    OnPropertyChanged("IsAdiministrator");
+                }
+            }
+        }
+
+        public bool IsAdiministrator {
+            get {
+                return !_isCoordinator;
+            }
+            set {
+                if (_isCoordinator == value) {
+                    _isCoordinator = !value;
+                    OnPropertyChanged("IsCoordinator");
+                    OnPropertyChanged("IsAdiministrator");
+                }
+            }
+        }
+
+        public ForumDetailViewModel(IPageService pageService) {
+            _pageService = pageService;
+            ConfirmCommand = new Command(ConfirmPresence);
+            DisconfirmCommand = new Command(DisconfirmPresence);
             EditComand = new Command(EditForum);
             PresenceCommand = new Command(HandlePresence);
             IsPast = HasPassed();
@@ -75,7 +111,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void GetConfirmation() {
-            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(Constants.Registration, RemoteId);
+            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(_currentUser, RemoteId);
             HandleButtonUI();
         }
 
@@ -89,6 +125,13 @@ namespace ForumDEG.ViewModels {
                 ButtonText = "Confirmar presença";
                 ButtonColor = Color.Orange;
             }
+            SetUserType();
+        }
+
+        public void SetUserType() {
+            //[TO DO]
+            //If logged user type coordinator set is coordinator true 
+            IsCoordinator = false;
         }
 
         public bool HasPassed() {
@@ -98,9 +141,9 @@ namespace ForumDEG.ViewModels {
         public void HandlePresence() {
             Debug.WriteLine("[ForumDetailVM]: Inside Presence Handler");
             if (!_isConfirmed) {
-                coordinatorService.PostConfirmationStatusAsync(Constants.Registration, RemoteId);
+                coordinatorService.PostConfirmationStatusAsync(_currentUser, RemoteId);
             } else {
-                coordinatorService.DeleteConfirmationAsync(Constants.Registration, RemoteId);
+                coordinatorService.DeleteConfirmationAsync(_currentUser, RemoteId);
             }
 
             TogglePresence();
@@ -113,6 +156,7 @@ namespace ForumDEG.ViewModels {
 
         private async void EditForum() {
             await PushAsync(new ForumEditPage(RemoteId)); 
+            await _pageService.PushAsync(new ForumEditPage(Registration));
         }
     }
 }

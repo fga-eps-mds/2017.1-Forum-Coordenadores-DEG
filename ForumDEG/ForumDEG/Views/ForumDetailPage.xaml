@@ -6,11 +6,11 @@
              x:Name="SeeForumPage">
     <StackLayout>
         <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
-            
+
             <ScrollView>
-                
+
                 <StackLayout  Padding="5" BackgroundColor="White">
-                    
+
                     <StackLayout BackgroundColor="White" Padding="5,5,0,0">
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"
@@ -18,7 +18,7 @@
                                    BackgroundColor="White" />
                             <Label Text="Editar Fórum" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White">
+                                   BackgroundColor="White"  IsVisible="{Binding IsAdiministrator}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding EditComand}"/>
                                 </Label.GestureRecognizers>
@@ -42,11 +42,11 @@
                                HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                                BackgroundColor="White"/>
                     </StackLayout>
-                    
+
                 </StackLayout>
-                
+
             </ScrollView>
-            
+
         </Frame>
         
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
@@ -55,8 +55,9 @@
                     BackgroundColor="{Binding ButtonColor}" 
                     x:Name="ConfirmPresenceButton"
                     Command="{Binding PresenceCommand}"/>
+
         </StackLayout>
-        
+
     </StackLayout>
 
 </ContentPage>
