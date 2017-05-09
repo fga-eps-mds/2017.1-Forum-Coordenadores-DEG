@@ -48,7 +48,7 @@
                 BackgroundColor="Transparent"
                 AbsoluteLayout.LayoutBounds="0.5, 0.73, 315, 53"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                Command="{Binding MakeLoginCommand}"
+                Clicked="LoginClicked"
                  />
 
     </AbsoluteLayout>

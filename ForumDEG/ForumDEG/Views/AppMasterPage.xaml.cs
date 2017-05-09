@@ -14,6 +14,7 @@ namespace ForumDEG.Views {
         private AppMasterViewModel viewModel = new AppMasterViewModel(new PageService());
 
         public AppMasterPage() {
+            Navigation.PushModalAsync(new LoginPage());
             BindingContext = viewModel;
             InitializeComponent();
         }

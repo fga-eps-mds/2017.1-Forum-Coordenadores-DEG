@@ -11,29 +11,26 @@ namespace ForumDEG.ViewModels {
         public string _userEmail { get; set; }
         public string _userPassword { get; set; }
 
-        public ICommand MakeLoginCommand { get; private set; }
-
         private IPageService _pageService;
         private IUserDialogs _dialog;
 
         public LoginViewModel(IPageService pageService, IUserDialogs dialog) {
             _pageService = pageService;
             _dialog = dialog;
-
-            MakeLoginCommand = new Command(MakeLogin);
         }
 
-        private void MakeLogin() {
+        public bool ValidateLogin() {
             // executed when login button is clicked
-            if (IsAnyFieldEmpty()) return;
-            if (!ValidateEmailRegex()) return;
-            if (!ValidatePasswordRegex()) return;
-            if (!ValidateOnDatabase()) return;
+            if (IsAnyFieldEmpty()) return false;
+            if (!ValidateEmailRegex()) return false;
+            if (!ValidatePasswordRegex()) return false;
+            if (!ValidateOnDatabase()) return false;
             LogUser();
+            return true;
         }
 
-        private async void LogUser() {
-            await _pageService.PushAsync(new AppMasterPage());
+        private void LogUser() {
+
         }
 
         private bool IsAnyFieldEmpty() {
@@ -46,6 +43,11 @@ namespace ForumDEG.ViewModels {
 
         private bool ValidateEmailRegex() {
             // validates email regex
+            bool isEmail = Regex.IsMatch(_userEmail, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+            if (!isEmail) {
+                _dialog.Alert(message: "Email inválido!", okText: "OK");
+                return false;
+            }
             return true;
         }
 

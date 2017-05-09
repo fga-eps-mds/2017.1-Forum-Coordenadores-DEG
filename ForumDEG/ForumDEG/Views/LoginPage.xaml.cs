@@ -14,5 +14,10 @@ namespace ForumDEG.Views {
 
             InitializeComponent();
         }
+
+        public void LoginClicked() {
+            if(_viewModel.ValidateLogin())
+                Navigation.PopModalAsync();
+        }
     }
 }
