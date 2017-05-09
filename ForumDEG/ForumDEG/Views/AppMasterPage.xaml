@@ -70,7 +70,7 @@
 
 
     <MasterDetailPage.Detail>
-        <ContentPage Title="Fórum DEG" Padding="0,50,0,0">
+        <ContentPage Title="Fórum DEG" >
             <ScrollView>
                 <StackLayout Padding="20">
                     <Button Text="Fórum" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
