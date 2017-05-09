@@ -1,6 +1,8 @@
 ﻿using Acr.UserDialogs;
 using ForumDEG.Interfaces;
+using ForumDEG.Views;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -23,18 +25,20 @@ namespace ForumDEG.ViewModels {
 
         private void MakeLogin() {
             // executed when login button is clicked
-            if (!IsAnyFieldEmpty()) return;
+            if (IsAnyFieldEmpty()) return;
             if (!ValidateEmailRegex()) return;
             if (!ValidatePasswordRegex()) return;
             if (!ValidateOnDatabase()) return;
+            LogUser();
         }
 
-        private void LogUser() {
-
+        private async void LogUser() {
+            await _pageService.PushAsync(new AppMasterPage());
         }
 
         private bool IsAnyFieldEmpty() {
             if (string.IsNullOrWhiteSpace(_userEmail) || string.IsNullOrWhiteSpace(_userPassword)) {
+                _dialog.Alert(message: "Não podem haver campos vazios!", okText: "OK");
                 return true;
             }
             return false;
@@ -46,8 +50,15 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool ValidatePasswordRegex() {
-            // validates password regex
-            return true;
+            var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
+            var match = Regex.Match(_userPassword, regex);
+
+            if (match.Success)
+                return true;
+
+            _dialog.Alert(message: "A senha não segue os padrões corretos:\n - De 8 a 15 caracteres\n " +
+                "- Pelo menos uma letra maiúscula e uma minúscula\n  - Pelo menos um número", okText: "OK");
+            return false;
         }
 
         private bool ValidateOnDatabase() {
