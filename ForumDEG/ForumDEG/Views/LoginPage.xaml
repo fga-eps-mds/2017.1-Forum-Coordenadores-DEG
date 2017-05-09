@@ -21,7 +21,7 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.4, 315, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Entry x:Name="emailEntry"
+        <Entry Text="{Binding _userEmail, Mode=TwoWay}"
                Placeholder="Usuário"
                BackgroundColor="Transparent"
                Keyboard="Email"
@@ -34,7 +34,7 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.55, 315, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Entry x:Name="passwordEntry"
+        <Entry Text="{Binding _userPassword, Mode=TwoWay}"
                BackgroundColor="Transparent"
                Placeholder="Senha"
                IsPassword="True"
@@ -48,12 +48,8 @@
                 BackgroundColor="Transparent"
                 AbsoluteLayout.LayoutBounds="0.5, 0.73, 315, 53"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                Command="{Binding MakeLoginCommand}"
                  />
-
-        <Label x:Name="loginFailedLabel" 
-               TextColor="Red"
-               AbsoluteLayout.LayoutBounds="0.5, 1, 0.5, 0.1" 
-               AbsoluteLayout.LayoutFlags="All" />
 
     </AbsoluteLayout>
 </ContentPage>
