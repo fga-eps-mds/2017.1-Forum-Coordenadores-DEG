@@ -19,7 +19,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="home_icon.jpg" Margin="10"/>
+                            <Image Source="home_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Home" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
@@ -34,7 +34,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="forums_icon.jpg" Margin="10"/>
+                            <Image Source="forums_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Fóruns" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
@@ -49,7 +49,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="create_icon.jpg" Margin="10"/>
+                            <Image Source="create_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Criar Fórum" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
@@ -64,7 +64,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="users_icon.jpg" Margin="10"/>
+                            <Image Source="users_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Usuários" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
@@ -79,7 +79,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="create_icon.jpg" Margin="10"/>
+                            <Image Source="create_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Adicionar Coordenador" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
@@ -94,7 +94,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="forms_icon.jpg" Margin="10"/>
+                            <Image Source="forms_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Formulários" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
@@ -109,7 +109,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="create_icon.jpg" Margin="10"/>
+                            <Image Source="create_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Adicionar Formulários" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
@@ -125,7 +125,7 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="home_icon.jpg" Margin="10"/>
+                            <Image Source="changepassword_icon.jpg" Margin="7"/>
                             <Label Margin="0, 5, 25, 5" Text="Alterar Senha" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
