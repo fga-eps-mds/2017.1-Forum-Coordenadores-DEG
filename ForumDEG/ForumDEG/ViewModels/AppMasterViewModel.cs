@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
     class AppMasterViewModel {
+        public ICommand HomeClickedCommand { get; private set; }
         public ICommand ForumsClickedCommand { get; private set; }
         public ICommand UsersClickedCommand { get; private set; }
         public ICommand FormsClickedCommand { get; private set; }
@@ -19,6 +20,7 @@ namespace ForumDEG.ViewModels {
         public AppMasterViewModel(IPageService pageService) {
             _pageService = pageService;
 
+            HomeClickedCommand = new Command(async () => await HomeClicked());
             ForumsClickedCommand = new Command(async () => await ForumsClicked());
             UsersClickedCommand = new Command(async () => await UsersClicked());
             FormsClickedCommand = new Command(async () => await FormsClicked());
@@ -26,6 +28,10 @@ namespace ForumDEG.ViewModels {
             RegisterUserClickedCommand = new Command(async () => await RegisterUserClicked());
             NewFormClickedCommand = new Command(async () => await NewFormClicked());
             ChangePasswordClickedCommand = new Command(async () => await ChangePasswordClicked());
+        }
+
+        private async Task HomeClicked() {
+            await _pageService.PushAsync(new AppMasterPage());
         }
         
         private async Task ForumsClicked() {
