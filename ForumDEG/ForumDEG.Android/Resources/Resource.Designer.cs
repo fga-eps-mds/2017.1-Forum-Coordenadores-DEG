@@ -2796,6 +2796,7 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f020108
 			public const int navigation_empty_icon = 2130837768;
+			public const int notification_bg_low = 2130837768;
 			
 			// aapt resource value: 0x7f020109
 			public const int notification_action_background = 2130837769;
@@ -2805,12 +2806,20 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f02010b
 			public const int notification_bg_low = 2130837771;
+			public const int notification_bg_normal = 2130837771;
 			
 			// aapt resource value: 0x7f02010c
 			public const int notification_bg_low_normal = 2130837772;
 			
 			// aapt resource value: 0x7f02010d
 			public const int notification_bg_low_pressed = 2130837773;
+			public const int notification_icon_background = 2130837773;
+			
+			// aapt resource value: 0x7f020115
+			public const int notification_template_icon_bg = 2130837781;
+			
+			// aapt resource value: 0x7f020116
+			public const int notification_template_icon_low_bg = 2130837782;
 			
 			// aapt resource value: 0x7f02010e
 			public const int notification_bg_normal = 2130837774;
@@ -2847,6 +2856,19 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f020117
 			public const int users_icon = 2130837783;
+			public const int plusbutton_icon = 2130837776;
+			
+			// aapt resource value: 0x7f020111
+			public const int roundedbg = 2130837777;
+			
+			// aapt resource value: 0x7f020112
+			public const int roundedbgdark = 2130837778;
+			
+			// aapt resource value: 0x7f020113
+			public const int splashscreen = 2130837779;
+			
+			// aapt resource value: 0x7f020114
+			public const int users_icon = 2130837780;
 			
 			static Drawable()
 			{
