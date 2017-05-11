@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using ForumDEG.Helpers;
 using ForumDEG.Interfaces;
+using System.Diagnostics;
 
 namespace ForumDEG.ViewModels {
     public class ForumDetailViewModel : PageService, INotifyPropertyChanged {
@@ -162,9 +163,15 @@ namespace ForumDEG.ViewModels {
         }
 
         private async void DeleteForum() {
-            var _toDeleteForum = await ForumDatabase.getForumDB.Get(Registration);
-            await ForumDatabase.getForumDB.Delete(_toDeleteForum);
-            await _pageService.PopAsync();
-        }
+           var _toDeleteForum = await ForumDatabase.getForumDB.Get(Registration);
+           var answer = await _pageService.DisplayAlert("Deletar Fórum", "Tem certeza que deseja deletar o fórum existente? ", "Sim", "Não");
+           Debug.WriteLine("Answer: " + answer);
+            if(answer == true){
+                await ForumDatabase.getForumDB.Delete(_toDeleteForum);
+                await _pageService.PopAsync();
+            } else {
+                //do nothing
+            }
+        }        
     }
 }
