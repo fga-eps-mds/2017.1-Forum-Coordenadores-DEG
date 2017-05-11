@@ -13,6 +13,14 @@ namespace ForumDEG.ViewModels {
         private string _buttonText;
         private Color _buttonColor;
         private bool _isConfirmed;
+        public bool IsConfirmed {
+            get {
+                return _isConfirmed;
+            }
+            set {
+                _isConfirmed = value;
+            }
+        }
 
         private Helpers.Coordinator coordinatorService;
 
@@ -92,8 +100,13 @@ namespace ForumDEG.ViewModels {
             } else {
                 coordinatorService.DeleteConfirmationAsync(Constants.Registration, Constants.ForumId);
             }
-            _isConfirmed = !_isConfirmed;
+
+            TogglePresence();
             HandleButtonUI();
+        }
+
+        public void TogglePresence() {
+            _isConfirmed = !_isConfirmed;
         }
 
         private async void EditForum() {
