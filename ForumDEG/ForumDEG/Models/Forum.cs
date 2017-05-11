@@ -17,8 +17,5 @@ namespace ForumDEG.Models {
         public DateTime Date { get; set; }
 
         public TimeSpan Hour { get; set; }
-
-        // Current coordinator that confirmed to a forum
-        public int UserIdConfirmed { get; set; }
     }
 }

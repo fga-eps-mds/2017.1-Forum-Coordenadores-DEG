@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
+using ForumDEG.Helpers;
 
 namespace ForumDEG.ViewModels {
     public class ForumDetailViewModel : PageService, INotifyPropertyChanged {
@@ -12,6 +13,8 @@ namespace ForumDEG.ViewModels {
         private string _buttonText;
         private Color _buttonColor;
         private bool _isConfirmed;
+
+        private Helpers.Coordinator coordinatorService;
 
         /* Forum properties */
         public string Title { get; set; }
@@ -53,11 +56,17 @@ namespace ForumDEG.ViewModels {
         public ICommand EditComand { get; private set; }
 
         public ForumDetailViewModel() {
+            coordinatorService = new Helpers.Coordinator();
+
             EditComand = new Command(EditForum);
             PresenceCommand = new Command(HandlePresence);
             IsPast = HasPassed();
 
-            _isConfirmed = false; // wil get data from API
+            getConfirmation();
+        }
+
+        private async void getConfirmation() {
+            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(Constants.Registration, Constants.ForumId);
             HandleButtonUI();
         }
 
@@ -78,6 +87,11 @@ namespace ForumDEG.ViewModels {
 
         public void HandlePresence() {
             Debug.WriteLine("[ForumDetailVM]: Inside Presence Handler");
+            if (!_isConfirmed) {
+                coordinatorService.PostConfirmationStatusAsync(Constants.Registration, Constants.ForumId);
+            } else {
+                coordinatorService.DeleteConfirmationAsync(Constants.Registration, Constants.ForumId);
+            }
             _isConfirmed = !_isConfirmed;
             HandleButtonUI();
         }
