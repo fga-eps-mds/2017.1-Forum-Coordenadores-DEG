@@ -1757,7 +1757,7 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f070058
 			public const int abc_text_size_subhead_material = 2131165272;
-			
+			    
 			// aapt resource value: 0x7f07000f
 			public const int abc_text_size_subtitle_material_toolbar = 2131165199;
 			

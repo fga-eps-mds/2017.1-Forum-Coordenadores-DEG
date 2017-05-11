@@ -164,7 +164,7 @@
                 <StackLayout  Orientation="Horizontal">
 
                     <StackLayout Orientation="Vertical" Padding="20">
-                        <Image Source="plusbutton_icon.png"
+                        <Image
                                    Scale="0.75"
                                    VerticalOptions="End" HorizontalOptions="Start">
                             <Image.GestureRecognizers>
