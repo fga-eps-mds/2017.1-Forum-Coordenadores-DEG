@@ -92,7 +92,7 @@ namespace ForumDEG.Helpers {
             }
         }
 
-        public async /*Task<bool>*/ void PostAdministratorAsync(Models.Administrator administrator) {
+        public async Task<bool> PostAdministratorAsync(Models.Administrator administrator) {
             var uri = new Uri(string.Format(Constants.RestUrl, "administrators"));
 
             var name = administrator.Name;
@@ -107,7 +107,7 @@ namespace ForumDEG.Helpers {
             administratorData.Add("registration", registration);
 
             var body = new JObject();
-            body.Add("user", administratorData);
+            body.Add("administrator", administratorData);
 
             var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
             var contentString = await content.ReadAsStringAsync();
@@ -117,15 +117,15 @@ namespace ForumDEG.Helpers {
                 if (response.IsSuccessStatusCode) {
                     var responseContent = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Administrator API] - Post result: " + responseContent);
-                    //return true;
+                    return true;
                 } else {
                     var failedContent = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Administrator API] - Post response unsuccessful " + failedContent);
-                    //return false;
+                    return false;
                 }
             } catch (Exception ex) {
                 Debug.WriteLine("[Administrator API exception]:" + ex.Message);
-                //return false;
+                return false;
             }
         }
 
