@@ -17,5 +17,7 @@ namespace ForumDEG.Models {
         public DateTime Date { get; set; }
 
         public TimeSpan Hour { get; set; }
+
+        public string RemoteId { get; set; } // hopefully temporary fix
     }
 }

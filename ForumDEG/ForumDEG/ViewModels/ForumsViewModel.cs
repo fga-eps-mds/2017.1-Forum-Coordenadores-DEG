@@ -19,12 +19,14 @@ namespace ForumDEG.ViewModels {
         }
 
         private readonly IPageService _pageService;
+        private readonly Helpers.Forum _forumService;
 
         public ICommand SelectForumCommand { get; private set; }
 
         private static ForumsViewModel _instance = null;
         private ForumsViewModel(IPageService pageService) {
             _pageService = pageService;
+            _forumService = new Helpers.Forum();
             SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
         }
 
@@ -43,7 +45,7 @@ namespace ForumDEG.ViewModels {
         // method for simulating local database
         public async void UpdateForumsList() {
             Forums = new ObservableCollection<ForumDetailViewModel>();
-            var forumsList = await ForumDatabase.getForumDB.GetAll();
+            var forumsList = await _forumService.GetForumsAsync();
 
             foreach (Forum forum in forumsList) {
                 Forums.Add(new ForumDetailViewModel {
@@ -52,7 +54,8 @@ namespace ForumDEG.ViewModels {
                     Schedules =  forum.Schedules,
                     Date = forum.Date,
                     Hour = forum.Hour,
-                    Registration = forum.Id
+                    Registration = forum.Id, // local id
+                    RemoteId = forum.RemoteId // remote id, ideally should only use this one
                 });
             }
         }

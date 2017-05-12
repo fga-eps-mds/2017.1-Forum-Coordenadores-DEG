@@ -32,6 +32,7 @@ namespace ForumDEG.ViewModels {
         public TimeSpan Hour { get; set; }
         public bool IsPast { get; private set; }
         public int Registration { get; set; }
+        public string RemoteId { get; set; }
 
         /* Button UI properties */
         public string ButtonText {
@@ -74,7 +75,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async void getConfirmation() {
-            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(Constants.Registration, Constants.ForumId);
+            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(Constants.Registration, RemoteId);
             HandleButtonUI();
         }
 
@@ -96,9 +97,9 @@ namespace ForumDEG.ViewModels {
         public void HandlePresence() {
             Debug.WriteLine("[ForumDetailVM]: Inside Presence Handler");
             if (!_isConfirmed) {
-                coordinatorService.PostConfirmationStatusAsync(Constants.Registration, Constants.ForumId);
+                coordinatorService.PostConfirmationStatusAsync(Constants.Registration, RemoteId);
             } else {
-                coordinatorService.DeleteConfirmationAsync(Constants.Registration, Constants.ForumId);
+                coordinatorService.DeleteConfirmationAsync(Constants.Registration, RemoteId);
             }
 
             TogglePresence();
@@ -110,7 +111,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async void EditForum() {
-            await PushAsync(new ForumEditPage(Registration)); 
+            await PushAsync(new ForumEditPage(RemoteId)); 
         }
     }
 }
