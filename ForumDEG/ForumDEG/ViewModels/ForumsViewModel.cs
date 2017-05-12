@@ -7,6 +7,7 @@ using ForumDEG.Views;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace ForumDEG.ViewModels {
     public class ForumsViewModel : BaseViewModel {
@@ -44,18 +45,26 @@ namespace ForumDEG.ViewModels {
 
         public async void UpdateForumsList() {
             Forums = new ObservableCollection<ForumDetailViewModel>();
-            var forumsList = await _forumService.GetForumsAsync();
+            try {
+                var forumsList = await _forumService.GetForumsAsync();
 
-            foreach (Forum forum in forumsList) {
-                Forums.Add(new ForumDetailViewModel {
-                    Title = forum.Title,
-                    Place = forum.Place,
-                    Schedules =  forum.Schedules,
-                    Date = forum.Date,
-                    Hour = forum.Hour,
-                    Registration = forum.Id, // local id
-                    RemoteId = forum.RemoteId // remote id, ideally should only use this one
-                });
+                foreach (Forum forum in forumsList) {
+                    Forums.Add(new ForumDetailViewModel {
+                        Title = forum.Title,
+                        Place = forum.Place,
+                        Schedules = forum.Schedules,
+                        Date = forum.Date,
+                        Hour = forum.Hour,
+                        Registration = forum.Id, // local id
+                        RemoteId = forum.RemoteId // remote id, ideally should only use this one
+                    });
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Update forums list] " + ex.Message);
+                await _pageService.DisplayAlert("Falha ao carregar fóruns",
+                                          "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
+                                          "Ok", "Cancel");
+                await _pageService.PopAsync();
             }
         }
     }

@@ -5,6 +5,7 @@ using ForumDEG.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,28 +70,36 @@ namespace ForumDEG.ViewModels {
             Administrators = new ObservableCollection<AdministratorDetailPageViewModel>();
             Coordinators = new ObservableCollection<CoordinatorDetailPageViewModel>();
 
-            var administratorsList = await _administratorService.GetAdministratorsAsync();
-            var coordinatorsList = await _coordinatorService.GetCoordinatorsAsync();
+            try {
+                var administratorsList = await _administratorService.GetAdministratorsAsync();
+                var coordinatorsList = await _coordinatorService.GetCoordinatorsAsync();
 
-            foreach (Coordinator coordinator in coordinatorsList) {
-                Coordinators.Add(new CoordinatorDetailPageViewModel {
-                    Name = coordinator.Name,
-                    Id = coordinator.Id,
-                    Password = coordinator.Password,
-                    Email = coordinator.Email,
-                    Registration = coordinator.Registration,
-                    Course = coordinator.Course
-                });
-            }
+                foreach (Coordinator coordinator in coordinatorsList) {
+                    Coordinators.Add(new CoordinatorDetailPageViewModel {
+                        Name = coordinator.Name,
+                        Id = coordinator.Id,
+                        Password = coordinator.Password,
+                        Email = coordinator.Email,
+                        Registration = coordinator.Registration,
+                        Course = coordinator.Course
+                    });
+                }
 
-            foreach (Administrator administrator in administratorsList) {
-                Administrators.Add(new AdministratorDetailPageViewModel {
-                    Name = administrator.Name,
-                    Id = administrator.Id,
-                    Password = administrator.Password,
-                    Email = administrator.Email,
-                    Registration = administrator.Registration
-                });
+                foreach (Administrator administrator in administratorsList) {
+                    Administrators.Add(new AdministratorDetailPageViewModel {
+                        Name = administrator.Name,
+                        Id = administrator.Id,
+                        Password = administrator.Password,
+                        Email = administrator.Email,
+                        Registration = administrator.Registration
+                    });
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Update users list] " + ex.Message);
+                await _pageService.DisplayAlert("Falha ao carregar usuários",
+                                          "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
+                                          "Ok", "Cancel");
+                await _pageService.PopAsync();
             }
         }
     }

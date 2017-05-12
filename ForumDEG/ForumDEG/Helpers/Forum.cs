@@ -102,8 +102,8 @@ namespace ForumDEG.Helpers {
                     }
                 }
                 return forums;
-            } catch (TaskCanceledException ex) {
-                throw new TaskCanceledException();
+            } catch (TaskCanceledException) {
+                throw;
             } catch (Exception ex) {
                 Debug.WriteLine("[Forum API exception]:" + ex.Message);
                 return null;
