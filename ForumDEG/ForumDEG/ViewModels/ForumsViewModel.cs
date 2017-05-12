@@ -36,7 +36,7 @@ namespace ForumDEG.ViewModels {
             return _instance;
         }
 
-        private async Task SelectForum(ForumDetailViewModel forum) {
+        public async Task SelectForum(ForumDetailViewModel forum) {
             if (forum == null)
                 return;
             SelectedForum = forum;

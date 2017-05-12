@@ -164,7 +164,7 @@ namespace ForumDEG.ViewModels {
 
         private async void DeleteForum() {
            var _toDeleteForum = await ForumDatabase.getForumDB.Get(Registration);
-           var answer = await _pageService.DisplayAlert("Deletar Fórum", "Tem certeza que deseja deletar o fórum existente? ", "Sim", "Não");
+           var answer = await _pageService.DisplayAlert("Deletar Fórum", "Tem certeza que deseja deletar o fórum existente? Esta ação não poderá ser desfeita.", "Sim", "Não");
            Debug.WriteLine("Answer: " + answer);
             if(answer == true){
                 await ForumDatabase.getForumDB.Delete(_toDeleteForum);
