@@ -13,6 +13,7 @@ using Xamarin.Forms;
 namespace ForumDEG.ViewModels {
     class ForumEditViewModel : BaseViewModel {
         private readonly IPageService _pageService;
+        private readonly Helpers.Forum _forumService;
         
         public Forum Forum { get; private set; } = new Forum();
         public ICommand CancelCommand { get; private set; }
@@ -85,20 +86,22 @@ namespace ForumDEG.ViewModels {
 
         public ForumEditViewModel(IPageService pageService) {
             _pageService = pageService;
+            _forumService = new Helpers.Forum();
 
             CancelCommand = new Command(Cancel);
             ConfirmCommand = new Command(() => ConfirmEdition());
         }
 
-        public async void setOldForumFields(int OldForumId) {
-            var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
+        public async void setOldForumFields(string OldForumId) {
+            //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
+            var _oldForum = await _forumService.GetForumAsync(OldForumId);
 
             ForumTitle = _oldForum.Title;
             ForumDate = _oldForum.Date;
             ForumHour = _oldForum.Hour;
             ForumPlace = _oldForum.Place;
             ForumSchedules = _oldForum.Schedules;
-            Forum.Id = _oldForum.Id;
+            Forum.RemoteId = _oldForum.RemoteId;
         }
 
         public bool IsAnyFieldBlank() {
@@ -117,7 +120,8 @@ namespace ForumDEG.ViewModels {
         }
 
         public async Task EditForum() {
-            await ForumDatabase.getForumDB.Save(Forum);
+            //await ForumDatabase.getForumDB.Save(Forum);
+            // Will use API after put route has been implemented.
 
             await _pageService.DisplayAlert("Fórum Editado"
                 , "O fórum foi editado com sucesso. Os coordenadores serão notificados em breve."

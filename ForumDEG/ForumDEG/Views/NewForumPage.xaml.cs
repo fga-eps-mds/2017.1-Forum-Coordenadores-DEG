@@ -29,7 +29,7 @@ namespace ForumDEG.Views {
         private async void OnNewForumButtonClicked(object sender, EventArgs e) {
             if (_viewModel.IsAnyFieldBlank()) {
                 _viewModel.CreationFailed();
-            } else if (await _viewModel.CreateForum()) {
+            } else if (await _viewModel.CreateForumRemote()) {
                 _viewModel.AlertSuccess();
 
                 Navigation.InsertPageBefore(new ForumsPage(), this);
