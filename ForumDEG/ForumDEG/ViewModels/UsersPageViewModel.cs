@@ -30,6 +30,7 @@ namespace ForumDEG.ViewModels {
 
         private readonly IPageService _pageService;
         private readonly Helpers.Coordinator _coordinatorService;
+        private readonly Helpers.Administrator _administratorService;
 
         public ICommand SelectAdministratorCommand { get; private set; }
         public ICommand SelectCoordinatorCommand { get; private set; }
@@ -39,6 +40,7 @@ namespace ForumDEG.ViewModels {
         private UsersPageViewModel(IPageService pageService) {
             _pageService = pageService;
             _coordinatorService = new Helpers.Coordinator();
+            _administratorService = new Helpers.Administrator();
 
             SelectAdministratorCommand = new Command<AdministratorDetailPageViewModel>(async vm => await SelectAdministrator(vm));
             SelectCoordinatorCommand = new Command<CoordinatorDetailPageViewModel>(async vm => await SelectCoordinator(vm));
@@ -67,11 +69,7 @@ namespace ForumDEG.ViewModels {
             Administrators = new ObservableCollection<AdministratorDetailPageViewModel>();
             Coordinators = new ObservableCollection<CoordinatorDetailPageViewModel>();
 
-            Task<List<Administrator>> administratorslisttask = AdministratorDatabase.getAdmDB.GetAll();
-            administratorslisttask.Wait();
-
-            List<Administrator> administratorslist = administratorslisttask.Result;
-
+            var administratorsList = await _administratorService.GetAdministratorsAsync();
             var coordinatorsList = await _coordinatorService.GetCoordinatorsAsync();
 
             foreach (Coordinator coordinator in coordinatorsList) {
@@ -85,7 +83,7 @@ namespace ForumDEG.ViewModels {
                 });
             }
 
-            foreach (Administrator administrator in administratorslist) {
+            foreach (Administrator administrator in administratorsList) {
                 Administrators.Add(new AdministratorDetailPageViewModel {
                     Name = administrator.Name,
                     Id = administrator.Id,

@@ -102,6 +102,8 @@ namespace ForumDEG.Helpers {
                     }
                 }
                 return forums;
+            } catch (TaskCanceledException ex) {
+                throw new TaskCanceledException();
             } catch (Exception ex) {
                 Debug.WriteLine("[Forum API exception]:" + ex.Message);
                 return null;
@@ -142,6 +144,82 @@ namespace ForumDEG.Helpers {
                 } else {
                     var failedContent = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Forum API] - Post response unsuccessful " + failedContent);
+                    return false;
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Forum API exception]:" + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> PutForumAsync(string id, Models.Forum newForum) {
+            var uri = new Uri(string.Format(Constants.RestUrl, "forums/" + id));
+            var oldForum = await GetForumAsync(id);
+
+            var forumData = new JObject();
+
+            if (oldForum.Title != newForum.Title && !String.IsNullOrEmpty(newForum.Title)) {
+                var theme = newForum.Title;
+                forumData.Add("theme", theme);
+            }
+
+            if (oldForum.Place != newForum.Place && !String.IsNullOrEmpty(newForum.Place)) {
+                var place = newForum.Place;
+                forumData.Add("place", place);
+            }
+
+            if (oldForum.Schedules != newForum.Schedules && !String.IsNullOrEmpty(newForum.Schedules)) {
+                var schedules = newForum.Schedules;
+                forumData.Add("schedules", schedules);
+            }
+
+            if (oldForum.Date != newForum.Date && newForum.Date != null) {
+                var date = newForum.Date;
+                forumData.Add("date", date);
+            }
+
+            if (oldForum.Hour != newForum.Hour && newForum.Hour != null) {
+                var hour = newForum.Hour.TotalSeconds;
+                forumData.Add("hour", hour);
+            }
+
+            var body = new JObject();
+            body.Add("forum", forumData);
+
+            var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
+            var contentString = await content.ReadAsStringAsync();
+
+            try {
+                var response = await _client.PutAsync(uri, content);
+                if (response.IsSuccessStatusCode) {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Forum API] - Put result: " + responseContent);
+                    return true;
+                } else {
+                    var failedContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Forum API] - Put response unsuccessful " + failedContent);
+                    return false;
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Forum API exception]:" + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteForumAsync(string id) {
+            var uri = new Uri(string.Format(Constants.RestUrl, "forums/" + id));
+            var emptyBody = new StringContent(""); // for some reason can't send request without body
+
+            try {
+                var response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode) {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Forum API] - Delete result: " + content);
+                    return true;
+                } else {
+                    var failedContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Forum API] - Delete response unsuccessful " + failedContent);
                     return false;
                 }
             } catch (Exception ex) {
