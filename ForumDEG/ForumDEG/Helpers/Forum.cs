@@ -25,7 +25,7 @@ namespace ForumDEG.Helpers {
                 var response = await _client.GetAsync(uri);
                 Debug.WriteLine("[Forum API] got response");
                 if (response.IsSuccessStatusCode) {
-                
+
                     var content = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Forum API]: " + content);
 
@@ -68,8 +68,9 @@ namespace ForumDEG.Helpers {
 
             try {
                 var response = await _client.GetAsync(uri);
+                List<Models.Forum> forums = new List<Models.Forum>();
+
                 if (response.IsSuccessStatusCode) {
-                    List<Models.Forum> forums = new List<Models.Forum>();
                     var content = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Forum API] - Forums: " + content);
 
@@ -99,10 +100,8 @@ namespace ForumDEG.Helpers {
                             RemoteId = remoteId
                         });
                     }
-
-                    return forums;
                 }
-                return null;
+                return forums;
             } catch (Exception ex) {
                 Debug.WriteLine("[Forum API exception]:" + ex.Message);
                 return null;

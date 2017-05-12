@@ -55,6 +55,164 @@ namespace ForumDEG.Helpers {
             }
         }
 
+        public async Task<List<Models.Coordinator>> GetCoordinatorsAsync() {
+            var uri = new Uri(string.Format(Constants.RestUrl, "coordinators"));
+
+            try {
+                var response = await _client.GetAsync(uri);
+                List<Models.Coordinator> coordinators = new List<Models.Coordinator>();
+
+                if (response.IsSuccessStatusCode) {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Coordinator API] - Coordinators: " + content);
+
+                    var objArray = JArray.Parse(content);
+
+                    foreach (JObject obj in objArray) {
+                        string name = obj["name"].ToString();
+                        string email = obj["email"].ToString();
+                        string course = obj["course"].ToString();
+                        string password = obj["password"].ToString();
+                        string registration = obj["registration"].ToString();
+
+                        Debug.WriteLine("[Coordinator API]: Coord name: " + name);
+                        Debug.WriteLine("[Coordinator API]: Coord email: " + email);
+                        Debug.WriteLine("[Coordinator API]: Coord course: " + course);
+                        Debug.WriteLine("[Coordinator API]: Coord password: " + password);
+                        Debug.WriteLine("[Coordinator API]: Coord registration: " + registration);
+
+                        coordinators.Add(new Models.Coordinator {
+                            Name = name,
+                            Email = email,
+                            Course = course,
+                            Password = password,
+                            Registration = registration
+                        });
+                    }
+                }
+
+                return coordinators;
+            } catch (Exception ex) {
+                Debug.WriteLine("[Coordinator API exception]:" + ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<bool> PostCoordinatorAsync(Models.Coordinator coordinator) {
+            var uri = new Uri(string.Format(Constants.RestUrl, "coordinators"));
+
+            var name = coordinator.Name;
+            var email = coordinator.Email;
+            var password = coordinator.Password;
+            var registration = coordinator.Registration;
+            var course = coordinator.Course;
+
+            var coordinatorData = new JObject();
+            coordinatorData.Add("name", name);
+            coordinatorData.Add("email", email);
+            coordinatorData.Add("password", password);
+            coordinatorData.Add("registration", registration);
+            coordinatorData.Add("course", course);
+
+            var body = new JObject();
+            body.Add("coordinator", coordinatorData);
+
+            var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
+            var contentString = await content.ReadAsStringAsync();
+
+            try {
+                var response = await _client.PostAsync(uri, content);
+                if (response.IsSuccessStatusCode) {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Coordinator API] - Post result: " + responseContent);
+                    return true;
+                } else {
+                    var failedContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Coordinator API] - Post response unsuccessful " + failedContent);
+                    return false;
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Coordinator API exception]:" + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> PutCoordinatorAsync(string registration, Models.Coordinator coordinator) {
+            var uri = new Uri(string.Format(Constants.RestUrl, "coordinators/" + registration));
+            var oldCoordinator = await GetCoordinatorAsync(registration);
+
+            var coordinatorData = new JObject();
+
+            if (oldCoordinator.Name != coordinator.Name && !String.IsNullOrEmpty(coordinator.Name)) {
+                var name = coordinator.Name;
+                coordinatorData.Add("name", name);
+            }
+
+            if (oldCoordinator.Email != coordinator.Email && !String.IsNullOrEmpty(coordinator.Email)) {
+                var email = coordinator.Email;
+                coordinatorData.Add("email", email);
+            }
+
+            if (oldCoordinator.Password != coordinator.Password && !String.IsNullOrEmpty(coordinator.Password)) {
+                var password = coordinator.Password;
+                coordinatorData.Add("password", password);
+            }
+
+            if (oldCoordinator.Registration != coordinator.Registration && !String.IsNullOrEmpty(coordinator.Registration)) {
+                var newRegistration = coordinator.Registration; 
+                coordinatorData.Add("registration", newRegistration);
+            }
+
+            if (oldCoordinator.Course != coordinator.Course && !String.IsNullOrEmpty(coordinator.Course)) {
+                var course = coordinator.Course;
+                coordinatorData.Add("course", course);
+            }
+
+            var body = new JObject();
+            body.Add("coordinator", coordinatorData);
+
+            var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
+            var contentString = await content.ReadAsStringAsync();
+
+            try {
+                var response = await _client.PutAsync(uri, content);
+                if (response.IsSuccessStatusCode) {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Coordinator API] - Put result: " + responseContent);
+                    return true;
+                } else {
+                    var failedContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Coordinator API] - Put response unsuccessful " + failedContent);
+                    return false;
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Coordinator API exception]:" + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteCoordinatorAsync(string registration) {
+            var uri = new Uri(string.Format(Constants.RestUrl, "coordinators/" + registration));
+            var emptyBody = new StringContent(""); // for some reason can't send request without body
+            
+            try {
+                var response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode) {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Coordinator API] - Delete result: " + content);
+                    return true;
+                } else {
+                    var failedContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Coordinator API] - Delete response unsuccessful " + failedContent);
+                    return false;
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Coordinator API exception]:" + ex.Message);
+                return false;
+            }
+        }
+
         public async Task<bool> GetConfirmationStatusAsync(string registration, string forumId) {
             string confirmationRoute = "coordinators/" + registration + "/forum/" + forumId;
             var uri = new Uri(string.Format(Constants.RestUrl, confirmationRoute));

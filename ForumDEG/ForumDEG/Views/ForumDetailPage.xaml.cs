@@ -6,10 +6,17 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumDetailPage : ContentPage {
-
+        private ForumDetailViewModel _viewModel;
         public ForumDetailPage() {
-            BindingContext = ForumsViewModel.GetInstance().SelectedForum;
+            _viewModel = ForumsViewModel.GetInstance().SelectedForum;
+            BindingContext = _viewModel;
             InitializeComponent();
         }
+
+        protected override void OnAppearing() {
+            base.OnAppearing();
+            _viewModel.GetConfirmation();
+        }
+
     }
 }
