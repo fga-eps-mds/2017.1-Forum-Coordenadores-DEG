@@ -42,7 +42,6 @@ namespace ForumDEG.ViewModels {
             await _pageService.PushAsync(new ForumDetailPage());
         }
 
-        // method for simulating local database
         public async void UpdateForumsList() {
             Forums = new ObservableCollection<ForumDetailViewModel>();
             var forumsList = await _forumService.GetForumsAsync();

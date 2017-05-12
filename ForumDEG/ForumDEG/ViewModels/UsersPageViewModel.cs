@@ -29,6 +29,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private readonly IPageService _pageService;
+        private readonly Helpers.Coordinator _coordinatorService;
 
         public ICommand SelectAdministratorCommand { get; private set; }
         public ICommand SelectCoordinatorCommand { get; private set; }
@@ -37,6 +38,8 @@ namespace ForumDEG.ViewModels {
 
         private UsersPageViewModel(IPageService pageService) {
             _pageService = pageService;
+            _coordinatorService = new Helpers.Coordinator();
+
             SelectAdministratorCommand = new Command<AdministratorDetailPageViewModel>(async vm => await SelectAdministrator(vm));
             SelectCoordinatorCommand = new Command<CoordinatorDetailPageViewModel>(async vm => await SelectCoordinator(vm));
         }
@@ -60,7 +63,7 @@ namespace ForumDEG.ViewModels {
             await _pageService.PushAsync(new ForumDetailPage());
         }
 
-        public void UpdateUsersLists() {
+        public async void UpdateUsersLists() {
             Administrators = new ObservableCollection<AdministratorDetailPageViewModel>();
             Coordinators = new ObservableCollection<CoordinatorDetailPageViewModel>();
 
@@ -69,12 +72,9 @@ namespace ForumDEG.ViewModels {
 
             List<Administrator> administratorslist = administratorslisttask.Result;
 
-            Task<List<Coordinator>> coordinatorslisttask = CoordinatorDatabase.getCoordinatorDB.GetAll();
-            coordinatorslisttask.Wait();
+            var coordinatorsList = await _coordinatorService.GetCoordinatorsAsync();
 
-            List<Coordinator> coordinatorslist = coordinatorslisttask.Result;
-
-            foreach (Coordinator coordinator in coordinatorslist) {
+            foreach (Coordinator coordinator in coordinatorsList) {
                 Coordinators.Add(new CoordinatorDetailPageViewModel {
                     Name = coordinator.Name,
                     Id = coordinator.Id,

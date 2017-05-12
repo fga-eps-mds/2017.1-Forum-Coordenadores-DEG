@@ -71,10 +71,10 @@ namespace ForumDEG.ViewModels {
             PresenceCommand = new Command(HandlePresence);
             IsPast = HasPassed();
 
-            getConfirmation();
+            //GetConfirmation();
         }
 
-        private async void getConfirmation() {
+        public async void GetConfirmation() {
             _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(Constants.Registration, RemoteId);
             HandleButtonUI();
         }
@@ -85,6 +85,7 @@ namespace ForumDEG.ViewModels {
                 ButtonText = "Cancelar presença";
                 ButtonColor = Color.Red;
             } else {
+                Debug.WriteLine("[ForumDetailVM]: isConfirmed false, " + Title + " forum");
                 ButtonText = "Confirmar presença";
                 ButtonColor = Color.Orange;
             }

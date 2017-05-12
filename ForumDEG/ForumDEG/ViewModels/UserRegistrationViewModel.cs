@@ -13,11 +13,14 @@ using ForumDEG.Utils;
 namespace ForumDEG.ViewModels {
     public class UserRegistrationViewModel : BaseViewModel {
         private readonly IPageService _pageService;
+        private readonly Helpers.Coordinator _coordinatorService;
 
         public ICommand RegisterNewUserCommand { get; private set; }
 
         public UserRegistrationViewModel(IPageService PageService) {
             _pageService = PageService;
+            _coordinatorService = new Helpers.Coordinator();
+
             RegisterNewUserCommand = new Command(async () => await RegisterNewUser());
         }
 
@@ -181,8 +184,11 @@ namespace ForumDEG.ViewModels {
                 CreatedOn = DateTime.Now,
                 Course = CourseIn
             };
-            await CoordinatorDatabase.getCoordinatorDB.Save(Coord);
-            await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo Coordenador com sucesso!", "ok", "cancel");
+            if (await _coordinatorService.PostCoordinatorAsync(Coord)) {
+                await _pageService.DisplayAlert("Registrar novo usuário", 
+                                                "Você salvou um novo Coordenador com sucesso!", 
+                                                "ok", "cancel");
+            }
         }
 
         public void CleanFields(){
