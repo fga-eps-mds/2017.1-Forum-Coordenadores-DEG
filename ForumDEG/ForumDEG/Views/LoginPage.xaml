@@ -21,10 +21,10 @@
                AbsoluteLayout.LayoutBounds="0.5, 0.4, 315, 53"
                AbsoluteLayout.LayoutFlags="PositionProportional" />
 
-        <Entry Text="{Binding _userEmail, Mode=TwoWay}"
-               Placeholder="Usuário"
+        <Entry Text="{Binding _userRegistration, Mode=TwoWay}"
+               Placeholder="Matrícula"
                BackgroundColor="Transparent"
-               Keyboard="Email"
+               Keyboard="Numeric"
                HorizontalTextAlignment="Center"
                FontSize="22"
                AbsoluteLayout.LayoutBounds="0.5, 0.4, 270, 53"

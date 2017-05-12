@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
     class LoginViewModel {
-        public string _userEmail { get; set; }
+        public string _userRegistration { get; set; }
         public string _userPassword { get; set; }
 
         private IPageService _pageService;
@@ -22,7 +22,7 @@ namespace ForumDEG.ViewModels {
         public bool ValidateLogin() {
             // executed when login button is clicked
             if (IsAnyFieldEmpty()) return false;
-            if (!ValidateEmailRegex()) return false;
+            if (!ValidateRegistration()) return false;
             if (!ValidatePasswordRegex()) return false;
             if (!ValidateOnDatabase()) return false;
             LogUser();
@@ -34,18 +34,17 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool IsAnyFieldEmpty() {
-            if (string.IsNullOrWhiteSpace(_userEmail) || string.IsNullOrWhiteSpace(_userPassword)) {
+            if (string.IsNullOrWhiteSpace(_userRegistration) || string.IsNullOrWhiteSpace(_userPassword)) {
                 _dialog.Alert(message: "Não podem haver campos vazios!", okText: "OK");
                 return true;
             }
             return false;
         }
 
-        private bool ValidateEmailRegex() {
-            // validates email regex
-            bool isEmail = Regex.IsMatch(_userEmail, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-            if (!isEmail) {
-                _dialog.Alert(message: "Email inválido!", okText: "OK");
+        private bool ValidateRegistration() {
+            // validates registration
+            if (_userRegistration.Length < 6 || _userRegistration.Length > 12) {
+                _dialog.Alert(message: "Matrícula inválida!", okText: "OK");
                 return false;
             }
             return true;
