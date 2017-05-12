@@ -201,7 +201,7 @@ namespace ForumDEG.ViewModels {
                                                 "ok", "cancel");
             } else {
                 await _pageService.DisplayAlert("Falha na conexão com o servidor",
-                                                "Não foi possível cadastrar o administrador. Por favor tente novamente.",
+                                                "Não foi possível cadastrar o coordenador. Por favor tente novamente.",
                                                 "ok", "cancel");
                 Debug.WriteLine("[URVM] Couldn't save.");
             }
