@@ -7,7 +7,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class LoginViewModel {
+    public class LoginViewModel {
         public string _userRegistration { get; set; }
         public string _userPassword { get; set; }
 
