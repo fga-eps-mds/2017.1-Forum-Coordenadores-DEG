@@ -30,7 +30,8 @@ namespace ForumDEG.ViewModels {
         }
 
         private void LogUser() {
-
+            App.Current.Properties["registration"] = _userRegistration;
+            App.Current.Properties["isAdmin"] = true; // TODO: Check if logged is really admin or not
         }
 
         private bool IsAnyFieldEmpty() {
