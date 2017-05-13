@@ -29,32 +29,25 @@ namespace UnitTest {
         [Test()]
         public void ValidateLogin_WithNullRegistration() {
             _viewModel._userRegistration = null;
-            Assert.False(_viewModel.ValidateLogin());
+            Assert.False(_viewModel.ValidateLogin().Result);
         }
 
         [Test()]
         public void ValidateLogin_WithNullPassWord() {
             _viewModel._userPassword = null;
-            Assert.False(_viewModel.ValidateLogin());
+            Assert.False(_viewModel.ValidateLogin().Result);
         }
 
         [Test()]
         public void ValidateLogin_WithInvalidRegistration() {
             _viewModel._userRegistration = "123";
-            Assert.False(_viewModel.ValidateLogin());
+            Assert.False(_viewModel.ValidateLogin().Result);
         }
 
         [Test()]
         public void ValidateLogin_WithInvalidPassword() {
             _viewModel._userPassword = "123";
-            Assert.False(_viewModel.ValidateLogin());
+            Assert.False(_viewModel.ValidateLogin().Result);
         }
-
-        [Test()]
-        public void ValidateLogin_WithValidFilds() {
-            Assert.True(_viewModel.ValidateLogin());
-        }
-
-
     }
 }

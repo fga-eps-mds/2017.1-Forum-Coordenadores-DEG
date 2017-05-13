@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using ForumDEG.ViewModels;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,12 +16,16 @@ namespace ForumDEG.Views {
             InitializeComponent();
         }
 
-        public void LoginClicked() {
-            if (_viewModel.ValidateLogin()) {
+        public async void Validate() {
+            if (await _viewModel.ValidateLogin()) {
                 Navigation.InsertPageBefore(new AppMasterPage(), this);
-                Navigation.PopModalAsync();
+                await Navigation.PopAsync();
             }
-                
+        } 
+
+        public void LoginClicked() {
+            Validate();
+            Debug.WriteLine("[User API]: Acabou");
         }
     }
 }
