@@ -45,9 +45,12 @@
     <Compile Include="DAO\ForumDatabase.cs" />
     <Compile Include="DAO\ForumNotificationDatabase.cs" />
     <Compile Include="Helpers\Administrator.cs" />
+    <Compile Include="Helpers\AdministratorParser.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Coordinator.cs" />
+    <Compile Include="Helpers\CoordinatorParser.cs" />
     <Compile Include="Helpers\Forum.cs" />
+    <Compile Include="Helpers\ForumParser.cs" />
     <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\IPageService.cs" />
     <Compile Include="MarkupExtensions\EmbeddedImage.cs" />
