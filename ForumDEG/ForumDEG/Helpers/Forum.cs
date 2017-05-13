@@ -24,38 +24,13 @@ namespace ForumDEG.Helpers {
             try {
                 var response = await _client.GetAsync(uri);
                 Debug.WriteLine("[Forum API] got response");
-                if (response.IsSuccessStatusCode) {
 
+                if (response.IsSuccessStatusCode) {
                     var content = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Forum API]: " + content);
-
-                    var obj = JObject.Parse(content);
-
-                    string title = obj["theme"].ToString();
-                    string place = obj["place"].ToString();
-                    string schedules = obj["schedules"].ToString();
-                    DateTime date = obj["date"].ToObject<DateTime>();
-                    int seconds = obj["hour"].ToObject<int>();
-                    TimeSpan hour = TimeSpan.FromSeconds(seconds);
-                    string remoteId = obj["id"].ToString();
-
-                    Debug.WriteLine("[Forum API]: Forum theme:" + title);
-                    Debug.WriteLine("[Forum API]: Forum place:" + place);
-                    Debug.WriteLine("[Forum API]: Forum schedules:" + schedules);
-                    Debug.WriteLine("[Forum API]: Forum date:" + date.ToString());
-                    Debug.WriteLine("[Forum API]: Forum hour:" + hour.ToString(@"hh\:mm\:ss"));
-
-                    Models.Forum forum = new Models.Forum {
-                        Title = title,
-                        Place = place,
-                        Schedules = schedules,
-                        Date = date,
-                        Hour = hour,
-                        RemoteId = remoteId
-                    };
-
-                    return forum;
+                    return ForumParser.GetForumParser(content, id);
                 }
+
                 return null;
             } catch (Exception ex) {
                 Debug.WriteLine("[Forum API exception]:" + ex.Message);
@@ -73,33 +48,7 @@ namespace ForumDEG.Helpers {
                 if (response.IsSuccessStatusCode) {
                     var content = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Forum API] - Forums: " + content);
-
-                    var objArray = JArray.Parse(content);
-
-                    foreach (JObject obj in objArray) {
-                        string title = obj["theme"].ToString();
-                        string place = obj["place"].ToString();
-                        string schedules = obj["schedules"].ToString();
-                        DateTime date = obj["date"].ToObject<DateTime>();
-                        int seconds = obj["hour"].ToObject<int>();
-                        TimeSpan hour = TimeSpan.FromSeconds(seconds);
-                        string remoteId = obj["id"].ToString();
-
-                        Debug.WriteLine("[Forum API]: Forum theme:" + title);
-                        Debug.WriteLine("[Forum API]: Forum place:" + place);
-                        Debug.WriteLine("[Forum API]: Forum schedules:" + schedules);
-                        Debug.WriteLine("[Forum API]: Forum date:" + date.ToString());
-                        Debug.WriteLine("[Forum API]: Forum hour:" + hour.ToString(@"hh\:mm\:ss"));
-
-                        forums.Add(new Models.Forum {
-                            Title = title,
-                            Place = place,
-                            Schedules = schedules,
-                            Date = date,
-                            Hour = hour,
-                            RemoteId = remoteId
-                        });
-                    }
+                    forums = ForumParser.GetForumsParser(content);
                 }
                 return forums;
             } catch (TaskCanceledException) {
@@ -113,21 +62,7 @@ namespace ForumDEG.Helpers {
         public async Task<bool> PostForumAsync(Models.Forum forum) {
             var uri = new Uri(string.Format(Constants.RestUrl, "forums"));
 
-            var theme = forum.Title;
-            var place = forum.Place;
-            var schedules = forum.Schedules;
-            var date = forum.Date;
-            var hour = forum.Hour.TotalSeconds;
-
-            var forumContents = new JObject();
-            forumContents.Add("theme", theme);
-            forumContents.Add("place", place);
-            forumContents.Add("schedules", schedules);
-            forumContents.Add("date", date);
-            forumContents.Add("hour", hour);
-
-            var body = new JObject();
-            body.Add("forum", forumContents);
+            var body = ForumParser.PostForumBuilder(forum);
 
             Debug.WriteLine("[Forum API] - preparing to build content");
 
@@ -156,35 +91,7 @@ namespace ForumDEG.Helpers {
             var uri = new Uri(string.Format(Constants.RestUrl, "forums/" + id));
             var oldForum = await GetForumAsync(id);
 
-            var forumData = new JObject();
-
-            if (oldForum.Title != newForum.Title && !String.IsNullOrEmpty(newForum.Title)) {
-                var theme = newForum.Title;
-                forumData.Add("theme", theme);
-            }
-
-            if (oldForum.Place != newForum.Place && !String.IsNullOrEmpty(newForum.Place)) {
-                var place = newForum.Place;
-                forumData.Add("place", place);
-            }
-
-            if (oldForum.Schedules != newForum.Schedules && !String.IsNullOrEmpty(newForum.Schedules)) {
-                var schedules = newForum.Schedules;
-                forumData.Add("schedules", schedules);
-            }
-
-            if (oldForum.Date != newForum.Date && newForum.Date != null) {
-                var date = newForum.Date;
-                forumData.Add("date", date);
-            }
-
-            if (oldForum.Hour != newForum.Hour && newForum.Hour != null) {
-                var hour = newForum.Hour.TotalSeconds;
-                forumData.Add("hour", hour);
-            }
-
-            var body = new JObject();
-            body.Add("forum", forumData);
+            var body = ForumParser.PutForumBuilder(oldForum, newForum);
 
             var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
             var contentString = await content.ReadAsStringAsync();

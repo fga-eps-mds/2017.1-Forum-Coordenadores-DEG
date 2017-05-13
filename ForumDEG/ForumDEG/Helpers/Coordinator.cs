@@ -24,28 +24,7 @@ namespace ForumDEG.Helpers {
 
                 if (response.IsSuccessStatusCode) {
                     var content = await response.Content.ReadAsStringAsync();
-
-                    var obj = JObject.Parse(content);
-
-                    string name = obj["name"].ToString();
-                    string email = obj["email"].ToString();
-                    string course = obj["course"].ToString();
-                    string password = obj["password"].ToString();
-
-                    Debug.WriteLine("[Coordinator API]: Coord name: " + name);
-                    Debug.WriteLine("[Coordinator API]: Coord email: " + email);
-                    Debug.WriteLine("[Coordinator API]: Coord course: " + course);
-                    Debug.WriteLine("[Coordinator API]: Coord password: " + password);
-
-                    Models.Coordinator coordinator = new Models.Coordinator {
-                        Name = name,
-                        Email = email,
-                        Course = course,
-                        Password = password,
-                        Registration = registration
-                    };
-
-                    return coordinator;
+                    return CoordinatorParser.GetCoordinatorParser(content, registration);
                 }
 
                 return null;
@@ -65,30 +44,7 @@ namespace ForumDEG.Helpers {
                 if (response.IsSuccessStatusCode) {
                     var content = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Coordinator API] - Coordinators: " + content);
-
-                    var objArray = JArray.Parse(content);
-
-                    foreach (JObject obj in objArray) {
-                        string name = obj["name"].ToString();
-                        string email = obj["email"].ToString();
-                        string course = obj["course"].ToString();
-                        string password = obj["password"].ToString();
-                        string registration = obj["registration"].ToString();
-
-                        Debug.WriteLine("[Coordinator API]: Coord name: " + name);
-                        Debug.WriteLine("[Coordinator API]: Coord email: " + email);
-                        Debug.WriteLine("[Coordinator API]: Coord course: " + course);
-                        Debug.WriteLine("[Coordinator API]: Coord password: " + password);
-                        Debug.WriteLine("[Coordinator API]: Coord registration: " + registration);
-
-                        coordinators.Add(new Models.Coordinator {
-                            Name = name,
-                            Email = email,
-                            Course = course,
-                            Password = password,
-                            Registration = registration
-                        });
-                    }
+                    coordinators = CoordinatorParser.GetCoordinatorsParser(content);
                 }
 
                 return coordinators;
@@ -101,21 +57,7 @@ namespace ForumDEG.Helpers {
         public async Task<bool> PostCoordinatorAsync(Models.Coordinator coordinator) {
             var uri = new Uri(string.Format(Constants.RestUrl, "coordinators"));
 
-            var name = coordinator.Name;
-            var email = coordinator.Email;
-            var password = coordinator.Password;
-            var registration = coordinator.Registration;
-            var course = coordinator.Course;
-
-            var coordinatorData = new JObject();
-            coordinatorData.Add("name", name);
-            coordinatorData.Add("email", email);
-            coordinatorData.Add("password", password);
-            coordinatorData.Add("registration", registration);
-            coordinatorData.Add("course", course);
-
-            var body = new JObject();
-            body.Add("coordinator", coordinatorData);
+            var body = CoordinatorParser.PostCoordinatorBuilder(coordinator);
 
             var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
             var contentString = await content.ReadAsStringAsync();
@@ -141,35 +83,7 @@ namespace ForumDEG.Helpers {
             var uri = new Uri(string.Format(Constants.RestUrl, "coordinators/" + registration));
             var oldCoordinator = await GetCoordinatorAsync(registration);
 
-            var coordinatorData = new JObject();
-
-            if (oldCoordinator.Name != coordinator.Name && !String.IsNullOrEmpty(coordinator.Name)) {
-                var name = coordinator.Name;
-                coordinatorData.Add("name", name);
-            }
-
-            if (oldCoordinator.Email != coordinator.Email && !String.IsNullOrEmpty(coordinator.Email)) {
-                var email = coordinator.Email;
-                coordinatorData.Add("email", email);
-            }
-
-            if (oldCoordinator.Password != coordinator.Password && !String.IsNullOrEmpty(coordinator.Password)) {
-                var password = coordinator.Password;
-                coordinatorData.Add("password", password);
-            }
-
-            if (oldCoordinator.Registration != coordinator.Registration && !String.IsNullOrEmpty(coordinator.Registration)) {
-                var newRegistration = coordinator.Registration; 
-                coordinatorData.Add("registration", newRegistration);
-            }
-
-            if (oldCoordinator.Course != coordinator.Course && !String.IsNullOrEmpty(coordinator.Course)) {
-                var course = coordinator.Course;
-                coordinatorData.Add("course", course);
-            }
-
-            var body = new JObject();
-            body.Add("coordinator", coordinatorData);
+            var body = CoordinatorParser.PutCoordinatorBuilder(oldCoordinator, coordinator);
 
             var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
             var contentString = await content.ReadAsStringAsync();

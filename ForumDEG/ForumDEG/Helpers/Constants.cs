@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ForumDEG.Helpers {
-    class Constants {
+    public class Constants {
         public static string RestUrl = "https://forumdeg.herokuapp.com/api/{0}";
 
         /* Used for testing purposes only */
