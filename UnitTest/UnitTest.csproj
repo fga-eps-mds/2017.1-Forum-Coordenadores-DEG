@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ForumsViewModelTests.cs" />
+    <Compile Include="LoginViewModelTests.cs" />
     <Compile Include="NewForumViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRegistrationViewModelTests.cs" />
