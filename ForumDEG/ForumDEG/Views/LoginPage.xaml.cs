@@ -16,8 +16,11 @@ namespace ForumDEG.Views {
         }
 
         public void LoginClicked() {
-            if(_viewModel.ValidateLogin())
+            if (_viewModel.ValidateLogin()) {
+                Navigation.InsertPageBefore(new AppMasterPage(), this);
                 Navigation.PopModalAsync();
+            }
+                
         }
     }
 }
