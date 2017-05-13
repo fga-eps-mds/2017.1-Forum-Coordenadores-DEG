@@ -25,7 +25,7 @@ namespace ForumDEG.ViewModels {
         public ICommand SelectForumCommand { get; private set; }
 
         private static ForumsViewModel _instance = null;
-        private ForumsViewModel(IPageService pageService) {
+        public ForumsViewModel(IPageService pageService) {
             _pageService = pageService;
             _forumService = new Helpers.Forum();
             SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
