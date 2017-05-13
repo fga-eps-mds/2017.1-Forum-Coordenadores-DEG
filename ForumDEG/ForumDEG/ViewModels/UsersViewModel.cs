@@ -51,7 +51,7 @@ namespace ForumDEG.ViewModels {
             return _instance;
         }
 
-        private async Task SelectAdministrator(UserDetailViewModel administrator) {
+        public async Task SelectAdministrator(UserDetailViewModel administrator) {
             if (administrator == null)
                 return;
             SelectedAdministrator = administrator;
@@ -80,7 +80,7 @@ namespace ForumDEG.ViewModels {
             coordinatorslisttask.Wait();
 
             List<Coordinator> coordinatorslist = coordinatorslisttask.Result;
-
+            
             try {
                 var administratorsList = await _administratorService.GetAdministratorsAsync();
                 var coordinatorsList = await _coordinatorService.GetCoordinatorsAsync();
@@ -92,7 +92,7 @@ namespace ForumDEG.ViewModels {
                         Password = coordinator.Password,
                         Email = coordinator.Email,
                         Registration = coordinator.Registration,
-                        Course = coordinator.Course
+                        Course = coordinator.Course,
                         IsAdministrator = false,
                         IsCoordinator = true
                     });
@@ -104,8 +104,8 @@ namespace ForumDEG.ViewModels {
                         Id = administrator.Id,
                         Password = administrator.Password,
                         Email = administrator.Email,
-                        Registration = administrator.Registration
-                         IsAdministrator = true,
+                        Registration = administrator.Registration,
+                        IsAdministrator = true,
                         IsCoordinator = false
                     });
                 }
@@ -115,6 +115,7 @@ namespace ForumDEG.ViewModels {
                                           "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
                                           "Ok", "Cancel");
                 await _pageService.PopAsync();
+
             }
         }
     }

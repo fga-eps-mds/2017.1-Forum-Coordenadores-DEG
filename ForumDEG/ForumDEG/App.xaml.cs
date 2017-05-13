@@ -58,6 +58,7 @@ namespace ForumDEG {
             coordinator.Password = "123";
             coordinator.Registration = "456";
             coordinator.Email = "Maria@oi.com";
+            coordinator.Course = "Teoria crítica e história da arte";
             coordinator.CreatedOn = DateTime.Now;
 
             await CoordinatorDatabase.getCoordinatorDB.Save(coordinator);

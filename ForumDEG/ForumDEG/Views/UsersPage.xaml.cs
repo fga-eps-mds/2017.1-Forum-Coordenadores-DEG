@@ -18,7 +18,8 @@ namespace ForumDEG.Views {
                 ViewModel.SelectedCoordinator = null;
         }
 
-        private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+        private async void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            await ViewModel.SelectAdministrator(e.SelectedItem as UserDetailViewModel);
         }
 
         private UsersViewModel ViewModel {

@@ -5,52 +5,47 @@
              Title="Ver Usuário"
              x:Name="SeeUserPage">
     <StackLayout>
+
         <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
 
-            <ScrollView>
-
-                <StackLayout  Padding="5" BackgroundColor="White">
-
-                    <StackLayout BackgroundColor="White" Padding="5,5,0,0">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium"
+            <StackLayout BackgroundColor="White" Padding="5,5,0,0">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium"
                                    HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                                    BackgroundColor="White" />
-                            <Label Text="Editar Usuário" TextColor="#3366BB" FontSize="Small"
+                    <Label Text="Editar Usuário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White" IsVisible="{Binding IsAdministrator}">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding EditComand}"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
-                        <Label Text="{Binding Date, StringFormat='Data: {0:dd/MM/yyyy}'}" TextColor="Gray"
-                               HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                   BackgroundColor="White" IsVisible="{Binding IsLoggedUserAdministrator}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditComand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
 
-                        <Label Text="{Binding Registration, StringFormat='Matricula: {0}'}" TextColor="Black" FontSize="Medium"
-                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
-                                   BackgroundColor="White" />
-
-                        <Label Text="{Binding Course, StringFormat='Curso: {0}'}" TextColor="Black" FontSize="Medium"
+                <Label Text="{Binding Course}" TextColor="Gray" FontSize="Small"
                                    HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                                    BackgroundColor="White" IsVisible="{Binding IsCoordinator}"/>
 
-                    </StackLayout>
+                <Label Text="{Binding Registration}" TextColor="Gray" FontSize="Small"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" />
 
-                </StackLayout>
+                <Label Text="{Binding ForumsPresent, StringFormat='Compareceu a {0} fóruns'}" TextColor="Gray" FontSize="Small"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" />
 
-            </ScrollView>
+
+
+            </StackLayout>
 
         </Frame>
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20">
-            <Button IsEnabled="{Binding IsPast}" Text="Confirmar Presença" Command="{Binding ConfirmCommand}"
-                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"
-                    x:Name="ConfirmPresenceButton"/>
-            <Button IsEnabled="{Binding IsPast}" Text="Não Comparecerei" Command="{Binding DisconfirmCommand}"
-                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small"
-                    x:Name="DenyPresenceButton"/>
-        </StackLayout>
+        <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
+            <StackLayout>
+                <Label FontSize="Large" HorizontalOptions="Center" Text="Formulários submetidos"></Label>
+            </StackLayout>
+        </Frame>
+
 
     </StackLayout>
 
