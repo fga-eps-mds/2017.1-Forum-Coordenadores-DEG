@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ForumDEG.Views.TestViewUsers"
-             x:Name="TestViewUsersPage">
+             x:Class="ForumDEG.Views.UsersPage"
+             x:Name="UsersPage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Administradores: "></Label>
@@ -17,7 +17,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell >
+                        <ViewCell>
 
                             <StackLayout Orientation="Horizontal" Padding="5">
                                 <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >

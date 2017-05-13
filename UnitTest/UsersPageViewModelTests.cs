@@ -13,17 +13,17 @@ namespace UnitTest {
         [TestFixture()]
         class ForumsViewModelTests {
             private Mock<IPageService> _pageService;
-            private UsersPageViewModel _viewModel;
+            private UsersViewModel _viewModel;
 
             [SetUp]
             public void Setup() {
                 _pageService = new Mock<IPageService>();
-               _viewModel = UsersPageViewModel.GetInstance();
+               _viewModel = UsersViewModel.GetInstance();
             }
 
             [Test()]
             public void SelectAdministrator_WhenCalled_AdministratorShouldBeSelected() {
-                var administrator = new AdministratorDetailPageViewModel();
+                var administrator = new UserDetailViewModel();
                 _viewModel.SelectAdministratorCommand.Execute(administrator);
 
                 Assert.AreSame(administrator, _viewModel.SelectedAdministrator);
@@ -31,7 +31,7 @@ namespace UnitTest {
 
             [Test()]
             public void SelectCoordinator_WhenCalled_CoordinatorShouldBeSelected() {
-                var coordinator = new CoordinatorDetailPageViewModel();
+                var coordinator = new UserDetailViewModel();
                 _viewModel.SelectCoordinatorCommand.Execute(coordinator);
 
                 Assert.AreSame(coordinator, _viewModel.SelectedCoordinator);

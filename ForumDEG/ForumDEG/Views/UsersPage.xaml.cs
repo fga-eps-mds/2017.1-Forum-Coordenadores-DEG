@@ -1,23 +1,13 @@
-﻿using ForumDEG.Utils;
-using ForumDEG.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ForumDEG.ViewModels;
 
-namespace ForumDEG.Views
-{
+namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TestViewUsers : ContentPage
-    {
-        public TestViewUsers()
-        {
-            BindingContext = UsersPageViewModel.GetInstance();
-            ViewModel.UpdateUsersLists();
+    public partial class UsersPage : ContentPage {
+        public UsersPage() {
+            BindingContext = UsersViewModel.GetInstance();
+            ViewModel.UpdateUsersList();
             InitializeComponent();
         }
 
@@ -31,8 +21,8 @@ namespace ForumDEG.Views
         private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
         }
 
-        private UsersPageViewModel ViewModel {
-            get { return (BindingContext as UsersPageViewModel); }
+        private UsersViewModel ViewModel {
+            get { return (BindingContext as UsersViewModel); }
             set { BindingContext = value; }
         }
     }
