@@ -13,7 +13,6 @@ namespace ForumDEG.ViewModels {
     public class ForumDetailViewModel : PageService, INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly IPageService _pageService;
-        private string _currentUser = App.Current.Properties["registration"].ToString();
 
         private string _buttonText;
         private Color _buttonColor;
@@ -71,9 +70,10 @@ namespace ForumDEG.ViewModels {
         public ICommand PresenceCommand { get; private set; }
         public ICommand EditComand { get; private set; }
         public ICommand DeleteCommand { get; private set;}
-        
+
         public ForumDetailViewModel() {
             coordinatorService = new Helpers.Coordinator();
+        }
 
         public bool IsCoordinator {
             get {
@@ -82,8 +82,8 @@ namespace ForumDEG.ViewModels {
             set {
                 if (_isCoordinator != value) {
                     _isCoordinator = value;
-                    OnPropertyChanged("IsCoordinator");
-                    OnPropertyChanged("IsAdiministrator");
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsCoordinator"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsAdministrator"));
                 }
             }
         }
@@ -95,16 +95,14 @@ namespace ForumDEG.ViewModels {
             set {
                 if (_isCoordinator == value) {
                     _isCoordinator = !value;
-                    OnPropertyChanged("IsCoordinator");
-                    OnPropertyChanged("IsAdiministrator");
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsCoordinator"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsAdministrator"));
                 }
             }
         }
 
         public ForumDetailViewModel(IPageService pageService) {
             _pageService = pageService;
-            ConfirmCommand = new Command(ConfirmPresence);
-            DisconfirmCommand = new Command(DisconfirmPresence);
             EditComand = new Command(EditForum);
             PresenceCommand = new Command(HandlePresence);
             DeleteCommand = new Command(DeleteForum);
@@ -114,7 +112,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void GetConfirmation() {
-            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(_currentUser, RemoteId);
+            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(App.Current.Properties["registration"].ToString(), RemoteId);
             HandleButtonUI();
         }
 
@@ -144,9 +142,9 @@ namespace ForumDEG.ViewModels {
         public void HandlePresence() {
             Debug.WriteLine("[ForumDetailVM]: Inside Presence Handler");
             if (!_isConfirmed) {
-                coordinatorService.PostConfirmationStatusAsync(_currentUser, RemoteId);
+                coordinatorService.PostConfirmationStatusAsync(App.Current.Properties["registration"].ToString(), RemoteId);
             } else {
-                coordinatorService.DeleteConfirmationAsync(_currentUser, RemoteId);
+                coordinatorService.DeleteConfirmationAsync(App.Current.Properties["registration"].ToString(), RemoteId);
             }
 
             TogglePresence();
@@ -159,7 +157,7 @@ namespace ForumDEG.ViewModels {
 
         private async void EditForum() {
             await PushAsync(new ForumEditPage(RemoteId)); 
-            await _pageService.PushAsync(new ForumEditPage(Registration));
+            await _pageService.PushAsync(new ForumEditPage(App.Current.Properties["registration"].ToString()));
         }
 
         private async void DeleteForum() {
