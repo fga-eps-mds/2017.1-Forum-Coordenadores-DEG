@@ -5,6 +5,7 @@ using ForumDEG.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace ForumDEG.ViewModels {
         }
 
         private readonly IPageService _pageService;
+        private readonly Helpers.Coordinator _coordinatorService;
+        private readonly Helpers.Administrator _administratorService;
 
         public ICommand SelectAdministratorCommand { get; private set; }
         public ICommand SelectCoordinatorCommand { get; private set; }
@@ -37,6 +40,9 @@ namespace ForumDEG.ViewModels {
 
         private UsersPageViewModel(IPageService pageService) {
             _pageService = pageService;
+            _coordinatorService = new Helpers.Coordinator();
+            _administratorService = new Helpers.Administrator();
+
             SelectAdministratorCommand = new Command<AdministratorDetailPageViewModel>(async vm => await SelectAdministrator(vm));
             SelectCoordinatorCommand = new Command<CoordinatorDetailPageViewModel>(async vm => await SelectCoordinator(vm));
         }
@@ -60,39 +66,40 @@ namespace ForumDEG.ViewModels {
             await _pageService.PushAsync(new ForumDetailPage());
         }
 
-        public void UpdateUsersLists() {
+        public async void UpdateUsersLists() {
             Administrators = new ObservableCollection<AdministratorDetailPageViewModel>();
             Coordinators = new ObservableCollection<CoordinatorDetailPageViewModel>();
 
-            Task<List<Administrator>> administratorslisttask = AdministratorDatabase.getAdmDB.GetAll();
-            administratorslisttask.Wait();
+            try {
+                var administratorsList = await _administratorService.GetAdministratorsAsync();
+                var coordinatorsList = await _coordinatorService.GetCoordinatorsAsync();
 
-            List<Administrator> administratorslist = administratorslisttask.Result;
+                foreach (Coordinator coordinator in coordinatorsList) {
+                    Coordinators.Add(new CoordinatorDetailPageViewModel {
+                        Name = coordinator.Name,
+                        Id = coordinator.Id,
+                        Password = coordinator.Password,
+                        Email = coordinator.Email,
+                        Registration = coordinator.Registration,
+                        Course = coordinator.Course
+                    });
+                }
 
-            Task<List<Coordinator>> coordinatorslisttask = CoordinatorDatabase.getCoordinatorDB.GetAll();
-            coordinatorslisttask.Wait();
-
-            List<Coordinator> coordinatorslist = coordinatorslisttask.Result;
-
-            foreach (Coordinator coordinator in coordinatorslist) {
-                Coordinators.Add(new CoordinatorDetailPageViewModel {
-                    Name = coordinator.Name,
-                    Id = coordinator.Id,
-                    Password = coordinator.Password,
-                    Email = coordinator.Email,
-                    Registration = coordinator.Registration,
-                    Course = coordinator.Course
-                });
-            }
-
-            foreach (Administrator administrator in administratorslist) {
-                Administrators.Add(new AdministratorDetailPageViewModel {
-                    Name = administrator.Name,
-                    Id = administrator.Id,
-                    Password = administrator.Password,
-                    Email = administrator.Email,
-                    Registration = administrator.Registration
-                });
+                foreach (Administrator administrator in administratorsList) {
+                    Administrators.Add(new AdministratorDetailPageViewModel {
+                        Name = administrator.Name,
+                        Id = administrator.Id,
+                        Password = administrator.Password,
+                        Email = administrator.Email,
+                        Registration = administrator.Registration
+                    });
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Update users list] " + ex.Message);
+                await _pageService.DisplayAlert("Falha ao carregar usuários",
+                                          "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
+                                          "Ok", "Cancel");
+                await _pageService.PopAsync();
             }
         }
     }

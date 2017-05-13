@@ -15,6 +15,7 @@ namespace ForumDEG.ViewModels {
         private readonly IUserDialogs _dialog;
         private readonly IPageService _pageService;
         private readonly IDatabase<Forum> _forumDB;
+        private readonly Helpers.Forum _forumService;
 
         public Forum Forum { get; private set; } = new Models.Forum();
         public ICommand CancelCommand { get; private set; }
@@ -23,6 +24,7 @@ namespace ForumDEG.ViewModels {
             _dialog = dialog;
             _pageService = pageService;
             _forumDB = forumDB;
+            _forumService = new Helpers.Forum();
 
             CancelCommand = new Command(Cancel);
         }
@@ -35,6 +37,10 @@ namespace ForumDEG.ViewModels {
 
         public async Task<bool> CreateForum() {
             return (await _forumDB.Save(Forum) == 1);
+        }
+
+        public async Task<bool> CreateForumRemote() {
+            return await _forumService.PostForumAsync(Forum);
         }
 
         public async void AlertSuccess() {

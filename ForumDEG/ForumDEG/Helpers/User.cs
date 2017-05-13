@@ -22,8 +22,7 @@ namespace ForumDEG.Helpers {
         }
 
         public async Task<string> AuthenticateLogin(string _registration, string _password) {
-            //var uri = new Uri(string.Format(Constants.RestUrl, "users/authenticate"));
-            var uri = new Uri("https://forumdeg.herokuapp.com/api/users/authenticate");
+            var uri = new Uri(string.Format(Constants.RestUrl, "users/authenticate"));
 
             
             var registration = _registration;
@@ -35,7 +34,6 @@ namespace ForumDEG.Helpers {
             
 
             var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
-            //var contentString = await content.ReadAsStringAsync();
             Debug.WriteLine("[User API]: Antes do Try");
 
             try {

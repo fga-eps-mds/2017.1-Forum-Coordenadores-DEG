@@ -12,7 +12,7 @@ namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumEditPage : ContentPage {
         private ForumEditViewModel _viewModel = new ForumEditViewModel(new PageService());
-        public ForumEditPage(int ForumId) {
+        public ForumEditPage(string ForumId) {
             InitializeComponent();
 
             BindingContext = _viewModel;
