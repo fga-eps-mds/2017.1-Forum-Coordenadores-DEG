@@ -9,15 +9,21 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using ForumDEG.Interfaces;
 using ForumDEG.Utils;
+using System.Diagnostics;
 
 namespace ForumDEG.ViewModels {
     public class UserRegistrationViewModel : BaseViewModel {
         private readonly IPageService _pageService;
+        private readonly Helpers.Coordinator _coordinatorService;
+        private readonly Helpers.Administrator _administratorService;
 
         public ICommand RegisterNewUserCommand { get; private set; }
 
         public UserRegistrationViewModel(IPageService PageService) {
             _pageService = PageService;
+            _coordinatorService = new Helpers.Coordinator();
+            _administratorService = new Helpers.Administrator();
+
             RegisterNewUserCommand = new Command(async () => await RegisterNewUser());
         }
 
@@ -168,8 +174,16 @@ namespace ForumDEG.ViewModels {
                 Password = PasswordIn,
                 CreatedOn = DateTime.Now
             };
-            await AdministratorDatabase.getAdmDB.Save(Admin);
-            await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo adminstrador com sucesso! ", "ok", "cancel");
+            if (await _administratorService.PostAdministratorAsync(Admin)) {
+                await _pageService.DisplayAlert("Registrar novo usuário", 
+                                                "Você salvou um novo adminstrador com sucesso! ", 
+                                                "ok", "cancel");
+            } else {
+                await _pageService.DisplayAlert("Falha na conexão com o servidor",
+                                                "Não foi possível cadastrar o administrador. Por favor tente novamente.",
+                                                "ok", "cancel");
+                Debug.WriteLine("[URVM] Couldn't save.");
+            }
         }
 
         public async void RegisterNewCoordinator(){
@@ -181,8 +195,16 @@ namespace ForumDEG.ViewModels {
                 CreatedOn = DateTime.Now,
                 Course = CourseIn
             };
-            await CoordinatorDatabase.getCoordinatorDB.Save(Coord);
-            await _pageService.DisplayAlert("Registrar novo usuário", "Você salvou um novo Coordenador com sucesso!", "ok", "cancel");
+            if (await _coordinatorService.PostCoordinatorAsync(Coord)) {
+                await _pageService.DisplayAlert("Registrar novo usuário", 
+                                                "Você salvou um novo Coordenador com sucesso!", 
+                                                "ok", "cancel");
+            } else {
+                await _pageService.DisplayAlert("Falha na conexão com o servidor",
+                                                "Não foi possível cadastrar o coordenador. Por favor tente novamente.",
+                                                "ok", "cancel");
+                Debug.WriteLine("[URVM] Couldn't save.");
+            }
         }
 
         public void CleanFields(){

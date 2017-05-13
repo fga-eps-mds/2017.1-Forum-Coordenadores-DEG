@@ -7,6 +7,7 @@ using ForumDEG.Views;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace ForumDEG.ViewModels {
     public class ForumsViewModel : BaseViewModel {
@@ -19,12 +20,14 @@ namespace ForumDEG.ViewModels {
         }
 
         private readonly IPageService _pageService;
+        private readonly Helpers.Forum _forumService;
 
         public ICommand SelectForumCommand { get; private set; }
 
         private static ForumsViewModel _instance = null;
         private ForumsViewModel(IPageService pageService) {
             _pageService = pageService;
+            _forumService = new Helpers.Forum();
             SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
         }
 
@@ -40,20 +43,28 @@ namespace ForumDEG.ViewModels {
             await _pageService.PushAsync(new ForumDetailPage());
         }
 
-        // method for simulating local database
         public async void UpdateForumsList() {
             Forums = new ObservableCollection<ForumDetailViewModel>();
-            var forumsList = await ForumDatabase.getForumDB.GetAll();
+            try {
+                var forumsList = await _forumService.GetForumsAsync();
 
-            foreach (Forum forum in forumsList) {
-                Forums.Add(new ForumDetailViewModel {
-                    Title = forum.Title,
-                    Place = forum.Place,
-                    Schedules =  forum.Schedules,
-                    Date = forum.Date,
-                    Hour = forum.Hour,
-                    Registration = forum.Id
-                });
+                foreach (Forum forum in forumsList) {
+                    Forums.Add(new ForumDetailViewModel {
+                        Title = forum.Title,
+                        Place = forum.Place,
+                        Schedules = forum.Schedules,
+                        Date = forum.Date,
+                        Hour = forum.Hour,
+                        Registration = forum.Id, // local id
+                        RemoteId = forum.RemoteId // remote id, ideally should only use this one
+                    });
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Update forums list] " + ex.Message);
+                await _pageService.DisplayAlert("Falha ao carregar fóruns",
+                                          "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
+                                          "Ok", "Cancel");
+                await _pageService.PopAsync();
             }
         }
     }
