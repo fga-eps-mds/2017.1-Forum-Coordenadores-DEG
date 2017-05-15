@@ -23,7 +23,7 @@ namespace UnitTest {
 
             [Test()]
             public void SelectAdministrator_WhenCalled_AdministratorShouldBeSelected() {
-                var administrator = new UserDetailViewModel();
+                var administrator = new UserDetailViewModel(_pageService.Object);
                 _viewModel.SelectAdministratorCommand.Execute(administrator);
 
                 Assert.AreSame(administrator, _viewModel.SelectedAdministrator);
@@ -31,7 +31,7 @@ namespace UnitTest {
 
             [Test()]
             public void SelectCoordinator_WhenCalled_CoordinatorShouldBeSelected() {
-                var coordinator = new UserDetailViewModel();
+                var coordinator = new UserDetailViewModel(_pageService.Object);
                 _viewModel.SelectCoordinatorCommand.Execute(coordinator);
 
                 Assert.AreSame(coordinator, _viewModel.SelectedCoordinator);

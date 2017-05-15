@@ -2,6 +2,7 @@
 using ForumDEG.Models;
 using ForumDEG.Utils;
 using ForumDEG.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -66,7 +67,7 @@ namespace ForumDEG.ViewModels {
         }
 
 
-        public async void UpdateUsersLists() {
+        public async void UpdateUsersList() {
 
             Administrators = new ObservableCollection<UserDetailViewModel>();
             Coordinators = new ObservableCollection<UserDetailViewModel>();
@@ -86,10 +87,9 @@ namespace ForumDEG.ViewModels {
                 var coordinatorsList = await _coordinatorService.GetCoordinatorsAsync();
 
                 foreach (Coordinator coordinator in coordinatorsList) {
-                    Coordinators.Add(new CoordinatorDetailPageViewModel {
+                    Coordinators.Add(new UserDetailViewModel (_pageService) {
                         Name = coordinator.Name,
                         Id = coordinator.Id,
-                        Password = coordinator.Password,
                         Email = coordinator.Email,
                         Registration = coordinator.Registration,
                         Course = coordinator.Course,
@@ -99,10 +99,9 @@ namespace ForumDEG.ViewModels {
                 }
 
                 foreach (Administrator administrator in administratorsList) {
-                    Administrators.Add(new AdministratorDetailPageViewModel {
+                    Administrators.Add(new UserDetailViewModel (_pageService){
                         Name = administrator.Name,
                         Id = administrator.Id,
-                        Password = administrator.Password,
                         Email = administrator.Email,
                         Registration = administrator.Registration,
                         IsAdministrator = true,

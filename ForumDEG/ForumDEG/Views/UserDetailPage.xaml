@@ -35,11 +35,15 @@
                                    HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                                    BackgroundColor="White" />
 
+                <Label Text="{Binding Email}" TextColor="Gray" FontSize="Small"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" />
+
                 <StackLayout Orientation="Horizontal">
 
                     <Label Text="{Binding ForumsPresent, StringFormat='Compareceu a {0} fóruns'}" TextColor="Gray" FontSize="Small"
                                    HorizontalOptions="Start" VerticalOptions="StartAndExpand"
-                                   BackgroundColor="White" />
+                                   BackgroundColor="White" IsVisible="{Binding IsCoordinator}"/>
 
                     <Label Text="Remover Usuário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
@@ -56,7 +60,7 @@
 
         </Frame>
 
-        <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
+        <Frame OutlineColor="Black" HasShadow="True" IsVisible="{Binding IsCoordinator}" Margin="20" BackgroundColor="White" >
             <StackLayout>
                 <Label FontSize="Large" HorizontalOptions="Center" Text="Formulários submetidos" TextColor="Black"></Label>
                 <ListView></ListView>
