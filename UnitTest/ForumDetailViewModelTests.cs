@@ -9,9 +9,11 @@ namespace UnitTest {
         private ForumDetailViewModel _viewModel;
         private Mock<IPageService> _pageService;
 
+
         [SetUp]
         public void SetUp() {
-            _viewModel = new ForumDetailViewModel();
+            _pageService = new Mock<IPageService>();
+            _viewModel = new ForumDetailViewModel(_pageService.Object);
         }
 
         [Test()]

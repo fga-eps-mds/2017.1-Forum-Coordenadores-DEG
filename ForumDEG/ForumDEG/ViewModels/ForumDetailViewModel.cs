@@ -167,7 +167,7 @@ namespace ForumDEG.ViewModels {
                 if (await _forumService.DeleteForumAsync(RemoteId) ){
                     await _pageService.PopAsync();
                 } else {
-                    await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", null);
+                    await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", "Cancelar");
                 }
             }
         }        
