@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ForumDEG.ViewModels;
+using System.Diagnostics;
 
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -13,15 +14,23 @@ namespace ForumDEG.Views {
         }
 
         override protected void OnAppearing() {
-            if (ViewModel.SelectedForum != null)
-                ViewModel.SelectedForum = null;
+            //if (ViewModel.SelectedForum != null)
+           //     ViewModel.SelectedForum = null;
         }
 
         private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
-            ViewModel.SelectForumCommand.Execute(e.SelectedItem);
-        }
+            Debug.WriteLine("Clicked item");
+          //  ViewModel.SelectForumCommand.Execute(e.SelectedItem);
 
-        private ForumsViewModel ViewModel {
+            if (e.SelectedItem != null && ViewModel.SelectForumCommand != null && ViewModel.SelectForumCommand.CanExecute(e)) {
+                ViewModel.SelectForumCommand.Execute(e.SelectedItem);
+                ViewModel.SelectedForum = null;
+            }
+
+        }
+       
+
+    private ForumsViewModel ViewModel {
             get { return (BindingContext as ForumsViewModel); }
             set { BindingContext = value; }
         }

@@ -13,7 +13,7 @@
                   HasUnevenRows="True"
                   RowHeight="60"
                   IsPullToRefreshEnabled="True"
-                  SelectedItem="{Binding SelectedForum}"
+                  SelectedItem="{Binding SelectedForum, Mode=TwoWay}"
                   ItemSelected="ItemSelected"
                   SeparatorColor="Gray">
 

@@ -18,7 +18,7 @@ namespace UnitTest {
 
         [Test()]
         public void SelectForum_WhenCalled_ForumShouldBeSelected() {
-            var forum = new ForumDetailViewModel();
+            var forum = new ForumDetailViewModel(_pageService.Object);
             _viewModel.SelectForumCommand.Execute(forum);
 
             Assert.AreSame(forum, _viewModel.SelectedForum);

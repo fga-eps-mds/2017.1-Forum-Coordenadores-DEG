@@ -120,12 +120,11 @@ namespace ForumDEG.ViewModels {
         }
 
         public async Task EditForum() {
-            //await ForumDatabase.getForumDB.Save(Forum);
-            // Will use API after put route has been implemented.
-
-            await _pageService.DisplayAlert("Fórum Editado"
-                , "O fórum foi editado com sucesso. Os coordenadores serão notificados em breve."
-                , "OK", "cancel");
+            if (await _forumService.PutForumAsync(Forum.RemoteId, Forum) ){
+                await _pageService.DisplayAlert("Editar Fórum", "O fórum foi editado com sucesso!", "OK", "Cancelar");
+            } else {
+                await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser editado. Tente novamente!", "OK", "Cancelar");
+            }
         }
 
         public async void EditionFailed() {

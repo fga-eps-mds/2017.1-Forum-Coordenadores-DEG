@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using ForumDEG.ViewModels;
-using ForumDEG.Utils;
 using ForumDEG.Models;
 using Moq;
 using ForumDEG.Interfaces;

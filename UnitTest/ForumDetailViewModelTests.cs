@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ForumDEG.ViewModels;
+﻿using ForumDEG.ViewModels;
 using NUnit.Framework;
 using Xamarin.Forms;
+using Moq;
+using ForumDEG.Interfaces;
 
 namespace UnitTest {
     class ForumDetailViewModelTests {
         private ForumDetailViewModel _viewModel;
+        private Mock<IPageService> _pageService;
+
+
         [SetUp]
         public void SetUp() {
-            _viewModel = new ForumDetailViewModel();
+            _pageService = new Mock<IPageService>();
+            _viewModel = new ForumDetailViewModel(_pageService.Object);
         }
 
         [Test()]
