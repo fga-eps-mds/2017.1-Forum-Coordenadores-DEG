@@ -17,6 +17,7 @@ namespace ForumDEG.Views {
             BindingContext = viewModel;
             InitializeComponent();
         }
+
     }
 }
 
