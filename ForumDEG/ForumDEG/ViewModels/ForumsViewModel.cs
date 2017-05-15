@@ -49,7 +49,7 @@ namespace ForumDEG.ViewModels {
                 var forumsList = await _forumService.GetForumsAsync();
 
                 foreach (Forum forum in forumsList) {
-                    Forums.Add(new ForumDetailViewModel {
+                    Forums.Add(new ForumDetailViewModel (new PageService()) {
                         Title = forum.Title,
                         Place = forum.Place,
                         Schedules = forum.Schedules,

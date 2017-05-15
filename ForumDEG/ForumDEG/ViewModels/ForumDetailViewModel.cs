@@ -13,6 +13,7 @@ namespace ForumDEG.ViewModels {
     public class ForumDetailViewModel : PageService, INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly IPageService _pageService;
+        private readonly Helpers.Forum _forumService;
 
         private string _buttonText;
         private Color _buttonColor;
@@ -68,12 +69,9 @@ namespace ForumDEG.ViewModels {
         private bool _isCoordinator;
         
         public ICommand PresenceCommand { get; private set; }
-        public ICommand EditComand { get; private set; }
+        public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set;}
 
-        public ForumDetailViewModel() {
-            coordinatorService = new Helpers.Coordinator();
-        }
 
         public bool IsCoordinator {
             get {
@@ -103,10 +101,12 @@ namespace ForumDEG.ViewModels {
 
         public ForumDetailViewModel(IPageService pageService) {
             _pageService = pageService;
-            EditComand = new Command(EditForum);
+            EditCommand = new Command(EditForum);
             PresenceCommand = new Command(HandlePresence);
             DeleteCommand = new Command(DeleteForum);
+            coordinatorService = new Helpers.Coordinator();
             IsPast = HasPassed();
+            _forumService = new Helpers.Forum();
 
             //GetConfirmation();
         }
@@ -156,19 +156,19 @@ namespace ForumDEG.ViewModels {
         }
 
         private async void EditForum() {
-            await PushAsync(new ForumEditPage(RemoteId)); 
-            await _pageService.PushAsync(new ForumEditPage(App.Current.Properties["registration"].ToString()));
+            Debug.WriteLine(" EDITAR FORUM ");
+            await PushAsync(new ForumEditPage(RemoteId));
         }
 
         private async void DeleteForum() {
-           var _toDeleteForum = await ForumDatabase.getForumDB.Get(Registration);
            var answer = await _pageService.DisplayAlert("Deletar Fórum", "Tem certeza que deseja deletar o fórum existente? Esta ação não poderá ser desfeita.", "Sim", "Não");
            Debug.WriteLine("Answer: " + answer);
-            if(answer == true){
-                await ForumDatabase.getForumDB.Delete(_toDeleteForum);
-                await _pageService.PopAsync();
-            } else {
-                //do nothing
+            if (answer == true) {
+                if (await _forumService.DeleteForumAsync(RemoteId) ){
+                    await _pageService.PopAsync();
+                } else {
+                    await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", null);
+                }
             }
         }        
     }
