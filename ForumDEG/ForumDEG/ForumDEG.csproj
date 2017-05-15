@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\ForumDetailViewModel.cs" />
     <Compile Include="ViewModels\ForumEditViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\NewFormViewModel.cs" />
     <Compile Include="ViewModels\NewForumViewModel.cs" />
     <Compile Include="ViewModels\PageService.cs" />
     <Compile Include="ViewModels\UserDetailViewModel.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Views\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\NewFormPage.xaml.cs">
+      <DependentUpon>NewFormPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ForumEditPage.xaml.cs">
       <DependentUpon>ForumEditPage.xaml</DependentUpon>
@@ -224,6 +228,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Images\login_background.png" />
     <EmbeddedResource Include="Views\UsersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Forms\NewFormPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
