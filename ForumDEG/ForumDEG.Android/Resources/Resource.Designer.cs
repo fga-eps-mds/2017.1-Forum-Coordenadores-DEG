@@ -2277,6 +2277,9 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f020123
 			public const int avd_show_password_3 = 2130837795;
+
+			// aapt resource value: 0x7f020054
+			public const int avd_show_password = 2130837588;
 			
 			// aapt resource value: 0x7f020055
 			public const int changepassword_icon = 2130837589;

@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using ForumDEG.Interfaces;
 using ForumDEG.Utils;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
     public class UserRegistrationViewModel : BaseViewModel {
@@ -96,7 +97,6 @@ namespace ForumDEG.ViewModels {
             }
             set {
                 if (emailIn != value) {
-                    emailIn = value;
                     OnPropertyChanged("EmailIn");
                 }
             }
@@ -143,7 +143,17 @@ namespace ForumDEG.ViewModels {
 
         public bool IsNewUserValid(){
             //verifica se os novos dados são válidos
-            return true;
+            var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+            var match = Regex.Match(emailIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Email]: Invalid!");
+                return false;
+            } else {
+                Debug.WriteLine("[User Email]: Valid!");
+                return true;
+            }
         }
 
         public async Task RegisterNewUser(){
