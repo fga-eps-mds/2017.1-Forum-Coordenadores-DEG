@@ -11,6 +11,7 @@ using ForumDEG.Interfaces;
 using ForumDEG.Utils;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using ForumDEG.Views;
 
 namespace ForumDEG.ViewModels {
     public class UserRegistrationViewModel : BaseViewModel {
@@ -19,6 +20,7 @@ namespace ForumDEG.ViewModels {
         private readonly Helpers.Administrator _administratorService;
 
         public ICommand RegisterNewUserCommand { get; private set; }
+        public ICommand CancelCommand { get; private set; }
 
         public UserRegistrationViewModel(IPageService PageService) {
             _pageService = PageService;
@@ -26,6 +28,7 @@ namespace ForumDEG.ViewModels {
             _administratorService = new Helpers.Administrator();
 
             RegisterNewUserCommand = new Command(async () => await RegisterNewUser());
+            CancelCommand = new Command(async () => await _pageService.PushAsync(new AppMasterPage()));
         }
 
         int userTypeIn;
@@ -97,6 +100,7 @@ namespace ForumDEG.ViewModels {
             }
             set {
                 if (emailIn != value) {
+                    emailIn = value;
                     OnPropertyChanged("EmailIn");
                 }
             }
