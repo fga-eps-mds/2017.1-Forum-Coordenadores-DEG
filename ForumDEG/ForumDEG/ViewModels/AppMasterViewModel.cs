@@ -6,8 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class AppMasterViewModel : INotifyPropertyChanged
-    {
+    class AppMasterViewModel : INotifyPropertyChanged {
         public ICommand HomeClickedCommand { get; private set; }
         public ICommand ForumsClickedCommand { get; private set; }
         public ICommand UsersClickedCommand { get; private set; }
@@ -19,7 +18,7 @@ namespace ForumDEG.ViewModels {
         public ICommand PlusButtonClickedCommand { get; set; }
 
         private float TapCount = 0;
-
+        
         public float _tapCount {
             get {
                 return _tapCount;
@@ -38,21 +37,19 @@ namespace ForumDEG.ViewModels {
                 return _extraButtonsVisibility;
             }
             set {
-                if (_extraButtonsVisibility != value)
-                {
+                if (_extraButtonsVisibility != value) {
                     _extraButtonsVisibility = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ExtraButtonsVisibility"));
                 }
             }
         }
 
-
         private readonly IPageService _pageService;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AppMasterViewModel(IPageService pageService)
-        {
+        public AppMasterViewModel(IPageService pageService) {
+            
             _pageService = pageService;
 
             HomeClickedCommand = new Command(async () => await HomeClicked());
@@ -69,55 +66,44 @@ namespace ForumDEG.ViewModels {
             TapCount = 0;
         }
 
-        private async Task HomeClicked()
-        {
+        private async Task HomeClicked() {
             await _pageService.PushAsync(new AppMasterPage());
         }
 
-        private async Task ForumsClicked()
-        {
+        private async Task ForumsClicked() {
             await _pageService.PushAsync(new ForumsPage());
         }
 
-        private async Task UsersClicked()
-        {
+        private async Task UsersClicked() {
             await _pageService.PushAsync(new TestViewUsers());
         }
 
-        private async Task FormsClicked()
-        {
+        private async Task FormsClicked() {
             await _pageService.PushAsync(new ForumsPage());
         }
 
-        private async Task NewForumClicked()
-        {
+        private async Task NewForumClicked() {
             await _pageService.PushAsync(new NewForumPage());
         }
 
-        private async Task RegisterUserClicked()
-        {
+        private async Task RegisterUserClicked() {
             await _pageService.PushAsync(new UserRegistrationPage());
         }
 
-        private async Task NewFormClicked()
-        {
+        private async Task NewFormClicked() {
             await _pageService.PushAsync(new ForumsPage());
         }
 
-        private async Task ChangePasswordClicked()
-        {
+        private async Task ChangePasswordClicked() {
             await _pageService.PushAsync(new ChangePasswordPage());
         }
 
-        private async Task PlusButtonClicked()
-        {
+        private async Task PlusButtonClicked() {
             TapCount++;
-            if (TapCount % 2 == 0)
-            {
+            if (TapCount % 2 == 0) {
                 ExtraButtonsVisibility = false;
             }
-            else
-            {
+            else {
                 ExtraButtonsVisibility = true;
             }
         }

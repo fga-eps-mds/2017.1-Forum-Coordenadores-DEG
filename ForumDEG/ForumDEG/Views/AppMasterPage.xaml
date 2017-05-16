@@ -7,7 +7,7 @@
                   Title="Fórum DEG">
 
     <MasterDetailPage.Master Title="Master Page">
-        <ContentPage Title="Master"  BackgroundColor="#2b2b2b" Padding="0,10,0,5">
+        <ContentPage Title="Master"  BackgroundColor="#2b2b2b" Padding="0,0,0,15">
             <ContentPage.Content>
                 <ScrollView>
                     <StackLayout>
@@ -18,12 +18,13 @@
                            FontSize="Large"
                            Margin="0, 20, 0, 20"/>
 
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="home_icon.jpg" Margin="7"/>
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="home_icon.jpg" Scale="0.4"/>
                             <Label Margin="0, 5, 25, 5" Text="Home" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
-                               HorizontalOptions="FillAndExpand" 
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
                                x:Name="HomeLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -33,12 +34,13 @@
                                 </Label>
                         </StackLayout>
 
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="forums_icon.jpg" Margin="7"/>
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="forums_icon.jpg" Scale="0.4"/>
                             <Label Margin="0, 5, 25, 5" Text="Fóruns" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
+                               VerticalOptions="Center"
                                x:Name="ForunsLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -48,12 +50,13 @@
                             </Label>
                         </StackLayout>
 
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="create_icon.jpg" Margin="7"/>
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="create_icon.jpg" Scale="0.4"/>
                             <Label Margin="0, 5, 25, 5" Text="Criar Fórum" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
+                               VerticalOptions="Center"
                                x:Name="ForunsAddLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -63,12 +66,13 @@
                             </Label>
                         </StackLayout>
 
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="users_icon.jpg" Margin="7"/>
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="users_icon.jpg" Scale="0.4"/>
                             <Label Margin="0, 5, 25, 5" Text="Usuários" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
                                x:Name="CoordenadoresLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -78,12 +82,13 @@
                             </Label>
                         </StackLayout>
 
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="create_icon.jpg" Margin="7"/>
-                            <Label Margin="0, 5, 25, 5" Text="Adicionar Coordenador" FontSize="Medium"
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="create_icon.jpg" Scale="0.4"/>
+                            <Label Margin="0, 5, 25, 5" Text="Cadastrar Coordenador" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
-                               HorizontalOptions="FillAndExpand" 
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
                                x:Name="AddCoordenadoresLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -93,12 +98,13 @@
                             </Label>
                         </StackLayout>
 
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="forms_icon.jpg" Margin="7"/>
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="forms_icon.jpg" Scale="0.4"/>
                             <Label Margin="0, 5, 25, 5" Text="Formulários" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
                                x:Name="FormulariosLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -108,12 +114,13 @@
                             </Label>
                         </StackLayout>
 
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="create_icon.jpg" Margin="7"/>
-                            <Label Margin="0, 5, 25, 5" Text="Adicionar Formulários" FontSize="Medium"
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="create_icon.jpg" Scale="0.4"/>
+                            <Label Margin="0, 5, 25, 5" Text="Criar Formulário" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
                                x:Name="AddFormulariosLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -123,13 +130,13 @@
                             </Label>
                         </StackLayout>
 
-
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="changepassword_icon.jpg" Margin="7"/>
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
+                            <Image Source="changepassword_icon.jpg" Scale="0.4"/>
                             <Label Margin="0, 5, 25, 5" Text="Alterar Senha" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
                                    x:Name="ChangePasswordLabel">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -138,7 +145,7 @@
                                 </Label.GestureRecognizers>
                             </Label>
                         </StackLayout>
-                        <BoxView HeightRequest="1" Color="#a2a2a2" HorizontalOptions="FillAndExpand"/>
+                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
 
                     </StackLayout>
                 </ScrollView>
@@ -150,50 +157,65 @@
 
     <MasterDetailPage.Detail>
         <ContentPage Title="Fórum DEG" >
-            <StackLayout Padding="20" Margin="20">
-                <Button Text="Fóruns" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
+            <ScrollView>
+                <StackLayout Padding="20" Margin="0,20,0,0">
+                    <Button Text="Fóruns" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="Start" FontSize="Medium" Command="{Binding ForumsClickedCommand}"/>
-                <Button Text="Usuários" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
+                    <Button Text="Usuários" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="Center" FontSize="Medium" Command="{Binding UsersClickedCommand}"
                             x:Name="UserButton"/>
-                <Button Text="Formulários" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
+                    <Button Text="Formulários" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="End" FontSize="Medium" Command="{Binding FormsClickedCommand}"
                             x:Name="FormularioButton"/>
-                <StackLayout  Orientation="Horizontal">
+                    <StackLayout  Orientation="Horizontal">
+                        <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
 
-                    <StackLayout Orientation="Vertical" Padding="20">
-                        <Image
-                                   Source="plusbutton_icon.png"
-                                   Scale="0.75"
-                                   VerticalOptions="End" HorizontalOptions="Start">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    
-                                    Command="{Binding PlusButtonClickedCommand}"
-                                    NumberOfTapsRequired="1" />
-                            </Image.GestureRecognizers>
-                        </Image>
+                        </StackLayout>
+
+                        <StackLayout>
+
+                        </StackLayout>
                     </StackLayout>
-
-                    <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
-                        <Button  Text=" Novo Fórum" HorizontalOptions="Start" BackgroundColor="White" 
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="140"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout VerticalOptions="Center" Grid.Row="1" Grid.Column="0">
+                            <Button  Text="Novo Fórum" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewForumClickedCommand}" 
                                      x:Name="NewForumButtonOnPageMaster"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
-                        <Button  Text="Cadastrar Coordenador" HorizontalOptions="Start" BackgroundColor="White" 
+                            <Button  Text="Cadastrar Coordenador" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding RegisterUserClickedCommand}" 
                                      x:Name="NewCoordenadorButtonOnPageMaster"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
-                        <Button  Text="Criar Formulário" HorizontalOptions="Start" BackgroundColor="White" 
+                            <Button  Text="Criar Formulário" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewFormClickedCommand}" 
                                      x:Name="NewFormularioButtonOnPageMaster"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
-                    </StackLayout>
+                        </StackLayout>
+                        <StackLayout VerticalOptions="Center" HorizontalOptions="End" Grid.Row="1" Grid.Column="1">
+                            <Image     Source="plusbutton_icon.png"
+                                   Scale="0.75">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding PlusButtonClickedCommand}"
+                                    NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </Grid>
                 </StackLayout>
-            </StackLayout>
+            </ScrollView>
         </ContentPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>

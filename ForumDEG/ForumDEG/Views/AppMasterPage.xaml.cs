@@ -11,6 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppMasterPage : MasterDetailPage {
+
         private AppMasterViewModel viewModel = new AppMasterViewModel(new PageService());
 
         public AppMasterPage() {
