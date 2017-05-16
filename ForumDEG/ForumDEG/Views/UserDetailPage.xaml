@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.UserDetailPage"
+             Title="Ver Usuário"
+             x:Name="SeeUserPage">
+    <StackLayout>
+
+        <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
+
+            <StackLayout BackgroundColor="White" Padding="5,5,0,0">
+
+                <StackLayout Orientation="Horizontal">
+                    
+                    <Label Text="{Binding Name}" FontSize="Large" TextColor="Black"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" />
+                    
+                    <Label Text="Editar Usuário" TextColor="#3366BB" FontSize="Small"
+                                   HorizontalOptions="EndAndExpand" VerticalOptions="Start"
+                                   BackgroundColor="White" IsVisible="{Binding IsLoggedUserAdmin}">
+                        
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditComand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                </StackLayout>
+
+                <Label Text="{Binding Course}" TextColor="Gray" FontSize="Small"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" IsVisible="{Binding IsCoordinator}"/>
+
+                <Label Text="{Binding Registration}" TextColor="Gray" FontSize="Small"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" />
+
+                <Label Text="{Binding Email}" TextColor="Gray" FontSize="Small"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" />
+
+                <StackLayout Orientation="Horizontal">
+
+                    <Label Text="{Binding ForumsPresent, StringFormat='Compareceu a {0} fóruns'}" TextColor="Gray" FontSize="Small"
+                                   HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                                   BackgroundColor="White" IsVisible="{Binding IsCoordinator}"/>
+
+                    <Label Text="Remover Usuário" TextColor="#3366BB" FontSize="Small"
+                                   HorizontalOptions="EndAndExpand" VerticalOptions="Start"
+                                   BackgroundColor="White" IsVisible="{Binding IsLoggedUserAdmin}">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeleteCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </Frame>
+
+        <Frame OutlineColor="Black" HasShadow="True" IsVisible="{Binding IsCoordinator}" Margin="20" BackgroundColor="White" >
+            <StackLayout>
+                <Label FontSize="Large" HorizontalOptions="Center" Text="Formulários submetidos" TextColor="Black"></Label>
+                <ListView></ListView>
+            </StackLayout>
+        </Frame>
+
+
+    </StackLayout>
+
+</ContentPage>
