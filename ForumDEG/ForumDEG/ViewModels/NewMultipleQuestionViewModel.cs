@@ -10,10 +10,20 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    public class NewMultipleQuestionViewModel : INotifyPropertyChanged {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public string Title { get; set; }
+    public class NewMultipleQuestionViewModel : BaseViewModel {
+
         public ObservableCollection<string> Options { get; set; }
+
+        private string _selectedOption;
+        public string SelectedOption {
+            get { return _selectedOption; }
+            set {
+                SetValue(ref _selectedOption, value);
+                RemoveOption();
+            }
+        }
+        public string Title { get; set; }
+
         private string _optionEntry;
         public string OptionEntry { 
            get {
@@ -22,7 +32,7 @@ namespace ForumDEG.ViewModels {
            set {
                if (_optionEntry != value) {
                    _optionEntry = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("OptionEntry"));
+                    OnPropertyChanged("OptionEntry");
 
                }
            }
@@ -33,6 +43,7 @@ namespace ForumDEG.ViewModels {
 
         public ICommand CancelCommand { get; set; }
         public ICommand AddOptionCommand { get; set; }
+        public ICommand RemoveOptionCommand { get; set; }
 
         public NewMultipleQuestionViewModel (bool _multipleAnswers, PageService _pageService, IUserDialogs dialog) {
             this._pageService = _pageService;
@@ -43,6 +54,7 @@ namespace ForumDEG.ViewModels {
 
             CancelCommand = new Command(async () => await Cancel());
             AddOptionCommand = new Command(AddOption);
+            RemoveOptionCommand = new Command(RemoveOption);
 
         }
 
@@ -55,6 +67,10 @@ namespace ForumDEG.ViewModels {
                 OptionEntry = null;
             }
 
+        }
+
+        public void RemoveOption() {
+            Options.Remove(SelectedOption);
         }
 
         public async Task Cancel() {

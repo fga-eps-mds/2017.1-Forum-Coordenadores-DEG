@@ -11,8 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views.Forms {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewMultipleQuestionPage : ContentPage {
+        ViewModels.NewMultipleQuestionViewModel _viewModel;
         public NewMultipleQuestionPage(bool option) {
-            BindingContext = new ViewModels.NewMultipleQuestionViewModel(option ,new ViewModels.PageService(), UserDialogs.Instance);
+            _viewModel = new ViewModels.NewMultipleQuestionViewModel(option, 
+                                                                     new ViewModels.PageService(), 
+                                                                     UserDialogs.Instance);
+            BindingContext = _viewModel;
             InitializeComponent();
         }
     }
