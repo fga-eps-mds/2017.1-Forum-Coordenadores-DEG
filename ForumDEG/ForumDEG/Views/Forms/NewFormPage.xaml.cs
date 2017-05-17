@@ -13,7 +13,7 @@ namespace ForumDEG.Views.Forms {
     public partial class NewFormPage : ContentPage {
         public NewFormPage() {
             InitializeComponent();
-            BindingContext = new NewFormViewModel();
+            BindingContext = new NewFormViewModel(new PageService());
         }
     }
 }
