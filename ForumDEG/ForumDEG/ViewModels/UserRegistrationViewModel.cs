@@ -34,7 +34,6 @@ namespace ForumDEG.ViewModels {
         int userTypeIn;
         bool isCoord = true;
         string nameIn;
-
         string registrationIn;
         string emailIn;
         string passwordIn;
@@ -145,6 +144,22 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        public bool ValidateRegisterNumber(){
+            var regex = @"^[0-9]{9}$";
+            var match = Regex.Match(RegistrationIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Registration]: Invalid!");
+                return false;
+            } else {
+                Debug.WriteLine("[User Registration]: Valid!");
+                return true;
+            }
+
+
+        }
+       
+
         public bool IsNewUserValid(){
             //verifica se os novos dados são válidos
             var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
@@ -163,13 +178,18 @@ namespace ForumDEG.ViewModels {
         public async Task RegisterNewUser(){
             if (!HasEmptySpace()){
                 if (IsNewUserValid()){
-                    if (UserTypeIn == 0){
+                    if (ValidateRegisterNumber()){
+                        if (UserTypeIn == 0){
                         RegisterNewCoordinator();
                     }
                     else{
                         RegisterNewAdministrator();
                     }
                     CleanFields();
+
+                    } else {
+                        await _pageService.DisplayAlert("Erro!", "Matrícula Inválida!", "ok", "cancel");
+                    }
                 }
                 else{
                     await _pageService.DisplayAlert("Erro!", "Dados inseridos inválidos!", "ok", "cancel");
