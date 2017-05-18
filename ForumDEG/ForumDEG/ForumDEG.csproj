@@ -78,6 +78,7 @@
     <Compile Include="ViewModels\NewForumViewModel.cs" />
     <Compile Include="ViewModels\NewMultipleQuestionViewModel.cs" />
     <Compile Include="ViewModels\PageService.cs" />
+    <Compile Include="ViewModels\QuestionDetailViewModel.cs" />
     <Compile Include="ViewModels\UserDetailViewModel.cs" />
     <Compile Include="ViewModels\UserRegistrationViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
@@ -89,6 +90,9 @@
     </Compile>
     <Compile Include="Views\Forms\NewMultipleQuestionPage.xaml.cs">
       <DependentUpon>NewMultipleQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\QuestionDetailPage.xaml.cs">
+      <DependentUpon>QuestionDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ForumEditPage.xaml.cs">
       <DependentUpon>ForumEditPage.xaml</DependentUpon>
@@ -244,6 +248,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Forms\NewMultipleQuestionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Forms\QuestionDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

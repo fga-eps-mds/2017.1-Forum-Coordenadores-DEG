@@ -7,7 +7,7 @@
 		<!-- Application resource dictionary -->
         <ResourceDictionary>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="Orange"/>
+                <Setter Property="BarBackgroundColor" Value="DarkOrange"/>
                 <Setter Property="BarTextColor" Value="White"/>
             </Style>
         </ResourceDictionary>

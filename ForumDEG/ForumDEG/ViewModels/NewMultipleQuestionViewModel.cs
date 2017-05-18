@@ -40,14 +40,20 @@ namespace ForumDEG.ViewModels {
         private bool _multipleAnswers { get; set; }
         private PageService _pageService;
         private IUserDialogs _dialog;
+        private NewFormViewModel _formViewModel;
 
         public ICommand CancelCommand { get; set; }
         public ICommand AddOptionCommand { get; set; }
         public ICommand RemoveOptionCommand { get; set; }
+        public ICommand SaveQuestionCommand { get; set; }
 
-        public NewMultipleQuestionViewModel (bool _multipleAnswers, PageService _pageService, IUserDialogs dialog) {
+        public NewMultipleQuestionViewModel (bool _multipleAnswers, 
+                                             PageService _pageService, 
+                                             IUserDialogs dialog, 
+                                             NewFormViewModel formViewModel) {
             this._pageService = _pageService;
             _dialog = dialog;
+            _formViewModel = formViewModel;
 
 
             Options = new ObservableCollection<string> { "One", "Two", "Three" };
@@ -55,22 +61,45 @@ namespace ForumDEG.ViewModels {
             CancelCommand = new Command(async () => await Cancel());
             AddOptionCommand = new Command(AddOption);
             RemoveOptionCommand = new Command(RemoveOption);
+            SaveQuestionCommand = new Command(async () => await SaveQuestion());
+        }
 
+        public bool IsFieldBlank(string field) {
+            return (String.IsNullOrEmpty(field) || String.IsNullOrWhiteSpace(field));
+        }
+
+        public bool IsOptionsListEmpty() {
+            return Options.Count == 0;
         }
 
         public void AddOption() {
-            if(String.IsNullOrEmpty(OptionEntry) || String.IsNullOrWhiteSpace(OptionEntry)) {
+            if (IsFieldBlank(OptionEntry)) {
                 _dialog.Alert(message: "Não se pode adicionar uma opção vazia!", okText: "OK");
 
             } else {
                 Options.Add(OptionEntry);
                 OptionEntry = null;
             }
-
         }
 
         public void RemoveOption() {
             Options.Remove(SelectedOption);
+        }
+
+        public async Task SaveQuestion() {
+            if (IsFieldBlank(Title)) {
+                _dialog.Alert(message: "A pergunta deve possuir título!", okText: "OK");
+            } else if (IsOptionsListEmpty()) {
+                _dialog.Alert(message: "A pergunta deve possuir opções!", okText: "OK");
+            } else {
+
+                _formViewModel.Questions.Add(new QuestionDetailViewModel {
+                    Title = this.Title,
+                    Options = this.Options,
+                    MultipleAnswers = _multipleAnswers
+                });
+                await _pageService.PopAsync();
+            }
         }
 
         public async Task Cancel() {

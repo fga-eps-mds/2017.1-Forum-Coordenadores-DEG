@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,18 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class NewFormViewModel : INotifyPropertyChanged {
-        public event PropertyChangedEventHandler PropertyChanged;
+    public class NewFormViewModel : BaseViewModel {
         private PageService _pageService;
+
+        public ObservableCollection<QuestionDetailViewModel> Questions { get; set; }
+        private QuestionDetailViewModel _selectedQuestion;
+        public QuestionDetailViewModel SelectedQuestion {
+            get { return _selectedQuestion; }
+            set {
+                SetValue(ref _selectedQuestion, value);
+                SelectQuestion(_selectedQuestion);
+            }
+        }
 
         public ICommand PlusButtonClickedCommand { get; set; }
         public ICommand NewMultipleQuestionCommand { get; set; }
@@ -25,7 +35,7 @@ namespace ForumDEG.ViewModels {
             set {
                 if (_tapCount != value)
                     _tapCount = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TapCount"));
+                OnPropertyChanged("TapCount");
             }
         }
 
@@ -38,7 +48,7 @@ namespace ForumDEG.ViewModels {
             set {
                 if (_extraButtonsVisibility != value) {
                     _extraButtonsVisibility = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ExtraButtonsVisibility"));
+                    OnPropertyChanged("ExtraButtonsVisibility");
                 }
             }
         }
@@ -47,10 +57,18 @@ namespace ForumDEG.ViewModels {
             PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
             NewMultipleQuestionCommand = new Command(async () => await NewMultipleQuestion());
             NewMultipleAnswersCommand = new Command(async () => await NewMultipleAnswers());
+            Questions = new ObservableCollection<QuestionDetailViewModel>();
+
             this._pageService = _pageService;
 
             ExtraButtonsVisibility = false;
             TapCount = 0;
+        }
+
+        public async void SelectQuestion(QuestionDetailViewModel question) {
+            if (question == null)
+                return;
+            await _pageService.PushAsync(new Views.Forms.QuestionDetailPage(this));
         }
 
         private async Task PlusButtonClicked() {
@@ -62,11 +80,11 @@ namespace ForumDEG.ViewModels {
             }
         }
         private async Task NewMultipleQuestion() {
-           await _pageService.PushAsync(new Views.Forms.NewMultipleQuestionPage(false));
+           await _pageService.PushAsync(new Views.Forms.NewMultipleQuestionPage(false, this));
         }
 
         private async Task NewMultipleAnswers() {
-            await _pageService.PushAsync(new Views.Forms.NewMultipleQuestionPage(true));
+            await _pageService.PushAsync(new Views.Forms.NewMultipleQuestionPage(true, this));
         }
     }
 }
