@@ -12,8 +12,6 @@ namespace ForumDEG.ViewModels {
         public ObservableCollection<string> Options { get; set; }
         public bool MultipleAnswers { get; set; }
 
-        public ICommand DeleteCommand { get; set; }
-
         public QuestionDetailViewModel() {
             Options = new ObservableCollection<string>();
         }

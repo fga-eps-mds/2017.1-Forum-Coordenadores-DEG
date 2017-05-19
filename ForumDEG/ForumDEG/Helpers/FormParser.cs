@@ -16,10 +16,11 @@ namespace ForumDEG.Helpers {
 
 
             var multipleChoices = form.MultipleChoiceQuestions;
+            formContent.Add("title", form.Title);
             foreach ( ViewModels.QuestionDetailViewModel question  in multipleChoices){
                 JObject multipleChoiceQuestion = new JObject();
-                JArray multipleChoiceOptions = new JArray();
-
+                JArray multipleChoiceOptions = new JArray();              
+                multipleChoiceQuestion.Add("multiple-anwsers", question.MultipleAnswers);
                 foreach (string option in question.Options) {
                     multipleChoiceOptions.Add(option);
                 }

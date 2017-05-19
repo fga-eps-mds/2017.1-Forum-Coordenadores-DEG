@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForumDEG.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
     public class NewFormViewModel : BaseViewModel {
-        private PageService _pageService;
+        private IPageService _pageService;
         private Helpers.Form _formService;
 
         public ObservableCollection<QuestionDetailViewModel> MultipleChoiceQuestions { get; set; }
@@ -58,7 +59,7 @@ namespace ForumDEG.ViewModels {
             }
         }
 
-        public NewFormViewModel(PageService _pageService) { 
+        public NewFormViewModel(IPageService _pageService) { 
             PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
             NewMultipleQuestionCommand = new Command(async () => await NewMultipleQuestion());
             NewMultipleAnswersCommand = new Command(async () => await NewMultipleAnswers());
@@ -117,11 +118,11 @@ namespace ForumDEG.ViewModels {
 
         private async Task SaveQuestion() {
             if (IsFieldBlank(Title)) {
-                _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir titulo", "ok");
+               await _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir titulo", "ok");
             } else if (await _formService.PostFormAsync(this)) {
                 await _pageService.PopAsync();
             } else {
-                _pageService.DisplayAlert("Formulário não pode ser criado", "Não foi possível estabelecer" +
+                await _pageService.DisplayAlert("Formulário não pode ser criado", "Não foi possível estabelecer" +
                                            " conexão com o banco de dados. Por favor tente novamente.", "ok");
             }
             

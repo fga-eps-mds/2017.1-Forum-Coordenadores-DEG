@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using ForumDEG.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,7 +39,7 @@ namespace ForumDEG.ViewModels {
            }
        }
         private bool _multipleAnswers { get; set; }
-        private PageService _pageService;
+        private IPageService _pageService;
         private IUserDialogs _dialog;
         private NewFormViewModel _formViewModel;
 
@@ -48,15 +49,15 @@ namespace ForumDEG.ViewModels {
         public ICommand SaveQuestionCommand { get; set; }
 
         public NewMultipleQuestionViewModel (bool _multipleAnswers, 
-                                             PageService _pageService, 
+                                             IPageService _pageService, 
                                              IUserDialogs dialog, 
                                              NewFormViewModel formViewModel) {
             this._pageService = _pageService;
             _dialog = dialog;
             _formViewModel = formViewModel;
 
-
-            Options = new ObservableCollection<string> { "One", "Two", "Three" };
+            Options = new ObservableCollection<string>();
+            this._multipleAnswers = _multipleAnswers;
 
             CancelCommand = new Command(async () => await Cancel());
             AddOptionCommand = new Command(AddOption);
