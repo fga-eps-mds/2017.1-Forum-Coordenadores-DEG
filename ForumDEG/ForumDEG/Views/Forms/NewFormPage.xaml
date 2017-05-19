@@ -24,6 +24,7 @@
             <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
                 <Button  Text="Pergunta Discursiva" HorizontalOptions="Start" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" 
+                                     Command="{Binding NewDiscursiveQuestionCommand}"
                                      x:Name="NewForumButtonOnPageMaster"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
                 <Button  Text="Múltipla Escolha(resposta única)" HorizontalOptions="Start" BackgroundColor="White" 
