@@ -15,6 +15,7 @@ namespace ForumDEG.ViewModels {
         private Helpers.Form _formService;
 
         public ObservableCollection<QuestionDetailViewModel> MultipleChoiceQuestions { get; set; }
+        public ObservableCollection<QuestionDetailViewModel> DiscursiveQuestions { get; set; }
         public string Title { get; set; }
         private QuestionDetailViewModel _selectedQuestion;
         public QuestionDetailViewModel SelectedQuestion {
@@ -101,7 +102,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task NewDiscursiveQuestion() {
-            await _pageService.PushAsync(new Views.Forms.NewDiscursiveQuestionPage());
+            await _pageService.PushAsync(new Views.Forms.NewDiscursiveQuestionPage(this));
         }
 
         private async Task NewMultipleQuestion() {

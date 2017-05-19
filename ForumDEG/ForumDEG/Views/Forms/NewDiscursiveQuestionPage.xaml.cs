@@ -6,10 +6,13 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views.Forms {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewDiscursiveQuestionPage : ContentPage {
+        private bool v;
+        private NewFormViewModel newFormViewModel;
+
         public NewDiscursiveQuestionViewModel _viewModel { get; private set; }
 
-        public NewDiscursiveQuestionPage() {
-            _viewModel = new NewDiscursiveQuestionViewModel(new PageService(), UserDialogs.Instance);
+        public NewDiscursiveQuestionPage(NewFormViewModel formViewModel) {
+            _viewModel = new NewDiscursiveQuestionViewModel(new PageService(), UserDialogs.Instance, formViewModel);
             BindingContext = _viewModel;
             InitializeComponent();
         }
