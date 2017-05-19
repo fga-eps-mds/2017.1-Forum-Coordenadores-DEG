@@ -11,7 +11,7 @@ namespace ForumDEG.Views.Forms {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class QuestionDetailPage : ContentPage {
         public QuestionDetailPage(ViewModels.NewFormViewModel formViewModel) {
-            BindingContext = formViewModel.SelectedQuestion;
+            BindingContext = formViewModel;
             InitializeComponent();
         }
     }

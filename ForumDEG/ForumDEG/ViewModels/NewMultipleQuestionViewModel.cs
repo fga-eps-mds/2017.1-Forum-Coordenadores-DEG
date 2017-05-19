@@ -93,7 +93,7 @@ namespace ForumDEG.ViewModels {
                 _dialog.Alert(message: "A pergunta deve possuir opções!", okText: "OK");
             } else {
 
-                _formViewModel.Questions.Add(new QuestionDetailViewModel {
+                _formViewModel.MultipleChoiceQuestions.Add(new QuestionDetailViewModel {
                     Title = this.Title,
                     Options = this.Options,
                     MultipleAnswers = _multipleAnswers

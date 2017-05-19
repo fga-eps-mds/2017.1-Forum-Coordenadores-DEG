@@ -11,8 +11,10 @@ using Xamarin.Forms;
 namespace ForumDEG.ViewModels {
     public class NewFormViewModel : BaseViewModel {
         private PageService _pageService;
+        private Helpers.Form _formService;
 
-        public ObservableCollection<QuestionDetailViewModel> Questions { get; set; }
+        public ObservableCollection<QuestionDetailViewModel> MultipleChoiceQuestions { get; set; }
+        public string Title { get; set; }
         private QuestionDetailViewModel _selectedQuestion;
         public QuestionDetailViewModel SelectedQuestion {
             get { return _selectedQuestion; }
@@ -25,6 +27,9 @@ namespace ForumDEG.ViewModels {
         public ICommand PlusButtonClickedCommand { get; set; }
         public ICommand NewMultipleQuestionCommand { get; set; }
         public ICommand NewMultipleAnswersCommand { get; set; }
+        public ICommand DeleteQuestionCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public ICommand SaveQuestionCommand { get; set; }
 
         private float TapCount = 0;
 
@@ -57,13 +62,25 @@ namespace ForumDEG.ViewModels {
             PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
             NewMultipleQuestionCommand = new Command(async () => await NewMultipleQuestion());
             NewMultipleAnswersCommand = new Command(async () => await NewMultipleAnswers());
-            Questions = new ObservableCollection<QuestionDetailViewModel>();
+            DeleteQuestionCommand = new Command(async () => await DeleteQuestion());
+            CancelCommand = new Command(async () => await Cancel());
+            SaveQuestionCommand = new Command(async () => await SaveQuestion());
 
+            MultipleChoiceQuestions = new ObservableCollection<QuestionDetailViewModel>();
+
+            _formService = new Helpers.Form();
             this._pageService = _pageService;
 
             ExtraButtonsVisibility = false;
             TapCount = 0;
         }
+
+
+
+        public bool IsFieldBlank(string field) {
+            return (String.IsNullOrEmpty(field) || String.IsNullOrWhiteSpace(field));
+        }
+
 
         public async void SelectQuestion(QuestionDetailViewModel question) {
             if (question == null)
@@ -86,5 +103,29 @@ namespace ForumDEG.ViewModels {
         private async Task NewMultipleAnswers() {
             await _pageService.PushAsync(new Views.Forms.NewMultipleQuestionPage(true, this));
         }
+
+        private async Task DeleteQuestion() {
+            MultipleChoiceQuestions.Remove(SelectedQuestion);
+            SelectedQuestion = null;
+            await _pageService.PopAsync();
+        }
+
+        private async Task Cancel() {
+
+            await _pageService.PopAsync();
+        }
+
+        private async Task SaveQuestion() {
+            if (IsFieldBlank(Title)) {
+                _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir titulo", "ok");
+            } else if (await _formService.PostFormAsync(this)) {
+                await _pageService.PopAsync();
+            } else {
+                _pageService.DisplayAlert("Formulário não pode ser criado", "Não foi possível estabelecer" +
+                                           " conexão com o banco de dados. Por favor tente novamente.", "ok");
+            }
+            
+        }
+        
     }
 }

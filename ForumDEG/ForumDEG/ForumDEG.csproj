@@ -44,6 +44,8 @@
     <Compile Include="DAO\ForumConfirmationDatabase.cs" />
     <Compile Include="DAO\ForumDatabase.cs" />
     <Compile Include="DAO\ForumNotificationDatabase.cs" />
+    <Compile Include="Helpers\Form.cs" />
+    <Compile Include="Helpers\FormParser.cs" />
     <Compile Include="Helpers\User.cs" />
     <Compile Include="Helpers\Administrator.cs" />
     <Compile Include="Helpers\AdministratorParser.cs" />
