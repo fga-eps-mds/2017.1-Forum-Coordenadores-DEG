@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.UsersPage"
-             x:Name="UsersPage">
+             x:Name="UsersPage"
+             Title="Usuários">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Administradores: "></Label>
@@ -11,14 +12,14 @@
                   HasUnevenRows="True"
                   RowHeight="60"
                   IsPullToRefreshEnabled="True"
-                  SelectedItem="{Binding SelectedAdministrator}"
+                  SelectedItem="{Binding SelectedAdministrator, Mode=TwoWay}"
                   ItemSelected="ItemSelected"
                   SeparatorColor="Gray">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-
+                            
                             <StackLayout Orientation="Horizontal" Padding="5">
                                 <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
                                     <Label Text="{Binding Name}" TextColor="Black" />
@@ -40,7 +41,7 @@
                   HasUnevenRows="True"
                   RowHeight="60"
                   IsPullToRefreshEnabled="True"
-                  SelectedItem="{Binding SelectedCoordinator}"
+                  SelectedItem="{Binding SelectedCoordinator, Mode=TwoWay}"
                   ItemSelected="ItemSelected"
                   SeparatorColor="Gray">
 
