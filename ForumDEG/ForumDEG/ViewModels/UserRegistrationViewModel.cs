@@ -28,7 +28,7 @@ namespace ForumDEG.ViewModels {
             _administratorService = new Helpers.Administrator();
 
             RegisterNewUserCommand = new Command(async () => await RegisterNewUser());
-            CancelCommand = new Command(async () => await _pageService.PushAsync(new AppMasterPage()));
+            CancelCommand = new Command(async () => await Cancel());
         }
 
         int userTypeIn;
@@ -154,13 +154,11 @@ namespace ForumDEG.ViewModels {
             } else {
                 Debug.WriteLine("[User Registration]: Valid!");
                 return true;
-            }
-
-
+            }   
         }
        
 
-        public bool IsNewUserValid(){
+        public bool ValidateEmail(){
             //verifica se os novos dados são válidos
             var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
@@ -175,30 +173,51 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        public bool ValidatePassword() {
+            if (PasswordIn.Length < 8)
+                return false;
+
+            var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
+            var match = Regex.Match(PasswordIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Password]: Invalid!");
+                return false;
+            } else {
+                Debug.WriteLine("[User Password]: Valid!");
+                return true;
+            }
+        }
+
         public async Task RegisterNewUser(){
             if (!HasEmptySpace()){
-                if (IsNewUserValid()){
+                if (ValidateEmail()){
                     if (ValidateRegisterNumber()){
-                        if (UserTypeIn == 0){
-                        RegisterNewCoordinator();
-                    }
-                    else{
-                        RegisterNewAdministrator();
-                    }
+                        if (ValidatePassword()) {
+                            if (UserTypeIn == 0){
+                             RegisterNewCoordinator();
+                                }
+                            else {
+                             RegisterNewAdministrator();
+                                }       
                     CleanFields();
+                        } else {
+                            await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número", "ok", "cancel");
+                        }
 
                     } else {
                         await _pageService.DisplayAlert("Erro!", "Matrícula Inválida!", "ok", "cancel");
                     }
                 }
                 else{
-                    await _pageService.DisplayAlert("Erro!", "Dados inseridos inválidos!", "ok", "cancel");
+                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
                 }
             }
             else{
                 await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
             }
         }
+
 
         public async void RegisterNewAdministrator(){
             Administrator Admin = new Administrator(){
@@ -248,6 +267,11 @@ namespace ForumDEG.ViewModels {
             EmailIn = null;
             PasswordIn = null;
             CourseIn = null;
+        }
+
+        private async Task Cancel() {
+            CleanFields();
+           await _pageService.PopAsync();
         }
     }
 }
