@@ -71,6 +71,7 @@ namespace ForumDEG.ViewModels {
             SaveQuestionCommand = new Command(async () => await SaveQuestion());
 
             MultipleChoiceQuestions = new ObservableCollection<QuestionDetailViewModel>();
+            DiscursiveQuestionsTitles = new ObservableCollection<string>();
 
             _formService = new Helpers.Form();
             this._pageService = _pageService;
