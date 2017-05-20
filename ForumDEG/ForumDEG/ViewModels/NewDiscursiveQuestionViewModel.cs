@@ -25,21 +25,25 @@ namespace ForumDEG.ViewModels {
             CancelQuestionCommand = new Command(async () => await CancelQuestion());
         }
 
-        private async Task AddQuestion() {
-            if (!VerifyQuestionField()) return;
-            await _page.PopAsync();
-    }
-
-    private async Task CancelQuestion() {
-        await _page.PopAsync();
-    }
-
-    private bool VerifyQuestionField() {
-        if (string.IsNullOrWhiteSpace(_questionText)) {
-            _dialog.ShowError("Não é possível ter uma pergunta em branco!");
-            return false;
+        public bool Validate() {
+            return VerifyQuestionField();
         }
-        return true;
+
+        private async Task AddQuestion() {
+            if (!Validate()) return;
+            await _page.PopAsync();
+        }
+
+        private async Task CancelQuestion() {
+            await _page.PopAsync();
+        }
+
+        private bool VerifyQuestionField() {
+            if (string.IsNullOrWhiteSpace(_questionText)) {
+                _dialog.ShowError("Não é possível ter uma pergunta em branco!");
+                return false;
+            }
+            return true;
+        }
     }
-}
 }

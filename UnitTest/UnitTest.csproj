@@ -42,6 +42,7 @@
     <Compile Include="ForumParserTests.cs" />
     <Compile Include="ForumsViewModelTests.cs" />
     <Compile Include="LoginViewModelTests.cs" />
+    <Compile Include="NewDiscursiveQuestionViewModelTests.cs" />
     <Compile Include="NewFormViewModelTests.cs" />
     <Compile Include="NewForumViewModelTests.cs" />
     <Compile Include="NewMultipleQuestionViewModelTests.cs" />
