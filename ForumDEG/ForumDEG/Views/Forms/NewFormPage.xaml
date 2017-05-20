@@ -24,6 +24,7 @@
             <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
                 <Button  Text="Pergunta Discursiva" HorizontalOptions="Start" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" 
+                                     Command="{Binding NewDiscursiveQuestionCommand}"
                                      x:Name="NewForumButtonOnPageMaster"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
                 <Button  Text="Múltipla Escolha(resposta única)" HorizontalOptions="Start" BackgroundColor="White" 
@@ -39,6 +40,27 @@
 
             </StackLayout>
         </StackLayout>
+        <ListView SeparatorVisibility="Default"
+                  ItemsSource="{Binding DiscursiveQuestionsTitles}"
+                  HasUnevenRows="True"
+                  RowHeight="60"
+                  IsPullToRefreshEnabled="True"
+                  SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}"
+                  SeparatorColor="Gray">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell >
+
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
+                                <Label Text="{Binding}" TextColor="Black" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <ListView SeparatorVisibility="Default"
                   ItemsSource="{Binding MultipleChoiceQuestions}"
                   HasUnevenRows="True"

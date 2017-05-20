@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.Forms.NewDiscursiveQuestionPage"
+             Title="Nova Pergunta Discursiva">
+    <StackLayout Padding="20">
+        <Entry Placeholder="Pergunta" Text="{Binding _questionText, Mode=TwoWay}" />
+        <StackLayout Orientation="Horizontal" Padding="20">
+            <Button Text="Cancelar" Command="{Binding CancelQuestionCommand}"
+                TextColor="White" BackgroundColor="Orange"/>
+            <Button Text="Adicionar Pergunta" Command="{Binding AddQuestionCommand}"
+                TextColor="White" BackgroundColor="Orange"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

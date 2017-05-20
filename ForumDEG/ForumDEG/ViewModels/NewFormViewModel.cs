@@ -15,6 +15,7 @@ namespace ForumDEG.ViewModels {
         private Helpers.Form _formService;
 
         public ObservableCollection<QuestionDetailViewModel> MultipleChoiceQuestions { get; set; }
+        public ObservableCollection<string> DiscursiveQuestionsTitles { get; set; }
         public string Title { get; set; }
         private QuestionDetailViewModel _selectedQuestion;
         public QuestionDetailViewModel SelectedQuestion {
@@ -31,6 +32,7 @@ namespace ForumDEG.ViewModels {
         public ICommand DeleteQuestionCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public ICommand SaveQuestionCommand { get; set; }
+        public ICommand NewDiscursiveQuestionCommand { get; set; }
 
         private float TapCount = 0;
 
@@ -63,11 +65,13 @@ namespace ForumDEG.ViewModels {
             PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
             NewMultipleQuestionCommand = new Command(async () => await NewMultipleQuestion());
             NewMultipleAnswersCommand = new Command(async () => await NewMultipleAnswers());
+            NewDiscursiveQuestionCommand = new Command(async () => await NewDiscursiveQuestion());
             DeleteQuestionCommand = new Command(async () => await DeleteQuestion());
             CancelCommand = new Command(async () => await Cancel());
             SaveQuestionCommand = new Command(async () => await SaveQuestion());
 
             MultipleChoiceQuestions = new ObservableCollection<QuestionDetailViewModel>();
+            DiscursiveQuestionsTitles = new ObservableCollection<string>();
 
             _formService = new Helpers.Form();
             this._pageService = _pageService;
@@ -97,6 +101,11 @@ namespace ForumDEG.ViewModels {
                 ExtraButtonsVisibility = true;
             }
         }
+
+        private async Task NewDiscursiveQuestion() {
+            await _pageService.PushAsync(new Views.Forms.NewDiscursiveQuestionPage(this));
+        }
+
         private async Task NewMultipleQuestion() {
            await _pageService.PushAsync(new Views.Forms.NewMultipleQuestionPage(false, this));
         }
