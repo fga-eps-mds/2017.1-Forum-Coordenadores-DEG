@@ -8,14 +8,14 @@
         <StackLayout  Padding="5" BackgroundColor="White">
             <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White">
                 <StackLayout BackgroundColor="White" Padding="5,5,0,0">
-                    <Label Text="{Binding SelectedForum.Title}" 
+                    <Label Text="{Binding Title}" 
                        TextColor="Black" FontSize="Medium"
                        HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                        BackgroundColor="White" />
-                    <Label Text="{Binding SelectedForum.Date, StringFormat='Data {0:dd/MM/yyyy}'}"
+                    <Label Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}"
                        TextColor="Gray"
                        HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                    <Label Text="{Binding SelectedForum.Hour, StringFormat='Horário {0:HH:mm}'}" 
+                    <Label Text="{Binding latestForum.Hour, StringFormat='Horário {0}'}" 
                         TextColor="Gray"
                         HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                     <Button Text="Ver Detalhes"

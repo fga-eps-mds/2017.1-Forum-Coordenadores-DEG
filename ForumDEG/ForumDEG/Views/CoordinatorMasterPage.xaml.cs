@@ -12,18 +12,19 @@ using Xamarin.Forms.Xaml;
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CoordinatorMasterPage : ContentPage {
+        CoordinatorMasterPageViewModel ViewModel;
 
         public  CoordinatorMasterPage() {
-            CoordinatorMasterPageViewModel ViewModel = CoordinatorMasterPageViewModel.GetInstance();
+            ViewModel = CoordinatorMasterPageViewModel.GetInstance();
             BindingContext = ViewModel;
-            Debug.WriteLine("[CoordinatorMasterPage]: goes to select forum");
             ViewModel.SelectForum();
-            try{
-                InitializeComponent();  
-            }
-            catch(Exception ex) { 
-                Debug.WriteLine("[CoordinatorMasterPage]: initialize component " + (ex.Message));
-            }
+            Debug.WriteLine("[CoordinatorMasterPage]: goes to select forum");
+            InitializeComponent();  
+        }
+
+        protected override void OnAppearing() {
+            base.OnAppearing();
+            ViewModel.SelectForum();
         }
 
         private void seeDetailsButtonClicked(object sender, EventArgs e) {
