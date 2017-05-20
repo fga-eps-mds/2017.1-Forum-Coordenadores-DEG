@@ -31,6 +31,7 @@ namespace ForumDEG.ViewModels {
 
         private async Task AddQuestion() {
             if (!Validate()) return;
+            _formViewModel.DiscursiveQuestionsTitles.Add(_questionText);
             await _page.PopAsync();
         }
 

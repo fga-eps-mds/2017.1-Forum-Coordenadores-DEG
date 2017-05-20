@@ -15,7 +15,7 @@ namespace ForumDEG.ViewModels {
         private Helpers.Form _formService;
 
         public ObservableCollection<QuestionDetailViewModel> MultipleChoiceQuestions { get; set; }
-        public ObservableCollection<QuestionDetailViewModel> DiscursiveQuestions { get; set; }
+        public ObservableCollection<string> DiscursiveQuestionsTitles { get; set; }
         public string Title { get; set; }
         private QuestionDetailViewModel _selectedQuestion;
         public QuestionDetailViewModel SelectedQuestion {
