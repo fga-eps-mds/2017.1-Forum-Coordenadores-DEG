@@ -13,14 +13,10 @@ namespace ForumDEG.Views {
             InitializeComponent();
         }
 
-        override protected void OnAppearing() {
-            //if (ViewModel.SelectedForum != null)
-           //     ViewModel.SelectedForum = null;
-        }
+        override protected void OnAppearing() {}
 
         private void ItemSelected(object sender, SelectedItemChangedEventArgs e) {
             Debug.WriteLine("Clicked item");
-          //  ViewModel.SelectForumCommand.Execute(e.SelectedItem);
 
             if (e.SelectedItem != null && ViewModel.SelectForumCommand != null && ViewModel.SelectForumCommand.CanExecute(e)) {
                 ViewModel.SelectForumCommand.Execute(e.SelectedItem);

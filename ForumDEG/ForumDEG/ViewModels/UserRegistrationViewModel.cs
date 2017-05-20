@@ -10,6 +10,8 @@ using Xamarin.Forms;
 using ForumDEG.Interfaces;
 using ForumDEG.Utils;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
+using ForumDEG.Views;
 
 namespace ForumDEG.ViewModels {
     public class UserRegistrationViewModel : BaseViewModel {
@@ -18,6 +20,7 @@ namespace ForumDEG.ViewModels {
         private readonly Helpers.Administrator _administratorService;
 
         public ICommand RegisterNewUserCommand { get; private set; }
+        public ICommand CancelCommand { get; private set; }
 
         public UserRegistrationViewModel(IPageService PageService) {
             _pageService = PageService;
@@ -25,12 +28,12 @@ namespace ForumDEG.ViewModels {
             _administratorService = new Helpers.Administrator();
 
             RegisterNewUserCommand = new Command(async () => await RegisterNewUser());
+            CancelCommand = new Command(async () => await Cancel());
         }
 
         int userTypeIn;
         bool isCoord = true;
         string nameIn;
-
         string registrationIn;
         string emailIn;
         string passwordIn;
@@ -141,30 +144,80 @@ namespace ForumDEG.ViewModels {
             }
         }
 
-        public bool IsNewUserValid(){
+        public bool ValidateRegisterNumber(){
+            var regex = @"^[0-9]{9}$";
+            var match = Regex.Match(RegistrationIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Registration]: Invalid!");
+                return false;
+            } else {
+                Debug.WriteLine("[User Registration]: Valid!");
+                return true;
+            }   
+        }
+       
+
+        public bool ValidateEmail(){
             //verifica se os novos dados são válidos
-            return true;
+            var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+            var match = Regex.Match(emailIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Email]: Invalid!");
+                return false;
+            } else {
+                Debug.WriteLine("[User Email]: Valid!");
+                return true;
+            }
+        }
+
+        public bool ValidatePassword() {
+            if (PasswordIn.Length < 8)
+                return false;
+
+            var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
+            var match = Regex.Match(PasswordIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Password]: Invalid!");
+                return false;
+            } else {
+                Debug.WriteLine("[User Password]: Valid!");
+                return true;
+            }
         }
 
         public async Task RegisterNewUser(){
             if (!HasEmptySpace()){
-                if (IsNewUserValid()){
-                    if (UserTypeIn == 0){
-                        RegisterNewCoordinator();
-                    }
-                    else{
-                        RegisterNewAdministrator();
-                    }
+                if (ValidateEmail()){
+                    if (ValidateRegisterNumber()){
+                        if (ValidatePassword()) {
+                            if (UserTypeIn == 0){
+                             RegisterNewCoordinator();
+                                }
+                            else {
+                             RegisterNewAdministrator();
+                                }       
                     CleanFields();
+                        } else {
+                            await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número", "ok", "cancel");
+                        }
+
+                    } else {
+                        await _pageService.DisplayAlert("Erro!", "Matrícula Inválida!", "ok", "cancel");
+                    }
                 }
                 else{
-                    await _pageService.DisplayAlert("Erro!", "Dados inseridos inválidos!", "ok", "cancel");
+                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
                 }
             }
             else{
                 await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
             }
         }
+
 
         public async void RegisterNewAdministrator(){
             Administrator Admin = new Administrator(){
@@ -214,6 +267,11 @@ namespace ForumDEG.ViewModels {
             EmailIn = null;
             PasswordIn = null;
             CourseIn = null;
+        }
+
+        private async Task Cancel() {
+            CleanFields();
+           await _pageService.PopAsync();
         }
     }
 }
