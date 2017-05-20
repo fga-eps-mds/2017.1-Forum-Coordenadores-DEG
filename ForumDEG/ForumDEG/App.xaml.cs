@@ -12,9 +12,15 @@ namespace ForumDEG {
         public App() {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage()) {
-                BarBackgroundColor = Color.FromHex("#ff8924")
-            };
+            if (ForumDEG.Helpers.Settings.IsUserLogged) {
+                MainPage = new NavigationPage(new AppMasterPage()) {
+                    BarBackgroundColor = Color.FromHex("#ff8924")
+                };
+            } else {
+                MainPage = new NavigationPage(new LoginPage()) {
+                    BarBackgroundColor = Color.FromHex("#ff8924")
+                };
+            }
         }
 
         protected override void OnStart() {

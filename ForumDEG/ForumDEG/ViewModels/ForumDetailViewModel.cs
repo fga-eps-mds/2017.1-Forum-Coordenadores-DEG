@@ -112,7 +112,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void GetConfirmation() {
-            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(App.Current.Properties["registration"].ToString(), RemoteId);
+            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(ForumDEG.Helpers.Settings.UserReg, RemoteId);
             HandleButtonUI();
         }
 
