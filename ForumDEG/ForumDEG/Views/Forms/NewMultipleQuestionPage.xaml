@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.Forms.NewMultipleQuestionPage"
+             Title="Nova Pergunta">
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Pergunta:" FontAttributes="Bold" />
+            <Entry  Text = "{Binding Title}" 
+                    Placeholder="Pergunta"/>
+            <Label Text="Nova Opção:" FontAttributes="Bold" />
+            <Entry  Placeholder="Nova Opção"
+                    Text = "{Binding OptionEntry}"/>
+            <Button HorizontalOptions="End" Text="Adicionar Opção"
+                    TextColor="White"
+                    BackgroundColor="Orange"
+                    Command="{Binding AddOptionCommand}"/>
+            <Label Text="Opções:" FontAttributes="Bold" />
+            <ScrollView>
+                <ListView SeparatorVisibility="Default"
+                  ItemsSource="{Binding Options}"
+                  HasUnevenRows="True"
+                  RowHeight="60"
+                  IsPullToRefreshEnabled="True"
+                  SelectedItem="{Binding SelectedOption, Mode=TwoWay}"
+
+                  SeparatorColor="Gray">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
+
+                                <StackLayout Orientation="Horizontal" Padding="5">
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
+                                        <Label Text="{Binding }" TextColor="Black" />
+                                    </StackLayout>
+                                        <Label Text="Remover" 
+                                           TextColor="#3366BB"
+                                           VerticalOptions="Center" />
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="End">
+                <Button Text="Cancelar" 
+                        TextColor="White"
+                        BackgroundColor="Orange"
+                        Command="{Binding CancelCommand}"
+                        x:Name="CancelButton"
+                        />
+                <Button Text="Criar pergunta" 
+                        TextColor="White"
+                        BackgroundColor="Orange"
+                        Command="{Binding SaveQuestionCommand}"
+                        x:Name="NewForumButtonOnPageNewForum"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

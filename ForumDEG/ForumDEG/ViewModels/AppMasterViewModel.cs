@@ -91,7 +91,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task NewFormClicked() {
-            await _pageService.PushAsync(new ForumsPage());
+            await _pageService.PushAsync(new Views.Forms.NewFormPage());
         }
 
         private async Task ChangePasswordClicked() {

@@ -44,6 +44,8 @@
     <Compile Include="DAO\ForumConfirmationDatabase.cs" />
     <Compile Include="DAO\ForumDatabase.cs" />
     <Compile Include="DAO\ForumNotificationDatabase.cs" />
+    <Compile Include="Helpers\Form.cs" />
+    <Compile Include="Helpers\FormParser.cs" />
     <Compile Include="Helpers\User.cs" />
     <Compile Include="Helpers\Administrator.cs" />
     <Compile Include="Helpers\AdministratorParser.cs" />
@@ -74,13 +76,25 @@
     <Compile Include="ViewModels\ForumDetailViewModel.cs" />
     <Compile Include="ViewModels\ForumEditViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\NewFormViewModel.cs" />
     <Compile Include="ViewModels\NewForumViewModel.cs" />
+    <Compile Include="ViewModels\NewMultipleQuestionViewModel.cs" />
     <Compile Include="ViewModels\PageService.cs" />
+    <Compile Include="ViewModels\QuestionDetailViewModel.cs" />
     <Compile Include="ViewModels\UserDetailViewModel.cs" />
     <Compile Include="ViewModels\UserRegistrationViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Views\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\NewFormPage.xaml.cs">
+      <DependentUpon>NewFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\NewMultipleQuestionPage.xaml.cs">
+      <DependentUpon>NewMultipleQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\QuestionDetailPage.xaml.cs">
+      <DependentUpon>QuestionDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ForumEditPage.xaml.cs">
       <DependentUpon>ForumEditPage.xaml</DependentUpon>
@@ -215,7 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\LoginPage.xaml">
-    </EmbeddedResource>  
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -224,6 +238,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Images\login_background.png" />
     <EmbeddedResource Include="Views\UsersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Forms\NewFormPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Forms\NewMultipleQuestionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Forms\QuestionDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
