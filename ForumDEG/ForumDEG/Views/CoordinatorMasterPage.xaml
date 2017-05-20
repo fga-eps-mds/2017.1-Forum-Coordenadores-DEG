@@ -5,22 +5,24 @@
              NavigationPage.HasNavigationBar="True"
              Title="Início">
     <ScrollView>
-        <StackLayout Padding="20">
-            <Label
-                Text="{Binding SelectedForum.Title}"/>
-            <Label
-                Text="{Binding SelectedForum.Date, StringFormat='Data {0:dd/MM/yyyy}'}"
-                HorizontalOptions="Start" 
-                VerticalOptions="CenterAndExpand"/>
-            <Label 
-                Text="{Binding SelectedForum.Date, StringFormat='Horário {0:HH:mm}'}" 
-                HorizontalOptions="Start" 
-                VerticalOptions="CenterAndExpand"/>
-            <Button
-                Text="Ver Detalhes"
-                HorizontalOptions="End"
-                VerticalOptions="CenterAndExpand"
-                Clicked="seeDetailsButtonClicked"/>
+        <StackLayout  Padding="5" BackgroundColor="White">
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White">
+                <StackLayout BackgroundColor="White" Padding="5,5,0,0">
+                    <Label Text="{Binding SelectedForum.Title}" 
+                       TextColor="Black" FontSize="Medium"
+                       HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                       BackgroundColor="White" />
+                    <Label Text="{Binding SelectedForum.Date, StringFormat='Data {0:dd/MM/yyyy}'}"
+                       TextColor="Gray"
+                       HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding SelectedForum.Hour, StringFormat='Horário {0:HH:mm}'}" 
+                        TextColor="Gray"
+                        HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                    <Button Text="Ver Detalhes"
+                        HorizontalOptions="End" VerticalOptions="CenterAndExpand"
+                        Clicked="seeDetailsButtonClicked"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ScrollView>
 </ContentPage>

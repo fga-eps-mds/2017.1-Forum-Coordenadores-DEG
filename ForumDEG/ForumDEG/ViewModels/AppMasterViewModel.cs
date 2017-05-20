@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System;
 
 namespace ForumDEG.ViewModels {
     class AppMasterViewModel : INotifyPropertyChanged {
@@ -16,6 +17,7 @@ namespace ForumDEG.ViewModels {
         public ICommand NewFormClickedCommand { get; private set; }
         public ICommand ChangePasswordClickedCommand { get; set; }
         public ICommand PlusButtonClickedCommand { get; set; }
+        public ICommand CoodinatorViewCommand { get; set; }
 
         private float TapCount = 0;
         
@@ -61,9 +63,15 @@ namespace ForumDEG.ViewModels {
             NewFormClickedCommand = new Command(async () => await NewFormClicked());
             ChangePasswordClickedCommand = new Command(async () => await ChangePasswordClicked());
             PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
+            CoodinatorViewCommand = new Command(async () => await CoodinatorViewClicked());
 
             ExtraButtonsVisibility = false;
             TapCount = 0;
+        }
+
+        private async Task CoodinatorViewClicked()
+        {
+            await _pageService.PushAsync(new CoordinatorMasterPage());
         }
 
         private async Task HomeClicked() {

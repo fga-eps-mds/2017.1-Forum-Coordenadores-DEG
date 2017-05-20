@@ -1,6 +1,7 @@
 ﻿using ForumDEG.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,14 @@ namespace ForumDEG.Views {
         public  CoordinatorMasterPage() {
             CoordinatorMasterPageViewModel ViewModel = CoordinatorMasterPageViewModel.GetInstance();
             BindingContext = ViewModel;
+            Debug.WriteLine("[CoordinatorMasterPage]: goes to select forum");
             ViewModel.SelectForum();
-            InitializeComponent();
+            try{
+                InitializeComponent();  
+            }
+            catch(Exception ex) { 
+                Debug.WriteLine("[CoordinatorMasterPage]: initialize component " + (ex.Message));
+            }
         }
 
         private void seeDetailsButtonClicked(object sender, EventArgs e) {

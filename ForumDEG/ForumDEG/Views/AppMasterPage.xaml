@@ -172,6 +172,10 @@
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="End" FontSize="Medium" Command="{Binding FormsClickedCommand}"
                             x:Name="FormularioButton"/>
+                    <Button Text="Visão do Coordenador" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
+                            HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
+                            VerticalOptions="End" FontSize="Medium" Command="{Binding CoodinatorViewCommand}"
+                            x:Name="CoordinatorViewButton"/>
                     <StackLayout  Orientation="Horizontal">
                         <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
 

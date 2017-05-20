@@ -235,15 +235,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ForumDetailPage.xaml" />
-    <EmbeddedResource Include="Views\TestViewUsers.xaml">
->>>>>>> Created method to select which forum will be displayed
+    <EmbeddedResource Include="Views\ForumDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\ForumDetailPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\UserRegistrationPage.xaml">
