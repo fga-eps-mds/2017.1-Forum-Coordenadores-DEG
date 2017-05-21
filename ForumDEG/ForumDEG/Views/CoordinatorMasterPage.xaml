@@ -19,8 +19,8 @@
                         TextColor="Gray"
                         HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                     <Button Text="Ver Detalhes"
-                        HorizontalOptions="End" VerticalOptions="CenterAndExpand"
-                        Clicked="seeDetailsButtonClicked"/>
+                        Command="{Binding DetailPageCommand}"
+                        HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

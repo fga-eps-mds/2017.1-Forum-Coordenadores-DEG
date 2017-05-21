@@ -90,23 +90,18 @@ namespace ForumDEG.ViewModels {
         private readonly Helpers.Forum _forumService;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand DetailPageCommand { get; set; }
 
         public CoordinatorMasterPageViewModel(IPageService pageService) {
             _pageService = pageService;
             _forumService = new Helpers.Forum();
-            //SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
+            DetailPageCommand = new Command(SeeDetailPage);
         }
 
         public static CoordinatorMasterPageViewModel GetInstance() {
             if (_instance == null)
                 _instance = new CoordinatorMasterPageViewModel(new PageService());
             return _instance;
-        }
-
-        private void SelectForum(ForumDetailViewModel forum) {
-            if (forum == null)
-                return;
-            SelectedForum = forum;
         }
 
         public async Task<Forum> SelectNextForum () {
@@ -164,5 +159,9 @@ namespace ForumDEG.ViewModels {
             Debug.WriteLine("[SelectNextForum]: schedules " + SelectedForum.Schedules);
         }
 
+        public async void SeeDetailPage() {
+            Debug.WriteLine("[Coord. Main] - Inside SeeDetailPage");
+            await _pageService.PushAsync(new ForumDetailPage(SelectedForum));
+        }
     }
 }

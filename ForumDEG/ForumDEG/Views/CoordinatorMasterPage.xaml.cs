@@ -26,10 +26,5 @@ namespace ForumDEG.Views {
             base.OnAppearing();
             ViewModel.SelectForum();
         }
-
-        private void seeDetailsButtonClicked(object sender, EventArgs e) {
-
-        }
-
     }
 }
