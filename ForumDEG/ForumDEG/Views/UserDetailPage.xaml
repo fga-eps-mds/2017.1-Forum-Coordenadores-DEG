@@ -18,7 +18,7 @@
                     
                     <Label Text="Editar Usuário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White" IsVisible="{Binding IsLoggedUserAdmin}">
+                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}">
                         
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding EditComand}"/>
@@ -47,7 +47,7 @@
 
                     <Label Text="Remover Usuário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White" IsVisible="{Binding IsLoggedUserAdmin}">
+                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}">
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding DeleteCommand}"/>

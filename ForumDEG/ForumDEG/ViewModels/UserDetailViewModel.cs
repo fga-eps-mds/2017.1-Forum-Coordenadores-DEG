@@ -25,24 +25,18 @@ namespace ForumDEG.ViewModels {
         public int ForumsPresent { get; set; }
         public bool IsAdministrator { get; set; }
         public bool IsCoordinator { get; set; }
-        public bool IsLoggedUserAdmin { get; set; }
 
         public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
 
+        public bool IsCurrentUserAdmin => Helpers.Settings.IsUserAdmin;
+
         public UserDetailViewModel(IPageService PageService) {
             _pageService = PageService;
-            SetLoggedUserType();
             EditCommand = new Command(EditUser);
             DeleteCommand = new Command(DeleteUser);
             _administratorService = new Helpers.Administrator();
             _coordinatorService = new Helpers.Coordinator();
-        }
-
-        public void SetLoggedUserType() {
-            //TO DO
-            //if logged user is admin set IsLoggedUserAdmin to true else set to false
-            IsLoggedUserAdmin = true;
         }
 
         public void EditUser() {
