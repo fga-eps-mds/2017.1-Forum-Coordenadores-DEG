@@ -5,7 +5,6 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
-using ForumDEG.Helpers;
 using ForumDEG.Interfaces;
 using System.Diagnostics;
 
@@ -40,6 +39,9 @@ namespace ForumDEG.ViewModels {
         public int Registration { get; set; }
         public string RemoteId { get; set; }
 
+        public bool IsCurrentUserAdmin => Helpers.Settings.IsUserAdmin;
+        public bool IsCurrentUserCoord => Helpers.Settings.IsUserCoord;
+
         /* Button UI properties */
         public string ButtonText {
             get {
@@ -66,38 +68,10 @@ namespace ForumDEG.ViewModels {
                 }
             }
         }
-        private bool _isCoordinator;
         
         public ICommand PresenceCommand { get; private set; }
         public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set;}
-
-
-        public bool IsCoordinator {
-            get {
-                return _isCoordinator;
-            }
-            set {
-                if (_isCoordinator != value) {
-                    _isCoordinator = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsCoordinator"));
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsAdministrator"));
-                }
-            }
-        }
-
-        public bool IsAdiministrator {
-            get {
-                return !_isCoordinator;
-            }
-            set {
-                if (_isCoordinator == value) {
-                    _isCoordinator = !value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsCoordinator"));
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsAdministrator"));
-                }
-            }
-        }
 
         public ForumDetailViewModel(IPageService pageService) {
             _pageService = pageService;
@@ -112,7 +86,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void GetConfirmation() {
-            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(App.Current.Properties["registration"].ToString(), RemoteId);
+            _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(Helpers.Settings.UserReg, RemoteId);
             HandleButtonUI();
         }
 
@@ -126,13 +100,6 @@ namespace ForumDEG.ViewModels {
                 ButtonText = "Confirmar presença";
                 ButtonColor = Color.Orange;
             }
-            SetUserType();
-        }
-
-        public void SetUserType() {
-            //[TO DO]
-            //If logged user type coordinator set is coordinator true 
-            IsCoordinator = false;
         }
 
         public bool HasPassed() {
@@ -142,9 +109,9 @@ namespace ForumDEG.ViewModels {
         public void HandlePresence() {
             Debug.WriteLine("[ForumDetailVM]: Inside Presence Handler");
             if (!_isConfirmed) {
-                coordinatorService.PostConfirmationStatusAsync(App.Current.Properties["registration"].ToString(), RemoteId);
+                coordinatorService.PostConfirmationStatusAsync(Helpers.Settings.UserReg, RemoteId);
             } else {
-                coordinatorService.DeleteConfirmationAsync(App.Current.Properties["registration"].ToString(), RemoteId);
+                coordinatorService.DeleteConfirmationAsync(Helpers.Settings.UserReg, RemoteId);
             }
 
             TogglePresence();

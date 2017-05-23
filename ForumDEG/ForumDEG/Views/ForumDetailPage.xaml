@@ -18,7 +18,7 @@
                                    BackgroundColor="White" />
                             <Label Text="Editar Fórum" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White"  IsVisible="{Binding IsAdiministrator}">
+                                   BackgroundColor="White"  IsVisible="{Binding IsCurrentUserAdmin}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding EditCommand}"/>
                                 </Label.GestureRecognizers>
@@ -52,6 +52,7 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20" IsVisible="{Binding IsCoordinator}">
             <Button IsEnabled="{Binding IsPast}" 
                     Text="{Binding ButtonText}" TextColor="White" FontSize="Small"
+                    IsVisible="{Binding IsCurrentUserCoord}"
                     BackgroundColor="{Binding ButtonColor}" 
                     x:Name="ConfirmPresenceButton"
                     Command="{Binding PresenceCommand}"/>
@@ -61,7 +62,7 @@
 
         <Button Text="Deletar Fórum" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
                     BackgroundColor="#ff8924" TextColor="White" FontSize="Small" 
-                    x:Name="DeleteButton" IsVisible="{Binding IsAdiministrator}">
+                    x:Name="DeleteButton" IsVisible="{Binding IsCurrentUserAdmin}">
         </Button>
         
     </StackLayout>

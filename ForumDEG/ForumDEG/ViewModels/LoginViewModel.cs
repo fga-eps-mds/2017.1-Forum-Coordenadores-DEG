@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using ForumDEG.Interfaces;
+using ForumDEG.Helpers;
 using ForumDEG.Views;
 using System;
 using System.Diagnostics;
@@ -35,7 +36,8 @@ namespace ForumDEG.ViewModels {
         }
 
         private void LogUser() {
-            App.Current.Properties["registration"] = _userRegistration;
+            Settings.UserReg = _userRegistration;
+            Settings.IsUserLogged = true;
         }
 
         private bool IsAnyFieldEmpty() {
@@ -71,11 +73,13 @@ namespace ForumDEG.ViewModels {
             try {
                 string result = await _userService.AuthenticateLogin(_userRegistration, _userPassword);
                 if (result == "administrator") {
-                    App.Current.Properties["isAdmin"] = true;
+                    Settings.IsUserAdmin = true;
+                    Settings.IsUserCoord = false;
                     Debug.WriteLine("[User API]: Adm");
                     return true;
                 } else if (result == "coordinator") {
-                    App.Current.Properties["isAdmin"] = false;
+                    Settings.IsUserAdmin = false;
+                    Settings.IsUserCoord = true;
                     Debug.WriteLine("[User API]: Coord");
                     return true;
                 } else {

@@ -159,6 +159,8 @@
         <ContentPage Title="Fórum DEG" >
             <ScrollView>
                 <StackLayout Padding="20" Margin="0,20,0,0">
+                    <Button Text="Sair" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
+                            HorizontalOptions="End" VerticalOptions="Start" Clicked="LogoutButtonClicked" />
                     <Button Text="Fóruns" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="Start" FontSize="Medium" Command="{Binding ForumsClickedCommand}"/>
