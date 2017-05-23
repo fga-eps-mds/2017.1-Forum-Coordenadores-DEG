@@ -10,7 +10,7 @@ namespace UnitTest
     [TestFixture]
     class AcceptanceTest
     {
-        private string path = "";
+        private string path = "ForumDEG.ForumDEG.apk";
         private AndroidApp app;
 
         [SetUp]
