@@ -2768,6 +2768,7 @@ namespace ForumDEG.Droid
 			public const int logo = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
+<<<<<<< HEAD
 			public const int logout_icon = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
