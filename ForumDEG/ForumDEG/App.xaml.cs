@@ -8,17 +8,21 @@ using Xamarin.Forms;
 
 namespace ForumDEG {
     public partial class App : Application {
-        static AdministratorDatabase _administratorDatabase;
-        static CoordinatorDatabase _coordinatorDatabase;
-        static ForumDatabase _forumDatabase;
 
         public App() {
             InitializeComponent();
 
             if (ForumDEG.Helpers.Settings.IsUserLogged) {
-                MainPage = new NavigationPage(new AppMasterPage()) {
-                    BarBackgroundColor = Color.FromHex("#ff8924")
-                };
+                if (Helpers.Settings.IsUserAdmin) {
+                    MainPage = new NavigationPage(new AppMasterPage()) {
+                        BarBackgroundColor = Color.FromHex("#ff8924")
+                    };
+                }
+                else if (Helpers.Settings.IsUserCoord) {
+                    MainPage = new NavigationPage(new CoordinatorMasterPage()) {
+                        BarBackgroundColor = Color.FromHex("#ff8924")
+                    };
+                }
             } else {
                 MainPage = new NavigationPage(new LoginPage()) {
                     BarBackgroundColor = Color.FromHex("#ff8924")

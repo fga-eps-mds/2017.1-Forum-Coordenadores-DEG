@@ -151,7 +151,8 @@ namespace ForumDEG.ViewModels {
                 Place = latestForum.Place,
                 Schedules = latestForum.Schedules,
                 Date = latestForum.Date,
-                Hour = latestForum.Hour
+                Hour = latestForum.Hour,
+                RemoteId = latestForum.RemoteId
             };
 
             Debug.WriteLine("[SelectNextForum]: title " + SelectedForum.Title);
