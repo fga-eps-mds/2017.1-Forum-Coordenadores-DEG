@@ -5,22 +5,64 @@
              NavigationPage.HasNavigationBar="True"
              Title="Início">
     <ScrollView>
-        <StackLayout  Padding="5" BackgroundColor="White">
-            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White">
-                <StackLayout BackgroundColor="White" Padding="5,5,0,0">
+        <StackLayout Padding="40,30,30,30" Spacing="30" BackgroundColor="White">
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray">
+                <StackLayout BackgroundColor="Transparent" Padding="5,5,0,0">
                     <Label Text="{Binding Title}" 
-                       TextColor="Black" FontSize="Medium"
+                       TextColor="White" FontSize="Large"
                        HorizontalOptions="Start" VerticalOptions="StartAndExpand"
-                       BackgroundColor="White" />
+                       BackgroundColor="Transparent" />
                     <Label Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}"
-                       TextColor="Gray"
-                       HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                    <Label Text="{Binding latestForum.Hour, StringFormat='Horário {0}'}" 
-                        TextColor="Gray"
-                        HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                    <Button Text="Ver Detalhes"
-                        Command="{Binding DetailPageCommand}"
-                        HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
+                       TextColor="White"
+                       HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                       BackgroundColor="Transparent"/>
+                    <Label Text="{Binding Hour, StringFormat='Horário {0}'}" 
+                        TextColor="White"
+                        HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                        BackgroundColor="Transparent"/>
+                    <Label Text="Ver Detalhes"
+                           TextColor="White"
+                           HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding DetailPageCommand }"
+                                NumberOfTapsRequired="1"/>                            
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray">
+                <StackLayout BackgroundColor="Transparent" Padding="5,5,0,0">
+                    <Label Text="Há um novo formulário disponível" 
+                       TextColor="White" FontSize="Large"
+                       HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                       BackgroundColor="Transparent" />
+                    <Label Text="Responder"
+                           TextColor="White"
+                           HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command=""
+                                NumberOfTapsRequired="1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray">
+                <StackLayout BackgroundColor="Transparent" Padding="5,5,0,0">
+                    <Label Text="Resultados do último fórum disponíveis" 
+                       TextColor="White" FontSize="Large"
+                       HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                       BackgroundColor="Transparent" />
+                    <Label Text="Conferir"
+                           TextColor="White"
+                           HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command=""
+                                NumberOfTapsRequired="1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
             </Frame>
         </StackLayout>
