@@ -7,7 +7,7 @@
   <a href=""><img src="https://img.shields.io/badge/c%23-v6.0-blue.svg" alt="C# Version"></a>
   <a href="http://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
   <a href="https://github.com/fga-gpp-mds"><img src="https://img.shields.io/badge/gpp--mds-2017.1-orange.svg" alt="GPP/MDS 2017.1"></a>
-  
+  <a href="https://github.com/fga-gpp-mds/2017.1-DEG-API"><img src="https://img.shields.io/badge/REST_API-deg--api-orange.svg" alt="2017.1-DEG-API"></a>
 </p>
 
 # Fórum de Coordenadores DEG-UnB
