@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System;
+using System.Diagnostics;
 
 namespace ForumDEG.ViewModels {
     class AppMasterViewModel : INotifyPropertyChanged {
@@ -18,6 +19,7 @@ namespace ForumDEG.ViewModels {
         public ICommand ChangePasswordClickedCommand { get; set; }
         public ICommand PlusButtonClickedCommand { get; set; }
         public ICommand CoodinatorViewCommand { get; set; }
+        public ICommand LogoutClickedCommand { get; set; }
 
         private float TapCount = 0;
         
@@ -62,16 +64,11 @@ namespace ForumDEG.ViewModels {
             RegisterUserClickedCommand = new Command(async () => await RegisterUserClicked());
             NewFormClickedCommand = new Command(async () => await NewFormClicked());
             ChangePasswordClickedCommand = new Command(async () => await ChangePasswordClicked());
+            LogoutClickedCommand = new Command(async () => await LogoutClicked());
             PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
-            CoodinatorViewCommand = new Command(async () => await CoodinatorViewClicked());
 
             ExtraButtonsVisibility = false;
             TapCount = 0;
-        }
-
-        private async Task CoodinatorViewClicked()
-        {
-            await _pageService.PushAsync(new CoordinatorMasterPage());
         }
 
         private async Task HomeClicked() {
@@ -91,19 +88,37 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task NewForumClicked() {
+            TapCount++;
+            if (TapCount % 2 == 0) {
+                ExtraButtonsVisibility = false;
+            }
             await _pageService.PushAsync(new NewForumPage());
         }
 
         private async Task RegisterUserClicked() {
+            TapCount++;
+            if (TapCount % 2 == 0) {
+                ExtraButtonsVisibility = false;
+            }
             await _pageService.PushAsync(new UserRegistrationPage());
         }
 
         private async Task NewFormClicked() {
+            TapCount++;
+            if (TapCount % 2 == 0) {
+                ExtraButtonsVisibility = false;
+            }
             await _pageService.PushAsync(new Views.Forms.NewFormPage());
         }
 
         private async Task ChangePasswordClicked() {
             await _pageService.PushAsync(new ChangePasswordPage());
+        }
+
+        private async Task LogoutClicked() {
+            Debug.WriteLine("[AppMasterViewModel]: Logout clicked");
+            Helpers.Settings.IsUserLogged = false;
+            await _pageService.PushAsync(new LoginPage());
         }
 
         private async Task PlusButtonClicked() {
