@@ -2257,6 +2257,7 @@ namespace ForumDEG.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+<<<<<<< HEAD
 			// aapt resource value: 0x7f02011f
 			public const int avd_hide_password_1 = 2130837791;
 			
@@ -2278,6 +2279,11 @@ namespace ForumDEG.Droid
 			// aapt resource value: 0x7f020124
 			public const int avd_show_password_3 = 2130837796;
 			
+=======
+			// aapt resource value: 0x7f020054
+			public const int avd_show_password = 2130837588;
+			
+>>>>>>> Changing project name on android manifest.
 			// aapt resource value: 0x7f020055
 			public const int changepassword_icon = 2130837589;
 			
