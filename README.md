@@ -1,4 +1,4 @@
-<p align="center"><a href="https://vuejs.org" target="_blank"><img width="140"src="https://camo.githubusercontent.com/a01e3716c634e6fc1c2b5008422db2079eeee10c/687474703a2f2f692e696d6775722e636f6d2f66476d536e31352e706e67"></a></p>
+<p align="center"><a href="http://www.deg.unb.br" target="_blank"><img width="140"src="https://camo.githubusercontent.com/a01e3716c634e6fc1c2b5008422db2079eeee10c/687474703a2f2f692e696d6775722e636f6d2f66476d536e31352e706e67"></a></p>
 
 <p align="center">
   <a href="https://ci.appveyor.com/project/DaniloBarros/2017-1-forum-coordenadores-deg"><img src="https://ci.appveyor.com/api/projects/status/pti794jc2425uq2g?svg=true" alt="Build Status"></a>
