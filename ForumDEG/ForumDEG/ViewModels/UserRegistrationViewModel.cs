@@ -202,7 +202,7 @@ namespace ForumDEG.ViewModels {
                                 }       
                     CleanFields();
                         } else {
-                            await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número", "ok", "cancel");
+                            await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", "ok", "cancel");
                         }
 
                     } else {
