@@ -22,9 +22,19 @@ namespace ForumDEG.Views {
             InitializeComponent();  
         }
 
+        protected override bool OnBackButtonPressed() {
+            return false;
+        }
+
         protected override void OnAppearing() {
             base.OnAppearing();
             ViewModel.SelectForum();
+        }
+
+        private async Task LogoutButtonClicked(object sender, EventArgs e) {
+            ForumDEG.Helpers.Settings.IsUserLogged = false;
+            Navigation.InsertPageBefore(new LoginPage(), this);
+            await Navigation.PopAsync();
         }
     }
 }

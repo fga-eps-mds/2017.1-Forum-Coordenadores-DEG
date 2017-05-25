@@ -4,6 +4,7 @@
                   xmlns:local="clr-namespace:ForumDEG;assembly=ForumDEG"
                   x:Class="ForumDEG.Views.AppMasterPage"
                   x:Name="AdministratorMainPage"
+                  NavigationPage.HasBackButton="False"
                   Title="Fórum DEG">
 
     <MasterDetailPage.Master Title="Master Page">
@@ -155,7 +156,7 @@
                                x:Name="Logout">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
-                                    Command="{Binding LogoutClickedCommand}"
+                                    Tapped="LogoutButtonClicked"
                                     NumberOfTapsRequired="1" />
                                 </Label.GestureRecognizers>
                             </Label>

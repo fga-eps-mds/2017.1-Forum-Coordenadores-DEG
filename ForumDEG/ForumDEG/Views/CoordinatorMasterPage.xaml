@@ -3,7 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.CoordinatorMasterPage"
              NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="False"
              Title="Início">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sair"
+                     Clicked="LogoutButtonClicked"/>
+    </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="40,30,30,30" Spacing="30" BackgroundColor="White">
             <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray">

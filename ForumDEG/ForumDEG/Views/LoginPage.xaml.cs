@@ -27,7 +27,11 @@ namespace ForumDEG.Views {
                     await Navigation.PopAsync();
                 }
             }
-        } 
+        }
+
+        protected override bool OnBackButtonPressed() {
+            return false;
+        }
 
         public void LoginClicked() {
             Validate();
