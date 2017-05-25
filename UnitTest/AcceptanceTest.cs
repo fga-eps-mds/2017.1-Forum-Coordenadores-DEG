@@ -7,16 +7,30 @@ using Xamarin.UITest.Queries;
 
 namespace UnitTest
 {
-    [TestFixture]
-    class AcceptanceTest
+    public class AppInitializer
     {
-        private string path = "ForumDEG.ForumDEG.apk";
-        private AndroidApp app;
+        public static IApp StartApp(Platform platform)
+        {
+            if (platform == Platform.Android)
+            {
+                return ConfigureApp.Android.StartApp();
+            }
+            return ConfigureApp.iOS.StartApp();
+        }
+    }
+
+    [TestFixture(Platform.Android)]
+    [TestFixture(Platform.iOS)]
+
+    public class AcceptanceTest
+    {
+        IApp app;
+        Platform platform;
 
         [SetUp]
         public void Setup()
         {
-            app = ConfigureApp.Android.ApkFile(path).StartApp();
+            app = AppInitializer.StartApp(platform);
         }
 
         [Test]
