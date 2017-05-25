@@ -66,16 +66,10 @@
 
 
         <Button Text="Deletar Fórum" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
-<<<<<<< HEAD
                     BackgroundColor="#ff8924" TextColor="White" FontSize="Small" 
-                    x:Name="DeleteButton" IsVisible="{Binding IsCurrentUserAdmin}">
-=======
-                BackgroundColor="#ff8924" TextColor="White" 
-                FontSize="Small" 
-                x:Name="ButtonDeletarForumForumDetailPage" 
-                AutomationId="ButtonDeletarForumForumDetailPage"
-                IsVisible="{Binding IsAdiministrator}">
->>>>>>> [UITest] Adding id on buttons and labels for test.
+                    IsVisible="{Binding IsCurrentUserAdmin}"
+                    x:Name="ButtonDeletarForumForumDetailPage" 
+                    AutomationId="ButtonDeletarForumForumDetailPage">
         </Button>
 
     </StackLayout>
