@@ -4,28 +4,34 @@
              x:Class="ForumDEG.Views.ForumEditPage"
              Title="Editar Fórum">
     <ScrollView>
-        <StackLayout Padding="20">
+        <StackLayout Padding="20" AutomationId="SLEditionForumEditPage">
             <Label Text="Título:" FontAttributes="Bold" />
-            <Entry Text="{Binding ForumTitle}" Placeholder="Título"/>
+            <Entry AutomationId="EtTitleForumEditPage" Text="{Binding ForumTitle}" Placeholder="Título"/>
             <Label Text="Data:" FontAttributes="Bold"/>
-            <DatePicker Date="{Binding ForumDate}" 
-                    x:Name="dateDatePicker"/>
+            <DatePicker AutomationId="DPDateForumEditPage"
+                        Date="{Binding ForumDate}" 
+                        x:Name="dateDatePicker"/>
             <Label Text="Horário:" FontAttributes="Bold"/>
-            <TimePicker Time="{Binding ForumHour}" />
+            <TimePicker AutomationId="TPHourForumEditPage" Time="{Binding ForumHour}" />
             <Label Text="Local:" FontAttributes="Bold" />
-            <Entry Text="{Binding ForumPlace}" 
-               Placeholder="Local"/>
+            <Entry AutomationId="EtLocalForumEdiPage" 
+                   Text="{Binding ForumPlace}" 
+                   Placeholder="Local"/>
             <Label Text="  Pautas:" FontAttributes="Bold"/>
-            <Editor Text="{Binding ForumSchedules}" 
-                HeightRequest="150" />
-            <StackLayout Orientation="Horizontal"
-                     HorizontalOptions="End">
-                <Button Text="Cancelar" 
+            <Editor AutomationId="EdSchedulesForumEdiPage"
+                    Text="{Binding ForumSchedules}" 
+                    HeightRequest="150" />
+            <StackLayout AutomationId="SLButtonsForumEdiPage"
+                         Orientation="Horizontal"
+                         HorizontalOptions="End">
+                <Button AutomationId="BtCancelForumEdiPage"
+                        Text="Cancelar" 
                         TextColor="White"
                         BackgroundColor="Orange"
                         x:Name="CancelButton"
                         Command="{Binding CancelCommand}"/>
-                <Button Text="Editar Forum" 
+                <Button AutomationId="BtEditForumEdiPage"
+                        Text="Editar Forum" 
                         TextColor="White"
                         BackgroundColor="Orange"
                         x:Name="EditButton"
