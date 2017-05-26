@@ -4,7 +4,8 @@
              x:Class="ForumDEG.Views.UserRegistrationPage"
              NavigationPage.HasNavigationBar="True"
              Title="Cadastrar Coordenador"
-             x:Name="UserRegistrationPage">
+             x:Name="PageUserRegistrationPage"
+             AutomationId="PageUserRegistrationPage">
 
     <ScrollView>
 
@@ -16,8 +17,11 @@
                     HorizontalOptions="Start"></Label>
 
                 <Entry Text="{Binding NameIn}" Placeholder="Nome completo" Keyboard="Text"
-                    HorizontalTextAlignment="Start" FontSize="16" HeightRequest="50" 
-                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+                      HorizontalTextAlignment="Start" FontSize="16" HeightRequest="50" 
+                      WidthRequest="280" HorizontalOptions="Center"
+                      x:Name="LabelNomeCompletoUserRegistrationPage"
+                      AutomationId="LabelNomeCompletoUserRegistrationPage">
+                </Entry>
 
             </StackLayout>
 
@@ -29,7 +33,11 @@
                 <Entry Text="{Binding EmailIn}" 
                     Placeholder="Endereço de email" Keyboard="Email"
                     HorizontalTextAlignment="Start" FontSize="16" HeightRequest="50" 
-                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+                    WidthRequest="280" HorizontalOptions="Center"
+                       x:Name="LabelEmailUserRegistrationPage"
+                       AutomationId="LabelEmailUserRegistrationPage">
+
+                </Entry>
 
             </StackLayout>
 
@@ -40,7 +48,11 @@
 
                 <Entry Text="{Binding RegistrationIn}" Placeholder="Matrícula" 
                     Keyboard="Numeric" HorizontalTextAlignment="Start" FontSize="16"
-                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+                    WidthRequest="280" HorizontalOptions="Center"
+                       x:Name="LabelMatriculaUserRegistrationPage"
+                       AutomationId="LabelMatriculaUserRegistrationPage">
+
+                </Entry>
 
             </StackLayout>
 
@@ -51,7 +63,11 @@
 
                 <Entry Text="{Binding PasswordIn}" Placeholder="Senha" IsPassword="True"
                     Keyboard="Text" HorizontalTextAlignment="Start" FontSize="16"
-                    WidthRequest="280" HorizontalOptions="Center"></Entry>
+                    WidthRequest="280" HorizontalOptions="Center"
+                       x:Name="LabelSenhaUserRegistrationPage"
+                       AutomationId="LabelSenhaUserRegistrationPage">
+
+                </Entry>
 
             </StackLayout>
 
@@ -61,7 +77,9 @@
                     HorizontalOptions="Start"></Label>
 
                 <Picker Title="Tipo de usuário" SelectedIndex="{Binding UserTypeIn}" 
-                        x:Name="User_Type" HorizontalOptions="Center" WidthRequest="280">
+                        HorizontalOptions="Center" WidthRequest="280"
+                        x:Name="PickerTipoDeUsuarioUserRegistrationPage"
+                        AutomationId="PickerTipoDeUsuarioUserRegistrationPage">
                     <Picker.Items>
                         <x:String>Coordenador</x:String>
                         <x:String>Administrador</x:String>
@@ -76,7 +94,9 @@
                     HorizontalOptions="Start"></Label>
 
                 <Picker Title="Curso" HorizontalOptions="Center" WidthRequest="280" 
-                        SelectedItem="{Binding CourseIn}" IsEnabled="{Binding IsCoord}">
+                        SelectedItem="{Binding CourseIn}" IsEnabled="{Binding IsCoord}"
+                        x:Name="PickerCursoUserRegistrationPage"
+                        AutomationId="PickerCursoUserRegistrationPage">
                     <Picker.Items>
                         <x:String>Engenharias</x:String>
                         <x:String>Engenharia de Software</x:String>
@@ -93,11 +113,13 @@
 
                 <Button Text="Cancelar" Command="{Binding CancelCommand}" TextColor="White" FontSize="17" 
                         BackgroundColor="Orange" WidthRequest="140"
-                        x:Name="CancelButtonOnUserResgistrationPage"></Button>
+                        x:Name="ButtonCancelarUserRegistrationPage"
+                        AutomationId="ButtonCancelarUserRegistrationPage"></Button>
 
                 <Button Command="{Binding RegisterNewUserCommand}" Text="Confirmar" TextColor="White" 
                         FontSize="17" BackgroundColor="Orange" WidthRequest="140"
-                        x:Name="ConfirmButtonOnUserRegistrationPage"></Button>
+                        x:Name="ButtonConfirmarUserRegistrationPage"
+                        AutomationId="ButtonConfirmarUserRegistrationPage"></Button>
 
             </StackLayout>
 
