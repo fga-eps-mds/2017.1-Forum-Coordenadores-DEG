@@ -6,49 +6,94 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
+using ForumDEG.Interfaces;
 
 namespace UnitTest {
     class CoordinatorMasterPageTests {
         private CoordinatorMasterPageViewModel _viewModel;
-        List<Forum> list1;
-        List<Forum> list2;
-        Forum tomorrow;
-        Forum f2;
-        Forum f3;
+        private Mock<IPageService> _pageServiceMock;
 
-    [SetUp]
+        [SetUp]
         public void Setup() {
-            _viewModel = new CoordinatorMasterPageViewModel();
-
-            list1 = new List<Forum>();
-            list2 = new List<Forum>();
-
-            tomorrow = new Forum();
-            f2 = new Forum();
-            f3 = new Forum();
-
-            tomorrow.Date = DateTime.Now.AddDays(1);
-            list1.Add(tomorrow);
-
-            f2.Date = DateTime.Now.AddDays(2);
-            list1.Add(f2);
-
-            f3.Date = DateTime.Now.AddDays(-1);
-            list2.Add(f3);
-        }
-
-        private List<Forum> GetList1() {
-            return list1;
+            _pageServiceMock = new Mock<IPageService>();
+            _viewModel = new CoordinatorMasterPageViewModel(_pageServiceMock.Object);
         }
 
         [Test()]
-        public void SelectNextForum_ReturnTheNextForum() { 
-            Assert.AreSame(_viewModel.SelectNextForum(list1),tomorrow);
+        public void GetLatestForum_WhenCalled_ShouldReturnLatestForum() {
+            Forum earliestForum = new Forum {
+                Date = DateTime.Now.AddDays(5)
+            };
+            Forum latestForum = new Forum {
+                Date = DateTime.Now.AddDays(2)
+            };
+            List<Forum> forums = new List<Forum>();
+            forums.Add(earliestForum);
+            forums.Add(latestForum);
+
+            var result = _viewModel.GetLatestForum(forums);
+
+            Assert.AreEqual(result, latestForum);
         }
 
         [Test()]
-        public void SelectNextForum_ThereIsNoNextForum() {
-            Assert.Null(_viewModel.SelectNextForum(list2));
+        public void GetLatestForum_WhenCalled_ShouldReturnNull_IfNoForumsAvailable() {
+            Forum passedForum = new Forum {
+                Date = DateTime.Now.AddDays(-2)
+            };
+            List<Forum> forums = new List<Forum>();
+            forums.Add(passedForum);
+
+            var result = _viewModel.GetLatestForum(forums);
+
+            Assert.IsNull(result);
+        }
+
+        [Test()]
+        public void GetLatestForum_WhenCalled_ShouldReturnNull_IfNoForumsExist() {
+            List<Forum> forums = new List<Forum>();
+
+            var result = _viewModel.GetLatestForum(forums);
+
+            Assert.IsNull(result);
+        }
+
+        [Test()]
+        public void SetLatestForumFields_DisplayWarningIfNoForumAvailable() {
+            Forum latestForum = null;
+            _viewModel.SetLatestForumFields(latestForum);
+
+            Assert.False(_viewModel.ForumVisibility);
+            Assert.True(_viewModel.NoForumWarning);
+        }
+
+        [Test()]
+        public void SetLatestForumFields_ForumVisible() {
+            Forum latestForum = new Forum();
+            _viewModel.SetLatestForumFields(latestForum);
+
+            Assert.True(_viewModel.ForumVisibility);
+            Assert.False(_viewModel.NoForumWarning);
+        }
+
+        [Test()]
+        public void SetLatestForumFields_AssignCorrectFields() {
+            Forum latestForum = new Forum {
+                Title = "Teste",
+                Place = "Teste",
+                Schedules = "Teste",
+                Date = DateTime.Now,
+                Hour = TimeSpan.FromHours(1)
+            };
+            _viewModel.SetLatestForumFields(latestForum);
+
+            Assert.AreEqual(latestForum.Title, _viewModel.Title);
+            Assert.AreEqual(latestForum.Place, _viewModel.Place);
+            Assert.AreEqual(latestForum.Schedules, _viewModel.Schedules);
+            Assert.AreEqual(latestForum.Date, _viewModel.Date);
+            Assert.AreEqual(latestForum.Hour, _viewModel.Hour);
+            Assert.NotNull(_viewModel.SelectedForum);
         }
     }
 }
