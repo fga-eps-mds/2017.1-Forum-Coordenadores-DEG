@@ -8,16 +8,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
-<<<<<<< HEAD
 using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
     public class UserEditViewModel : BaseViewModel {
-=======
 
-namespace ForumDEG.ViewModels {
-    class UserEditViewModel : BaseViewModel{
->>>>>>> ViewModel and View of User edition.
 
         private readonly IPageService _pageService;
         private readonly Helpers.Administrator _administratorService;
@@ -142,6 +137,7 @@ namespace ForumDEG.ViewModels {
             //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             Debug.WriteLine("[Administrator edition]" + OldAdministratorId);
             var _oldAdministrator = await _administratorService.GetAdministratorAsync(OldAdministratorId);
 
@@ -156,18 +152,25 @@ namespace ForumDEG.ViewModels {
             Debug.WriteLine("[Coordinator edition]" + OldCoordinatorId);
 =======
             Debug.WriteLine("[Administrator edition]"+ OldAdministratorId);
+=======
+            Debug.WriteLine("[Administrator edition]" + OldAdministratorId);
+>>>>>>> [User Edit] Create validations methods for User Edition
             var _oldAdministrator = await _administratorService.GetAdministratorAsync(OldAdministratorId);
 
-           NameIn = _oldAdministrator.Name;
-           EmailIn = _oldAdministrator.Email;
-           PasswordIn = _oldAdministrator.Password;
-           RegistrationIn = _oldAdministrator.Registration;
-           
+            NameIn = _oldAdministrator.Name;
+            EmailIn = _oldAdministrator.Email;
+            PasswordIn = _oldAdministrator.Password;
+            RegistrationIn = _oldAdministrator.Registration;
+
         }
 
         public async void setOldCoordinatorFields(string OldCoordinatorId) {
+<<<<<<< HEAD
             Debug.WriteLine("[Coordinator edition]"+ OldCoordinatorId);
 >>>>>>> ViewModel and View of User edition.
+=======
+            Debug.WriteLine("[Coordinator edition]" + OldCoordinatorId);
+>>>>>>> [User Edit] Create validations methods for User Edition
 
             //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
             var _oldCoordinator = await _coordinatorService.GetCoordinatorAsync(OldCoordinatorId);
@@ -188,6 +191,9 @@ namespace ForumDEG.ViewModels {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> [User Edit] Create validations methods for User Edition
         public bool ValidateEmail() {
             //verifica se os novos dados são válidos
             var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
@@ -213,6 +219,7 @@ namespace ForumDEG.ViewModels {
             if (!match.Success) {
                 Debug.WriteLine("[User Password]: Invalid!");
                 return false;
+<<<<<<< HEAD
             } else {
                 Debug.WriteLine("[User Password]: Valid!");
                 return true;
@@ -240,12 +247,32 @@ namespace ForumDEG.ViewModels {
         public async void ConfirmEdition() {
             if (IsAnyFieldBlank()) {
                 EditionFailed();
+=======
+>>>>>>> [User Edit] Create validations methods for User Edition
             } else {
-                await EditUser();
-                await _pageService.PopAsync();
+                Debug.WriteLine("[User Password]: Valid!");
+                return true;
             }
         }
 >>>>>>> ViewModel and View of User edition.
+
+        public async void ConfirmEdition() {
+            if (!IsAnyFieldBlank()) {
+                if (ValidateEmail()) {
+                    if (ValidatePassword()) {
+                        await EditUser();
+                        await _pageService.PopAsync();
+
+                    } else {
+                        await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", "ok", "cancel");
+                    }
+                } else {
+                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
+                }
+            } else {
+                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
+            }
+        }    
 
         public async Task EditUser() {
 
@@ -277,6 +304,7 @@ namespace ForumDEG.ViewModels {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         public async void EditionFailed() {
             await _pageService.DisplayAlert("Erro na Edição"
@@ -285,6 +313,8 @@ namespace ForumDEG.ViewModels {
         }
 
 >>>>>>> ViewModel and View of User edition.
+=======
+>>>>>>> [User Edit] Create validations methods for User Edition
         public async void Cancel() {
             await _pageService.PopAsync();
         }
