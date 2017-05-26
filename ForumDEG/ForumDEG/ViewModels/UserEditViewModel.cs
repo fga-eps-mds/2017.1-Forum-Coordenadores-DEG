@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
+<<<<<<< HEAD
 using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
     public class UserEditViewModel : BaseViewModel {
+=======
+
+namespace ForumDEG.ViewModels {
+    class UserEditViewModel : BaseViewModel{
+>>>>>>> ViewModel and View of User edition.
 
         private readonly IPageService _pageService;
         private readonly Helpers.Administrator _administratorService;
@@ -135,6 +141,7 @@ namespace ForumDEG.ViewModels {
         public async void setOldAdministratorFields(string OldAdministratorId) {
             //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
 
+<<<<<<< HEAD
             Debug.WriteLine("[Administrator edition]" + OldAdministratorId);
             var _oldAdministrator = await _administratorService.GetAdministratorAsync(OldAdministratorId);
 
@@ -147,6 +154,20 @@ namespace ForumDEG.ViewModels {
 
         public async void setOldCoordinatorFields(string OldCoordinatorId) {
             Debug.WriteLine("[Coordinator edition]" + OldCoordinatorId);
+=======
+            Debug.WriteLine("[Administrator edition]"+ OldAdministratorId);
+            var _oldAdministrator = await _administratorService.GetAdministratorAsync(OldAdministratorId);
+
+           NameIn = _oldAdministrator.Name;
+           EmailIn = _oldAdministrator.Email;
+           PasswordIn = _oldAdministrator.Password;
+           RegistrationIn = _oldAdministrator.Registration;
+           
+        }
+
+        public async void setOldCoordinatorFields(string OldCoordinatorId) {
+            Debug.WriteLine("[Coordinator edition]"+ OldCoordinatorId);
+>>>>>>> ViewModel and View of User edition.
 
             //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
             var _oldCoordinator = await _coordinatorService.GetCoordinatorAsync(OldCoordinatorId);
@@ -166,6 +187,7 @@ namespace ForumDEG.ViewModels {
             (isCoord && String.IsNullOrWhiteSpace(CourseIn)));
         }
 
+<<<<<<< HEAD
         public bool ValidateEmail() {
             //verifica se os novos dados são válidos
             var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
@@ -214,6 +236,16 @@ namespace ForumDEG.ViewModels {
                 await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
             }
         }    
+=======
+        public async void ConfirmEdition() {
+            if (IsAnyFieldBlank()) {
+                EditionFailed();
+            } else {
+                await EditUser();
+                await _pageService.PopAsync();
+            }
+        }
+>>>>>>> ViewModel and View of User edition.
 
         public async Task EditUser() {
 
@@ -244,6 +276,15 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+<<<<<<< HEAD
+=======
+        public async void EditionFailed() {
+            await _pageService.DisplayAlert("Erro na Edição"
+                , "O usuário não foi editado. Você deve preencher todos os campos."
+                , "OK", "cancel");
+        }
+
+>>>>>>> ViewModel and View of User edition.
         public async void Cancel() {
             await _pageService.PopAsync();
         }

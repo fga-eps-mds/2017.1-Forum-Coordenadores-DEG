@@ -81,7 +81,7 @@
                         x:Name="CancelButtonOnUserResgistrationPage"></Button>
 
                 <Button Command="{Binding ConfirmCommand}" Text="Confirmar" TextColor="White" 
-                        FontSize="17" BackgroundColor="Orange" WidthRequest="120"
+                        FontSize="17" BackgroundColor="Orange" WidthRequest="140"
                         x:Name="ConfirmButtonOnUserRegistrationPage"></Button>
 
             </StackLayout>
