@@ -7,12 +7,20 @@
              Title="Início">
     <ScrollView>
         <StackLayout Padding="40,30,30,30" Spacing="30" BackgroundColor="White">
-            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray">
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray" IsVisible="{Binding NoForumWarning, Mode=TwoWay}">
+                <StackLayout BackgroundColor="Transparent" Padding="5,5,0,25">
+                    <Label Text="Não há nenhum novo fórum disponível" 
+                       TextColor="White" FontSize="Large"
+                       HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                       BackgroundColor="Transparent"/>
+                </StackLayout>
+            </Frame>
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray" IsVisible="{Binding ForumVisibility, Mode=TwoWay}">
                 <StackLayout BackgroundColor="Transparent" Padding="5,5,0,0">
                     <Label Text="{Binding Title}" 
                        TextColor="White" FontSize="Large"
                        HorizontalOptions="Start" VerticalOptions="StartAndExpand"
-                       BackgroundColor="Transparent" />
+                       BackgroundColor="Transparent"/>
                     <Label Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}"
                        TextColor="White"
                        HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
@@ -27,7 +35,7 @@
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding DetailPageCommand }"
-                                NumberOfTapsRequired="1"/>                            
+                                NumberOfTapsRequired="1"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>

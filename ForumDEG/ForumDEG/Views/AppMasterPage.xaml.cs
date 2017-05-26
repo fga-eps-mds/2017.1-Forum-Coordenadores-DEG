@@ -20,9 +20,12 @@ namespace ForumDEG.Views {
         }
 
         private async Task LogoutButtonClicked(object sender, EventArgs e) {
-            ForumDEG.Helpers.Settings.IsUserLogged = false;
-            Navigation.InsertPageBefore(new LoginPage(), this);
-            await Navigation.PopAsync();
+            var answer = await DisplayAlert("Sair", "Tem certeza que deseja sair da sua conta?", "SIM", "NÃO");
+            if (answer) {
+                ForumDEG.Helpers.Settings.IsUserLogged = false;
+                Navigation.InsertPageBefore(new LoginPage(), this);
+                await Navigation.PopAsync();
+            }
         }
     }
 }

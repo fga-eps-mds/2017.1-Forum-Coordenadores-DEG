@@ -83,6 +83,33 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        private bool _forumVisibility;
+        public bool ForumVisibility {
+            get {
+                return _forumVisibility;
+            }
+            set {
+                if (_forumVisibility != value) {
+                    _forumVisibility = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ForumVisibility"));
+                }
+            }
+        }
+        private bool _noForumWarning;
+        public bool NoForumWarning {
+            get {
+                return _noForumWarning;
+            }
+            set {
+                if (_noForumWarning != value) {
+                    _noForumWarning = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NoForumWarning"));
+                }
+            }
+        }
+
         private static CoordinatorMasterPageViewModel _instance = null;
         public ObservableCollection<ForumDetailViewModel> Forums { get; private set; }
         public ForumDetailViewModel SelectedForum { get; private set; }
@@ -93,6 +120,8 @@ namespace ForumDEG.ViewModels {
         public ICommand DetailPageCommand { get; set; }
 
         public CoordinatorMasterPageViewModel(IPageService pageService) {
+            ForumVisibility = false;
+            NoForumWarning = false;
             _pageService = pageService;
             _forumService = new Helpers.Forum();
             DetailPageCommand = new Command(SeeDetailPage);
@@ -110,7 +139,7 @@ namespace ForumDEG.ViewModels {
             Forum latestForum = null;
             foreach (Forum forum in listforum) {
                 Debug.WriteLine("[SelectNextForum]: picks a new forum");
-                if (DateTime.Compare(DateTime.Now, forum.Date) <= 0) { 
+                if (DateTime.Compare(DateTime.Now, forum.Date) <= 0) {
                     if (latestForum == null) { 
                         latestForum = forum;
                         Debug.WriteLine("[SelectNextForum]: sets a value to the latest forum variable");
@@ -131,10 +160,13 @@ namespace ForumDEG.ViewModels {
             Forum latestForum = null;
             latestForum = await SelectNextForum();
             if(latestForum==null) {
-                latestForum = new Forum();
-                latestForum.Title = "Nenhum forum disponivel";
+                ForumVisibility = false;
+                NoForumWarning = true;
+                Debug.WriteLine("[SelectForum]: noForumWarning is set to: " + _noForumWarning);
             }
             else {
+                ForumVisibility = true;
+                NoForumWarning = false;
                 Title = latestForum.Title;
                 Place = latestForum.Place;
                 Schedules = latestForum.Schedules;
@@ -144,20 +176,18 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[SelectForum]: title: " + Title);
                 Debug.WriteLine("[SelectForum]: place: " + Place);
                 Debug.WriteLine("[SelectForum]: schedules: " + Schedules);
+                SelectedForum = new ForumDetailViewModel(_pageService) {
+                    Title = latestForum.Title,
+                    Place = latestForum.Place,
+                    Schedules = latestForum.Schedules,
+                    Date = latestForum.Date,
+                    Hour = latestForum.Hour,
+                    RemoteId = latestForum.RemoteId
+                };
+                Debug.WriteLine("[SelectNextForum]: title " + SelectedForum.Title);
+                Debug.WriteLine("[SelectNextForum]: place " + SelectedForum.Place);
+                Debug.WriteLine("[SelectNextForum]: schedules " + SelectedForum.Schedules);
             }
-            
-            SelectedForum = new ForumDetailViewModel(_pageService) {
-                Title = latestForum.Title,
-                Place = latestForum.Place,
-                Schedules = latestForum.Schedules,
-                Date = latestForum.Date,
-                Hour = latestForum.Hour,
-                RemoteId = latestForum.RemoteId
-            };
-
-            Debug.WriteLine("[SelectNextForum]: title " + SelectedForum.Title);
-            Debug.WriteLine("[SelectNextForum]: place " + SelectedForum.Place);
-            Debug.WriteLine("[SelectNextForum]: schedules " + SelectedForum.Schedules);
         }
 
         public async void SeeDetailPage() {
