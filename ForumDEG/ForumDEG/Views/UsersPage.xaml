@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.UsersPage"
-             x:Name="UsersPage"
+             x:Name="PageUsersPage"
+             AutomationId="PageUsersPage"
              Title="Usuários">
+    
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Administradores: "></Label>
@@ -27,6 +29,8 @@
                                 </StackLayout>
 
                                 <Label Text="Ver detalhes" 
+                                       x:Name="LabelVerDetalhesAdministradoresUsersPage"
+                                       AutomationId="LabelVerDetalhesAdministradoresUsersPage"
                                        TextColor="#3366BB"
                                        VerticalOptions="Center" />
 
@@ -35,6 +39,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
             <Label Text="Coordenadores: "></Label>
             <ListView SeparatorVisibility="Default"
                   ItemsSource="{Binding Coordinators}"
@@ -56,6 +61,8 @@
                                 </StackLayout>
 
                                 <Label Text="Ver detalhes" 
+                                       x:Name="LabelVerDetalhesCoordenadoresUsersPage"
+                                       AutomationId="LabelVerDetalhesCoordenadoresUsersPage"
                                        TextColor="#3366BB"
                                        VerticalOptions="Center" />
 
