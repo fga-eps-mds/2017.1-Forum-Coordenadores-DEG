@@ -77,11 +77,11 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 0, 0, 30">
 
                 <Button Text="Cancelar" Command="{Binding CancelCommand}" TextColor="White" FontSize="17" 
-                        BackgroundColor="Orange" WidthRequest="140"
+                        BackgroundColor="Orange" WidthRequest="120"
                         x:Name="CancelButtonOnUserResgistrationPage"></Button>
 
                 <Button Command="{Binding ConfirmCommand}" Text="Confirmar" TextColor="White" 
-                        FontSize="17" BackgroundColor="Orange" WidthRequest="140"
+                        FontSize="17" BackgroundColor="Orange" WidthRequest="120"
                         x:Name="ConfirmButtonOnUserRegistrationPage"></Button>
 
             </StackLayout>

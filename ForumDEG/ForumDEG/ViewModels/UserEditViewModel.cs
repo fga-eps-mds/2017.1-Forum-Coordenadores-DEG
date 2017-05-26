@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
-    class UserEditViewModel : BaseViewModel{
+    public class UserEditViewModel : BaseViewModel {
 
         private readonly IPageService _pageService;
         private readonly Helpers.Administrator _administratorService;
@@ -134,18 +135,18 @@ namespace ForumDEG.ViewModels {
         public async void setOldAdministratorFields(string OldAdministratorId) {
             //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
 
-            Debug.WriteLine("[Administrator edition]"+ OldAdministratorId);
+            Debug.WriteLine("[Administrator edition]" + OldAdministratorId);
             var _oldAdministrator = await _administratorService.GetAdministratorAsync(OldAdministratorId);
 
-           NameIn = _oldAdministrator.Name;
-           EmailIn = _oldAdministrator.Email;
-           PasswordIn = _oldAdministrator.Password;
-           RegistrationIn = _oldAdministrator.Registration;
-           
+            NameIn = _oldAdministrator.Name;
+            EmailIn = _oldAdministrator.Email;
+            PasswordIn = _oldAdministrator.Password;
+            RegistrationIn = _oldAdministrator.Registration;
+
         }
 
         public async void setOldCoordinatorFields(string OldCoordinatorId) {
-            Debug.WriteLine("[Coordinator edition]"+ OldCoordinatorId);
+            Debug.WriteLine("[Coordinator edition]" + OldCoordinatorId);
 
             //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
             var _oldCoordinator = await _coordinatorService.GetCoordinatorAsync(OldCoordinatorId);
@@ -165,14 +166,54 @@ namespace ForumDEG.ViewModels {
             (isCoord && String.IsNullOrWhiteSpace(CourseIn)));
         }
 
-        public async void ConfirmEdition() {
-            if (IsAnyFieldBlank()) {
-                EditionFailed();
+        public bool ValidateEmail() {
+            //verifica se os novos dados são válidos
+            var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+            var match = Regex.Match(emailIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Email]: Invalid!");
+                return false;
             } else {
-                await EditUser();
-                await _pageService.PopAsync();
+                Debug.WriteLine("[User Email]: Valid!");
+                return true;
             }
         }
+
+        public bool ValidatePassword() {
+            if (PasswordIn.Length < 8)
+                return false;
+
+            var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
+            var match = Regex.Match(PasswordIn, regex);
+
+            if (!match.Success) {
+                Debug.WriteLine("[User Password]: Invalid!");
+                return false;
+            } else {
+                Debug.WriteLine("[User Password]: Valid!");
+                return true;
+            }
+        }
+
+        public async void ConfirmEdition() {
+            if (!IsAnyFieldBlank()) {
+                if (ValidateEmail()) {
+                    if (ValidatePassword()) {
+                        await EditUser();
+                        await _pageService.PopAsync();
+
+                    } else {
+                        await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", "ok", "cancel");
+                    }
+                } else {
+                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
+                }
+            } else {
+                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
+            }
+        }    
 
         public async Task EditUser() {
 
@@ -201,12 +242,6 @@ namespace ForumDEG.ViewModels {
                 await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", "OK", "Cancelar");
             }
             }
-        }
-
-        public async void EditionFailed() {
-            await _pageService.DisplayAlert("Erro na Edição"
-                , "O usuário não foi editado. Você deve preencher todos os campos."
-                , "OK", "cancel");
         }
 
         public async void Cancel() {
