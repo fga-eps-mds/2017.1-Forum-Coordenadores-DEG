@@ -23,7 +23,7 @@ namespace ForumDEG.Views {
                     await Navigation.PopAsync();
                 }
                 else {
-                    Navigation.InsertPageBefore(new CoordinatorMasterPage(), this);
+                    Navigation.InsertPageBefore(new CoordinatorTabbedPage(), this);
                     await Navigation.PopAsync();
                 }
             }

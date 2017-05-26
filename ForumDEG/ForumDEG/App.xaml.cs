@@ -19,7 +19,7 @@ namespace ForumDEG {
                     };
                 }
                 else if (Helpers.Settings.IsUserCoord) {
-                    MainPage = new NavigationPage(new CoordinatorMasterPage()) {
+                    MainPage = new NavigationPage(new CoordinatorTabbedPage()) {
                         BarBackgroundColor = Color.FromHex("#ff8924")
                     };
                 }
