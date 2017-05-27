@@ -21,7 +21,7 @@
                                    BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}">
                         
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditComand}"/>
+                            <TapGestureRecognizer Command="{Binding EditCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
                     

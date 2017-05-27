@@ -84,6 +84,7 @@
     <Compile Include="ViewModels\PageService.cs" />
     <Compile Include="ViewModels\QuestionDetailViewModel.cs" />
     <Compile Include="ViewModels\UserDetailViewModel.cs" />
+    <Compile Include="ViewModels\UserEditViewModel.cs" />
     <Compile Include="ViewModels\UserRegistrationViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Views\ChangePasswordPage.xaml.cs">
@@ -122,6 +123,9 @@
     </Compile>
     <Compile Include="Views\UserDetailPage.xaml.cs">
       <DependentUpon>UserDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserEditPage.xaml.cs">
+      <DependentUpon>UserEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserRegistrationPage.xaml.cs">
       <DependentUpon>UserRegistrationPage.xaml</DependentUpon>
@@ -273,6 +277,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Forms\NewDiscursiveQuestionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\UserEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

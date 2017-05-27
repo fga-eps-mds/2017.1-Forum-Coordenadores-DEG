@@ -40,7 +40,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public void EditUser() {
-            //_pageService.PushAsync(new UserEditPage());
+            _pageService.PushAsync(new UserEditPage(Registration, IsCoordinator));
         }
 
         private async void DeleteUser() {
