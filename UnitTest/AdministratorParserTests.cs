@@ -18,6 +18,11 @@ namespace UnitTest {
         public static string password = "PB12345";
         public static string registration = "123456789";
 
+        public static string newName = "New name";
+        public static string newEmail = "New email";
+        public static string newPassword = "New password";
+        public static string newRegistration = "New registration";
+
         [Test()]
         public void GetAdministratorParser_WhenCalled_CreateAdminWithCorrectProperties() {
             Administrator administrator = AdministratorParser.GetAdministratorParser(content, Constants.Registration);
@@ -59,6 +64,107 @@ namespace UnitTest {
             Assert.AreEqual(email, adminEmail);
             Assert.AreEqual(password, adminPass);
             Assert.AreEqual(registration, adminRegist);
+        }
+
+        [Test()]
+        public void PutAdministratorBuilder_AllFieldsChanged() {
+            Administrator oldAdministrator = new Administrator {
+                Name = name,
+                Email = email,
+                Password = password,
+                Registration = registration
+            };
+
+            Administrator newAdministrator = new Administrator {
+                Name = newName,
+                Email = newEmail,
+                Password = newPassword,
+                Registration = newRegistration
+            };
+
+            JObject obj = AdministratorParser.PutAdministratorBuilder(oldAdministrator, newAdministrator);
+
+            var adminBody = obj["administrator"];
+
+            var adminName = adminBody["name"].ToString();
+            var adminEmail = adminBody["email"].ToString();
+            var adminPass = adminBody["password"].ToString();
+            var adminRegist = adminBody["registration"].ToString();
+
+            Assert.AreEqual(newName, adminName);
+            Assert.AreEqual(newEmail, adminEmail);
+            Assert.AreEqual(newPassword, adminPass);
+            Assert.AreEqual(newRegistration, adminRegist);
+        }
+
+        [Test()]
+        public void PutAdministratorBuilder_OneFieldChanged() {
+            Administrator oldAdministrator = new Administrator {
+                Name = name,
+                Email = email,
+                Password = password,
+                Registration = registration
+            };
+
+            Administrator newAdministrator = new Administrator {
+                Name = newName,
+            };
+
+            JObject obj = AdministratorParser.PutAdministratorBuilder(oldAdministrator, newAdministrator);
+
+            var adminBody = obj["administrator"];
+            var children = adminBody.Count();
+
+            var adminName = adminBody["name"].ToString();
+
+            Assert.AreEqual(newName, adminName);
+            Assert.AreEqual(1, children);
+        }
+
+        [Test()]
+        public void PutAdministratorBuilder_SomeFieldsChanged() {
+            Administrator oldAdministrator = new Administrator {
+                Name = name,
+                Email = email,
+                Password = password,
+                Registration = registration
+            };
+
+            Administrator newAdministrator = new Administrator {
+                Name = newName,
+                Email = newEmail,
+            };
+
+            JObject obj = AdministratorParser.PutAdministratorBuilder(oldAdministrator, newAdministrator);
+
+            var adminBody = obj["administrator"];
+            var children = adminBody.Count();
+
+            var adminName = adminBody["name"].ToString();
+            var adminEmail = adminBody["email"].ToString();;
+
+            Assert.AreEqual(newName, adminName);
+            Assert.AreEqual(newEmail, adminEmail);
+            Assert.AreEqual(2, children);
+        }
+
+        [Test()]
+        public void PutAdministratorBuilder_NoFieldsChanged() {
+            Administrator oldAdministrator = new Administrator {
+                Name = name,
+                Email = email,
+                Password = password,
+                Registration = registration
+            };
+
+            Administrator newAdministrator = new Administrator();
+
+            JObject obj = AdministratorParser.PutAdministratorBuilder(oldAdministrator, newAdministrator);
+
+            var adminBody = obj["administrator"];
+            var children = adminBody.Count();
+
+            Assert.AreEqual(0, children);
         }
     }
 }
