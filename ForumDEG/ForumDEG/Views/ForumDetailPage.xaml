@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.ForumDetailPage"
              Title="Ver Fórum"
-             x:Name="SeeForumPage">
+             x:Name="PageForumDetailPage"
+             AutomationId="PageForumDetailPage">
+
     <StackLayout Margin="20">
         <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" >
 
@@ -18,7 +20,9 @@
                                    BackgroundColor="White" />
                             <Label Text="Editar Fórum" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White"  IsVisible="{Binding IsCurrentUserAdmin}">
+                                   BackgroundColor="White"  IsVisible="{Binding IsCurrentUserAdmin}"
+                                   x:Name="LabelEditarForumForumDetailPage"
+                                   AutomationId="LabelEditarForumForumDetailPage">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding EditCommand}"/>
                                 </Label.GestureRecognizers>
@@ -48,13 +52,14 @@
             </ScrollView>
 
         </Frame>
-        
+
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20" IsVisible="{Binding IsCoordinator}">
             <Button IsEnabled="{Binding IsPast}" 
                     Text="{Binding ButtonText}" TextColor="White" FontSize="Small"
                     IsVisible="{Binding IsCurrentUserCoord}"
                     BackgroundColor="{Binding ButtonColor}" 
-                    x:Name="ConfirmPresenceButton"
+                    x:Name="ButtonConfirmPresenceForumDetailPage"
+                    AutomationId="ButtonConfirmPresenceForumDetailPage"
                     Command="{Binding PresenceCommand}"/>
 
         </StackLayout>
@@ -62,9 +67,11 @@
 
         <Button Text="Deletar Fórum" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
                     BackgroundColor="#ff8924" TextColor="White" FontSize="Small" 
-                    x:Name="DeleteButton" IsVisible="{Binding IsCurrentUserAdmin}">
+                    IsVisible="{Binding IsCurrentUserAdmin}"
+                    x:Name="ButtonDeletarForumForumDetailPage" 
+                    AutomationId="ButtonDeletarForumForumDetailPage">
         </Button>
-        
+
     </StackLayout>
 
 </ContentPage>

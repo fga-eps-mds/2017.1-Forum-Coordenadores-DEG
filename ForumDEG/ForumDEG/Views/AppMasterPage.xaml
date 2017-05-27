@@ -3,12 +3,13 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:local="clr-namespace:ForumDEG;assembly=ForumDEG"
                   x:Class="ForumDEG.Views.AppMasterPage"
-                  x:Name="AdministratorMainPage"
                   NavigationPage.HasBackButton="False"
+                  x:Name="PageAppMasterPage"
+                  AutomationId="PageAppMasterPage"
                   Title="Fórum DEG">
 
     <MasterDetailPage.Master Title="Master Page">
-        <ContentPage Title="Master"  BackgroundColor="#2b2b2b" Padding="0,0,0,15">
+        <ContentPage Title="Master"  BackgroundColor="#2b2b2b" Padding="0,0,0,15" AutomationId="PageMasterPageMaster">
             <ContentPage.Content>
                 <ScrollView>
                     <StackLayout>
@@ -17,7 +18,8 @@
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            FontSize="Large"
-                           Margin="0, 20, 0, 20"/>
+                           Margin="0, 20, 0, 20"
+                               AutomationId="LabelOpcoesAppMasterPage"/>
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
@@ -26,7 +28,8 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="Center"
-                               x:Name="HomeLabel">
+                               x:Name="LabelHomeAppMasterPage"
+                                   AutomationId="LabelHomeAppMasterPageMaster">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding HomeClickedCommand}"
@@ -42,7 +45,8 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
                                VerticalOptions="Center"
-                               x:Name="ForunsLabel">
+                               x:Name="LabelForunsAppMasterPage"
+                                   AutomationId="LabelForunsAppMasterPageMaster">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding ForumsClickedCommand}"
@@ -58,7 +62,8 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand" 
                                VerticalOptions="Center"
-                               x:Name="ForunsAddLabel">
+                               x:Name="LabelAddForunsAppMasterPageMaster"
+                                   AutomationId="LabelAddForunsAppMasterPageMaster">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding NewForumClickedCommand }"
@@ -74,7 +79,8 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="Center"
-                               x:Name="CoordenadoresLabel">
+                               x:Name="LabelCoordenadoresAppMasterPageMaster"
+                                   AutomationId="LabelCoordenadoresAppMasterPageMaster">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding UsersClickedCommand}"
@@ -90,7 +96,8 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="Center"
-                               x:Name="AddCoordenadoresLabel">
+                               x:Name="LabelAddCoordenadoresAppMasterPageMaster"
+                                   AutomationId="LabelAddCoordenadoresAppMasterPageMaster">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding RegisterUserClickedCommand}"
@@ -106,7 +113,9 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="Center"
-                               x:Name="FormulariosLabel">
+                               x:Name="LabelFormulariosAppMasterPageMaster"
+                                   AutomationId="LabelFormulariosAppMasterPageMaster">
+                                
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding FormsClickedCommand}"
@@ -122,7 +131,8 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="Center"
-                               x:Name="AddFormulariosLabel">
+                               x:Name="AddFormulariosLabel"
+                                   AutomationId="LabelAddFormulariosAppMasterPageMaster">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding NewFormClickedCommand }"
@@ -138,7 +148,8 @@
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="Center"
-                                   x:Name="ChangePasswordLabel">
+                                   x:Name="LabelChangePasswordAppMasterPageMaster"
+                                   AutomationId="LabelChangePasswordAppMasterPageMaster">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding ChangePasswordClickedCommand}"
@@ -172,20 +183,33 @@
 
 
     <MasterDetailPage.Detail>
-        <ContentPage Title="Fórum DEG" >
+        <ContentPage Title="Fórum DEG" AutomationId="PageMasterPageDetail">
             <ScrollView>
                 <StackLayout Padding="20" Margin="0,20,0,0">
                     <Button Text="Fóruns" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White"  
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
-                            VerticalOptions="Start" FontSize="Medium" Command="{Binding ForumsClickedCommand}"/>
+                            VerticalOptions="Start" FontSize="Medium" Command="{Binding ForumsClickedCommand}"
+                            AutomationId="ButtonForunsAppMasterPageDetail"
+                            x:Name="ButtonForunsAppMasterPageDetail"/>
                     <Button Text="Usuários" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="Center" FontSize="Medium" Command="{Binding UsersClickedCommand}"
-                            x:Name="UserButton"/>
+                            x:Name="ButtonUserButtonAppMasterPageDetail"
+                            AutomationId="ButtonUserButtonAppMasterPageDetail"/>
                     <Button Text="Formulários" TextColor="#a2a2a2" BorderColor="#2b2b2b" BackgroundColor="White" 
                             HeightRequest="100" WidthRequest="220" HorizontalOptions="Center" 
                             VerticalOptions="End" FontSize="Medium" Command="{Binding FormsClickedCommand}"
-                            x:Name="FormularioButton"/>
+                            x:Name="ButtonFormulariosAppMasterPageDetail"
+                            AutomationId="ButtonFormulariosAppMasterPageDetail"/>
+                    <StackLayout  Orientation="Horizontal">
+                        <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
+
+                        </StackLayout>
+
+                        <StackLayout>
+
+                        </StackLayout>
+                    </StackLayout>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -199,20 +223,24 @@
                         <StackLayout VerticalOptions="Center" Grid.Row="1" Grid.Column="0">
                             <Button  Text="Novo Fórum" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewForumClickedCommand}" 
-                                     x:Name="NewForumButtonOnPageMaster"
+                                     x:Name="ButtonNewForumAppMasterPageDetail"
+                                     AutomationId="ButtonNewForumAppMasterPageDetail"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
                             <Button  Text="Cadastrar Coordenador" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding RegisterUserClickedCommand}" 
-                                     x:Name="NewCoordenadorButtonOnPageMaster"
+                                     x:Name="ButtonNewCoordenadorAppMasterPageDetail"
+                                     AutomationId="ButtonNewCoordenadorAppMasterPageDetail"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
                             <Button  Text="Criar Formulário" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="White" 
                                      TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" Command="{Binding NewFormClickedCommand}" 
-                                     x:Name="NewFormularioButtonOnPageMaster"
+                                     x:Name="ButtonNewFormularioAppMasterPageDetail"
+                                     AutomationId="ButtonNewFormularioAppMasterPageDetail"
                                      IsVisible="{Binding ExtraButtonsVisibility}"/>
                         </StackLayout>
                         <StackLayout VerticalOptions="Center" HorizontalOptions="End" Grid.Row="1" Grid.Column="1">
-                            <Image     Source="plusbutton_icon.png"
-                                   Scale="0.75">
+                            <Image Source="plusbutton_icon.png"
+                                   Scale="0.75"
+                                   AutomationId="ButtonPlusAppMasterPageDetail">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer
                                     Command="{Binding PlusButtonClickedCommand}"

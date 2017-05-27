@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 namespace ForumDEG.ViewModels {
     public class UserEditViewModel : BaseViewModel {
 
+
         private readonly IPageService _pageService;
         private readonly Helpers.Administrator _administratorService;
         private readonly Helpers.Coordinator _coordinatorService;
@@ -133,7 +134,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void setOldAdministratorFields(string OldAdministratorId) {
-            //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
+           
 
             Debug.WriteLine("[Administrator edition]" + OldAdministratorId);
             var _oldAdministrator = await _administratorService.GetAdministratorAsync(OldAdministratorId);
@@ -146,9 +147,9 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void setOldCoordinatorFields(string OldCoordinatorId) {
+
             Debug.WriteLine("[Coordinator edition]" + OldCoordinatorId);
 
-            //var _oldForum = await ForumDatabase.getForumDB.Get(OldForumId);
             var _oldCoordinator = await _coordinatorService.GetCoordinatorAsync(OldCoordinatorId);
 
             NameIn = _oldCoordinator.Name;
@@ -214,6 +215,7 @@ namespace ForumDEG.ViewModels {
                 await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
             }
         }    
+    
 
         public async Task EditUser() {
 
@@ -242,6 +244,12 @@ namespace ForumDEG.ViewModels {
                 await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", "OK", "Cancelar");
             }
             }
+        }
+
+        public async void EditionFailed() {
+            await _pageService.DisplayAlert("Erro na Edição"
+                , "O usuário não foi editado. Você deve preencher todos os campos."
+                , "OK", "cancel");
         }
 
         public async void Cancel() {

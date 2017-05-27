@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.UserDetailPage"
              Title="Ver Usuário"
-             x:Name="SeeUserPage">
+             x:Name="PageUserDetailPage"
+             AutomationId="PageUserDetailPage">
+    
     <StackLayout>
 
         <Frame OutlineColor="Black" HasShadow="True"  Margin="20" BackgroundColor="White" >
@@ -15,11 +17,12 @@
                     <Label Text="{Binding Name}" FontSize="Large" TextColor="Black"
                                    HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                                    BackgroundColor="White" />
-                    
+
                     <Label Text="Editar Usuário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}">
-                        
+                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}"
+                                   x:Name="LabelEditarUsuarioUserDetailPage"
+                                   AutomationId="LabelEditarUsuarioUserDetailPage">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding EditCommand}"/>
                         </Label.GestureRecognizers>
@@ -47,7 +50,9 @@
 
                     <Label Text="Remover Usuário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}">
+                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}"
+                           x:Name="LabelRemoverUsuarioUserDetailPage"
+                           AutomationId="LabelRemoverUsuarioUserDetailPage">
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding DeleteCommand}"/>

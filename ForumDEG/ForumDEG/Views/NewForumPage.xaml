@@ -4,7 +4,8 @@
              x:Class="ForumDEG.Views.NewForumPage"
              NavigationPage.HasNavigationBar="True"
              Title="Novo Fórum"
-             x:Name="NewForunsPage">
+             x:Name="PageNewForunsPage"
+             AutomationId="PageNewForunsPage">
 
     <ScrollView>
         <StackLayout Padding="20">
@@ -27,13 +28,15 @@
                         TextColor="White"
                         BackgroundColor="Orange"
                         Command="{Binding CancelCommand}"
-                        x:Name="CancelButton"
-                        />
+                        x:Name="ButtonCancelarPageNewForunsPage"
+                        AutomationId="ButtonCancelarPageNewForunsPage"/>
+                
                 <Button Text="Criar fórum" 
                         TextColor="White"
                         BackgroundColor="Orange"
                         Clicked="OnNewForumButtonClicked"
-                        x:Name="NewForumButtonOnPageNewForum"/>
+                        x:Name="ButtonCriarForumPageNewForunsPage"
+                        AutomationId="ButtonCriarForumPageNewForunsPage"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>
