@@ -13,15 +13,24 @@ namespace ForumDEG {
             InitializeComponent();
 
             if (ForumDEG.Helpers.Settings.IsUserLogged) {
-                MainPage = new NavigationPage(new AppMasterPage()) {
-                    BarBackgroundColor = Color.FromHex("#ff8924")
-                };
+                if (Helpers.Settings.IsUserAdmin) {
+                    MainPage = new NavigationPage(new AppMasterPage()) {
+                        BarBackgroundColor = Color.FromHex("#ff8924")
+                    };
+                }
+                else if (Helpers.Settings.IsUserCoord) {
+                    MainPage = new NavigationPage(new CoordinatorTabbedPage()) {
+                        BarBackgroundColor = Color.FromHex("#ff8924")
+                    };
+                }
             } else {
                 MainPage = new NavigationPage(new LoginPage()) {
                     BarBackgroundColor = Color.FromHex("#ff8924")
                 };
             }
         }
+
+
 
         protected override void OnStart() {
             if (AdministratorDatabase.getAdmDB.GetAll().Result.Count == 0) {

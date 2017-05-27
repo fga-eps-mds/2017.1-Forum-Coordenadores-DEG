@@ -13,7 +13,7 @@ namespace ForumDEG.Utils
 
         private static ForumDatabase _forumDatabase = null;
 
-        private ForumDatabase(string databasePath)
+        public ForumDatabase(string databasePath)
         {
             _database = new SQLiteAsyncConnection(databasePath);
 

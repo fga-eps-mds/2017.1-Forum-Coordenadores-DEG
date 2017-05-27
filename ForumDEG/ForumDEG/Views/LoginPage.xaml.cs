@@ -18,10 +18,20 @@ namespace ForumDEG.Views {
 
         public async void Validate() {
             if (await _viewModel.ValidateLogin()) {
-                Navigation.InsertPageBefore(new AppMasterPage(), this);
-                await Navigation.PopAsync();
+                if (Helpers.Settings.IsUserAdmin) {
+                    Navigation.InsertPageBefore(new AppMasterPage(), this);
+                    await Navigation.PopAsync();
+                }
+                else {
+                    Navigation.InsertPageBefore(new CoordinatorTabbedPage(), this);
+                    await Navigation.PopAsync();
+                }
             }
-        } 
+        }
+
+        protected override bool OnBackButtonPressed() {
+            return false;
+        }
 
         public void LoginClicked() {
             Validate();

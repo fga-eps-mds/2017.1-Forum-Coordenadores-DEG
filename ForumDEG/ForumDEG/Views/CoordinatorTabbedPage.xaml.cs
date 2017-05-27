@@ -1,5 +1,4 @@
-﻿using ForumDEG.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +9,8 @@ using Xamarin.Forms.Xaml;
 
 namespace ForumDEG.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AppMasterPage : MasterDetailPage {
-
-        private AppMasterViewModel viewModel = new AppMasterViewModel(new PageService());
-
-        public AppMasterPage() {
-            BindingContext = viewModel;
+    public partial class CoordinatorTabbedPage : TabbedPage {
+        public CoordinatorTabbedPage() {
             InitializeComponent();
         }
 
@@ -29,4 +24,3 @@ namespace ForumDEG.Views {
         }
     }
 }
-

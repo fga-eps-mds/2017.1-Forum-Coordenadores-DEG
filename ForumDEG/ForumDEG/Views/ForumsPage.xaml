@@ -4,7 +4,7 @@
              x:Class="ForumDEG.Views.ForumsPage"
              Padding="15, 25, 15, 25"
              BackgroundColor="White"
-             Title="Foruns"
+             Title="Fóruns"
              x:Name="ForunsListPage">
     
     <ScrollView>

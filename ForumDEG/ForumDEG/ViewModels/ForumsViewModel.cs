@@ -40,7 +40,7 @@ namespace ForumDEG.ViewModels {
             if (forum == null)
                 return;
             SelectedForum = forum;
-            await _pageService.PushAsync(new ForumDetailPage());
+            await _pageService.PushAsync(new ForumDetailPage(SelectedForum));
         }
 
         public async void UpdateForumsList() {

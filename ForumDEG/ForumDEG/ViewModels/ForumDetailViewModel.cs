@@ -6,7 +6,6 @@ using Xamarin.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
 using ForumDEG.Interfaces;
-using System.Diagnostics;
 
 namespace ForumDEG.ViewModels {
     public class ForumDetailViewModel : PageService, INotifyPropertyChanged {
