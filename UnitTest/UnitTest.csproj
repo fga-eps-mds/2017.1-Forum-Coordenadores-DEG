@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppInitializer.cs" />
-    <Compile Include="LoginAcceptanceTest.cs" />
+    <None Include="LoginAcceptanceTest.cs" />
     <Compile Include="AdministratorParserTests.cs" />
     <Compile Include="CoordinatorParserTests.cs" />
     <Compile Include="FormParserTests.cs" />
