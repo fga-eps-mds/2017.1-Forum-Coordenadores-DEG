@@ -49,21 +49,10 @@
                                    BackgroundColor="White" IsVisible="{Binding IsCoordinator}"/>
 
                     <Label Text="Remover Usuário" TextColor="#3366BB" FontSize="Small"
-<<<<<<< HEAD
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-<<<<<<< HEAD
-                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}">
-=======
-                                   BackgroundColor="White" IsVisible="{Binding IsLoggedUserAdmin}"
+                                   BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}"
                            x:Name="LabelRemoverUsuarioUserDetailPage"
                            AutomationId="LabelRemoverUsuarioUserDetailPage">
->>>>>>> [UITest]Adding id for uitest.
-=======
-                           HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                           BackgroundColor="White" IsVisible="{Binding IsCurrentUserAdmin}"
-                           x:Name="LabelRemoverUsuarioUserDetailPage"
-                           AutomationId="LabelRemoverUsuarioUserDetailPage">
->>>>>>> [UITest]Adding id for uitest.
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding DeleteCommand}"/>
