@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTest.cs" />
+    <Compile Include="AppInitializer.cs" />
+    <Compile Include="LoginAcceptanceTest.cs" />
     <Compile Include="AdministratorParserTests.cs" />
     <Compile Include="CoordinatorParserTests.cs" />
     <Compile Include="FormParserTests.cs" />

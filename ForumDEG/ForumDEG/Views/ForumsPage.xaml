@@ -26,7 +26,7 @@
                             <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
                                 <Label Text="{Binding Title}" TextColor="Black" 
                                        x:Name="{Binding Title}"
-                                       AutomationId="{Binding Title}"/>
+                                       AutomationId="LbTitleForumsPage"/>
                                 <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Gray"/>
                             </StackLayout>
 
