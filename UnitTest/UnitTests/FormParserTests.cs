@@ -67,8 +67,8 @@ namespace Tests {
 
             var questions = formBody["multipleChoices"].ToObject<List<JObject>>();
 
-            multipleAnswersList.Add(questions[0]["multiple-anwsers"].ToObject<bool>());
-            multipleAnswersList.Add(questions[1]["multiple-anwsers"].ToObject<bool>());
+            multipleAnswersList.Add(questions[0]["multiple_anwsers"].ToObject<bool>());
+            multipleAnswersList.Add(questions[1]["multiple_anwsers"].ToObject<bool>());
 
             Assert.AreEqual(_question1.MultipleAnswers,multipleAnswersList[0]);
             Assert.AreEqual(_question2.MultipleAnswers, multipleAnswersList[1]);
