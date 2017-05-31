@@ -23,6 +23,7 @@ namespace ForumDEG.Helpers {
 
                 if (response.IsSuccessStatusCode) {
                     var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Form API]: " + content);
                     return FormParser.GetFormParser(content, id);
                 }
 
