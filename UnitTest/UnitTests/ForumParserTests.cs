@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
-namespace UnitTest {
+namespace Tests {
     class ForumParserTests {
         public static string content = "{\"date\":\"2017-05-20T00:00:00.000Z\",\"hour\":43200,\"id\":\"b3153003-b444-4d94-b4a5-b3b749ae6726\",\"place\":\"Na casa da árvore\",\"schedules\":\"O forum será sobre a grande obra prima de adventure time e a terra de Ooo\",\"theme\":\"Adventure Time\"}";
         public static string contentList = "[" + content + "," + content + "]";

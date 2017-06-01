@@ -6,7 +6,7 @@ using ForumDEG.Interfaces;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
 
-namespace UnitTest {
+namespace Tests {
     public class NewForumViewModelTests {
         private NewForumViewModel viewModel;
         private Mock<IUserDialogs> _mockDialogs;

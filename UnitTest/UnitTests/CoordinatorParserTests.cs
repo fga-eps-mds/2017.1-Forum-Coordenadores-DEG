@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
-namespace UnitTest {
+namespace Tests {
     class CoordinatorParserTests {
         public static string content = "{\"course\":\"Engenharia de Software\",\"email\":\"finn@thehuman.ooo\",\"name\":\"Finn, The Human\",\"password\":\"PB12345\",\"registration\":\"123456789\"}";
         public static string contentList = "[" + content + ",{\"course\":\"Engenharia de Software\",\"email\":\"finn@thehuman.ooo\",\"name\":\"Finn, The Human\",\"password\":\"PB12345\",\"registration\":\"12345678\"}" + "]";

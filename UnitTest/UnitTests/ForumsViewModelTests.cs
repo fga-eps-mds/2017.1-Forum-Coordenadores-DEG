@@ -4,7 +4,7 @@ using ForumDEG.Views;
 using Moq;
 using NUnit.Framework;
 
-namespace UnitTest {
+namespace Tests {
     [TestFixture()]
     class ForumsViewModelTests {
         private Mock<IPageService> _pageService;

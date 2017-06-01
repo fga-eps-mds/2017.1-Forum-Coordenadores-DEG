@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using ForumDEG.ViewModels;
 using ForumDEG.Interfaces;
 
-namespace UnitTest {
+namespace Tests {
     class UserEditTests {
 
         private UserEditViewModel viewModel;

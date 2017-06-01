@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Http;
 
-namespace UnitTest {
+namespace Tests {
     class FormParserTests {
         private NewFormViewModel form;
         private Mock<IPageService> _pageService;

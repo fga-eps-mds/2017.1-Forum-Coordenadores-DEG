@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Moq;
 using ForumDEG.Interfaces;
 
-namespace UnitTest {
+namespace Tests {
     class CoordinatorMasterPageTests {
         private CoordinatorMasterPageViewModel _viewModel;
         private Mock<IPageService> _pageServiceMock;

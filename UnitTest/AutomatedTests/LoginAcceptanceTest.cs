@@ -5,7 +5,7 @@ using Xamarin.UITest.Android;
 using Xamarin.UITest.Queries;
 
 
-namespace UnitTest
+namespace Tests
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
@@ -21,16 +21,27 @@ namespace UnitTest
         [SetUp]
         public void BeforeEachTest() {
             app = AppInitializer.StartApp(platform);
+            app.WaitForElement("ImBackgroundLoginPage");
         }
 
         [Test]
-        public void LoginSuccess() {
+        public void LoginCoordinatorSuccess() {
             app.EnterText("EtRegistrationLoginPage", "123456789");
             app.EnterText("EtPasswordLoginPage", "Pb1234567");
             app.Tap("BtLoginLoginPage");
 
             Assert.IsNotNull(app.Query("PageUsersPage"));
+            app.Repl();
         }
+
+        //[Test]
+        //public void LoginAdministratorSuccess() {
+        //    app.EnterText("EtRegistrationLoginPage", "123456789");
+        //    app.EnterText("EtPasswordLoginPage", "Pb1234567");
+        //    app.Tap("BtLoginLoginPage");
+
+        //    Assert.IsNotNull(app.Query("PageUsersPage"));
+        //}
 
         //[Test]
         //public void LoginFailure() {

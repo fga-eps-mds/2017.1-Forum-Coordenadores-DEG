@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTest {
+namespace Tests {
     class LoginViewModelTests {
         private LoginViewModel _viewModel;
         private Mock<IPageService> _pageService;
