@@ -27,19 +27,24 @@ namespace ForumDEG.Helpers {
                     string questionTitle = question["question"].ToString();
                     bool multipleAnswers = question["multiple_anwsers"].ToObject<bool>();
                     Debug.WriteLine("[Form Parser] - GET - Multiple answers: " + multipleAnswers.ToString());
-                    List<string> optionsList = new List<string>();
+                    List<Option> optionsList = new List<Option>();
 
                     JArray options = (JArray)question["options"];
-                    foreach (string option in options) {
+                    foreach (string optionText in options) {
+                        Option option = new Option {
+                            OptionText = optionText
+                        };
                         optionsList.Add(option);
-                        Debug.WriteLine("[Form Parser] - GET - Option: " + option);
+                        Debug.WriteLine("[Form Parser] - GET - Option: " + option.OptionText);
                     }
                     Debug.WriteLine("[Form Parser] - GET - Question Title: " + questionTitle);
-                    multipleChoiceQuestions.Add(new MultipleChoiceQuestion {
-                        Question = questionTitle,
-                        MultipleAnswers = multipleAnswers,
-                        Options = optionsList
-                    });
+
+                    MultipleChoiceQuestion multipleQuestion = new MultipleChoiceQuestion(questionTitle, multipleAnswers);
+                    foreach (Option option in optionsList) {
+                        multipleQuestion.Add(option);
+                    }
+
+                    multipleChoiceQuestions.Add(multipleQuestion);
                 }
             }
             
@@ -84,19 +89,24 @@ namespace ForumDEG.Helpers {
                         string questionTitle = question["question"].ToString();
                         bool multipleAnswers = question["multiple_anwsers"].ToObject<bool>();
                         Debug.WriteLine("[Form Parser] - GET - Multiple answers: " + multipleAnswers.ToString());
-                        List<string> optionsList = new List<string>();
 
+                        List<Option> optionsList = new List<Option>();
                         JArray options = (JArray)question["options"];
-                        foreach (string option in options) {
+                        foreach (string optionText in options) {
+                            Option option = new Option {
+                                OptionText = optionText
+                            };
                             optionsList.Add(option);
-                            Debug.WriteLine("[Form Parser] - GET - Option: " + option);
+                            Debug.WriteLine("[Form Parser] - GET - Option: " + option.OptionText);
                         }
                         Debug.WriteLine("[Form Parser] - GET - Question Title: " + questionTitle);
-                        multipleChoiceQuestions.Add(new MultipleChoiceQuestion {
-                            Question = questionTitle,
-                            MultipleAnswers = multipleAnswers,
-                            Options = optionsList
-                        });
+
+                        MultipleChoiceQuestion multipleQuestion = new MultipleChoiceQuestion(questionTitle, multipleAnswers);
+                        foreach (Option option in optionsList) {
+                            multipleQuestion.Add(option);
+                        }
+
+                        multipleChoiceQuestions.Add(multipleQuestion);
                     }
                 }
 

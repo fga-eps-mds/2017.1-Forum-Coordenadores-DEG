@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ForumDEG.Models {
-    public class MultipleChoiceQuestion {
+    public class MultipleChoiceQuestion : ObservableCollection<Option> {
         public string Question { get; set; }
-        public List<string> Options { get; set; }
         public bool MultipleAnswers { get; set; }
+
+        public MultipleChoiceQuestion(string question, bool multipleAnswers) {
+            Question = question;
+            MultipleAnswers = multipleAnswers;
+        }
     }
 }

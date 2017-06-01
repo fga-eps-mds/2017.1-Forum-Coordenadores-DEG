@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System;
 using System.Diagnostics;
+using ForumDEG.Views.Forms;
 
 namespace ForumDEG.ViewModels {
     class AppMasterViewModel : INotifyPropertyChanged {

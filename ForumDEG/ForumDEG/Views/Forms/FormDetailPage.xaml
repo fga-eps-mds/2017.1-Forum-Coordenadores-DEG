@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ForumDEG.Views.Forms.FormDetailPage"
+             Title="Formulário">
+    <ScrollView>
+        <StackLayout Margin="20">
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
+                <StackLayout>
+                    <Label Text="{Binding Title}" 
+                       TextColor="Black" 
+                       FontSize="Large"
+                       HorizontalOptions="Start" 
+                       VerticalOptions="StartAndExpand"
+                       BackgroundColor="White" />
+                    <Label Text="Perguntas Discursivas:"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           HorizontalOptions="Start" 
+                           VerticalOptions="StartAndExpand"
+                           BackgroundColor="White"
+                           />
+                    <ListView
+                        ItemsSource="{Binding DiscursiveQuestions}"
+                        HasUnevenRows="True"
+                        IsEnabled="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding Question}"/>
+                                        <Entry Placeholder="Resposta"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Label Text="Perguntas de Múltipla Escolha:"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           HorizontalOptions="Start" 
+                           VerticalOptions="StartAndExpand"
+                           BackgroundColor="White" />
+                    <ListView
+                        x:Name="GroupedView"
+                        IsEnabled="False"
+                        GroupDisplayBinding="{Binding Question}"
+                        IsGroupingEnabled="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding OptionText}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

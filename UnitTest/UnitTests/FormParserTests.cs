@@ -24,7 +24,7 @@ namespace Tests {
         private static string title = "Form que vai dar bom";
         private static string id = "3";
         private static List<ForumDEG.Models.DiscursiveQuestion> discursive;
-        private static List<ForumDEG.Models.MultipleChoiceQuestion> multiplechoice;
+        private static List<ForumDEG.Models.MultipleChoiceQuestion> multipleChoice;
 
         [SetUp()]
         public void SetUp() {
@@ -34,16 +34,28 @@ namespace Tests {
             discursive = new List<ForumDEG.Models.DiscursiveQuestion>();
             discursive.Add(new ForumDEG.Models.DiscursiveQuestion { Question = "Chama, chama, chama" });
 
-            multiplechoice = new List<ForumDEG.Models.MultipleChoiceQuestion>();
-            multiplechoice.Add(new ForumDEG.Models.MultipleChoiceQuestion {
-                MultipleAnswers = false,
-                Question = "Funcionaaa",
-                Options = new List<string> { "fun", "ci", "o", "na" }
+            multipleChoice = new List<ForumDEG.Models.MultipleChoiceQuestion>();
+            multipleChoice.Add(new ForumDEG.Models.MultipleChoiceQuestion("Funcionaaa", false) {
+                new ForumDEG.Models.Option{
+                    OptionText = "fun"
+                },
+                new ForumDEG.Models.Option{
+                    OptionText = "ci"
+                },
+                new ForumDEG.Models.Option{
+                    OptionText = "o"
+                },
+                new ForumDEG.Models.Option{
+                    OptionText = "na"
+                },
             });
-            multiplechoice.Add(new ForumDEG.Models.MultipleChoiceQuestion {
-                MultipleAnswers = true,
-                Question = "lalala",
-                Options = new List<string> { "uma", "duas"}
+            multipleChoice.Add(new ForumDEG.Models.MultipleChoiceQuestion("lalala", true) {
+                new ForumDEG.Models.Option {
+                    OptionText = "uma"
+                },
+                new ForumDEG.Models.Option {
+                    OptionText = "duas"
+                },
             });
 
             form.Title = "Titulo";
@@ -82,10 +94,12 @@ namespace Tests {
            for(int i = 0; i < discursive.Count(); i++) {
                 Assert.AreEqual(discursive[i].Question, test.DiscursiveQuestions[i].Question);
             }
-            for (int i = 0; i < discursive.Count(); i++) {
-                Assert.AreEqual(multiplechoice[i].Question, test.MultipleChoiceQuestions[i].Question);
-                Assert.AreEqual(multiplechoice[i].MultipleAnswers, test.MultipleChoiceQuestions[i].MultipleAnswers);
-                Assert.AreEqual(multiplechoice[i].Options, test.MultipleChoiceQuestions[i].Options);
+            for (int i = 0; i < multipleChoice.Count(); i++) {
+                Assert.AreEqual(multipleChoice[i].Question, test.MultipleChoiceQuestions[i].Question);
+                Assert.AreEqual(multipleChoice[i].MultipleAnswers, test.MultipleChoiceQuestions[i].MultipleAnswers);
+                for (int j = 0; j < multipleChoice[i].Count; j++) {
+                    Assert.AreEqual(multipleChoice[i][j].OptionText, test.MultipleChoiceQuestions[i][j].OptionText);
+                }
             }
         }
 
