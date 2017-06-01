@@ -76,6 +76,8 @@
     <Compile Include="ViewModels\AppMasterViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\FormDetailViewModel.cs" />
+    <Compile Include="ViewModels\FormsViewModel.cs" />
     <Compile Include="ViewModels\ForumDetailViewModel.cs" />
     <Compile Include="ViewModels\ForumEditViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -94,6 +96,9 @@
     </Compile>
     <Compile Include="Views\CoordinatorTabbedPage.xaml.cs">
       <DependentUpon>CoordinatorTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormsPage.xaml.cs">
+      <DependentUpon>FormsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Forms\NewDiscursiveQuestionPage.xaml.cs">
       <DependentUpon>NewDiscursiveQuestionPage.xaml</DependentUpon>
@@ -307,6 +312,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\CoordinatorTabbedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FormsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

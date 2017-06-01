@@ -84,7 +84,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task FormsClicked() {
-            await _pageService.PushAsync(new ForumsPage());
+            await _pageService.PushAsync(new FormsPage());
         }
 
         private async Task NewForumClicked() {
