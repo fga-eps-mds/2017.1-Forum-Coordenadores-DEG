@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +36,7 @@ namespace ForumDEG.Views.Forms {
                             OptionText = "Opção 2"
                         }
                     },
-                    new Models.MultipleChoiceQuestion("Questão 2", true) {
+                    new Models.MultipleChoiceQuestion("Questão 2", false) {
                         new Option {
                             OptionText = "Opção 1"
                         },
@@ -47,7 +49,8 @@ namespace ForumDEG.Views.Forms {
 
             BindingContext = _viewModel;
             InitializeComponent();
-            GroupedView.ItemsSource = _viewModel.MultipleChoiceQuestions;
+            GroupedView.ItemsSource = _viewModel.MultipleAnswersQuestions;
+            SingleQuestionList.ItemsSource = _viewModel.SingleAnswerQuestions;
         }
     }
 }

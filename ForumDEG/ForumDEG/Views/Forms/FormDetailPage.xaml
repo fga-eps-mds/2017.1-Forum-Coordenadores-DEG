@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.Forms.FormDetailPage"
-             Title="Formulário">
+             Title="Formulário"
+             AutomationId="PageFormDetailPage"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms">
     <ScrollView>
         <StackLayout Margin="20">
             <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
@@ -23,18 +25,21 @@
                     <ListView
                         ItemsSource="{Binding DiscursiveQuestions}"
                         HasUnevenRows="True"
-                        IsEnabled="False">
+                        IsEnabled="False"
+                        >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout>
                                         <Label Text="{Binding Question}"/>
-                                        <Entry Placeholder="Resposta"/>
+                                        <Entry Placeholder="Resposta"
+                                               AutomationId="EntryDiscursiveAnswerFormDetailPage"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+
                     <Label Text="Perguntas de Múltipla Escolha:"
                            TextColor="Black"
                            FontSize="Medium"
@@ -42,6 +47,7 @@
                            VerticalOptions="StartAndExpand"
                            BackgroundColor="White" />
                     <ListView
+                        HasUnevenRows="True"
                         x:Name="GroupedView"
                         IsEnabled="False"
                         GroupDisplayBinding="{Binding Question}"
@@ -49,8 +55,25 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout>
-                                        <Label Text="{Binding OptionText}"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <controls:CheckBox DefaultText="{Binding OptionText}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView
+                        HasUnevenRows="True"
+                        x:Name="SingleQuestionList"
+                        IsEnabled="False"
+                        GroupDisplayBinding="{Binding Question}"
+                        IsGroupingEnabled="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <!-- TODO: Find out how to bind with options -->
+                                        <controls:BindableRadioGroup/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

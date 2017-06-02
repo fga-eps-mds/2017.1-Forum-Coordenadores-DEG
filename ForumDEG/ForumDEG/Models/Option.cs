@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace ForumDEG.Models {
     public class Option {
         public string OptionText { get; set; }
+        public bool IsSelected { get; set; }
     }
 }
