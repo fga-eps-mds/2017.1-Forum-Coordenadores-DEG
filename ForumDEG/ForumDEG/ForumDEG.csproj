@@ -67,8 +67,10 @@
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ForumConfirmation.cs" />
     <Compile Include="Models\ForumNotification.cs" />
+    <Compile Include="Models\MultipleAnswersQuestion.cs" />
     <Compile Include="Models\MultipleChoiceQuestion.cs" />
     <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\SingleAnswerQuestion.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAO\CoordinatorDatabase.cs" />

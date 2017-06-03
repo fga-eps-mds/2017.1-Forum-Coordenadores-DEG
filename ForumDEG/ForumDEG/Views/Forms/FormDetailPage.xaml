@@ -7,46 +7,42 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms">
     <ScrollView>
         <StackLayout Margin="20">
-            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
-                <StackLayout>
-                    <Label Text="{Binding Title}" 
+            <StackLayout>
+                <Label Text="{Binding Title}" 
                        TextColor="Black" 
+                       FontAttributes="Bold"
                        FontSize="Large"
                        HorizontalOptions="Start" 
                        VerticalOptions="StartAndExpand"
-                       BackgroundColor="White" />
-                    <Label Text="Perguntas Discursivas:"
-                           TextColor="Black"
-                           FontSize="Medium"
-                           HorizontalOptions="Start" 
-                           VerticalOptions="StartAndExpand"
-                           BackgroundColor="White"
-                           />
-                    <ListView
+                       BackgroundColor="Transparent" />
+            </StackLayout>
+            <ListView
                         ItemsSource="{Binding DiscursiveQuestions}"
                         HasUnevenRows="True"
                         IsEnabled="False"
                         >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout>
-                                        <Label Text="{Binding Question}"/>
-                                        <Entry Placeholder="Resposta"
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
+                                <StackLayout>
+                                    <Label Text="{Binding Question}"
+                                           TextColor="Black"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"/>
+                                    <Entry Placeholder="Resposta"
                                                AutomationId="EntryDiscursiveAnswerFormDetailPage"/>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-
-                    <Label Text="Perguntas de Múltipla Escolha:"
-                           TextColor="Black"
-                           FontSize="Medium"
-                           HorizontalOptions="Start" 
-                           VerticalOptions="StartAndExpand"
-                           BackgroundColor="White" />
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout>
+                <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
                     <ListView
+                        SeparatorVisibility="Default"
+                        SeparatorColor="Gray"
                         HasUnevenRows="True"
                         x:Name="GroupedView"
                         IsEnabled="False"
@@ -55,32 +51,65 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal">
+                                    <StackLayout  Margin="10">
                                         <controls:CheckBox DefaultText="{Binding OptionText}"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
-                    <ListView
-                        HasUnevenRows="True"
-                        x:Name="SingleQuestionList"
-                        IsEnabled="False"
-                        GroupDisplayBinding="{Binding Question}"
-                        IsGroupingEnabled="True">
-                        <ListView.ItemTemplate>
+                        <ListView.GroupHeaderTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal">
-                                        <!-- TODO: Find out how to bind with options -->
-                                        <controls:BindableRadioGroup/>
+                                    <StackLayout Margin="10">
+                                        <Label Text="{Binding Question}" 
+                                               TextColor="Black"
+                                               FontSize="Medium"
+                                               FontAttributes="Bold"
+                                               />
                                     </StackLayout>
                                 </ViewCell>
+
                             </DataTemplate>
-                        </ListView.ItemTemplate>
+                        </ListView.GroupHeaderTemplate>
                     </ListView>
-                </StackLayout>
-            </Frame>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout>
+                <ListView
+                        HasUnevenRows="True"
+                        x:Name="SingleQuestionList"
+                        IsEnabled="False">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
+                                    <StackLayout>
+                                        <Label Text="{Binding Question}" 
+                                               TextColor="Black"
+                                               FontSize="Medium"
+                                               FontAttributes="Bold"
+                                               />
+                                        <controls:BindableRadioGroup ItemsSource="{Binding Options}"
+                                                                     Grid.Row="1"/>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="End" 
+                         Margin="10">
+                <Button Text="Cancelar" 
+                        TextColor="White"
+                        BackgroundColor="Orange"
+                        />
+                <Button Text="Submeter" 
+                        TextColor="White"
+                        BackgroundColor="Orange"/>
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

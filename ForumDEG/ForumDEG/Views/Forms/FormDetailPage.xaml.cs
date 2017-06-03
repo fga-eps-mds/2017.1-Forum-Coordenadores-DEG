@@ -18,7 +18,7 @@ namespace ForumDEG.Views.Forms {
 
         public FormDetailPage() {
             _viewModel = new ViewModels.FormDetailViewModel(new Models.Form {
-                Title = "Teste",
+                Title = "Formulário",
                 DiscursiveQuestions = new List<Models.DiscursiveQuestion> {
                     new Models.DiscursiveQuestion {
                         Question = "Pergunta discursiva"
@@ -27,30 +27,43 @@ namespace ForumDEG.Views.Forms {
                         Question = "Outra pergunta"
                     }
                 },
-                MultipleChoiceQuestions = new List<Models.MultipleChoiceQuestion> {
-                    new Models.MultipleChoiceQuestion("Questão 1", true) {
-                        new Option {
-                            OptionText = "Opção 1"
-                        },
-                        new Option {
-                            OptionText = "Opção 2"
-                        }
+                MultipleChoiceQuestions = new List<MultipleChoiceQuestion>()
+            });
+
+            List<MultipleAnswersQuestion> multipleQuestions = new List<MultipleAnswersQuestion> {
+                new MultipleAnswersQuestion("Questão 01") {
+                    new Option {
+                        OptionText = "Opção 01"
                     },
-                    new Models.MultipleChoiceQuestion("Questão 2", false) {
-                        new Option {
-                            OptionText = "Opção 1"
-                        },
-                        new Option {
-                            OptionText = "Opção 2"
-                        }
+                    new Option {
+                        OptionText = "Opção 02"
+                    }
+                },
+                new MultipleAnswersQuestion("Questão 02") {
+                    new Option {
+                        OptionText = "Outra Opção"
+                    },
+                    new Option {
+                        OptionText = "E outra"
                     }
                 }
-            });
+            };
+
+            List<SingleAnswerQuestion> singleQuestions = new List<SingleAnswerQuestion> {
+                new SingleAnswerQuestion {
+                    Question = "Questão Radio",
+                    Options = new ObservableCollection<string> { "Uma", "Duas", "Três" }
+                },
+                new SingleAnswerQuestion {
+                    Question = "Radio questão",
+                    Options = new ObservableCollection<string> {"Três", "Dois", "Um"}
+                }
+            };
 
             BindingContext = _viewModel;
             InitializeComponent();
-            GroupedView.ItemsSource = _viewModel.MultipleAnswersQuestions;
-            SingleQuestionList.ItemsSource = _viewModel.SingleAnswerQuestions;
+            GroupedView.ItemsSource = multipleQuestions;
+            SingleQuestionList.ItemsSource = singleQuestions;
         }
     }
 }
