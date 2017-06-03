@@ -16,9 +16,10 @@ namespace ForumDEG.Views.Forms {
     public partial class FormDetailPage : ContentPage {
         private ViewModels.FormDetailViewModel _viewModel;
 
-        public FormDetailPage() {
+        public FormDetailPage(ViewModels.FormDetailViewModel viewModel) {
             try {
-                _viewModel = new ViewModels.FormDetailViewModel(new Models.Form {
+                _viewModel = viewModel;
+                /*_viewModel = new ViewModels.FormDetailViewModel(new Models.Form {
                     Title = "Formulário",
                     DiscursiveQuestions = new List<Models.DiscursiveQuestion> {
                     new Models.DiscursiveQuestion {
@@ -62,7 +63,7 @@ namespace ForumDEG.Views.Forms {
                         }
                     }
                 }
-                });
+                });*/
             } catch (Exception ex) {
                 Debug.WriteLine("[Form Page]" + ex.StackTrace + ex.Message);
             }

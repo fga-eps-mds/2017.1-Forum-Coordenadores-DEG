@@ -3664,14 +3664,10 @@ namespace ForumDEG.Droid
 			public const int abc_vector_test = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int avd_hide_password = 2130837587;
+			public const int ad16 = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int avd_show_password = 2130837588;
-			
-			// aapt resource value: 0x7f020055
-			public const int changepassword_icon = 2130837589;
-			public const int ad16 = 2130837587;
+			public const int avd_hide_password = 2130837588;
 			
 			// aapt resource value: 0x7f020121
 			public const int avd_hide_password_1 = 2130837793;
@@ -3681,6 +3677,9 @@ namespace ForumDEG.Droid
 			
 			// aapt resource value: 0x7f020123
 			public const int avd_hide_password_3 = 2130837795;
+			
+			// aapt resource value: 0x7f020055
+			public const int avd_show_password = 2130837589;
 			
 			// aapt resource value: 0x7f020124
 			public const int avd_show_password_1 = 2130837796;

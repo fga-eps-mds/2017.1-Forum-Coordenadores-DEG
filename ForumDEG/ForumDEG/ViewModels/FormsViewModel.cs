@@ -42,7 +42,7 @@ namespace ForumDEG.ViewModels {
             if (form == null)
                 return;
             SelectedForm = form;
-            //await _pageService.PushAsync(new FormDetailPage(SelectedForm));
+            await _pageService.PushAsync(new Views.Forms.FormDetailPage(SelectedForm));
         }
 
         public async void UpdateFormsList() {
@@ -51,17 +51,19 @@ namespace ForumDEG.ViewModels {
                 var formsList = await _formService.GetFormsAsync();
 
                 foreach (Form _form in formsList) {
-                    Forms.Add(new FormDetailViewModel() {
+                    var formViewModel = new FormDetailViewModel() {
                         Id = _form.Id,
                         RemoteId = _form.RemoteId,
                         Title = _form.Title,
                         DiscursiveQuestions = _form.DiscursiveQuestions,
                         MultipleChoiceQuestions = _form.MultipleChoiceQuestions
-                    });
+                    };
+                    formViewModel.SplitMultipleChoiceQuestions();
+                    Forms.Add(formViewModel);
                 }
             }
             catch (Exception ex) {
-                Debug.WriteLine("[Update forms list] " + ex.Message);
+                Debug.WriteLine("[Update forms list] " + ex.Message + "\n" + ex.StackTrace);
                 await _pageService.DisplayAlert("Falha ao carregar formulários",
                                           "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
                                           "Ok", "Cancel");

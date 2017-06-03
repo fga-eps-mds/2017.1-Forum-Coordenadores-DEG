@@ -2,6 +2,7 @@ using ForumDEG.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,21 +18,16 @@ namespace ForumDEG.ViewModels {
         }
 
         public List<Models.DiscursiveQuestion> DiscursiveQuestions { get; set; }
+        public List<Models.MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
         public List<Models.MultipleAnswersQuestion> MultipleAnswersQuestions;
         public List<Models.SingleAnswerQuestion> SingleAnswerQuestions;
 
-        public FormDetailViewModel(Models.Form form) {
-            _form = form;
-
-            Title = _form.Title;
-            DiscursiveQuestions = _form.DiscursiveQuestions;
+        public FormDetailViewModel() {
             MultipleAnswersQuestions = new List<Models.MultipleAnswersQuestion>();
             SingleAnswerQuestions = new List<Models.SingleAnswerQuestion>();
-
-            SplitMultipleChoiceQuestions();
         }
         public void SplitMultipleChoiceQuestions() {
-            var multipleChoiceQuestions = _form.MultipleChoiceQuestions;
+            var multipleChoiceQuestions = MultipleChoiceQuestions;
 
             foreach (Models.MultipleChoiceQuestion multipleQuestion in multipleChoiceQuestions) {
                 if (multipleQuestion.MultipleAnswers) {
@@ -51,6 +47,7 @@ namespace ForumDEG.ViewModels {
                     SingleAnswerQuestions.Add(singleAnswerQuestion);
                 }
             }
+
         }
     }
 }
