@@ -5,7 +5,7 @@ using Xamarin.UITest.Android;
 using Xamarin.UITest.Queries;
 
 
-namespace Tests
+namespace UnitTest
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
@@ -21,41 +21,27 @@ namespace Tests
         [SetUp]
         public void BeforeEachTest() {
             app = AppInitializer.StartApp(platform);
-            app.WaitForElement("ImBackgroundLoginPage");
         }
 
         [Test]
-        public void LoginCoordinatorSuccess() {
+        public void ListsFormsForCoordinators() {
             app.EnterText("EtRegistrationLoginPage", "123456789");
             app.EnterText("EtPasswordLoginPage", "Pb1234567");
             app.Tap("BtLoginLoginPage");
             app.WaitForNoElement("BtLoginLoginPage");
-            Assert.IsNotNull(app.Query("Início"));
-            //app.Repl();
+            app.Tap("Formulários");
+            Assert.IsNotNull(app.Query("Ver detalhes"));
         }
 
         [Test]
-        public void LoginAdministratorSuccess() {
+        public void ListsFormsForAdministrators() {
             app.EnterText("EtRegistrationLoginPage", "12345678");
             app.EnterText("EtPasswordLoginPage", "Pb1234567");
             app.Tap("BtLoginLoginPage");
-
             app.WaitForNoElement("BtLoginLoginPage");
-            Assert.IsNotNull(app.Query("Formulários"));
+            app.Tap("Formulários");
+            Assert.IsNotNull(app.Query("Ver detalhes"));
         }
 
-        [Test]
-        public void LoginFailureBlankSpaces() {
-            app.Tap("BtLoginLoginPage");
-            Assert.IsNotNull("OK");
-        }
-
-        [Test]
-        public void LoginFailure() {
-            app.EnterText("EtRegistrationLoginPage", "987654321");
-            app.EnterText("EtPasswordLoginPage", "Pb1234567");
-            app.Tap("BtLoginLoginPage");
-            Assert.IsNotNull("OK");
-        }
     }
 }

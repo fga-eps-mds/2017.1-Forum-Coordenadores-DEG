@@ -12,7 +12,5 @@
     </ContentPage.ToolbarItems>
     <pages:CoordinatorMasterPage/>
     <pages:ForumsPage/>
-    <ContentPage AutomationId="PgFormsCoordinatorTabbedPage" 
-                 Title="Formulários">
-    </ContentPage>
+    <pages:FormsPage/>
 </TabbedPage>
