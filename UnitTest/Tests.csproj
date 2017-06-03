@@ -35,24 +35,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AppInitializer.cs" />
-    <None Include="LoginAcceptanceTest.cs" />
-    <Compile Include="AdministratorParserTests.cs" />
-    <Compile Include="CoordinatorParserTests.cs" />
-    <Compile Include="FormParserTests.cs" />
-    <Compile Include="ForumDetailViewModelTests.cs" />
-    <Compile Include="ForumParserTests.cs" />
-    <Compile Include="CoordinatorMasterPageTests.cs" />
-    <Compile Include="ForumsViewModelTests.cs" />
-    <Compile Include="LoginViewModelTests.cs" />
-    <Compile Include="NewDiscursiveQuestionViewModelTests.cs" />
-    <Compile Include="NewFormViewModelTests.cs" />
-    <Compile Include="NewForumViewModelTests.cs" />
-    <Compile Include="NewMultipleQuestionViewModelTests.cs" />
+    <None Include="AutomatedTests\AdministratorAcceptionTest.cs" />
+    <None Include="AutomatedTests\AppInitializer.cs" />
+    <None Include="AutomatedTests\CoordinatorAutomatedTest.cs" />
+    <None Include="AutomatedTests\LoginAcceptanceTest.cs" />
+    <Compile Include="UnitTests\AdministratorParserTests.cs" />
+    <Compile Include="UnitTests\CoordinatorParserTests.cs" />
+    <Compile Include="UnitTests\FormParserTests.cs" />
+    <Compile Include="UnitTests\ForumDetailViewModelTests.cs" />
+    <Compile Include="UnitTests\ForumParserTests.cs" />
+    <Compile Include="UnitTests\CoordinatorMasterPageTests.cs" />
+    <Compile Include="UnitTests\ForumsViewModelTests.cs" />
+    <Compile Include="UnitTests\LoginViewModelTests.cs" />
+    <Compile Include="UnitTests\NewDiscursiveQuestionViewModelTests.cs" />
+    <Compile Include="UnitTests\NewFormViewModelTests.cs" />
+    <Compile Include="UnitTests\NewForumViewModelTests.cs" />
+    <Compile Include="UnitTests\NewMultipleQuestionViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserEditTests.cs" />
-    <Compile Include="UserRegistrationViewModelTests.cs" />
-    <Compile Include="UsersPageViewModelTests.cs" />
+    <Compile Include="UnitTests\UserEditTests.cs" />
+    <Compile Include="UnitTests\UserRegistrationViewModelTests.cs" />
+    <Compile Include="UnitTests\UsersPageViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

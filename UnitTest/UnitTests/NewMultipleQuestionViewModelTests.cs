@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using ForumDEG.ViewModels;
 using Acr.UserDialogs;
 
-namespace UnitTest {
+namespace Tests {
     class NewMultipleQuestionViewModelTests {
         private Mock<IPageService> _pageService;
         private Mock<IUserDialogs> _dialog;

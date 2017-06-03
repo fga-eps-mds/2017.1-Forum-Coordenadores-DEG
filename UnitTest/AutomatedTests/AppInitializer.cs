@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.UITest;
 
-namespace UnitTest {
+namespace Tests {
     class AppInitializer {
         public static IApp StartApp(Platform platform) {
 

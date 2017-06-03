@@ -4,7 +4,7 @@ using ForumDEG.ViewModels;
 using Moq;
 using NUnit.Framework;
 
-namespace UnitTest {
+namespace Tests {
     class NewDiscursiveQuestionViewModelTests {
         private Mock<IPageService> _pageService;
         private Mock<IUserDialogs> _dialog;

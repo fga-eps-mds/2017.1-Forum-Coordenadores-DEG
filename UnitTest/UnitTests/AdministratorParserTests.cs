@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace UnitTest {
+namespace Tests {
     class AdministratorParserTests {
         public static string content = "{\"email\":\"finn@thehuman.ooo\",\"name\":\"Finn, The Human\",\"password\":\"PB12345\",\"registration\":\"123456789\"}";
         public static string contentList = "[" + content + ",{\"email\":\"finn@thehuman.ooo\",\"name\":\"Finn, The Human\",\"password\":\"PB12345\",\"registration\":\"12345678\"}" + "]";

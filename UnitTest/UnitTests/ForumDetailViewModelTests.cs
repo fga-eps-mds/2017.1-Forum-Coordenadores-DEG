@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Moq;
 using ForumDEG.Interfaces;
 
-namespace UnitTest {
+namespace Tests {
     class ForumDetailViewModelTests {
         private ForumDetailViewModel _viewModel;
         private Mock<IPageService> _pageService;

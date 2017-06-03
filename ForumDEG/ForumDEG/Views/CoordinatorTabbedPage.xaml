@@ -4,13 +4,15 @@
              x:Class="ForumDEG.Views.CoordinatorTabbedPage"
              xmlns:pages="clr-namespace:ForumDEG.Views;assembly=ForumDEG"
              Title="Fórum DEG">
-  <!--Pages can be added as references or inline-->
+    <!--Pages can be added as references or inline-->
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sair"
+        <ToolbarItem AutomationId="TiLogoutCoordinatorTabbedPage"
+                     Text="Sair"
                      Clicked="LogoutButtonClicked"/>
     </ContentPage.ToolbarItems>
     <pages:CoordinatorMasterPage/>
     <pages:ForumsPage/>
-    <ContentPage Title="Formulários">
+    <ContentPage AutomationId="PgFormsCoordinatorTabbedPage" 
+                 Title="Formulários">
     </ContentPage>
 </TabbedPage>

@@ -4,7 +4,7 @@ using ForumDEG.Utils;
 using Moq;
 using ForumDEG.Interfaces;
 
-namespace UnitTest {
+namespace Tests {
     public class UserRegistrationViewModelTests {
 
         private UserRegistrationViewModel viewModel;

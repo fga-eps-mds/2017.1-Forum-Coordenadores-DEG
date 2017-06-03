@@ -10,18 +10,23 @@
     <ScrollView>
         <StackLayout Padding="20">
             <Label Text="Título:" FontAttributes="Bold" />
-            <Entry Text="{Binding Forum.Title}" Placeholder="Título"/>
+            <Entry AutomationId="EtTitleNewForumPage"
+                   Text="{Binding Forum.Title}" Placeholder="Título"/>
             <Label Text="Data:" FontAttributes="Bold"/>
-            <DatePicker Date="{Binding Forum.Date}" 
-                    x:Name="dateDatePicker"/>
+            <DatePicker AutomationId="DpDateNewForumPage"
+                        Date="{Binding Forum.Date}" 
+                        x:Name="dateDatePicker"/>
             <Label Text="Horário:" FontAttributes="Bold"/>
-            <TimePicker Time="{Binding Forum.Hour}" />
+            <TimePicker AutomationId="TpHourNewForumPage"
+                        Time="{Binding Forum.Hour}" />
             <Label Text="Local:" FontAttributes="Bold" />
-            <Entry Text="{Binding Forum.Place}" 
-               Placeholder="Local"/>
+            <Entry AutomationId="EtPlaceNewForumPage"
+                   Text="{Binding Forum.Place}" 
+                   Placeholder="Local"/>
             <Label Text="  Pautas:" FontAttributes="Bold"/>
-            <Editor Text="{Binding Forum.Schedules}" 
-                HeightRequest="150" />
+            <Editor AutomationId="EdScheduleNewForumPage"
+                    Text="{Binding Forum.Schedules}" 
+                    HeightRequest="150" />
             <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">
                 <Button Text="Cancelar" 
