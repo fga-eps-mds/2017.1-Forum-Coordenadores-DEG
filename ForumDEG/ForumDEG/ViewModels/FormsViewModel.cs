@@ -51,7 +51,7 @@ namespace ForumDEG.ViewModels {
                 var formsList = await _formService.GetFormsAsync();
 
                 foreach (Form _form in formsList) {
-                    var formViewModel = new FormDetailViewModel() {
+                    var formViewModel = new FormDetailViewModel(new PageService()) {
                         Id = _form.Id,
                         RemoteId = _form.RemoteId,
                         Title = _form.Title,

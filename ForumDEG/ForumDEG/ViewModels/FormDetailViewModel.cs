@@ -1,3 +1,4 @@
+using ForumDEG.Interfaces;
 using ForumDEG.Models;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
     public class FormDetailViewModel {
+        private IPageService _pageService;
+
         public int Id { get; set; }
         public string RemoteId { get; set; }
         public string Title { get; set; }
@@ -17,16 +22,21 @@ namespace ForumDEG.ViewModels {
             get { return (DiscursiveQuestions.Count + MultipleChoiceQuestions.Count); }
         }
 
+        public ICommand CancelCommand { get; set; }
+
         public List<Models.DiscursiveQuestion> DiscursiveQuestions { get; set; }
         public List<Models.MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
         public List<Models.MultipleAnswersQuestion> MultipleAnswersQuestions;
         public List<Models.SingleAnswerQuestion> SingleAnswerQuestions;
 
-        public FormDetailViewModel() {
+        public FormDetailViewModel(IPageService pageService) {
+            _pageService = pageService;
             MultipleAnswersQuestions = new List<Models.MultipleAnswersQuestion>();
             SingleAnswerQuestions = new List<Models.SingleAnswerQuestion>();
         }
         public void SplitMultipleChoiceQuestions() {
+            CancelCommand = new Command(async () => await Cancel());
+
             var multipleChoiceQuestions = MultipleChoiceQuestions;
 
             foreach (Models.MultipleChoiceQuestion multipleQuestion in multipleChoiceQuestions) {
@@ -47,7 +57,10 @@ namespace ForumDEG.ViewModels {
                     SingleAnswerQuestions.Add(singleAnswerQuestion);
                 }
             }
+        }
 
+        private async Task Cancel() {
+            await _pageService.PopAsync();
         }
     }
 }

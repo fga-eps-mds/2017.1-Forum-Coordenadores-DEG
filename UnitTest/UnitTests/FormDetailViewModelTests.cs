@@ -5,17 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ForumDEG.ViewModels;
+using ForumDEG.Interfaces;
+using Moq;
 
 namespace UnitTest.UnitTests {
     public class FormDetailViewModelTests {
         private FormDetailViewModel _viewModel;
+        private Mock<IPageService> _pageService;
         private List<ForumDEG.Models.MultipleChoiceQuestion> _multipleChoiceQuestions;
         private static string _multipleAnswer = "Questão check";
         private static string _singleAnswer = "Questão radio";
 
         [SetUp]
         public void Setup() {
-            _viewModel = new FormDetailViewModel();
+            _pageService = new Mock<IPageService>();
+            _viewModel = new FormDetailViewModel(_pageService.Object);
             _multipleChoiceQuestions = new List<ForumDEG.Models.MultipleChoiceQuestion> {
                 new ForumDEG.Models.MultipleChoiceQuestion(_multipleAnswer, true) {
                     new ForumDEG.Models.Option { OptionText = "Opção 01" },

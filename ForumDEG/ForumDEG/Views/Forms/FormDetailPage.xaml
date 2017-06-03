@@ -20,6 +20,7 @@
                         ItemsSource="{Binding DiscursiveQuestions}"
                         HasUnevenRows="True"
                         IsEnabled="False"
+                        AutomationId="ListViewDiscursiveListFormDetailPage"
                         >
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -105,6 +106,7 @@
                 <Button Text="Cancelar" 
                         TextColor="White"
                         BackgroundColor="Orange"
+                        Command="{Binding CancelCommand}"
                         />
                 <Button Text="Submeter" 
                         TextColor="White"
