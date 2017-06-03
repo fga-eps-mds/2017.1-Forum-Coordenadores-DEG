@@ -28,7 +28,7 @@ namespace ForumDEG.ViewModels {
         private Helpers.Coordinator coordinatorService;
 
         /* Forum properties */
-        
+
         public string Title { get; set; }
         public string Place { get; set; }
         public string Schedules { get; set; }
@@ -67,10 +67,10 @@ namespace ForumDEG.ViewModels {
                 }
             }
         }
-        
+
         public ICommand PresenceCommand { get; private set; }
         public ICommand EditCommand { get; private set; }
-        public ICommand DeleteCommand { get; private set;}
+        public ICommand DeleteCommand { get; private set; }
 
         public ForumDetailViewModel(IPageService pageService) {
             _pageService = pageService;
@@ -94,7 +94,8 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[ForumDetailVM]: isConfirmed true");
                 ButtonText = "Cancelar presença";
                 ButtonColor = Color.Red;
-            } else {
+            }
+            else {
                 Debug.WriteLine("[ForumDetailVM]: isConfirmed false, " + Title + " forum");
                 ButtonText = "Confirmar presença";
                 ButtonColor = Color.Orange;
@@ -109,7 +110,8 @@ namespace ForumDEG.ViewModels {
             Debug.WriteLine("[ForumDetailVM]: Inside Presence Handler");
             if (!_isConfirmed) {
                 coordinatorService.PostConfirmationStatusAsync(Helpers.Settings.UserReg, RemoteId);
-            } else {
+            }
+            else {
                 coordinatorService.DeleteConfirmationAsync(Helpers.Settings.UserReg, RemoteId);
             }
 
@@ -127,15 +129,16 @@ namespace ForumDEG.ViewModels {
         }
 
         private async void DeleteForum() {
-           var answer = await _pageService.DisplayAlert("Deletar Fórum", "Tem certeza que deseja deletar o fórum existente? Esta ação não poderá ser desfeita.", "Sim", "Não");
-           Debug.WriteLine("Answer: " + answer);
+            var answer = await _pageService.DisplayAlert("Deletar Fórum", "Tem certeza que deseja deletar o fórum existente? Esta ação não poderá ser desfeita.", "Sim", "Não");
+            Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
-                if (await _forumService.DeleteForumAsync(RemoteId) ){
+                if (await _forumService.DeleteForumAsync(RemoteId)) {
                     await _pageService.PopAsync();
-                } else {
+                }
+                else {
                     await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", "Cancelar");
                 }
             }
-        }        
+        }
     }
 }
