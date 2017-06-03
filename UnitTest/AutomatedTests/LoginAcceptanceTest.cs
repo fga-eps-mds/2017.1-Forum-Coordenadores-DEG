@@ -29,25 +29,33 @@ namespace Tests
             app.EnterText("EtRegistrationLoginPage", "123456789");
             app.EnterText("EtPasswordLoginPage", "Pb1234567");
             app.Tap("BtLoginLoginPage");
-
-            Assert.IsNotNull(app.Query("PageUsersPage"));
-            app.Repl();
+            app.WaitForNoElement("BtLoginLoginPage");
+            Assert.IsNotNull(app.Query("Início"));
+            //app.Repl();
         }
 
-        //[Test]
-        //public void LoginAdministratorSuccess() {
-        //    app.EnterText("EtRegistrationLoginPage", "123456789");
-        //    app.EnterText("EtPasswordLoginPage", "Pb1234567");
-        //    app.Tap("BtLoginLoginPage");
+        [Test]
+        public void LoginAdministratorSuccess() {
+            app.EnterText("EtRegistrationLoginPage", "12345678");
+            app.EnterText("EtPasswordLoginPage", "Pb1234567");
+            app.Tap("BtLoginLoginPage");
 
-        //    Assert.IsNotNull(app.Query("PageUsersPage"));
-        //}
+            app.WaitForNoElement("BtLoginLoginPage");
+            Assert.IsNotNull(app.Query("Formulários"));
+        }
 
-        //[Test]
-        //public void LoginFailure() {
+        [Test]
+        public void LoginFailureBlankSpaces() {
+            app.Tap("BtLoginLoginPage");
+            Assert.IsNotNull("OK");
+        }
 
-        //    app.Tap("BtLoginLoginPage");
-
-        //}
+        [Test]
+        public void LoginFailure() {
+            app.EnterText("EtRegistrationLoginPage", "987654321");
+            app.EnterText("EtPasswordLoginPage", "Pb1234567");
+            app.Tap("BtLoginLoginPage");
+            Assert.IsNotNull("OK");
+        }
     }
 }

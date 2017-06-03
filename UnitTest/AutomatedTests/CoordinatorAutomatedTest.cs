@@ -33,10 +33,17 @@ namespace UnitTest.AutomatedTests {
 
             [Test]
             public void EnterForumDetailAndConfirmPresence() {
-                app.Tap(c=>c.Marked("Foruns"));
-                app.Tap(c => c.Marked("Funciona"));
+                app.Tap(c=>c.Marked("Fóruns"));
+                app.Tap("Ver detalhes");
                 app.Tap("ButtonConfirmPresenceForumDetailPage");
                 Assert.IsNotNull(app.Query("PageForumDetailPage"));
+            }
+
+            [Test]
+            public void ListsFormsForCoordinators() {
+                //goes to forms
+                app.Tap("Formulários");
+                Assert.IsNotNull(app.Query("Ver detalhes"));
             }
         }
     }

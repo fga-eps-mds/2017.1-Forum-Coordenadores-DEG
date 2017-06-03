@@ -29,6 +29,7 @@ namespace UnitTest.AutomatedTests {
                 app.EnterText("EtRegistrationLoginPage", "12345678");
                 app.EnterText("EtPasswordLoginPage", "Pb1234567");
                 app.Tap("BtLoginLoginPage");
+                app.WaitForNoElement("BtLoginLoginPage");
             }
 
             [Test]
@@ -36,26 +37,32 @@ namespace UnitTest.AutomatedTests {
                 app.Tap("ButtonPlusAppMasterPageDetail");
                 app.Tap("ButtonNewForumAppMasterPageDetail");
 
-                Assert.IsNotNull("PageNewForunsPage");
-
                 app.EnterText("EtTitleNewForumPage", "Forum Teste");
                 app.EnterText("EtPlaceNewForumPage", "Local Teste");
                 app.EnterText("EdScheduleNewForumPage", "Pauta Teste. 123.");
+                app.DismissKeyboard();
+                app.ScrollDown();
                 app.Tap("ButtonCriarForumPageNewForunsPage");
+                app.WaitForElement("alertTitle");
 
-                app.Repl();
-
+                //app.Repl();
+                Assert.IsNotNull(app.Query("OK"));
             }
 
             [Test]
             public void RemoveForum() {
                 app.Tap("ButtonForunsAppMasterPageDetail");
-
-                Assert.IsNotNull("PageForumDetailPage");
-
-                app.Tap(c => c.Marked("Forum Teste"));
+                app.Tap(c => c.Marked("Ver detalhes"));
                 app.Tap("ButtonDeletarForumForumDetailPage");
                 app.Tap(c => c.Marked("Sim"));
+                app.WaitForNoElement("Sim");
+                Assert.IsNotNull("Fóruns");
+            }
+
+            [Test]
+            public void ListsFormsForAdministrators() {
+                app.Tap("Formulários");
+                Assert.IsNotNull(app.Query("Ver detalhes"));
             }
         }
     }
