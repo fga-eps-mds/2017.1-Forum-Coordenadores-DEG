@@ -32,6 +32,8 @@ namespace UnitTest.AutomatedTests {
                 app.WaitForNoElement("BtLoginLoginPage");
             }
 
+
+
             [Test]
             public void CreateNewForum() {
                 app.Tap("ButtonPlusAppMasterPageDetail");
@@ -47,6 +49,41 @@ namespace UnitTest.AutomatedTests {
 
                 //app.Repl();
                 Assert.IsNotNull(app.Query("OK"));
+
+            }
+            [Test]
+            public void UserRegistration() {
+                app.Tap(e => e.Marked("ButtonPlusAppMasterPageDetail"));
+                app.Tap(e => e.Marked("ButtonNewCoordenadorAppMasterPageDetail"));
+                app.EnterText("LabelNomeCompletoUserRegistrationPage", "Nome Teste");
+                app.EnterText("LabelEmailUserRegistrationPage", "teste@email.com");
+                app.EnterText("LabelMatriculaUserRegistrationPage", "246813579");
+                app.EnterText("LabelSenhaUserRegistrationPage", "Pb12345678");
+                app.DismissKeyboard();
+                app.ScrollDown();
+                app.Tap("PickerCursoUserRegistrationPage");
+                app.Tap("Engenharias");
+                app.Tap(e => e.Marked("ButtonConfirmarUserRegistrationPage"));
+                app.Tap(e => e.Marked("button1"));
+                Assert.IsNotNull("Registrar novo usuário");
+            }
+
+            [Test]
+            public void ShowUser() {
+                app.Tap(e => e.Marked("ButtonUserButtonAppMasterPageDetail"));
+                app.WaitForElement("Ver detalhes");
+                app.Tap(e => e.Marked("Nome Teste"));
+                Assert.IsNotNull("LabelRemoverUsuarioUserDetailPage");
+            }
+
+            [Test]
+            public void RemoveUser() {
+                app.Tap(e => e.Marked("ButtonUserButtonAppMasterPageDetail"));
+                app.WaitForElement("Ver detalhes");
+                app.Tap(e => e.Marked("Nome Teste"));
+                app.Tap(e => e.Marked("LabelRemoverUsuarioUserDetailPage"));
+                app.Tap(e => e.Marked("button1"));
+                Assert.IsNotNull("Ver detalhes");
             }
 
             [Test]
