@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace ForumDEG.Models {
     public class DiscursiveQuestion {
         public string Question { get; set; }
+        public string Answer { get; set; }
     }
 }

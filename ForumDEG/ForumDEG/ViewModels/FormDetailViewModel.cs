@@ -1,11 +1,8 @@
 using ForumDEG.Interfaces;
 using ForumDEG.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -23,6 +20,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public ICommand CancelCommand { get; set; }
+        public ICommand SubmitCommand { get; set; }
 
         public List<Models.DiscursiveQuestion> DiscursiveQuestions { get; set; }
         public List<Models.MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
@@ -33,9 +31,11 @@ namespace ForumDEG.ViewModels {
             _pageService = pageService;
             MultipleAnswersQuestions = new List<Models.MultipleAnswersQuestion>();
             SingleAnswerQuestions = new List<Models.SingleAnswerQuestion>();
+
+            CancelCommand = new Command(async () => await Cancel());
+            SubmitCommand = new Command(Submit);
         }
         public void SplitMultipleChoiceQuestions() {
-            CancelCommand = new Command(async () => await Cancel());
 
             var multipleChoiceQuestions = MultipleChoiceQuestions;
 
@@ -61,6 +61,27 @@ namespace ForumDEG.ViewModels {
 
         private async Task Cancel() {
             await _pageService.PopAsync();
+        }
+
+        private void Submit() {
+            foreach (DiscursiveQuestion discursiveQuestion in DiscursiveQuestions) {
+                Debug.WriteLine("[Submit] Question: " + discursiveQuestion.Question);
+                Debug.WriteLine("[Submit] Answer: " + discursiveQuestion.Answer);
+            }
+            foreach (MultipleAnswersQuestion checkBoxQuestion in MultipleAnswersQuestions) {
+                Debug.WriteLine("[Submit] Question: " + checkBoxQuestion.Question);
+                foreach (Option option in checkBoxQuestion) {
+                    if (option.IsSelected) {
+                        Debug.WriteLine("[Submit] Answer: " + option.OptionText);
+                    }
+                }
+            }
+            foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
+                int answerIndex = radioButtonQuestion.SelectedOption;
+
+                Debug.WriteLine("[Submit] Question: " + radioButtonQuestion.Question);
+                Debug.WriteLine("[Submit] Answer: " + radioButtonQuestion.Options[answerIndex]);
+            }
         }
     }
 }
