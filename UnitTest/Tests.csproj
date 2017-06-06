@@ -41,10 +41,12 @@
     <None Include="AutomatedTests\CoordinatorAutomatedTest.cs" />
     <None Include="AutomatedTests\LoginAcceptanceTest.cs" />
     <Compile Include="UnitTests\AdministratorParserTests.cs" />
+    <Compile Include="UnitTests\ChangePasswordViewModelTests.cs" />
     <Compile Include="UnitTests\CoordinatorParserTests.cs" />
     <Compile Include="UnitTests\FormDetailViewModelTests.cs" />
     <Compile Include="UnitTests\FormParserTests.cs" />
     <Compile Include="UnitTests\ForumDetailViewModelTests.cs" />
+    <Compile Include="UnitTests\ForumEditViewModelTests.cs" />
     <Compile Include="UnitTests\ForumParserTests.cs" />
     <Compile Include="UnitTests\CoordinatorMasterPageTests.cs" />
     <Compile Include="UnitTests\ForumsViewModelTests.cs" />

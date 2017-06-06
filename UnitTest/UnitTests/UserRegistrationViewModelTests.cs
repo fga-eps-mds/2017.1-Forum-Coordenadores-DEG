@@ -24,40 +24,48 @@ namespace Tests {
         }
 
         [Test()]
-        public void HasEmptySpace_NameInBlank() {
+        public void UserRegistrationViewModelTests_HasEmptySpace_NameInBlank() {
             viewModel.NameIn = "";
            Assert.True(viewModel.HasEmptySpace());
         }
 
         [Test()]
-        public void HasEmptySpace_EmailInBlank() {
+        public void UserRegistrationViewModelTests_HasEmptySpace_EmailInBlank() {
             viewModel.EmailIn = "";
             Assert.True(viewModel.HasEmptySpace());
         }
 
         [Test()]
-        public void HasEmptySpace_RegistrationInBlank() {
+        public void UserRegistrationViewModelTests_HasEmptySpace_RegistrationInBlank() {
             viewModel.RegistrationIn = "";
             Assert.True(viewModel.HasEmptySpace());
         }
 
         [Test()]
-        public void HasEmptySpace_PasswordInBlank() {
+        public void UserRegistrationViewModelTests_HasEmptySpace_PasswordInBlank() {
             viewModel.PasswordIn = "";
             Assert.True(viewModel.HasEmptySpace());
         }
+
         [Test()]
-        public void HasEmptySpace_NoBlankFields() {
+        public void UserRegistrationViewModelTests_HasEmptySpace_BlankCourse() {
+            viewModel.UserTypeIn = 0;
+            viewModel.CourseIn = "";
+            Assert.True(viewModel.HasEmptySpace());
+        }
+
+        [Test()]
+        public void UserRegistrationViewModelTests_HasEmptySpace_NoBlankFields() {
             Assert.False(viewModel.HasEmptySpace());
         }
 
         [Test()]
-        public void ValidateRegisterNumber_ValidRegisterNumber() {
+        public void UserRegistrationViewModelTests_ValidateRegisterNumber_ValidRegisterNumber() {
             Assert.True(viewModel.ValidateRegisterNumber());
         }
 
         [Test()]
-        public void ValidateRegisterNumber_InvalidRegisterNumber1() {
+        public void UserRegistrationViewModelTests_ValidateRegisterNumber_InvalidRegisterNumber1() {
 
             //less numbers than 9
             viewModel.RegistrationIn = "123";
@@ -68,12 +76,12 @@ namespace Tests {
         }
 
         [Test()]
-        public void ValidateEmail_ValidEmail() {
+        public void UserRegistrationViewModelTests_ValidateEmail_ValidEmail() {
             Assert.True(viewModel.ValidateEmail());
         }
 
         [Test()]
-        public void ValidateEmail_InvalidEmail() {
+        public void UserRegistrationViewModelTests_ValidateEmail_InvalidEmail() {
             viewModel.EmailIn = "email";
             Assert.False(viewModel.ValidateEmail());
 
@@ -86,12 +94,12 @@ namespace Tests {
 
 
         [Test()]
-        public void ValidatePassword_ValidPassWord() {
+        public void UserRegistrationViewModelTests_ValidatePassword_ValidPassWord() {
             Assert.True(viewModel.ValidatePassword());
         }
 
         [Test()]
-        public void ValidatePassword_invalidPassWord() {
+        public void UserRegistrationViewModelTests_ValidatePassword_invalidPassWord() {
             //less chars than 8
             viewModel.PasswordIn = "Pb1";
             Assert.False(viewModel.ValidatePassword());
@@ -114,7 +122,7 @@ namespace Tests {
         }
 
         [Test()]
-        public void CleanFields() {
+        public void UserRegistrationViewModelTests_CleanFields() {
             viewModel.CleanFields();
             Assert.Null(viewModel.NameIn);
             Assert.Null(viewModel.PasswordIn);

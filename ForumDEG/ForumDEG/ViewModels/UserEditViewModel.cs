@@ -164,7 +164,7 @@ namespace ForumDEG.ViewModels {
                     String.IsNullOrWhiteSpace(RegistrationIn) ||
                     String.IsNullOrWhiteSpace(EmailIn) ||
                     String.IsNullOrWhiteSpace(PasswordIn) ||
-            (isCoord && String.IsNullOrWhiteSpace(CourseIn)));
+            (IsCoord && String.IsNullOrWhiteSpace(CourseIn)));
         }
 
         public bool ValidateEmail() {
