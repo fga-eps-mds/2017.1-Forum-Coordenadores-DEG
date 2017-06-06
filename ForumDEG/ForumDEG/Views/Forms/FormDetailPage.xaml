@@ -110,21 +110,27 @@
                         TextColor="White"
                         BackgroundColor="Orange"
                         Command="{Binding CancelCommand}"
+                        AutomationId="ButtonCancelarFormDetailPage"
+                        x:Name="ButtonCancelarFormDetailPage"
                         />
                 <Button Text="Submeter" 
                         TextColor="White"
                         BackgroundColor="Orange"
-                        Command="{Binding SubmitCommand}"/>
-
-
-                <Button Text="Deletar Formulário" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
-                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small" 
-                    IsVisible="{Binding IsCurrentUserAdmin}"
-                />
-
-
+                        Command="{Binding SubmitCommand}"
+                        AutomationId="ButtonSubmeterFormDetailPage"
+                        x:Name="ButtonSubmeterFormDetailPage"
+                        />
             </StackLayout>
-
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="End"
+                         Margin="5">
+                <Button Text="Deletar Formulário" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
+                        BackgroundColor="Orange" TextColor="White" FontSize="Small" 
+                        IsVisible="{Binding IsCurrentUserAdmin}"
+                        AutomationId="ButtonDeletarFormulárioFormDetailPage"
+                        x:Name="ButtonDeletarFormulárioFormDetailPage"
+                        />
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>
