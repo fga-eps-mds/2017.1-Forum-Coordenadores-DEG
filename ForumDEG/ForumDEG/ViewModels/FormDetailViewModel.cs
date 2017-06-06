@@ -4,14 +4,23 @@ using ForumDEG.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    public class FormDetailViewModel {
+    public class FormDetailViewModel : PageService, INotifyPropertyChanged {
+        public event PropertyChangedEventHandler PropertyChanged;
         private IPageService _pageService;
         private Helpers.Form _formService;
+        private readonly Helpers.Form _formService;
+
+        public bool IsCurrentUserAdmin => Helpers.Settings.IsUserAdmin;
+        public bool IsCurrentUserCoord => Helpers.Settings.IsUserCoord;
+
 
         public int Id { get; set; }
         public string RemoteId { get; set; }
@@ -23,6 +32,7 @@ namespace ForumDEG.ViewModels {
 
         public ICommand CancelCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
+        public ICommand DeleteCommand { get; private set; }
 
         public List<Models.DiscursiveQuestion> DiscursiveQuestions { get; set; }
         public List<Models.MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
@@ -37,6 +47,8 @@ namespace ForumDEG.ViewModels {
 
             CancelCommand = new Command(async () => await Cancel());
             SubmitCommand = new Command(Submit);
+            _formService = new Helpers.Form();
+            DeleteCommand = new Command(DeleteForm);
         }
         public void SplitMultipleChoiceQuestions() {
 
@@ -120,7 +132,7 @@ namespace ForumDEG.ViewModels {
         public bool RadioButtonValidation(List<MultipleChoiceAnswer> multipleChoiceAnswers) {
             foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
                 if (radioButtonQuestion.SelectedOption == -1) {
-                    Debug.WriteLine("nenhuma questão selecionada");
+                    Debug.WriteLine("nenhuma questï¿½o selecionada");
                     return false;
                 }
 
@@ -144,7 +156,18 @@ namespace ForumDEG.ViewModels {
         }
 
         public async Task blankAnswerAsync() {
-                await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opção!", "ok", "cancel");
+                await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opï¿½ï¿½o!", "ok", "cancel");
+        private async void DeleteForm() {
+            var answer = await _pageService.DisplayAlert("Deletar Formulï¿½rio", "Tem certeza que deseja deletar o formulï¿½rio existente? Esta aï¿½ï¿½o nï¿½o poderï¿½ ser desfeita.", "Sim", "Nï¿½o");
+            Debug.WriteLine("Answer: " + answer);
+            if (answer == true) {
+                if (await _formService.DeleteFormAsync(RemoteId)) {
+                    await _pageService.PopAsync();
+                }
+                else {
+                    await _pageService.DisplayAlert("Erro!", "O formulï¿½rio nï¿½o pï¿½de ser deletado, tente novamente.", "OK", "Cancelar");
+                }
+            }
         }
     }
 }

@@ -115,7 +115,16 @@
                         TextColor="White"
                         BackgroundColor="Orange"
                         Command="{Binding SubmitCommand}"/>
+
+
+                <Button Text="Deletar Formulário" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
+                    BackgroundColor="#ff8924" TextColor="White" FontSize="Small" 
+                    IsVisible="{Binding IsCurrentUserAdmin}"
+                />
+
+
             </StackLayout>
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
