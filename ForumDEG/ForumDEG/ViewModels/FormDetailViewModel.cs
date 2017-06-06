@@ -1,3 +1,4 @@
+using ForumDEG.Helpers;
 using ForumDEG.Interfaces;
 using ForumDEG.Models;
 using System.Collections.Generic;
@@ -64,24 +65,51 @@ namespace ForumDEG.ViewModels {
         }
 
         private void Submit() {
+            List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
+
             foreach (DiscursiveQuestion discursiveQuestion in DiscursiveQuestions) {
                 Debug.WriteLine("[Submit] Question: " + discursiveQuestion.Question);
                 Debug.WriteLine("[Submit] Answer: " + discursiveQuestion.Answer);
             }
+
             foreach (MultipleAnswersQuestion checkBoxQuestion in MultipleAnswersQuestions) {
                 Debug.WriteLine("[Submit] Question: " + checkBoxQuestion.Question);
+                List<string> selectedOptions = new List<string>();
+
                 foreach (Option option in checkBoxQuestion) {
                     if (option.IsSelected) {
+                        selectedOptions.Add(option.OptionText);
                         Debug.WriteLine("[Submit] Answer: " + option.OptionText);
                     }
                 }
+
+                MultipleChoiceAnswer answer = new MultipleChoiceAnswer {
+                    Question = checkBoxQuestion.Question,
+                    Answers = selectedOptions
+                };
+                multipleChoiceAnswers.Add(answer);
             }
+
             foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
                 int answerIndex = radioButtonQuestion.SelectedOption;
+
+                MultipleChoiceAnswer answer = new MultipleChoiceAnswer {
+                    Question = radioButtonQuestion.Question,
+                    Answers = new List<string> { radioButtonQuestion.Options[answerIndex] }
+                };
+
+                multipleChoiceAnswers.Add(answer);
 
                 Debug.WriteLine("[Submit] Question: " + radioButtonQuestion.Question);
                 Debug.WriteLine("[Submit] Answer: " + radioButtonQuestion.Options[answerIndex]);
             }
+
+            FormAnswer formAnswer = new FormAnswer {
+                FormId = RemoteId,
+                CoordinatorId = Settings.UserReg,
+                DiscursiveAnswers = DiscursiveQuestions,
+                MultipleChoiceAnswers = multipleChoiceAnswers
+            };
         }
     }
 }
