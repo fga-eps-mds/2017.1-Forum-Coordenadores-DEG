@@ -68,6 +68,7 @@
     <Compile Include="Models\ForumConfirmation.cs" />
     <Compile Include="Models\ForumNotification.cs" />
     <Compile Include="Models\MultipleAnswersQuestion.cs" />
+    <Compile Include="Models\MultipleChoiceAnswer.cs" />
     <Compile Include="Models\MultipleChoiceQuestion.cs" />
     <Compile Include="Models\Option.cs" />
     <Compile Include="Models\SingleAnswerQuestion.cs" />
