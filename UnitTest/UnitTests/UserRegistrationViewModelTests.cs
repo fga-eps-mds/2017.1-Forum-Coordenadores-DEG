@@ -132,5 +132,12 @@ namespace Tests {
             Assert.AreEqual(0, viewModel.UserTypeIn);
         }
 
+        [Test()]
+        public void UserRegistrationViewModelTests_UserTypeIandIsCoordConection() {
+            Assert.AreEqual(viewModel.UserTypeIn == 0, viewModel.IsCoord);
+            viewModel.UserTypeIn++;
+            Assert.AreEqual(viewModel.UserTypeIn == 0, viewModel.IsCoord);
+        }
+
     }
 }

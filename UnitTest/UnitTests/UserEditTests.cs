@@ -108,6 +108,14 @@ namespace Tests {
             viewModel.PasswordIn = "Abcdefghij";
             Assert.False(viewModel.ValidatePassword());
         }
- 
+
+        [Test()]
+        public void UserEditTests_UserTypeIandIsCoordConection() {
+            Assert.AreEqual(viewModel.UserTypeIn == 0, viewModel.IsCoord);
+            viewModel.UserTypeIn++;
+            Assert.AreEqual(viewModel.UserTypeIn == 0, viewModel.IsCoord);
+        }
+
+
     }
 }
