@@ -34,9 +34,9 @@ namespace ForumDEG.ViewModels {
         public ICommand SaveQuestionCommand { get; set; }
         public ICommand NewDiscursiveQuestionCommand { get; set; }
 
-        private float TapCount = 0;
+        private float _tapCount = 0;
 
-        public float _tapCount {
+        public float TapCount {
             get {
                 return _tapCount;
             }

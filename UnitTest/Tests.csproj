@@ -45,6 +45,7 @@
     <Compile Include="UnitTests\CoordinatorParserTests.cs" />
     <Compile Include="UnitTests\FormDetailViewModelTests.cs" />
     <Compile Include="UnitTests\FormParserTests.cs" />
+    <Compile Include="UnitTests\FormsViewModelTests.cs" />
     <Compile Include="UnitTests\ForumDetailViewModelTests.cs" />
     <Compile Include="UnitTests\ForumEditViewModelTests.cs" />
     <Compile Include="UnitTests\ForumParserTests.cs" />

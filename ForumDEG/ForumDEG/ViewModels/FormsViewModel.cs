@@ -11,7 +11,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class FormsViewModel : BaseViewModel {
+    public class FormsViewModel : BaseViewModel {
         public ObservableCollection<FormDetailViewModel> Forms { get; private set; }
 
         private FormDetailViewModel _selectedForm;

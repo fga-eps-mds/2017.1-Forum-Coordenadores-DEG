@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Moq;
 using ForumDEG.Interfaces;
 
+
 namespace Tests {
     class ForumDetailViewModelTests {
         private ForumDetailViewModel _viewModel;
@@ -60,5 +61,6 @@ namespace Tests {
             _viewModel.TogglePresence();
             Assert.True(_viewModel.IsConfirmed);
         }
+
     }
 }
