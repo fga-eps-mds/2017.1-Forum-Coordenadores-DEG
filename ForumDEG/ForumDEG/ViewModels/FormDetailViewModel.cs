@@ -60,11 +60,7 @@ namespace ForumDEG.ViewModels {
             }
         }
 
-        private async Task Cancel() {
-            await _pageService.PopAsync();
-        }
-
-        private void Submit() {
+        private async void Submit() {
             List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
 
             foreach (DiscursiveQuestion discursiveQuestion in DiscursiveQuestions) {
@@ -76,11 +72,19 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Submit] Question: " + checkBoxQuestion.Question);
                 List<string> selectedOptions = new List<string>();
 
+                bool validateCheckbox = false;
+                Debug.WriteLine("[Validate submit] " + validateCheckbox);
+
                 foreach (Option option in checkBoxQuestion) {
                     if (option.IsSelected) {
+                        validateCheckbox = true;
                         selectedOptions.Add(option.OptionText);
                         Debug.WriteLine("[Submit] Answer: " + option.OptionText);
                     }
+                }
+                if (validateCheckbox == false) {
+                    await blankAnswerAsync();
+                    return;
                 }
 
                 MultipleChoiceAnswer answer = new MultipleChoiceAnswer {
@@ -91,8 +95,14 @@ namespace ForumDEG.ViewModels {
             }
 
             foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
-                int answerIndex = radioButtonQuestion.SelectedOption;
+                if (radioButtonQuestion.SelectedOption == -1) {
+                    Debug.WriteLine("nenhuma questão selecionada");
+                    await blankAnswerAsync();
+                    return;                    
+                }
 
+               int answerIndex = radioButtonQuestion.SelectedOption;
+                
                 MultipleChoiceAnswer answer = new MultipleChoiceAnswer {
                     Question = radioButtonQuestion.Question,
                     Answers = new List<string> { radioButtonQuestion.Options[answerIndex] }
@@ -109,7 +119,15 @@ namespace ForumDEG.ViewModels {
                 CoordinatorId = Settings.UserReg,
                 DiscursiveAnswers = DiscursiveQuestions,
                 MultipleChoiceAnswers = multipleChoiceAnswers
-            };
+            };            
+        }
+
+        private async Task Cancel() {
+            await _pageService.PopAsync();
+        }
+
+        public async Task blankAnswerAsync() {
+                await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opção!", "ok", "cancel");
         }
     }
 }
