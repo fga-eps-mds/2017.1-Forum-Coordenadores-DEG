@@ -7,7 +7,7 @@ using Xamarin.Forms;
 using System.Text.RegularExpressions;
 
 namespace ForumDEG.ViewModels {
-    class ChangePasswordViewModel {
+    public class ChangePasswordViewModel {
         public User User { get; private set; }
 
         public ICommand ChangePasswordClickedCommand { get; private set; }

@@ -12,16 +12,16 @@ using ForumDEG.Interfaces;
 namespace Tests {
     class CoordinatorMasterPageTests {
         private CoordinatorMasterPageViewModel _viewModel;
-        private Mock<IPageService> _pageServiceMock;
+        private Mock<IPageService> _pageService;
 
         [SetUp]
         public void Setup() {
-            _pageServiceMock = new Mock<IPageService>();
-            _viewModel = new CoordinatorMasterPageViewModel(_pageServiceMock.Object);
+            _pageService = new Mock<IPageService>();
+            _viewModel = new CoordinatorMasterPageViewModel(_pageService.Object);
         }
 
         [Test()]
-        public void GetLatestForum_WhenCalled_ShouldReturnLatestForum() {
+        public void CoordinatorMasterPageTests_GetLatestForum_WhenCalled_ShouldReturnLatestForum() {
             Forum earliestForum = new Forum {
                 Date = DateTime.Now.AddDays(5)
             };
@@ -38,7 +38,7 @@ namespace Tests {
         }
 
         [Test()]
-        public void GetLatestForum_WhenCalled_ShouldReturnNull_IfNoForumsAvailable() {
+        public void CoordinatorMasterPageTests_GetLatestForum_WhenCalled_ShouldReturnNull_IfNoForumsAvailable() {
             Forum passedForum = new Forum {
                 Date = DateTime.Now.AddDays(-2)
             };
@@ -51,7 +51,7 @@ namespace Tests {
         }
 
         [Test()]
-        public void GetLatestForum_WhenCalled_ShouldReturnNull_IfNoForumsExist() {
+        public void CoordinatorMasterPageTests_GetLatestForum_WhenCalled_ShouldReturnNull_IfNoForumsExist() {
             List<Forum> forums = new List<Forum>();
 
             var result = _viewModel.GetLatestForum(forums);
@@ -60,7 +60,7 @@ namespace Tests {
         }
 
         [Test()]
-        public void SetLatestForumFields_DisplayWarningIfNoForumAvailable() {
+        public void CoordinatorMasterPageTests_SetLatestForumFields_DisplayWarningIfNoForumAvailable() {
             Forum latestForum = null;
             _viewModel.SetLatestForumFields(latestForum);
 
@@ -69,7 +69,7 @@ namespace Tests {
         }
 
         [Test()]
-        public void SetLatestForumFields_ForumVisible() {
+        public void CoordinatorMasterPageTests_SetLatestForumFields_ForumVisible() {
             Forum latestForum = new Forum();
             _viewModel.SetLatestForumFields(latestForum);
 
@@ -78,7 +78,7 @@ namespace Tests {
         }
 
         [Test()]
-        public void SetLatestForumFields_AssignCorrectFields() {
+        public void CoordinatorMasterPageTests_SetLatestForumFields_AssignCorrectFields() {
             Forum latestForum = new Forum {
                 Title = "Teste",
                 Place = "Teste",
@@ -94,6 +94,10 @@ namespace Tests {
             Assert.AreEqual(latestForum.Date, _viewModel.Date);
             Assert.AreEqual(latestForum.Hour, _viewModel.Hour);
             Assert.NotNull(_viewModel.SelectedForum);
+        }
+        [Test()]
+        public void CoordinatorMasterPageTests_GetInstance() {
+            Assert.IsInstanceOf<CoordinatorMasterPageViewModel>(CoordinatorMasterPageViewModel.GetInstance());
         }
     }
 }

@@ -15,6 +15,7 @@ namespace UnitTest.UnitTests {
         private List<ForumDEG.Models.MultipleChoiceQuestion> _multipleChoiceQuestions;
         private static string _multipleAnswer = "Questão check";
         private static string _singleAnswer = "Questão radio";
+        private static int testQuestionsAmount;
 
         [SetUp]
         public void Setup() {
@@ -31,20 +32,27 @@ namespace UnitTest.UnitTests {
                 }
             };
             _viewModel.MultipleChoiceQuestions = _multipleChoiceQuestions;
+            _viewModel.DiscursiveQuestions = new List<ForumDEG.Models.DiscursiveQuestion>();
+            testQuestionsAmount = 2;
         }
 
         [Test]
-        public void SplitMultipleChoiceQuestions_MultipleAnswersList() {
+        public void FormDetailViewModelTests_SplitMultipleChoiceQuestions_MultipleAnswersList() {
             _viewModel.SplitMultipleChoiceQuestions();
             Assert.AreEqual(1, _viewModel.MultipleAnswersQuestions.Count);
             Assert.AreEqual(_multipleAnswer, _viewModel.MultipleAnswersQuestions[0].Question);
         }
         [Test]
-        public void SplitMultipleChoiceQuestions_SingleAnswerList() {
+        public void FormDetailViewModelTests_SplitMultipleChoiceQuestions_SingleAnswerList() {
             _viewModel.SplitMultipleChoiceQuestions();
             Assert.AreEqual(1, _viewModel.SingleAnswerQuestions.Count);
             Assert.AreEqual(_singleAnswer, _viewModel.SingleAnswerQuestions[0].Question);
         }
+        [Test]
+        public void FormDetailViewModelTests_QuestionsAmount_Get() {
+            Assert.AreEqual(testQuestionsAmount,_viewModel.QuestionsAmount);
+        }
+
 
     }
 }

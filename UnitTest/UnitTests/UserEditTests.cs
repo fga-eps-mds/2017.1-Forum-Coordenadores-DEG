@@ -28,41 +28,48 @@ namespace Tests {
         }
 
         [Test()]
-        public void IsAnyFieldBlank_NoBlankFields() {
+        public void UserEditTests_IsAnyFieldBlank_NoBlankFields() {
             Assert.False(viewModel.IsAnyFieldBlank());
         }
 
         [Test()]
-        public void IsAnyFieldBlank_NameInBlank() {
+        public void UserEditTests_IsAnyFieldBlank_NameInBlank() {
             viewModel.NameIn = "";
             Assert.True(viewModel.IsAnyFieldBlank());
         }
 
         [Test()]
-        public void IsAnyFieldBlank_EmailInBlank() {
+        public void UserEditTests_IsAnyFieldBlank_EmailInBlank() {
             viewModel.EmailIn = "";
             Assert.True(viewModel.IsAnyFieldBlank());
         }
 
         [Test()]
-        public void IsAnyFieldBlank_RegistrationInBlank() {
+        public void UserEditTests_IsAnyFieldBlank_RegistrationInBlank() {
             viewModel.RegistrationIn = "";
             Assert.True(viewModel.IsAnyFieldBlank());
         }
 
         [Test()]
-        public void IsAnyFieldBlank_PasswordInBlank() {
+        public void UserEditTests_IsAnyFieldBlank_PasswordInBlank() {
             viewModel.PasswordIn = "";
             Assert.True(viewModel.IsAnyFieldBlank());
         }
 
         [Test()]
-        public void ValidateEmail_ValidEmail() {
+        public void UserEditTests_IsAnyFieldBlank_CourseInBlank() {
+            viewModel.UserTypeIn = 0;
+            viewModel.CourseIn = "";
+            Assert.True(viewModel.IsAnyFieldBlank());
+        }
+
+        [Test()]
+        public void UserEditTests_ValidateEmail_ValidEmail() {
             Assert.True(viewModel.ValidateEmail());
         }
 
         [Test()]
-        public void ValidateEmail_InvalidEmail() {
+        public void UserEditTests_ValidateEmail_InvalidEmail() {
             viewModel.EmailIn = "email";
             Assert.False(viewModel.ValidateEmail());
 
@@ -75,12 +82,12 @@ namespace Tests {
 
 
         [Test()]
-        public void ValidatePassword_ValidPassWord() {
+        public void UserEditTests_ValidatePassword_ValidPassWord() {
             Assert.True(viewModel.ValidatePassword());
         }
 
         [Test()]
-        public void ValidatePassword_invalidPassWord() {
+        public void UserEditTests_ValidatePassword_invalidPassWord() {
             //less chars than 8
             viewModel.PasswordIn = "Pb1";
             Assert.False(viewModel.ValidatePassword());
@@ -101,5 +108,14 @@ namespace Tests {
             viewModel.PasswordIn = "Abcdefghij";
             Assert.False(viewModel.ValidatePassword());
         }
+
+        [Test()]
+        public void UserEditTests_UserTypeIandIsCoordConection() {
+            Assert.AreEqual(viewModel.UserTypeIn == 0, viewModel.IsCoord);
+            viewModel.UserTypeIn++;
+            Assert.AreEqual(viewModel.UserTypeIn == 0, viewModel.IsCoord);
+        }
+
+
     }
 }

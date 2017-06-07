@@ -11,7 +11,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    class ForumEditViewModel : BaseViewModel {
+    public class ForumEditViewModel : BaseViewModel {
         private readonly IPageService _pageService;
         private readonly Helpers.Forum _forumService;
         
@@ -105,9 +105,9 @@ namespace ForumDEG.ViewModels {
         }
 
         public bool IsAnyFieldBlank() {
-            return (String.IsNullOrWhiteSpace(Forum.Title) ||
-                    String.IsNullOrWhiteSpace(Forum.Place) ||
-                    String.IsNullOrWhiteSpace(Forum.Schedules));
+            return (String.IsNullOrWhiteSpace(ForumTitle) ||
+                    String.IsNullOrWhiteSpace(ForumPlace) ||
+                    String.IsNullOrWhiteSpace(ForumSchedules));
         }
 
         public async void ConfirmEdition() {
