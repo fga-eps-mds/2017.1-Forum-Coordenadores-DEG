@@ -17,7 +17,7 @@ namespace Tests {
         }
 
         [Test()]
-        public void ChangeButtonUI_WhenCalled_CancelOptionShouldAppearIfPresenceIsConfirmed() {
+        public void ForumDetailViewModelTests_ChangeButtonUI_WhenCalled_CancelOptionShouldAppearIfPresenceIsConfirmed() {
             _viewModel.IsConfirmed = true;
             var cancelText = "Cancelar presença";
 
@@ -26,7 +26,7 @@ namespace Tests {
             Assert.AreEqual(_viewModel.ButtonText, cancelText);
         }
         [Test()]
-        public void ChangeButtonUI_WhenCalled_ConfirmOptionShouldAppearIfPresenceIsNotConfirmed() {
+        public void ForumDetailViewModelTests_ChangeButtonUI_WhenCalled_ConfirmOptionShouldAppearIfPresenceIsNotConfirmed() {
             _viewModel.IsConfirmed = false;
             var confirmText = "Confirmar presença";
 
@@ -35,7 +35,7 @@ namespace Tests {
             Assert.AreEqual(_viewModel.ButtonText, confirmText);
         }
         [Test()]
-        public void ChangeButtonUI_WhenCalled_ButtonColorShouldBeRedIfPresenceIsConfirmed() {
+        public void ForumDetailViewModelTests_ChangeButtonUI_WhenCalled_ButtonColorShouldBeRedIfPresenceIsConfirmed() {
             _viewModel.IsConfirmed = true;
             Color cancelColor = Color.Red;
 
@@ -44,7 +44,7 @@ namespace Tests {
             Assert.AreEqual(_viewModel.ButtonColor, cancelColor);
         }
         [Test()]
-        public void ChangeButtonUI_WhenCalled_ButtonColorShouldBeOrangeIfPresenceIsNotConfirmed() {
+        public void ForumDetailViewModelTests_ChangeButtonUI_WhenCalled_ButtonColorShouldBeOrangeIfPresenceIsNotConfirmed() {
             _viewModel.IsConfirmed = false;
             Color confirmColor = Color.Orange;
 
@@ -53,7 +53,7 @@ namespace Tests {
             Assert.AreEqual(_viewModel.ButtonColor, confirmColor);
         }
         [Test()]
-        public void TogglePresence_WhenCalled_ConfirmationStatusShouldSwitch() {
+        public void ForumDetailViewModelTests_TogglePresence_WhenCalled_ConfirmationStatusShouldSwitch() {
             _viewModel.IsConfirmed = true;
             _viewModel.TogglePresence();
             Assert.False(_viewModel.IsConfirmed);
