@@ -15,7 +15,6 @@ namespace ForumDEG.ViewModels {
     public class FormDetailViewModel : PageService, INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
         private IPageService _pageService;
-        private Helpers.Form _formService;
         private readonly Helpers.Form _formService;
 
         public bool IsCurrentUserAdmin => Helpers.Settings.IsUserAdmin;
@@ -41,7 +40,6 @@ namespace ForumDEG.ViewModels {
 
         public FormDetailViewModel(IPageService pageService) {
             _pageService = pageService;
-            _formService = new Helpers.Form();
             MultipleAnswersQuestions = new List<Models.MultipleAnswersQuestion>();
             SingleAnswerQuestions = new List<Models.SingleAnswerQuestion>();
 
@@ -82,12 +80,12 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Submit] Answer: " + discursiveQuestion.Answer);
             }
 
-            if ((CheckBoxValidation(multipleChoiceAnswers) == false) || (RadioButtonValidation(multipleChoiceAnswers)== false )){
+            if ((CheckBoxValidation(multipleChoiceAnswers) == false) || (RadioButtonValidation(multipleChoiceAnswers) == false)) {
                 await blankAnswerAsync();
                 return;
             }
 
-            
+
 
             FormAnswer formAnswer = new FormAnswer {
                 FormId = RemoteId,
@@ -126,7 +124,7 @@ namespace ForumDEG.ViewModels {
                 };
                 multipleChoiceAnswers.Add(answer);
             }
-                return true;
+            return true;
         }
 
         public bool RadioButtonValidation(List<MultipleChoiceAnswer> multipleChoiceAnswers) {
@@ -156,9 +154,11 @@ namespace ForumDEG.ViewModels {
         }
 
         public async Task blankAnswerAsync() {
-                await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opï¿½ï¿½o!", "ok", "cancel");
+            await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opção!", "ok", "cancel");
+        }
+
         private async void DeleteForm() {
-            var answer = await _pageService.DisplayAlert("Deletar Formulï¿½rio", "Tem certeza que deseja deletar o formulï¿½rio existente? Esta aï¿½ï¿½o nï¿½o poderï¿½ ser desfeita.", "Sim", "Nï¿½o");
+            var answer = await _pageService.DisplayAlert("Deletar Formulário", "Tem certeza que deseja deletar o Formulário existente? Esta alteração não poderá ser desfeita.", "Sim", "Não");
             Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
                 if (await _formService.DeleteFormAsync(RemoteId)) {
@@ -166,7 +166,7 @@ namespace ForumDEG.ViewModels {
                     await _pageService.PopAsync();
                 }
                 else {
-                    await _pageService.DisplayAlert("Erro!", "O formulï¿½rio nï¿½o pï¿½de ser deletado, tente novamente.", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Erro!", "O formulário não pode ser deletado, tente novamente.", "OK", "Cancelar");
                 }
             }
         }

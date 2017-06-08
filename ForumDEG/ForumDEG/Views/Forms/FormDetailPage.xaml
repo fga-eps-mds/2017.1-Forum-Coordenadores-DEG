@@ -15,13 +15,14 @@
                        HorizontalOptions="Start" 
                        VerticalOptions="StartAndExpand"
                        BackgroundColor="Transparent" />
+               
                 <Label Text="Deletar Formulário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
                                    BackgroundColor="White"  IsVisible="{Binding IsCurrentUserAdmin}"
                                    x:Name="LabelDeletarFormulárioFormDetailPage"
                                    AutomationId="LabelDeletarFormulárioFormDetailPage">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditCommand}"/>
+                        <TapGestureRecognizer Command="{Binding DeleteCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
 

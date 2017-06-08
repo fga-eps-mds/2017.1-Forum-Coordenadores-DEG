@@ -29,13 +29,21 @@ namespace UnitTest.AutomatedTests {
 
             [Test]
             public void ShowFormDetail() {
-                // app.Repl();
                 app.Tap(e => e.Marked("ButtonFormulariosAppMasterPageDetail"));
                 app.Tap("Form que vai dar bom");
                 Assert.IsNotNull(app.Query("Chama, chama, chama"));
                 app.ScrollDown();
                 app.ScrollDown();
                 Assert.IsNotNull(app.Query("Submeter"));
+            }
+
+            [Test]
+            public void DeleteForm() {
+                app.Tap("Formulários");
+                app.Tap("xablau");
+                app.Tap("Deletar Formulário");
+                app.Tap("Sim");
+                Assert.IsNotNull(app.Query("OK"));
             }
         }
     }
