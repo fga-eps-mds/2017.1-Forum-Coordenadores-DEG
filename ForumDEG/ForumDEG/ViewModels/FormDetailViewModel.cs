@@ -11,6 +11,7 @@ using Xamarin.Forms;
 namespace ForumDEG.ViewModels {
     public class FormDetailViewModel {
         private IPageService _pageService;
+        private Helpers.Form _formService;
 
         public int Id { get; set; }
         public string RemoteId { get; set; }
@@ -30,6 +31,7 @@ namespace ForumDEG.ViewModels {
 
         public FormDetailViewModel(IPageService pageService) {
             _pageService = pageService;
+            _formService = new Helpers.Form();
             MultipleAnswersQuestions = new List<Models.MultipleAnswersQuestion>();
             SingleAnswerQuestions = new List<Models.SingleAnswerQuestion>();
 
@@ -119,7 +121,11 @@ namespace ForumDEG.ViewModels {
                 CoordinatorId = Settings.UserReg,
                 DiscursiveAnswers = DiscursiveQuestions,
                 MultipleChoiceAnswers = multipleChoiceAnswers
-            };            
+            };
+
+            /* Uncomment after API is implemented
+             * await _formService.PostFormAnswerAsync(formAnswer);
+             */
         }
 
         private async Task Cancel() {
