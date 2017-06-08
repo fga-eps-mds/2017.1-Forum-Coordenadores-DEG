@@ -57,49 +57,53 @@ namespace UnitTest.UnitTests {
 
         [Test]
         public void FormDetailViewModelTests_CheckboxValidation_True() {
+            Option option = new Option {
+                IsSelected = true,
+                OptionText = "Opção"
+            };
+            MultipleAnswersQuestion question = new MultipleAnswersQuestion("questão");
+            question.Add(option);
+            _viewModel.MultipleAnswersQuestions.Add(question);
+
             List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
-
-            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
-                Question = "Testando Checkboxes",
-                Answers = new List<string> { "testando resposta checkboxes" }
-            });
-
             Assert.True(_viewModel.CheckBoxValidation(multipleChoiceAnswers));
         }
 
         [Test]
         public void FormDetailViewModelTests_CheckboxValidation_False() {
+            Option option = new Option {
+                IsSelected = false,
+                OptionText = "Opção"
+            };
+            MultipleAnswersQuestion question = new MultipleAnswersQuestion("questão");
+            question.Add(option);
+            _viewModel.MultipleAnswersQuestions.Add(question);
+
             List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
-
-            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
-                Question = "Testando Checkboxes",
-                Answers = new List<string>()
-            });
-
             Assert.False(_viewModel.CheckBoxValidation(multipleChoiceAnswers));
         }
 
         [Test]
         public void FormDetailViewModelTests_RadioButtonValidation_True() {
+            SingleAnswerQuestion question = new SingleAnswerQuestion {
+                Question = "questão",
+                Options = new System.Collections.ObjectModel.ObservableCollection<string> { "opção" },
+                SelectedOption = 0
+            };
+            _viewModel.SingleAnswerQuestions.Add(question);
             List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
-
-            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
-                Question = "Testando RadioButtons",
-                Answers = new List<string> { "SS em MDS" }
-            });
-
             Assert.True(_viewModel.RadioButtonValidation(multipleChoiceAnswers));
         }
 
         [Test]
         public void FormDetailViewModelTests_RadioButtonValidation_False() {
+            SingleAnswerQuestion question = new SingleAnswerQuestion {
+                Question = "questão",
+                Options = new System.Collections.ObjectModel.ObservableCollection<string> { "opção" },
+                SelectedOption = -1
+            };
+            _viewModel.SingleAnswerQuestions.Add(question);
             List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
-
-            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
-                Question = "Testando Checkboxes",
-                Answers = new List<string>()
-            });
-
             Assert.False(_viewModel.RadioButtonValidation(multipleChoiceAnswers));
         }
     }

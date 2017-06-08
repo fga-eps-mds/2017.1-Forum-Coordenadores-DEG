@@ -26,8 +26,8 @@ namespace ForumDEG.ViewModels {
 
         public List<Models.DiscursiveQuestion> DiscursiveQuestions { get; set; }
         public List<Models.MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
-        public List<Models.MultipleAnswersQuestion> MultipleAnswersQuestions;
-        public List<Models.SingleAnswerQuestion> SingleAnswerQuestions;
+        public List<Models.MultipleAnswersQuestion> MultipleAnswersQuestions { get; set; }
+        public List<Models.SingleAnswerQuestion> SingleAnswerQuestions { get; set; }
 
         public FormDetailViewModel(IPageService pageService) {
             _pageService = pageService;
