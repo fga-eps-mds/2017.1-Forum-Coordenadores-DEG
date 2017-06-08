@@ -1,4 +1,5 @@
-﻿using ForumDEG.Interfaces;
+﻿using Acr.UserDialogs;
+using ForumDEG.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,8 +34,9 @@ namespace ForumDEG.ViewModels {
         public ICommand CancelCommand { get; set; }
         public ICommand SaveQuestionCommand { get; set; }
         public ICommand NewDiscursiveQuestionCommand { get; set; }
-        
-        public NewFormViewModel(IPageService _pageService) { 
+        private readonly IUserDialogs _dialog;
+
+        public NewFormViewModel(IUserDialogs dialog, IPageService _pageService) { 
             NewMultipleQuestionCommand = new Command(async () => await NewMultipleQuestion());
             NewMultipleAnswersCommand = new Command(async () => await NewMultipleAnswers());
             NewDiscursiveQuestionCommand = new Command(async () => await NewDiscursiveQuestion());
@@ -42,11 +44,14 @@ namespace ForumDEG.ViewModels {
             CancelCommand = new Command(async () => await Cancel());
             SaveQuestionCommand = new Command(async () => await SaveQuestion());
 
+
             MultipleChoiceQuestions = new ObservableCollection<QuestionDetailViewModel>();
             DiscursiveQuestionsTitles = new ObservableCollection<string>();
 
             _formService = new Helpers.Form();
             this._pageService = _pageService;
+
+            _dialog = dialog;
         }
 
         public bool IsFieldBlank(string field) {
@@ -79,7 +84,6 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task Cancel() {
-
             await _pageService.PopAsync();
         }
 
@@ -87,6 +91,9 @@ namespace ForumDEG.ViewModels {
             if (IsFieldBlank(Title)) {
                await _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir título", "ok");
             } else if (await _formService.PostFormAsync(this)) {
+                await _dialog.AlertAsync("O formulário foi criado com sucesso. Os coordenadores serão notificados em breve."
+                , "Formulário Criado"
+                , "OK");
                 await _pageService.PopAsync();
             } else {
                 await _pageService.DisplayAlert("Formulário não pode ser criado", "Não foi possível estabelecer" +
