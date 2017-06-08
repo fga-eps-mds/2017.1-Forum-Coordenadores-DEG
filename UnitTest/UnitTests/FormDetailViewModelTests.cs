@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ForumDEG.ViewModels;
 using ForumDEG.Interfaces;
 using Moq;
+using ForumDEG.Models;
 
 namespace UnitTest.UnitTests {
     public class FormDetailViewModelTests {
@@ -54,5 +55,52 @@ namespace UnitTest.UnitTests {
         }
 
 
+        [Test]
+        public void FormDetailViewModelTests_CheckboxValidation_True() {
+            List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
+
+            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
+                Question = "Testando Checkboxes",
+                Answers = new List<string> { "testando resposta checkboxes" }
+            });
+
+            Assert.True(_viewModel.CheckBoxValidation(multipleChoiceAnswers));
+        }
+
+        [Test]
+        public void FormDetailViewModelTests_CheckboxValidation_False() {
+            List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
+
+            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
+                Question = "Testando Checkboxes",
+                Answers = new List<string>()
+            });
+
+            Assert.False(_viewModel.CheckBoxValidation(multipleChoiceAnswers));
+        }
+
+        [Test]
+        public void FormDetailViewModelTests_RadioButtonValidation_True() {
+            List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
+
+            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
+                Question = "Testando RadioButtons",
+                Answers = new List<string> { "SS em MDS" }
+            });
+
+            Assert.True(_viewModel.RadioButtonValidation(multipleChoiceAnswers));
+        }
+
+        [Test]
+        public void FormDetailViewModelTests_RadioButtonValidation_False() {
+            List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
+
+            multipleChoiceAnswers.Add(new MultipleChoiceAnswer {
+                Question = "Testando Checkboxes",
+                Answers = new List<string>()
+            });
+
+            Assert.False(_viewModel.RadioButtonValidation(multipleChoiceAnswers));
+        }
     }
 }

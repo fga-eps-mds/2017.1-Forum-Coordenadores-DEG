@@ -70,6 +70,26 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Submit] Answer: " + discursiveQuestion.Answer);
             }
 
+            if ((CheckBoxValidation(multipleChoiceAnswers) == false) || (RadioButtonValidation(multipleChoiceAnswers)== false )){
+                await blankAnswerAsync();
+                return;
+            }
+
+            
+
+            FormAnswer formAnswer = new FormAnswer {
+                FormId = RemoteId,
+                CoordinatorId = Settings.UserReg,
+                DiscursiveAnswers = DiscursiveQuestions,
+                MultipleChoiceAnswers = multipleChoiceAnswers
+            };
+
+            /* Uncomment after API is implemented
+             * await _formService.PostFormAnswerAsync(formAnswer);
+             */
+        }
+
+        public bool CheckBoxValidation(List<MultipleChoiceAnswer> multipleChoiceAnswers) {
             foreach (MultipleAnswersQuestion checkBoxQuestion in MultipleAnswersQuestions) {
                 Debug.WriteLine("[Submit] Question: " + checkBoxQuestion.Question);
                 List<string> selectedOptions = new List<string>();
@@ -85,8 +105,7 @@ namespace ForumDEG.ViewModels {
                     }
                 }
                 if (validateCheckbox == false) {
-                    await blankAnswerAsync();
-                    return;
+                    return false;
                 }
 
                 MultipleChoiceAnswer answer = new MultipleChoiceAnswer {
@@ -95,16 +114,18 @@ namespace ForumDEG.ViewModels {
                 };
                 multipleChoiceAnswers.Add(answer);
             }
+                return true;
+        }
 
+        public bool RadioButtonValidation(List<MultipleChoiceAnswer> multipleChoiceAnswers) {
             foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
                 if (radioButtonQuestion.SelectedOption == -1) {
                     Debug.WriteLine("nenhuma questão selecionada");
-                    await blankAnswerAsync();
-                    return;                    
+                    return false;
                 }
 
-               int answerIndex = radioButtonQuestion.SelectedOption;
-                
+                int answerIndex = radioButtonQuestion.SelectedOption;
+
                 MultipleChoiceAnswer answer = new MultipleChoiceAnswer {
                     Question = radioButtonQuestion.Question,
                     Answers = new List<string> { radioButtonQuestion.Options[answerIndex] }
@@ -115,17 +136,7 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Submit] Question: " + radioButtonQuestion.Question);
                 Debug.WriteLine("[Submit] Answer: " + radioButtonQuestion.Options[answerIndex]);
             }
-
-            FormAnswer formAnswer = new FormAnswer {
-                FormId = RemoteId,
-                CoordinatorId = Settings.UserReg,
-                DiscursiveAnswers = DiscursiveQuestions,
-                MultipleChoiceAnswers = multipleChoiceAnswers
-            };
-
-            /* Uncomment after API is implemented
-             * await _formService.PostFormAnswerAsync(formAnswer);
-             */
+            return true;
         }
 
         private async Task Cancel() {
