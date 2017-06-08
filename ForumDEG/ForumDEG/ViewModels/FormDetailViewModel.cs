@@ -162,6 +162,7 @@ namespace ForumDEG.ViewModels {
             Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
                 if (await _formService.DeleteFormAsync(RemoteId)) {
+                    await _pageService.DisplayAlert("Formulário Deletado !", "O Formulário foi deletado com sucesso.", null, "OK");
                     await _pageService.PopAsync();
                 }
                 else {
