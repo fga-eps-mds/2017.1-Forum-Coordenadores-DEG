@@ -3,44 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.Forms.NewFormPage"
              Title="Novo Formulário">
-    <StackLayout Padding="20">
-        <Label Text="Título:" FontAttributes="Bold" />
-        <Entry Placeholder="Título" Text="{Binding Title}"/>
-
-        <StackLayout Orientation="Horizontal">
-            <StackLayout Orientation="Vertical" Padding="20">
-                <Image
-                                   Source="plusbutton_icon.png"
-                                   Scale="0.75"
-                                   VerticalOptions="End" HorizontalOptions="Start">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer
-                                    Command="{Binding PlusButtonClickedCommand}"
-                                    NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical"  Padding="0,5,10,5">
-                <Button  Text="Pergunta Discursiva" HorizontalOptions="Start" BackgroundColor="White" 
-                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" 
-                                     Command="{Binding NewDiscursiveQuestionCommand}"
-                                     x:Name="NewForumButtonOnPageMaster"
-                                     IsVisible="{Binding ExtraButtonsVisibility}"/>
-                <Button  Text="Múltipla Escolha(resposta única)" HorizontalOptions="Start" BackgroundColor="White" 
-                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro"
-                                     Command="{Binding NewMultipleQuestionCommand}"
-                                     x:Name="NewCoordenadorButtonOnPageMaster"
-                                     IsVisible="{Binding ExtraButtonsVisibility}"/>
-                <Button  Text="Múltipla Escolha(várias respostas)" HorizontalOptions="Start" BackgroundColor="White" 
-                                     TextColor="#2b2b2b" HeightRequest="35" FontSize="Micro" 
-                                     x:Name="NewFormularioButtonOnPageMaster"
-                                     Command="{Binding NewMultipleAnswersCommand}"
-                                     IsVisible="{Binding ExtraButtonsVisibility}"/>
-
-            </StackLayout>
-        </StackLayout>
-        <ListView SeparatorVisibility="Default"
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Título do formulário" FontAttributes="Bold" />
+            <Entry Placeholder="Título" Text="{Binding Title}"/>
+            <Frame>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Perguntas discursivas"
+               FontSize="Large"/>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Lista de perguntas cadastradas:" VerticalOptions="Start"/>
+                        <ListView SeparatorVisibility="Default"
                   ItemsSource="{Binding DiscursiveQuestionsTitles}"
                   HasUnevenRows="True"
                   RowHeight="60"
@@ -48,57 +21,139 @@
                   SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}"
                   SeparatorColor="Gray">
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell >
-
-                        <StackLayout Orientation="Horizontal" Padding="5">
-                            <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
-                                <Label Text="{Binding}" TextColor="Black" />
-                            </StackLayout>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell >
+                                        <StackLayout Orientation="Horizontal" Padding="5">
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                                <Label Text="{Binding}" TextColor="Black" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <StackLayout Orientation="Horizontal">
+                            <Image
+                                   Source="add_icon.png"
+                                   Scale="0.75"
+                                   VerticalOptions="End" HorizontalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding NewDiscursiveQuestionCommand}"
+                                    NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="Adicionar nova pergunta discursiva" HorizontalOptions="Start" BackgroundColor="Transparent" 
+                                     TextColor="#2b2b2b"
+                                     VerticalOptions="Center"
+                                     x:Name="NewDiscursiveQuestionOnNewFormPage">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                Command="{Binding NewDiscursiveQuestionCommand}"
+                                NumberOfTapsRequired="1"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView SeparatorVisibility="Default"
-                  ItemsSource="{Binding MultipleChoiceQuestions}"
-                  HasUnevenRows="True"
-                  RowHeight="60"
-                  IsPullToRefreshEnabled="True"
-                  SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}"
-                  SeparatorColor="Gray">
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell >
 
-                        <StackLayout Orientation="Horizontal" Padding="5">
-                            <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
-                                <Label Text="{Binding Title}" TextColor="Black" />
-                            </StackLayout>
-                            <Label Text="Ver detalhes" 
+            <Frame>
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Perguntas de múltipla escolha"
+                           FontSize="Large"
+                           VerticalOptions="Start"/>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Lista de perguntas cadastradas:" VerticalOptions="Start"/>
+                        <ListView SeparatorVisibility="Default"
+                                      ItemsSource="{Binding MultipleChoiceQuestions}"
+                                      HasUnevenRows="True"
+                                      VerticalOptions="FillAndExpand"
+                                      IsPullToRefreshEnabled="True"
+                                      SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}"
+                                      SeparatorColor="Gray">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal" Padding="5" VerticalOptions="FillAndExpand">
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
+                                                <Label Text="{Binding Title}" TextColor="Black" />
+                                            </StackLayout>
+                                            <Label Text="Ver detalhes" 
                                            TextColor="#3366BB"
                                            VerticalOptions="Center" />
-
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Padding="20" VerticalOptions="Start">
+                        <StackLayout Orientation="Horizontal">
+                            <Image
+                                   Source="add_icon.png"
+                                   Scale="0.75"
+                                   VerticalOptions="End" HorizontalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding NewMultipleQuestionCommand}"
+                                    NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="Adicionar nova pergunta de múltipla escolha (resposta única)" HorizontalOptions="Start" BackgroundColor="Transparent" 
+                                     TextColor="#2b2b2b"
+                                     VerticalOptions="Center"
+                                     x:Name="NewMultipleChoiceQuestionWithNoMultipleAnswersOnNewFormPage">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                Command="{Binding NewMultipleQuestionCommand}"
+                                NumberOfTapsRequired="1"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <StackLayout Orientation="Horizontal"
+                        <StackLayout Orientation="Horizontal">
+                            <Image
+                                   Source="add_icon.png"
+                                   Scale="0.75"
+                                   VerticalOptions="End" HorizontalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding NewMultipleAnswersCommand}"
+                                    NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="Adicionar nova pergunta de múltipla escolha (várias respostas)" HorizontalOptions="Start" BackgroundColor="Transparent" 
+                                     TextColor="#2b2b2b"
+                                     VerticalOptions="Center"
+                                     x:Name="NewMultipleChoiceQuestionWithMultipleAnswersOnNewFormPage">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                Command="{Binding NewMultipleAnswersCommand}"
+                                NumberOfTapsRequired="1"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">
-            <Button Text="Cancelar" 
+                <Button Text="Cancelar" 
                         TextColor="White"
                         BackgroundColor="Orange"
                         Command="{Binding CancelCommand}"
                         x:Name="CancelButton"
                         />
-            <Button Text="Criar formulário" 
+                <Button Text="Criar formulário" 
                         TextColor="White"
                         BackgroundColor="Orange"
                         Command="{Binding SaveQuestionCommand}"
                         x:Name="NewForumButtonOnPageNewForum"/>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

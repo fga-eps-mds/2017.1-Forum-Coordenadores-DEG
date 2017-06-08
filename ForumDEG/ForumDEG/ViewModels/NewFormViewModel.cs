@@ -33,36 +33,8 @@ namespace ForumDEG.ViewModels {
         public ICommand CancelCommand { get; set; }
         public ICommand SaveQuestionCommand { get; set; }
         public ICommand NewDiscursiveQuestionCommand { get; set; }
-
-        private float _tapCount = 0;
-
-        public float TapCount {
-            get {
-                return _tapCount;
-            }
-            set {
-                if (_tapCount != value)
-                    _tapCount = value;
-                OnPropertyChanged("TapCount");
-            }
-        }
-
-        private bool _extraButtonsVisibility;
-
-        public bool ExtraButtonsVisibility {
-            get {
-                return _extraButtonsVisibility;
-            }
-            set {
-                if (_extraButtonsVisibility != value) {
-                    _extraButtonsVisibility = value;
-                    OnPropertyChanged("ExtraButtonsVisibility");
-                }
-            }
-        }
-
+        
         public NewFormViewModel(IPageService _pageService) { 
-            PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
             NewMultipleQuestionCommand = new Command(async () => await NewMultipleQuestion());
             NewMultipleAnswersCommand = new Command(async () => await NewMultipleAnswers());
             NewDiscursiveQuestionCommand = new Command(async () => await NewDiscursiveQuestion());
@@ -75,12 +47,7 @@ namespace ForumDEG.ViewModels {
 
             _formService = new Helpers.Form();
             this._pageService = _pageService;
-
-            ExtraButtonsVisibility = false;
-            TapCount = 0;
         }
-
-
 
         public bool IsFieldBlank(string field) {
             return (String.IsNullOrEmpty(field) || String.IsNullOrWhiteSpace(field));
@@ -91,15 +58,6 @@ namespace ForumDEG.ViewModels {
             if (question == null)
                 return;
             await _pageService.PushAsync(new Views.Forms.QuestionDetailPage(this));
-        }
-
-        private async Task PlusButtonClicked() {
-            TapCount++;
-            if (TapCount % 2 == 0) {
-                ExtraButtonsVisibility = false;
-            } else {
-                ExtraButtonsVisibility = true;
-            }
         }
 
         private async Task NewDiscursiveQuestion() {
@@ -127,7 +85,7 @@ namespace ForumDEG.ViewModels {
 
         private async Task SaveQuestion() {
             if (IsFieldBlank(Title)) {
-               await _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir titulo", "ok");
+               await _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir título", "ok");
             } else if (await _formService.PostFormAsync(this)) {
                 await _pageService.PopAsync();
             } else {
