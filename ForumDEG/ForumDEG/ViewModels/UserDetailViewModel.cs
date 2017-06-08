@@ -53,9 +53,10 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("Answer: " + answer);
                 if (answer == true) {
                     if (await _administratorService.DeleteAdministratorAsync(Registration)) {
+                        await _pageService.DisplayAlert("Usuário deletado", "O usuário foi excluído do sistema com sucesso.", "OK");
                         await _pageService.PopAsync();
                     } else {
-                        await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.", "OK", "Cancelar");
+                        await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.", "OK");
                     }
                 }
                       //LOCAL DATABASE//
