@@ -132,6 +132,49 @@ namespace ForumDEG.Helpers {
 
             return forms;
         }
+
+        public static JObject PostFormAnswerBuilder(Models.FormAnswer formAnswer) {
+            JObject body = new JObject();
+            JObject formAnswerContent = new JObject();
+            JArray multipleChoiceAnswersJSON = new JArray();
+            JArray discursiveAnswersJSON = new JArray();
+
+            var multipleChoiceAnswers = formAnswer.MultipleChoiceAnswers;
+            var discursiveAnswers = formAnswer.DiscursiveAnswers;
+
+            formAnswerContent.Add("formId", formAnswer.FormId);
+            formAnswerContent.Add("coordinatorId", formAnswer.CoordinatorId);
+            
+            foreach (Models.MultipleChoiceAnswer answer in multipleChoiceAnswers) {
+                JObject multipleChoiceQuestion = new JObject();
+                JArray optionsAnswered = new JArray();
+
+                multipleChoiceQuestion.Add("question", answer.Question);
+
+                foreach (string option in answer.Answers) {
+                    optionsAnswered.Add(option);
+                }
+                multipleChoiceQuestion.Add("answers", optionsAnswered);
+
+                multipleChoiceAnswersJSON.Add(multipleChoiceQuestion);
+            }
+
+            foreach (Models.DiscursiveQuestion discursiveQuestion in discursiveAnswers) {
+                JObject discursiveQuestionAnswer = new JObject {
+                    { "question", discursiveQuestion.Question },
+                    { "answer", discursiveQuestion.Answer }
+                };
+                discursiveAnswersJSON.Add(discursiveQuestionAnswer);
+            }
+
+            formAnswerContent.Add("discursiveAnswers", discursiveAnswersJSON);
+            formAnswerContent.Add("multipleChoiceAnswers", multipleChoiceAnswersJSON);
+
+            body.Add("formAnswer", formAnswerContent);
+
+            return body;
+        }
+
         public static JObject PostFormbuilder(ViewModels.NewFormViewModel form) {
 
             JObject body = new JObject();

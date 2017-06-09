@@ -79,5 +79,32 @@ namespace ForumDEG.Helpers {
                 return false;
             }
         }
+
+        public async Task<bool> PostFormAnswerAsync(Models.FormAnswer formAnswer) {
+            var route = "coordinators/" + formAnswer.CoordinatorId + "/answer/" + formAnswer.FormId;
+            var uri = new Uri(string.Format(Constants.RestUrl, route));
+
+            var body = FormParser.PostFormAnswerBuilder(formAnswer);
+
+            var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
+            var contentString = await content.ReadAsStringAsync();
+            Debug.WriteLine("[Form API] - Answer content built: " + contentString);
+
+            try {
+                var response = await _client.PostAsync(uri, content);
+                if (response.IsSuccessStatusCode) {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Form API] - Post Answer result: " + responseContent);
+                    return true;
+                } else {
+                    var failedContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Form API] - Post Answer response unsuccessful " + failedContent);
+                    return false;
+                }
+            } catch (Exception ex) {
+                Debug.WriteLine("[Form API exception]:" + ex.Message);
+                return false;
+            }
+        }
     }
 }

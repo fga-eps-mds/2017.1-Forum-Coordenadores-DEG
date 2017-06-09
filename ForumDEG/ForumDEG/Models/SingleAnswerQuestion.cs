@@ -9,5 +9,10 @@ namespace ForumDEG.Models {
     public class SingleAnswerQuestion {
         public string Question { get; set; }
         public ObservableCollection<string> Options { get; set; }
+        public int SelectedOption { get; set; }
+
+        public SingleAnswerQuestion() {
+            SelectedOption = -1;
+        }
     }
 }

@@ -14,7 +14,8 @@ using System.Net.Http;
 
 namespace Tests {
     class FormParserTests {
-        private NewFormViewModel form;
+        private NewFormViewModel _form;
+        private ForumDEG.Models.FormAnswer _formAnswer;
         private Mock<IPageService> _pageService;
         private QuestionDetailViewModel _question1;
         private QuestionDetailViewModel _question2;
@@ -29,7 +30,23 @@ namespace Tests {
         [SetUp()]
         public void SetUp() {
             _pageService = new Mock<IPageService>();
-            form = new NewFormViewModel(_pageService.Object);
+            _form = new NewFormViewModel(_pageService.Object);
+            _formAnswer = new ForumDEG.Models.FormAnswer {
+                CoordinatorId = "12345678",
+                FormId = "0001",
+                DiscursiveAnswers = new List<ForumDEG.Models.DiscursiveQuestion> {
+                    new ForumDEG.Models.DiscursiveQuestion {
+                        Question = "Questão Discursiva",
+                        Answer = "Resposta Discursiva"
+                    }
+                },
+                MultipleChoiceAnswers = new List<ForumDEG.Models.MultipleChoiceAnswer> {
+                    new ForumDEG.Models.MultipleChoiceAnswer {
+                        Question = "Questão Múltipla",
+                        Answers = new List<string> { "Opção 1", "Opção 2" }
+                    }
+                }
+            };
 
             discursive = new List<ForumDEG.Models.DiscursiveQuestion>();
             discursive.Add(new ForumDEG.Models.DiscursiveQuestion { Question = "Chama, chama, chama" });
@@ -58,7 +75,7 @@ namespace Tests {
                 },
             });
 
-            form.Title = "Titulo";
+            _form.Title = "Titulo";
             _question1 = new QuestionDetailViewModel {
                 Title = "pergunta1",
                 MultipleAnswers = true
@@ -72,8 +89,10 @@ namespace Tests {
             };
             _question2.Options.Add("reposta1");
             _question2.Options.Add("reposta2");
-            form.MultipleChoiceQuestions.Add(_question1);
-            form.MultipleChoiceQuestions.Add(_question2);
+            _form.MultipleChoiceQuestions.Add(_question1);
+            _form.MultipleChoiceQuestions.Add(_question2);
+
+            _form.DiscursiveQuestionsTitles.Add("Chama, chama, chama");
         }
 
         [Test()]
@@ -106,19 +125,19 @@ namespace Tests {
         [Test()]
         public void PostFormbuilder_Title() {
 
-            JObject obj = FormParser.PostFormbuilder(form);
+            JObject obj = FormParser.PostFormbuilder(_form);
 
             var formBody = obj["form"];
 
             var formTitle = formBody["title"].ToString();;
 
-            Assert.AreEqual(form.Title, formTitle);
+            Assert.AreEqual(_form.Title, formTitle);
         }
 
         [Test()]
         public void PostFormbuilder_MultipleAnwsers() {
 
-            JObject obj = FormParser.PostFormbuilder(form);
+            JObject obj = FormParser.PostFormbuilder(_form);
 
             var formBody = obj["form"];
 
@@ -137,7 +156,7 @@ namespace Tests {
         [Test()]
         public void PostFormbuilder_Question() {
 
-            JObject obj = FormParser.PostFormbuilder(form);
+            JObject obj = FormParser.PostFormbuilder(_form);
 
             var formBody = obj["form"];
 
@@ -154,9 +173,22 @@ namespace Tests {
         }
 
         [Test()]
+        public void FormParser_PostFormbuilder_DiscursiveQuestion() {
+
+            JObject obj = FormParser.PostFormbuilder(_form);
+
+            var formBody = obj["form"];
+            var discursiveQuestions = formBody["discussive"].ToObject<List<JObject>>();
+
+            var question = discursiveQuestions[0]["question"].ToString();
+
+            Assert.AreEqual(_form.DiscursiveQuestionsTitles[0], question);
+        }
+
+        [Test()]
         public void PostFormbuilder_Options() {
 
-            JObject obj = FormParser.PostFormbuilder(form);
+            JObject obj = FormParser.PostFormbuilder(_form);
 
             var formBody = obj["form"];
 
@@ -170,6 +202,47 @@ namespace Tests {
 
             Assert.AreEqual(_question1.Options, questionList[0]);
             Assert.AreEqual(_question2.Options, questionList[1]);
+        }
+
+        [Test()]
+        public void FormParser_PostFormAnswerBuilder_Ids() {
+            JObject obj = FormParser.PostFormAnswerBuilder(_formAnswer);
+
+            var formBody = obj["formAnswer"];
+
+            var formId = formBody["formId"].ToString();
+            var coordId = formBody["coordinatorId"].ToString();
+
+            Assert.AreEqual(_formAnswer.FormId, formId);
+            Assert.AreEqual(_formAnswer.CoordinatorId, coordId);
+        }
+
+        [Test()]
+        public void FormParser_PostFormAnswerBuilder_DiscursiveAnswers() {
+            JObject obj = FormParser.PostFormAnswerBuilder(_formAnswer);
+
+            var formBody = obj["formAnswer"];
+            var discursiveAnswersList = formBody["discursiveAnswers"].ToObject<List<JObject>>();
+
+            var discursiveQuestion = discursiveAnswersList[0]["question"].ToString();
+            var discursiveAnswer = discursiveAnswersList[0]["answer"].ToString();
+
+            Assert.AreEqual(_formAnswer.DiscursiveAnswers[0].Question, discursiveQuestion);
+            Assert.AreEqual(_formAnswer.DiscursiveAnswers[0].Answer, discursiveAnswer);
+        }
+
+        [Test()]
+        public void FormParser_PostFormAnswerBuilder_MultipleChoiceAnswers() {
+            JObject obj = FormParser.PostFormAnswerBuilder(_formAnswer);
+
+            var formBody = obj["formAnswer"];
+            var multipleChoiceAnswersList = formBody["multipleChoiceAnswers"].ToObject<List<JObject>>();
+
+            var questionTitle = multipleChoiceAnswersList[0]["question"].ToString();
+            var optionsAnswered = multipleChoiceAnswersList[0]["answers"].ToObject<List<string>>();
+
+            Assert.AreEqual(_formAnswer.MultipleChoiceAnswers[0].Question, questionTitle);
+            Assert.AreEqual(_formAnswer.MultipleChoiceAnswers[0].Answers, optionsAnswered);
         }
     }
 

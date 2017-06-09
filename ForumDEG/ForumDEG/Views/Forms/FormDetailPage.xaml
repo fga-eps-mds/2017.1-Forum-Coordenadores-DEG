@@ -32,6 +32,7 @@
                                            FontSize="Medium"
                                            FontAttributes="Bold"/>
                                     <Entry Placeholder="Resposta"
+                                           Text="{Binding Answer}"
                                                AutomationId="EntryDiscursiveAnswerFormDetailPage"/>
                                 </StackLayout>
                             </Frame>
@@ -53,7 +54,8 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout  Margin="10">
-                                        <controls:CheckBox DefaultText="{Binding OptionText}"/>
+                                        <controls:CheckBox DefaultText="{Binding OptionText}"
+                                                           Checked="{Binding IsSelected}"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
@@ -92,7 +94,8 @@
                                                FontAttributes="Bold"
                                                />
                                         <controls:BindableRadioGroup ItemsSource="{Binding Options}"
-                                                                     Grid.Row="1"/>
+                                                                     Grid.Row="1"
+                                                                     SelectedIndex="{Binding SelectedOption}"/>
                                     </StackLayout>
                                 </Frame>
                             </ViewCell>
@@ -110,7 +113,8 @@
                         />
                 <Button Text="Submeter" 
                         TextColor="White"
-                        BackgroundColor="Orange"/>
+                        BackgroundColor="Orange"
+                        Command="{Binding SubmitCommand}"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>

@@ -19,51 +19,6 @@ namespace ForumDEG.Views.Forms {
         public FormDetailPage(ViewModels.FormDetailViewModel viewModel) {
             try {
                 _viewModel = viewModel;
-                /*_viewModel = new ViewModels.FormDetailViewModel(new Models.Form {
-                    Title = "Formulário",
-                    DiscursiveQuestions = new List<Models.DiscursiveQuestion> {
-                    new Models.DiscursiveQuestion {
-                        Question = "Pergunta discursiva"
-                    },
-                    new Models.DiscursiveQuestion {
-                        Question = "Outra pergunta"
-                    }
-                },
-                    MultipleChoiceQuestions = new List<MultipleChoiceQuestion> {
-                    new MultipleChoiceQuestion("Questão 01", true) {
-                        new Option {
-                        OptionText = "Opção 01"
-                        },
-                        new Option {
-                        OptionText = "Opção 02"
-                        }
-                    },
-                    new MultipleChoiceQuestion("Questão 02", true) {
-                        new Option {
-                        OptionText = "Opção 01"
-                        },
-                        new Option {
-                        OptionText = "Opção 02"
-                        }
-                    },
-                    new MultipleChoiceQuestion("Questão 03", false) {
-                        new Option {
-                        OptionText = "Opção 01"
-                        },
-                        new Option {
-                        OptionText = "Opção 02"
-                        }
-                    },
-                    new MultipleChoiceQuestion("Questão 04", false) {
-                        new Option {
-                        OptionText = "Opção 01"
-                        },
-                        new Option {
-                        OptionText = "Opção 02"
-                        }
-                    }
-                }
-                });*/
             } catch (Exception ex) {
                 Debug.WriteLine("[Form Page]" + ex.StackTrace + ex.Message);
             }

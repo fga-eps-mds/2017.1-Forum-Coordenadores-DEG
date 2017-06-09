@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ForumDEG.Models {
-    public class DiscursiveQuestion {
+    public class MultipleChoiceAnswer {
         public string Question { get; set; }
-        public string Answer { get; set; }
+        public List<string> Answers { get; set; }
     }
 }
