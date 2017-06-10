@@ -20,6 +20,34 @@ namespace ForumDEG.ViewModels {
             set { SetValue(ref _selectedForm, value); }
         }
 
+        private bool _formVisibility;
+        public bool FormVisibility {
+            get {
+                return _formVisibility;
+            }
+            set {
+                if (_formVisibility != value) {
+                    _formVisibility = value;
+
+                    OnPropertyChanged("FormVisibility");
+                }
+            }
+        }
+
+        private bool _noFormWarning;
+        public bool NoFormWarning {
+            get {
+                return _noFormWarning;
+            }
+            set {
+                if (_noFormWarning != value) {
+                    _noFormWarning = value;
+
+                    OnPropertyChanged("NoFormWarning");
+                }
+            }
+        }
+
         private readonly IPageService _pageService;
         private readonly Helpers.Form _formService;
 
@@ -30,6 +58,8 @@ namespace ForumDEG.ViewModels {
             _pageService = pageService;
             _formService = new Helpers.Form();
             SelectFormCommand = new Command<FormDetailViewModel>(async vm => await SelectForm(vm));
+            _formVisibility = true;
+            _noFormWarning = false;
         }
 
         public static FormsViewModel GetInstance() {
@@ -60,6 +90,15 @@ namespace ForumDEG.ViewModels {
                     };
                     formViewModel.SplitMultipleChoiceQuestions();
                     Forms.Add(formViewModel);
+                }
+
+                if(formsList.Count == 0) {
+                    _formVisibility = false;
+                    _noFormWarning = true;
+                }
+                else {
+                    _formVisibility = true;
+                    _noFormWarning = false;
                 }
             }
             catch (Exception ex) {
