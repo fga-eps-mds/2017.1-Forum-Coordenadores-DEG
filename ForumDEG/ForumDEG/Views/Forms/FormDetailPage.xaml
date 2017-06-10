@@ -15,6 +15,17 @@
                        HorizontalOptions="Start" 
                        VerticalOptions="StartAndExpand"
                        BackgroundColor="Transparent" />
+               
+                <Label Text="Deletar Formulário" TextColor="#3366BB" FontSize="Small"
+                                   HorizontalOptions="EndAndExpand" VerticalOptions="Start"
+                                   BackgroundColor="White"  IsVisible="{Binding IsCurrentUserAdmin}"
+                                   x:Name="LabelDeletarFormulárioFormDetailPage"
+                                   AutomationId="LabelDeletarFormulárioFormDetailPage">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DeleteCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
             </StackLayout>
             <ListView
                         ItemsSource="{Binding DiscursiveQuestions}"
@@ -110,11 +121,16 @@
                         TextColor="White"
                         BackgroundColor="Orange"
                         Command="{Binding CancelCommand}"
+                        AutomationId="ButtonCancelarFormDetailPage"
+                        x:Name="ButtonCancelarFormDetailPage"
                         />
                 <Button Text="Submeter" 
                         TextColor="White"
                         BackgroundColor="Orange"
-                        Command="{Binding SubmitCommand}"/>
+                        Command="{Binding SubmitCommand}"
+                        AutomationId="ButtonSubmeterFormDetailPage"
+                        x:Name="ButtonSubmeterFormDetailPage"
+                        />
             </StackLayout>
         </StackLayout>
     </ScrollView>

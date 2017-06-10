@@ -28,7 +28,8 @@ namespace ForumDEG.Helpers {
                 }
 
                 return null;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 Debug.WriteLine("[Form API exception]: " + ex.Message);
                 return null;
             }
@@ -48,13 +49,14 @@ namespace ForumDEG.Helpers {
                 }
 
                 return forms;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 Debug.WriteLine("[Coordinator API exception]:" + ex.Message);
                 return null;
             }
         }
 
-        public async Task<bool> PostFormAsync (ViewModels.NewFormViewModel form) {
+        public async Task<bool> PostFormAsync(ViewModels.NewFormViewModel form) {
             var uri = new Uri(string.Format(Constants.RestUrl, "forms"));
 
             var body = FormParser.PostFormbuilder(form);
@@ -69,12 +71,38 @@ namespace ForumDEG.Helpers {
                     var responseContent = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Form API] - Post result: " + responseContent);
                     return true;
-                } else {
+                }
+                else {
                     var failedContent = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("[Form API] - Post response unsuccessful " + failedContent);
                     return false;
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
+                Debug.WriteLine("[Form API exception]:" + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteFormAsync(string id) {
+            var uri = new Uri(string.Format(Constants.RestUrl, "forms/" + id));
+            var emptyBody = new StringContent(""); // for some reason can't send request without body
+
+            try {
+                var response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode) {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Form API] - Delete result: " + content);
+                    return true;
+                }
+                else {
+                    var failedContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("[Form API] - Delete response unsuccessful " + failedContent);
+                    return false;
+                }
+            }
+            catch (Exception ex) {
                 Debug.WriteLine("[Form API exception]:" + ex.Message);
                 return false;
             }

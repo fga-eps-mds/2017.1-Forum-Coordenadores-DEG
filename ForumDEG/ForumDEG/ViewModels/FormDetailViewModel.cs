@@ -4,14 +4,22 @@ using ForumDEG.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ForumDEG.ViewModels {
-    public class FormDetailViewModel {
+    public class FormDetailViewModel : PageService, INotifyPropertyChanged {
+        public event PropertyChangedEventHandler PropertyChanged;
         private IPageService _pageService;
-        private Helpers.Form _formService;
+        private readonly Helpers.Form _formService;
+
+        public bool IsCurrentUserAdmin => Helpers.Settings.IsUserAdmin;
+        public bool IsCurrentUserCoord => Helpers.Settings.IsUserCoord;
+
 
         public int Id { get; set; }
         public string RemoteId { get; set; }
@@ -23,6 +31,7 @@ namespace ForumDEG.ViewModels {
 
         public ICommand CancelCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
+        public ICommand DeleteCommand { get; private set; }
 
         public List<Models.DiscursiveQuestion> DiscursiveQuestions { get; set; }
         public List<Models.MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
@@ -31,12 +40,13 @@ namespace ForumDEG.ViewModels {
 
         public FormDetailViewModel(IPageService pageService) {
             _pageService = pageService;
-            _formService = new Helpers.Form();
             MultipleAnswersQuestions = new List<Models.MultipleAnswersQuestion>();
             SingleAnswerQuestions = new List<Models.SingleAnswerQuestion>();
 
             CancelCommand = new Command(async () => await Cancel());
             SubmitCommand = new Command(Submit);
+            _formService = new Helpers.Form();
+            DeleteCommand = new Command(DeleteForm);
         }
         public void SplitMultipleChoiceQuestions() {
 
@@ -70,12 +80,12 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Submit] Answer: " + discursiveQuestion.Answer);
             }
 
-            if ((CheckBoxValidation(multipleChoiceAnswers) == false) || (RadioButtonValidation(multipleChoiceAnswers)== false )){
+            if ((CheckBoxValidation(multipleChoiceAnswers) == false) || (RadioButtonValidation(multipleChoiceAnswers) == false)) {
                 await blankAnswerAsync();
                 return;
             }
 
-            
+
 
             FormAnswer formAnswer = new FormAnswer {
                 FormId = RemoteId,
@@ -114,13 +124,13 @@ namespace ForumDEG.ViewModels {
                 };
                 multipleChoiceAnswers.Add(answer);
             }
-                return true;
+            return true;
         }
 
         public bool RadioButtonValidation(List<MultipleChoiceAnswer> multipleChoiceAnswers) {
             foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
                 if (radioButtonQuestion.SelectedOption == -1) {
-                    Debug.WriteLine("nenhuma questão selecionada");
+                    Debug.WriteLine("nenhuma questï¿½o selecionada");
                     return false;
                 }
 
@@ -144,7 +154,21 @@ namespace ForumDEG.ViewModels {
         }
 
         public async Task blankAnswerAsync() {
-                await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opção!", "ok", "cancel");
+            await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opção!", "ok", "cancel");
+        }
+
+        private async void DeleteForm() {
+            var answer = await _pageService.DisplayAlert("Deletar Formulário", "Tem certeza que deseja deletar o Formulário existente? Esta alteração não poderá ser desfeita.", "Sim", "Não");
+            Debug.WriteLine("Answer: " + answer);
+            if (answer == true) {
+                if (await _formService.DeleteFormAsync(RemoteId)) {
+                    await _pageService.DisplayAlert("Formulário Deletado !", "O Formulário foi deletado com sucesso.", null, "OK");
+                    await _pageService.PopAsync();
+                }
+                else {
+                    await _pageService.DisplayAlert("Erro!", "O formulário não pode ser deletado, tente novamente.", "OK", "Cancelar");
+                }
+            }
         }
     }
 }
