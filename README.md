@@ -5,7 +5,7 @@
   <a href="#"><img src="https://badge.fury.io/gh/fga-gpp-mds%2F2017.1-Forum-Coordenadores-DEG.svg" alt="Version"></a>
   <a href="https://docs.microsoft.com/en-us/nuget/release-notes/nuget-4.0-rc"><img src="https://img.shields.io/badge/nuget-v4.0%20RC-blue.svg" alt="NuGet Version"></a>
   <a href=""><img src="https://img.shields.io/badge/c%23-v6.0-blue.svg" alt="C# Version"></a>
-  <a href="http://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg" alt="License: MIT"></a>
   <a href="https://github.com/fga-gpp-mds"><img src="https://img.shields.io/badge/gpp--mds-2017.1-orange.svg" alt="GPP/MDS 2017.1"></a>
   <a href="https://github.com/fga-gpp-mds/2017.1-DEG-API"><img src="https://img.shields.io/badge/REST_API-deg--api-orange.svg" alt="2017.1-DEG-API"></a>
 </p>
@@ -43,7 +43,7 @@ Após isso, o projeto estará pronto para ser executado.
 
 ## Licença
 
-[GNU AGPL v3.0](https://www.gnu.org/licenses/agpl-3.0.html)
+[MIT](https://opensource.org/licenses/MIT)
 
 
 <p align="center">Grupo 8 - Gestão de Portifólios e Projetos de Software (GPP) / Métodos de Desenvolvimento de Software (MDS)<br /><br />
