@@ -6,16 +6,14 @@
              AutomationId="PageFormDetailPage"
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms">
     <ScrollView>
-        <StackLayout Margin="20">
+        <StackLayout Orientation="Vertical" Margin="20" Spacing="20">
             <StackLayout>
                 <Label Text="{Binding Title}" 
-                       TextColor="Black" 
-                       FontAttributes="Bold"
+                       TextColor="Black"
                        FontSize="Large"
                        HorizontalOptions="Start" 
                        VerticalOptions="StartAndExpand"
                        BackgroundColor="Transparent" />
-               
                 <Label Text="Deletar Formulário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
                                    BackgroundColor="White"  IsVisible="{Binding IsCurrentUserAdmin}"
@@ -25,112 +23,120 @@
                         <TapGestureRecognizer Command="{Binding DeleteCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
-
             </StackLayout>
-            <ListView
-                        ItemsSource="{Binding DiscursiveQuestions}"
-                        HasUnevenRows="True"
-                        IsEnabled="False"
-                        AutomationId="ListViewDiscursiveListFormDetailPage"
-                        >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
-                                <StackLayout>
-                                    <Label Text="{Binding Question}"
+
+            <StackLayout Orientation="Vertical">
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Perguntas discursivas"/>
+                        <ListView
+                            ItemsSource="{Binding DiscursiveQuestions}"
+                            HasUnevenRows="True"
+                            IsEnabled="False"
+                            AutomationId="ListViewDiscursiveListFormDetailPage">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout>
+                                                <Label Text="{Binding Question}"
                                            TextColor="Black"
-                                           FontSize="Medium"
-                                           FontAttributes="Bold"/>
-                                    <Entry Placeholder="Resposta"
+                                           FontSize="Medium"/>
+                                                <Entry Placeholder="Resposta"
                                            Text="{Binding Answer}"
                                                AutomationId="EntryDiscursiveAnswerFormDetailPage"/>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <StackLayout>
-                <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
-                    <ListView
-                        SeparatorVisibility="Default"
-                        SeparatorColor="Gray"
-                        HasUnevenRows="True"
-                        x:Name="GroupedView"
-                        IsEnabled="False"
-                        GroupDisplayBinding="{Binding Question}"
-                        IsGroupingEnabled="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout  Margin="10">
-                                        <controls:CheckBox DefaultText="{Binding OptionText}"
-                                                           Checked="{Binding IsSelected}"/>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.GroupHeaderTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Margin="10">
-                                        <Label Text="{Binding Question}" 
-                                               TextColor="Black"
-                                               FontSize="Medium"
-                                               FontAttributes="Bold"
-                                               />
-                                    </StackLayout>
-                                </ViewCell>
-
-                            </DataTemplate>
-                        </ListView.GroupHeaderTemplate>
-                    </ListView>
+                                            </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
                 </Frame>
             </StackLayout>
 
-            <StackLayout>
-                <ListView
+            <StackLayout Orientation="Vertical" Spacing="20">
+                <Frame>
+                    <Label Text="Perguntas de múltipla escolha"/>
+                    <StackLayout>
+                        <ListView
+                        SeparatorVisibility="Default"
                         HasUnevenRows="True"
-                        x:Name="SingleQuestionList"
-                        IsEnabled="False">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="White" Margin="10">
-                                    <StackLayout>
-                                        <Label Text="{Binding Question}" 
+                        x:Name="GroupedView"
+                        GroupDisplayBinding="{Binding Question}"
+                        IsGroupingEnabled="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout  Margin="10">
+                                            <controls:CheckBox DefaultText="{Binding OptionText}"
+                                                           Checked="{Binding IsSelected}"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.GroupHeaderTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Margin="10">
+                                            <Label Text="{Binding Question}" 
                                                TextColor="Black"
                                                FontSize="Medium"
-                                               FontAttributes="Bold"
                                                />
-                                        <controls:BindableRadioGroup ItemsSource="{Binding Options}"
+                                        </StackLayout>
+                                    </ViewCell>
+
+                                </DataTemplate>
+                            </ListView.GroupHeaderTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+
+                <Frame>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Perguntas de múltipla escolha"/>
+                        <StackLayout>
+                            <ListView
+                                    HasUnevenRows="True"
+                                    x:Name="SingleQuestionList"
+                                    SeparatorVisibility="Default">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Frame>
+                                                <StackLayout>
+                                                    <Label Text="{Binding Question}" 
+                                               TextColor="Black"
+                                               FontSize="Medium"
+                                               />
+                                                    <controls:BindableRadioGroup ItemsSource="{Binding Options}"
                                                                      Grid.Row="1"
                                                                      SelectedIndex="{Binding SelectedOption}"/>
-                                    </StackLayout>
-                                </Frame>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal"
-                     HorizontalOptions="End" 
-                         Margin="10">
-                <Button Text="Cancelar" 
-                        TextColor="White"
-                        BackgroundColor="Orange"
-                        Command="{Binding CancelCommand}"
-                        AutomationId="ButtonCancelarFormDetailPage"
-                        x:Name="ButtonCancelarFormDetailPage"
-                        />
-                <Button Text="Submeter" 
-                        TextColor="White"
-                        BackgroundColor="Orange"
-                        Command="{Binding SubmitCommand}"
-                        AutomationId="ButtonSubmeterFormDetailPage"
-                        x:Name="ButtonSubmeterFormDetailPage"
-                        />
+                                                </StackLayout>
+                                            </Frame>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                        HorizontalOptions="End" 
+                                        Margin="10">
+                            <Button Text="Cancelar" 
+                                                TextColor="White"
+                                                BackgroundColor="Orange"
+                                                Command="{Binding CancelCommand}"
+                                                AutomationId="ButtonCancelarFormDetailPage"
+                                                x:Name="ButtonCancelarFormDetailPage"
+                                                />
+                            <Button Text="Submeter" 
+                                                TextColor="White"
+                                                BackgroundColor="Orange"
+                                                Command="{Binding SubmitCommand}"
+                                                AutomationId="ButtonSubmeterFormDetailPage"
+                                                x:Name="ButtonSubmeterFormDetailPage"
+                                                />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </StackLayout>
     </ScrollView>

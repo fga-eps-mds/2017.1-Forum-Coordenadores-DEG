@@ -20,7 +20,7 @@ namespace Tests {
         public void Setup() {
             _pageService = new Mock<IPageService>();
             _dialog = new Mock<IUserDialogs>();
-            _form = new NewFormViewModel(_pageService.Object);
+            _form = new NewFormViewModel(_dialog.Object, _pageService.Object);
             viewModel = new NewMultipleQuestionViewModel(true,_pageService.Object,_dialog.Object,_form);
 
         }

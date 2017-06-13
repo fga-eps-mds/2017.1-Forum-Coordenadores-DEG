@@ -133,10 +133,11 @@ namespace ForumDEG.ViewModels {
             Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
                 if (await _forumService.DeleteForumAsync(RemoteId)) {
+                    await _pageService.DisplayAlert("Fórum deletado", "O fórum foi excluído com sucesso", "OK", "CANCELAR");
                     await _pageService.PopAsync();
                 }
                 else {
-                    await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", "CANCELAR");
                 }
             }
         }

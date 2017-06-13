@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ForumDEG.ViewModels;
+using Acr.UserDialogs;
 
 namespace ForumDEG.Views.Forms {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewFormPage : ContentPage {
         public NewFormPage() {
             InitializeComponent();
-            BindingContext = new NewFormViewModel(new PageService());
+            BindingContext = new NewFormViewModel(UserDialogs.Instance, new PageService());
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace ForumDEG.ViewModels {
     public class ForumsViewModel : BaseViewModel {
@@ -19,6 +20,34 @@ namespace ForumDEG.ViewModels {
             set { SetValue(ref _selectedForum, value); }
         }
 
+        private bool _forumVisibility;
+        public bool ForumVisibility {
+            get {
+                return _forumVisibility;
+            }
+            set {
+                if (_forumVisibility != value) {
+                    _forumVisibility = value;
+
+                    OnPropertyChanged("ForumVisibility");
+                }
+            }
+        }
+
+        private bool _noForumWarning;
+        public bool NoForumWarning {
+            get {
+                return _noForumWarning;
+            }
+            set {
+                if (_noForumWarning != value) {
+                    _noForumWarning = value;
+
+                    OnPropertyChanged("NoForumWarning");
+                }
+            }
+        }
+
         private readonly IPageService _pageService;
         private readonly Helpers.Forum _forumService;
 
@@ -28,6 +57,8 @@ namespace ForumDEG.ViewModels {
         public ForumsViewModel(IPageService pageService) {
             _pageService = pageService;
             _forumService = new Helpers.Forum();
+            _forumVisibility = true;
+            _noForumWarning = false;
             SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
         }
 
@@ -58,6 +89,14 @@ namespace ForumDEG.ViewModels {
                         Registration = forum.Id, // local id
                         RemoteId = forum.RemoteId // remote id, ideally should only use this one
                     });
+                }
+                if(forumsList.Count == 0) {
+                    _noForumWarning = true;
+                    _forumVisibility = false;
+                }
+                else {
+                    _noForumWarning = false;
+                    _forumVisibility = true;
                 }
             } catch (Exception ex) {
                 Debug.WriteLine("[Update forums list] " + ex.Message);

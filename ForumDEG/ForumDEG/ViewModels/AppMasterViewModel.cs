@@ -73,18 +73,26 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task HomeClicked() {
+            TapCount = 0;
+            ExtraButtonsVisibility = false;
             await _pageService.PushAsync(new AppMasterPage());
         }
 
         private async Task ForumsClicked() {
+            TapCount = 0;
+            ExtraButtonsVisibility = false;
             await _pageService.PushAsync(new ForumsPage());
         }
         
         private async Task UsersClicked() {
+            TapCount = 0;
+            ExtraButtonsVisibility = false;
             await _pageService.PushAsync(new UsersPage());
         }
 
         private async Task FormsClicked() {
+            TapCount = 0;
+            ExtraButtonsVisibility = false;
             await _pageService.PushAsync(new FormsPage());
         }
 

@@ -1,4 +1,5 @@
-﻿using ForumDEG.Interfaces;
+﻿using Acr.UserDialogs;
+using ForumDEG.Interfaces;
 using ForumDEG.ViewModels;
 using Moq;
 using NUnit.Framework;
@@ -12,11 +13,13 @@ namespace Tests {
     class NewFormViewModelTests {
         private Mock<IPageService> _pageService;
         private NewFormViewModel viewModel;
+        private Mock<IUserDialogs> _dialog;
 
         [SetUp]
         public void Setup() {
             _pageService = new Mock<IPageService>();
-            viewModel = new NewFormViewModel(_pageService.Object);
+            _dialog = new Mock<IUserDialogs>();
+            viewModel = new NewFormViewModel(_dialog.Object, _pageService.Object);
 
         }
 
@@ -35,18 +38,5 @@ namespace Tests {
             viewModel.SelectedQuestion = test;
             Assert.AreSame(test, viewModel.SelectedQuestion);
         }
-        [Test()]
-        public void NewFormViewModelTests_TapCount_Get_Set() {
-            float test = 5;
-            viewModel.TapCount = test;
-            Assert.AreEqual(test, viewModel.TapCount);
-        }
-        [Test()]
-        public void NewFormViewModelTests_ExtraButtonsVisibility_Get_Set() {
-            bool test = true;
-            viewModel.ExtraButtonsVisibility = test;
-            Assert.True(viewModel.ExtraButtonsVisibility);
-        }
-
     }
 }

@@ -11,12 +11,14 @@ using ForumDEG.Interfaces;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Http;
+using Acr.UserDialogs;
 
 namespace Tests {
     class FormParserTests {
         private NewFormViewModel _form;
         private ForumDEG.Models.FormAnswer _formAnswer;
         private Mock<IPageService> _pageService;
+        private Mock<IUserDialogs> _dialog;
         private QuestionDetailViewModel _question1;
         private QuestionDetailViewModel _question2;
 
@@ -30,7 +32,8 @@ namespace Tests {
         [SetUp()]
         public void SetUp() {
             _pageService = new Mock<IPageService>();
-            _form = new NewFormViewModel(_pageService.Object);
+            _dialog = new Mock<IUserDialogs>();
+            _form = new NewFormViewModel(_dialog.Object, _pageService.Object);
             _formAnswer = new ForumDEG.Models.FormAnswer {
                 CoordinatorId = "12345678",
                 FormId = "0001",

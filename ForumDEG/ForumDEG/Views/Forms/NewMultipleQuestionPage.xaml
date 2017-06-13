@@ -2,7 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.Forms.NewMultipleQuestionPage"
-             Title="Nova Pergunta">
+             Title="">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem AutomationId="TiSaveNewMultipleQuestionPage"
+                     Text="Salvar Pergunta"
+                     Command="{Binding SaveQuestionCommand}"/>
+    </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="20">
             <Label Text="Pergunta:" FontAttributes="Bold" />
@@ -52,11 +57,6 @@
                         Command="{Binding CancelCommand}"
                         x:Name="CancelButton"
                         />
-                <Button Text="Criar pergunta" 
-                        TextColor="White"
-                        BackgroundColor="Orange"
-                        Command="{Binding SaveQuestionCommand}"
-                        x:Name="NewForumButtonOnPageNewForum"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>
