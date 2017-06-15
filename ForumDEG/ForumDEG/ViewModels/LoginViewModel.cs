@@ -8,9 +8,10 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.ComponentModel;
 
 namespace ForumDEG.ViewModels {
-    public class LoginViewModel {
+    public class LoginViewModel : BaseViewModel {
         public string _userRegistration { get; set; }
         public string _userPassword { get; set; }
 
@@ -19,14 +20,30 @@ namespace ForumDEG.ViewModels {
         private IPageService _pageService;
         private IUserDialogs _dialog;
 
+        private bool _activityIndicator;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         public LoginViewModel(IPageService pageService, IUserDialogs dialog) {
             _pageService = pageService;
             _dialog = dialog;
             _userService = new Helpers.User();
+            _activityIndicator = false;
         }
 
         public async Task<bool> ValidateLogin() {
             // executed when login button is clicked
+            ActivityIndicator = true;
             if (IsAnyFieldEmpty()) return false;
             if (!ValidateRegistration()) return false;
             if (!ValidatePasswordRegex()) return false;

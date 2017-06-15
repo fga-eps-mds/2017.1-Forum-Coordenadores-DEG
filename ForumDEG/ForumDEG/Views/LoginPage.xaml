@@ -58,6 +58,10 @@
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 Clicked="LoginClicked"
                  />
+        <ActivityIndicator x:Name="actIndicatorLogin"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.90, 315, 53"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           IsRunning="{Binding ActivityIndicator}"/>
 
     </AbsoluteLayout>
 </ContentPage>
