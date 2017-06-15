@@ -22,7 +22,6 @@
                   ItemsSource="{Binding Forums}"
                   HasUnevenRows="True"
                   RowHeight="60"
-                  IsPullToRefreshEnabled="True"
                   SelectedItem="{Binding SelectedForum, Mode=TwoWay}"
                   ItemSelected="ItemSelected"
                   SeparatorColor="Gray">
@@ -30,7 +29,6 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-
                                 <StackLayout Orientation="Horizontal" Padding="5">
                                     <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
                                         <Label Text="{Binding Title}" TextColor="Black" 
@@ -43,7 +41,6 @@
                                    AutomationId="LabelVerDetalhesForunsPage"
                                    TextColor="#3366BB"
                                    VerticalOptions="Center" />
-
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
