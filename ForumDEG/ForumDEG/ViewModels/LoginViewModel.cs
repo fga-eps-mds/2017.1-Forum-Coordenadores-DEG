@@ -38,7 +38,7 @@ namespace ForumDEG.ViewModels {
             _pageService = pageService;
             _dialog = dialog;
             _userService = new Helpers.User();
-            _activityIndicator = false;
+            ActivityIndicator = false;
         }
 
         public async Task<bool> ValidateLogin() {
@@ -47,17 +47,20 @@ namespace ForumDEG.ViewModels {
             if (IsAnyFieldEmpty()) return false;
             if (!ValidateRegistration()) return false;
             if (!ValidatePasswordRegex()) return false;
+            ActivityIndicator = true;
             if (!await ValidateOnDatabase()) return false;
             LogUser();
             return true;
         }
 
         private void LogUser() {
+            ActivityIndicator = false;
             Settings.UserReg = _userRegistration;
             Settings.IsUserLogged = true;
         }
 
         private bool IsAnyFieldEmpty() {
+            ActivityIndicator = false;
             if (string.IsNullOrWhiteSpace(_userRegistration) || string.IsNullOrWhiteSpace(_userPassword)) {
                 _dialog.Alert(message: "Não podem haver campos vazios!", okText: "OK");
                 return true;
@@ -67,6 +70,7 @@ namespace ForumDEG.ViewModels {
 
         private bool ValidateRegistration() {
             // validates registration
+            ActivityIndicator = false;
             if (_userRegistration.Length < 6 || _userRegistration.Length > 12) {
                 _dialog.Alert(message: "Matrícula inválida!", okText: "OK");
                 return false;
@@ -75,6 +79,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool ValidatePasswordRegex() {
+            ActivityIndicator = false;
             var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
             var match = Regex.Match(_userPassword, regex);
 
@@ -100,12 +105,15 @@ namespace ForumDEG.ViewModels {
                     Debug.WriteLine("[User API]: Coord");
                     return true;
                 } else {
+                    ActivityIndicator = false;
+                    Debug.WriteLine("[LOGIN VIEW MODEL]: when activity indicator should be false, activity indicator is: " + ActivityIndicator);
                     _dialog.Alert(message: "Matrícula ou Senha inválida!", okText: "OK");
                     return false;
                 }
             } catch (Exception ex) {
 
                 Debug.WriteLine("[User API exception]:" + ex.Message);
+                ActivityIndicator = false;
                 return false;
             }
             
