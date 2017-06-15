@@ -48,6 +48,20 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        private bool _activityIndicator;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         private readonly IPageService _pageService;
         private readonly Helpers.Form _formService;
 
@@ -57,9 +71,10 @@ namespace ForumDEG.ViewModels {
         public FormsViewModel(IPageService pageService) {
             _pageService = pageService;
             _formService = new Helpers.Form();
+            ActivityIndicator = false;
             SelectFormCommand = new Command<FormDetailViewModel>(async vm => await SelectForm(vm));
-            _formVisibility = true;
-            _noFormWarning = false;
+            FormVisibility = true;
+            NoFormWarning = false;
         }
 
         public static FormsViewModel GetInstance() {
@@ -76,6 +91,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void UpdateFormsList() {
+            ActivityIndicator = true;
             Forms = new ObservableCollection<FormDetailViewModel>();
             try {
                 var formsList = await _formService.GetFormsAsync();
@@ -88,20 +104,24 @@ namespace ForumDEG.ViewModels {
                         DiscursiveQuestions = _form.DiscursiveQuestions,
                         MultipleChoiceQuestions = _form.MultipleChoiceQuestions
                     };
+                    ActivityIndicator = false;
                     formViewModel.SplitMultipleChoiceQuestions();
                     Forms.Add(formViewModel);
                 }
 
                 if(formsList.Count == 0) {
-                    _formVisibility = false;
-                    _noFormWarning = true;
+                    ActivityIndicator = false;
+                    FormVisibility = false;
+                    NoFormWarning = true;
                 }
                 else {
-                    _formVisibility = true;
-                    _noFormWarning = false;
+                    ActivityIndicator = false;
+                    FormVisibility = true;
+                    NoFormWarning = false;
                 }
             }
             catch (Exception ex) {
+                ActivityIndicator = false;
                 Debug.WriteLine("[Update forms list] " + ex.Message + "\n" + ex.StackTrace);
                 await _pageService.DisplayAlert("Falha ao carregar formulários",
                                           "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
