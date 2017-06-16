@@ -45,7 +45,6 @@ namespace UnitTest.AutomatedTests {
                 app.DismissKeyboard();
                 app.ScrollDown();
                 app.Tap("ButtonCriarForumPageNewForunsPage");
-                app.WaitForElement("alertTitle");
 
                 //app.Repl();
                 Assert.IsNotNull(app.Query("OK"));
@@ -70,20 +69,19 @@ namespace UnitTest.AutomatedTests {
 
             [Test]
             public void ShowUser() {
-                app.Tap(e => e.Marked("ButtonUserButtonAppMasterPageDetail"));
+                app.Tap("USUÁRIOS");
                 app.WaitForElement("Ver detalhes");
-                app.Tap(e => e.Marked("Nome Teste"));
-                Assert.IsNotNull("LabelRemoverUsuarioUserDetailPage");
+                app.Tap("Ver detalhes");
+                Assert.IsNotNull("Remover Usuário");
             }
 
             [Test]
             public void RemoveUser() {
-                app.Tap(e => e.Marked("ButtonUserButtonAppMasterPageDetail"));
-                app.WaitForElement("Ver detalhes");
-                app.Tap(e => e.Marked("Nome Teste"));
-                app.Tap(e => e.Marked("LabelRemoverUsuarioUserDetailPage"));
-                app.Tap(e => e.Marked("button1"));
-                Assert.IsNotNull("Ver detalhes");
+                app.Tap("USUÁRIOS");
+                app.Tap("Ver detalhes");
+                app.Tap("Remover Usuário");
+                app.Tap("SIM");
+                Assert.IsNotNull("Usuários");
             }
 
             [Test]
@@ -101,6 +99,23 @@ namespace UnitTest.AutomatedTests {
                 app.Tap("Formulários");
                 Assert.IsNotNull(app.Query("Ver detalhes"));
             }
+
+            [Test]
+            public void ShowFormDetailForAdministrators() {
+                app.Tap("Formulários");
+                app.Tap("Ver detalhes");
+                Assert.IsNotNull(app.Query("Formulário"));
+            }
+
+            [Test]
+            public void DeleteForm() {
+                app.Tap("Formulários");
+                app.Tap("Ver detalhes");
+                app.Tap("Deletar Formulário");
+                app.Tap("SIM");
+                Assert.IsNotNull(app.Query("Formulário Deletado !"));
+            }
+
         }
     }
 }

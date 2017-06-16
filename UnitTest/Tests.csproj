@@ -37,7 +37,6 @@
   <ItemGroup>
     <None Include="AutomatedTests\AdministratorAcceptionTest.cs" />
     <None Include="AutomatedTests\AppInitializer.cs" />
-    <None Include="AutomatedTests\Form.cs" />
     <None Include="AutomatedTests\CoordinatorAutomatedTest.cs" />
     <None Include="AutomatedTests\LoginAcceptanceTest.cs" />
     <Compile Include="UnitTests\AdministratorParserTests.cs" />
