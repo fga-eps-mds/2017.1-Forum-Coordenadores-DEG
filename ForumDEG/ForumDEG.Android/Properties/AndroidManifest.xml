@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="ForumDEG.ForumDEG" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="forumDEG.forumDEG" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="19" />
-	<application android:label="Fórum DEG" android:icon="@drawable/icon_android"></application>
+	<permission android:name="forumDEG.forumDEG.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="forumDEG.forumDEG.permission.C2D_MESSAGE" />
+	<application android:label="Fórum DEG" android:icon="@drawable/icon_android">
+		<receiver android:name="com.onesignal.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<category android:name="forumDEG.forumDEG" />
+			</intent-filter>
+		</receiver>
+	</application>
 </manifest>
