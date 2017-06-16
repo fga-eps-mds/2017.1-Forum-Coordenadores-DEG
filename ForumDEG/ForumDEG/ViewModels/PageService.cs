@@ -23,5 +23,7 @@ namespace ForumDEG.ViewModels {
         public async Task PushAsync(Page page) {
             await Application.Current.MainPage.Navigation.PushAsync(page);
         }
+
+
     }
 }
