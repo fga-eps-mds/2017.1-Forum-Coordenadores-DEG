@@ -22,7 +22,22 @@ namespace ForumDEG.ViewModels {
         public ICommand RegisterNewUserCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
 
+        private bool _activityIndicator = false;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         public UserRegistrationViewModel(IPageService PageService) {
+            ActivityIndicator = false;
             _pageService = PageService;
             _coordinatorService = new Helpers.Coordinator();
             _administratorService = new Helpers.Administrator();
@@ -48,7 +63,8 @@ namespace ForumDEG.ViewModels {
                     userTypeIn = value;
                     if (userTypeIn == 0) {
                         IsCoord = true;
-                    } else {
+                    }
+                    else {
                         IsCoord = false;
                         CourseIn = null;
                     }
@@ -130,97 +146,120 @@ namespace ForumDEG.ViewModels {
         }
 
         public bool HasEmptySpace() {
+            ActivityIndicator = true;
             if (String.IsNullOrWhiteSpace(NameIn) ||
                 String.IsNullOrWhiteSpace(RegistrationIn) ||
                 String.IsNullOrWhiteSpace(EmailIn) ||
                 String.IsNullOrWhiteSpace(PasswordIn)) {
-              return true;
-            } else {
-                if(UserTypeIn == 0) {
-                    return (String.IsNullOrWhiteSpace(CourseIn));
-                } else {
+                ActivityIndicator = false;
+                return true;
+            }
+            else {
+                if (UserTypeIn == 0) {
+                    return ( String.IsNullOrWhiteSpace(CourseIn) );
+                }
+                else {
+                    ActivityIndicator = false;
                     return false;
                 }
             }
         }
 
-        public bool ValidateRegisterNumber(){
+        public bool ValidateRegisterNumber() {
+            ActivityIndicator = true;
             var regex = @"^[0-9]{9}$";
             var match = Regex.Match(RegistrationIn, regex);
 
             if (!match.Success) {
                 Debug.WriteLine("[User Registration]: Invalid!");
+                ActivityIndicator = false;
                 return false;
-            } else {
+            }
+            else {
                 Debug.WriteLine("[User Registration]: Valid!");
                 return true;
-            }   
+            }
         }
-       
 
-        public bool ValidateEmail(){
+
+        public bool ValidateEmail() {
             //verifica se os novos dados são válidos
+            ActivityIndicator = true;
             var regex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
             var match = Regex.Match(emailIn, regex);
 
             if (!match.Success) {
                 Debug.WriteLine("[User Email]: Invalid!");
+                ActivityIndicator = false;
                 return false;
-            } else {
+            }
+            else {
                 Debug.WriteLine("[User Email]: Valid!");
                 return true;
             }
         }
 
         public bool ValidatePassword() {
-            if (PasswordIn.Length < 8)
+            ActivityIndicator = true;
+            if (PasswordIn.Length < 8) {
+                ActivityIndicator = false;
                 return false;
+            }
 
             var regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
             var match = Regex.Match(PasswordIn, regex);
 
             if (!match.Success) {
+                ActivityIndicator = false;
                 Debug.WriteLine("[User Password]: Invalid!");
                 return false;
-            } else {
+            }
+            else {
                 Debug.WriteLine("[User Password]: Valid!");
                 return true;
             }
         }
 
-        public async Task RegisterNewUser(){
-            if (!HasEmptySpace()){
-                if (ValidateEmail()){
-                    if (ValidateRegisterNumber()){
+        public async Task RegisterNewUser() {
+            ActivityIndicator = true;
+            if (!HasEmptySpace()) {
+                if (ValidateEmail()) {
+                    if (ValidateRegisterNumber()) {
                         if (ValidatePassword()) {
-                            if (UserTypeIn == 0){
-                             RegisterNewCoordinator();
-                                }
+                            if (UserTypeIn == 0) {
+                                RegisterNewCoordinator();
+                            }
                             else {
-                             RegisterNewAdministrator();
-                                }       
-                    CleanFields();
-                        } else {
+                                RegisterNewAdministrator();
+                            }
+                            CleanFields();
+                        }
+                        else {
+                            ActivityIndicator = false;
                             await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", "ok", "cancel");
                         }
 
-                    } else {
+                    }
+                    else {
+                        ActivityIndicator = false;
                         await _pageService.DisplayAlert("Erro!", "Matrícula Inválida!", "ok", "cancel");
                     }
                 }
-                else{
+                else {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
                 }
             }
-            else{
+            else {
+                ActivityIndicator = false;
                 await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
             }
         }
 
 
-        public async void RegisterNewAdministrator(){
-            Administrator Admin = new Administrator(){
+        public async void RegisterNewAdministrator() {
+            Administrator Admin = new Administrator() {
                 Name = NameIn,
                 Email = EmailIn,
                 Registration = RegistrationIn,
@@ -228,10 +267,13 @@ namespace ForumDEG.ViewModels {
                 CreatedOn = DateTime.Now
             };
             if (await _administratorService.PostAdministratorAsync(Admin)) {
-                await _pageService.DisplayAlert("Registrar novo usuário", 
-                                                "Você salvou um novo adminstrador com sucesso! ", 
+                ActivityIndicator = false;
+                await _pageService.DisplayAlert("Registrar novo usuário",
+                                                "Você salvou um novo adminstrador com sucesso! ",
                                                 "ok", "cancel");
-            } else {
+            }
+            else {
+                ActivityIndicator = false;
                 await _pageService.DisplayAlert("Falha na conexão com o servidor",
                                                 "Não foi possível cadastrar o administrador. Por favor tente novamente.",
                                                 "ok", "cancel");
@@ -239,8 +281,8 @@ namespace ForumDEG.ViewModels {
             }
         }
 
-        public async void RegisterNewCoordinator(){
-            Coordinator Coord = new Coordinator(){
+        public async void RegisterNewCoordinator() {
+            Coordinator Coord = new Coordinator() {
                 Name = NameIn,
                 Email = EmailIn,
                 Registration = RegistrationIn,
@@ -249,10 +291,13 @@ namespace ForumDEG.ViewModels {
                 Course = CourseIn
             };
             if (await _coordinatorService.PostCoordinatorAsync(Coord)) {
-                await _pageService.DisplayAlert("Registrar novo usuário", 
-                                                "Você salvou um novo Coordenador com sucesso!", 
+                ActivityIndicator = false;
+                await _pageService.DisplayAlert("Registrar novo usuário",
+                                                "Você salvou um novo Coordenador com sucesso!",
                                                 "ok", "cancel");
-            } else {
+            }
+            else {
+                ActivityIndicator = false;
                 await _pageService.DisplayAlert("Falha na conexão com o servidor",
                                                 "Não foi possível cadastrar o coordenador. Por favor tente novamente.",
                                                 "ok", "cancel");
@@ -260,7 +305,7 @@ namespace ForumDEG.ViewModels {
             }
         }
 
-        public void CleanFields(){
+        public void CleanFields() {
             UserTypeIn = 0;
             NameIn = null;
             RegistrationIn = null;
@@ -271,7 +316,7 @@ namespace ForumDEG.ViewModels {
 
         private async Task Cancel() {
             CleanFields();
-           await _pageService.PopAsync();
+            await _pageService.PopAsync();
         }
     }
 }

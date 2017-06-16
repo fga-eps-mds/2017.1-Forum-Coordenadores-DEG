@@ -12,7 +12,7 @@ using Xamarin.Forms;
 using System.Diagnostics;
 
 namespace ForumDEG.ViewModels {
-    public class UserDetailViewModel {
+    public class UserDetailViewModel : BaseViewModel{
         private readonly IPageService _pageService;
         private readonly Helpers.Administrator _administratorService;
         private readonly Helpers.Coordinator _coordinatorService;
@@ -26,12 +26,27 @@ namespace ForumDEG.ViewModels {
         public bool IsAdministrator { get; set; }
         public bool IsCoordinator { get; set; }
 
+        private bool _activityIndicator = false;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
 
         public bool IsCurrentUserAdmin => Helpers.Settings.IsUserAdmin;
 
         public UserDetailViewModel(IPageService PageService) {
+            ActivityIndicator = false;
             _pageService = PageService;
             EditCommand = new Command(EditUser);
             DeleteCommand = new Command(DeleteUser);
@@ -52,10 +67,13 @@ namespace ForumDEG.ViewModels {
                 var answer = await _pageService.DisplayAlert("Deletar Usuário", "Tem certeza que deseja deletar esse usuário? Esta ação não poderá ser desfeita.", "Sim", "Não");
                 Debug.WriteLine("Answer: " + answer);
                 if (answer == true) {
+                    ActivityIndicator = true;
                     if (await _administratorService.DeleteAdministratorAsync(Registration)) {
+                        ActivityIndicator = false;
                         await _pageService.DisplayAlert("Usuário deletado", "O usuário foi excluído do sistema com sucesso.", "OK");
                         await _pageService.PopAsync();
                     } else {
+                        ActivityIndicator = false;
                         await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.", "OK");
                     }
                 }
@@ -73,9 +91,12 @@ namespace ForumDEG.ViewModels {
                 var answer = await _pageService.DisplayAlert("Deletar Usuário", "Tem certeza que deseja deletar esse usuário? Esta ação não poderá ser desfeita.", "Sim", "Não");
                 Debug.WriteLine("Answer: " + answer);
                 if (answer == true) {
+                    ActivityIndicator = true;
                     if (await _coordinatorService.DeleteCoordinatorAsync(Registration)) {
+                        ActivityIndicator = false;
                         await _pageService.PopAsync();
                     } else {
+                        ActivityIndicator = false;
                         await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.", "OK", "Cancelar");
                     }
                 }

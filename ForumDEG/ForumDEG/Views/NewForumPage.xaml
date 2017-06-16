@@ -29,13 +29,16 @@
                     HeightRequest="150" />
             <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">
+                <ActivityIndicator
+                    IsRunning="{Binding ActivityIndicator}"
+                    />
                 <Button Text="Cancelar" 
                         TextColor="White"
                         BackgroundColor="Orange"
                         Command="{Binding CancelCommand}"
                         x:Name="ButtonCancelarPageNewForunsPage"
                         AutomationId="ButtonCancelarPageNewForunsPage"/>
-                
+
                 <Button Text="Criar fórum" 
                         TextColor="White"
                         BackgroundColor="Orange"
@@ -44,5 +47,6 @@
                         AutomationId="ButtonCriarForumPageNewForunsPage"/>
             </StackLayout>
         </StackLayout>
+        
     </ScrollView>
 </ContentPage>

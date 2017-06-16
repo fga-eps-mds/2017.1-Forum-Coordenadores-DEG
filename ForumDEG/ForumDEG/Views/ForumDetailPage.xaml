@@ -54,6 +54,9 @@
         </Frame>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0, 0, 0, 20" IsVisible="{Binding IsCoordinator}">
+            <ActivityIndicator
+                    IsRunning="{Binding ActivityIndicator}"
+                    IsVisible="{Binding IsCoordinator}"/>
             <Button IsEnabled="{Binding IsPast}" 
                     Text="{Binding ButtonText}" TextColor="White" FontSize="Small"
                     IsVisible="{Binding IsCurrentUserCoord}"
@@ -64,14 +67,13 @@
 
         </StackLayout>
 
-
-        <Button Text="Deletar Fórum" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End" IsVisible="{Binding IsCurrentUserAdmin}">
+            <Button Text="Deletar Fórum" Command="{Binding DeleteCommand}"  HorizontalOptions="End"
                     BackgroundColor="#ff8924" TextColor="White" FontSize="Small" 
-                    IsVisible="{Binding IsCurrentUserAdmin}"
                     x:Name="ButtonDeletarForumForumDetailPage" 
                     AutomationId="ButtonDeletarForumForumDetailPage">
-        </Button>
-
+            </Button>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

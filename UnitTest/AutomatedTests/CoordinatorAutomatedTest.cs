@@ -45,6 +45,13 @@ namespace UnitTest.AutomatedTests {
                 app.Tap("Formulários");
                 Assert.IsNotNull(app.Query("Ver detalhes"));
             }
+
+            [Test]
+            public void ShowFormDetailForCoordinators() {
+                app.Tap("Formulários");
+                app.Tap("Ver detalhes");
+                Assert.IsNotNull(app.Query("Formulário"));
+            }
         }
     }
 }

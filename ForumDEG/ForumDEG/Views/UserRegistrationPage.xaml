@@ -109,18 +109,27 @@
 
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 0, 0, 30">
+            <StackLayout Orientation="Vertical">
 
-                <Button Text="Cancelar" Command="{Binding CancelCommand}" TextColor="White" FontSize="17" 
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 0, 0, 30">
+                    <Button Text="Cancelar" Command="{Binding CancelCommand}" TextColor="White" FontSize="17" 
                         BackgroundColor="Orange" WidthRequest="140"
                         x:Name="ButtonCancelarUserRegistrationPage"
                         AutomationId="ButtonCancelarUserRegistrationPage"></Button>
 
-                <Button Command="{Binding RegisterNewUserCommand}" Text="Confirmar" TextColor="White" 
+                    <Button Command="{Binding RegisterNewUserCommand}" Text="Confirmar" TextColor="White" 
                         FontSize="17" BackgroundColor="Orange" WidthRequest="140"
                         x:Name="ButtonConfirmarUserRegistrationPage"
                         AutomationId="ButtonConfirmarUserRegistrationPage"></Button>
 
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+                    <ActivityIndicator
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                                    IsRunning="{Binding ActivityIndicator}"/>
+                </StackLayout>
             </StackLayout>
 
         </StackLayout>

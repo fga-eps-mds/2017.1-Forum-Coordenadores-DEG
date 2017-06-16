@@ -10,6 +10,9 @@
     
     <ScrollView>
         <StackLayout>
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" IsVisible="{Binding ActivityIndicator}">
+                <ActivityIndicator IsRunning="{Binding ActivityIndicator}"/>
+            </StackLayout>
             <StackLayout IsVisible="{Binding NoForumWarning, Mode=TwoWay}" Margin="20">
                 <Label Text="Não há nenhum fórum disponível"
                        FontSize="Large"/>
@@ -19,7 +22,6 @@
                   ItemsSource="{Binding Forums}"
                   HasUnevenRows="True"
                   RowHeight="60"
-                  IsPullToRefreshEnabled="True"
                   SelectedItem="{Binding SelectedForum, Mode=TwoWay}"
                   ItemSelected="ItemSelected"
                   SeparatorColor="Gray">
@@ -27,7 +29,6 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-
                                 <StackLayout Orientation="Horizontal" Padding="5">
                                     <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
                                         <Label Text="{Binding Title}" TextColor="Black" 
@@ -40,7 +41,6 @@
                                    AutomationId="LabelVerDetalhesForunsPage"
                                    TextColor="#3366BB"
                                    VerticalOptions="Center" />
-
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

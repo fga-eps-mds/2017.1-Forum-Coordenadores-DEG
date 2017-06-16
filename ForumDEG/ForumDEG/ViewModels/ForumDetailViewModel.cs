@@ -68,11 +68,26 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        private bool _activityIndicator = false;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ActivityIndicator"));
+                }
+            }
+        }
+
         public ICommand PresenceCommand { get; private set; }
         public ICommand EditCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
 
         public ForumDetailViewModel(IPageService pageService) {
+            ActivityIndicator = false;
             _pageService = pageService;
             EditCommand = new Command(EditForum);
             PresenceCommand = new Command(HandlePresence);
@@ -85,11 +100,14 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void GetConfirmation() {
+            ActivityIndicator = true;
             _isConfirmed = await coordinatorService.GetConfirmationStatusAsync(Helpers.Settings.UserReg, RemoteId);
             HandleButtonUI();
+            ActivityIndicator = false;
         }
 
         public void HandleButtonUI() {
+            ActivityIndicator = true;
             if (_isConfirmed) {
                 Debug.WriteLine("[ForumDetailVM]: isConfirmed true");
                 ButtonText = "Cancelar presença";
@@ -100,6 +118,7 @@ namespace ForumDEG.ViewModels {
                 ButtonText = "Confirmar presença";
                 ButtonColor = Color.Orange;
             }
+            ActivityIndicator = false;
         }
 
         public bool HasPassed() {
@@ -107,6 +126,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public void HandlePresence() {
+            ActivityIndicator = true;
             Debug.WriteLine("[ForumDetailVM]: Inside Presence Handler");
             if (!_isConfirmed) {
                 coordinatorService.PostConfirmationStatusAsync(Helpers.Settings.UserReg, RemoteId);
@@ -117,29 +137,38 @@ namespace ForumDEG.ViewModels {
 
             TogglePresence();
             HandleButtonUI();
+            ActivityIndicator = false;
         }
 
         public void TogglePresence() {
+            ActivityIndicator = true;
             _isConfirmed = !_isConfirmed;
+            ActivityIndicator = false;
         }
 
         private async void EditForum() {
             Debug.WriteLine(" EDITAR FORUM ");
+            ActivityIndicator = true;
             await PushAsync(new ForumEditPage(RemoteId));
+            ActivityIndicator = false;
         }
 
         private async void DeleteForum() {
             var answer = await _pageService.DisplayAlert("Deletar Fórum", "Tem certeza que deseja deletar o fórum existente? Esta ação não poderá ser desfeita.", "Sim", "Não");
             Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
+                ActivityIndicator = true;
                 if (await _forumService.DeleteForumAsync(RemoteId)) {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Fórum deletado", "O fórum foi excluído com sucesso", "OK", "CANCELAR");
                     await _pageService.PopAsync();
                 }
                 else {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", "CANCELAR");
                 }
             }
+            ActivityIndicator = false;
         }
     }
 }

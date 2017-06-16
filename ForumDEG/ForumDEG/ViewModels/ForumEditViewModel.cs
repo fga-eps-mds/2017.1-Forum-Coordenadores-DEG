@@ -84,7 +84,22 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        private bool _activityIndicator = false;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         public ForumEditViewModel(IPageService pageService) {
+            ActivityIndicator = false;
             _pageService = pageService;
             _forumService = new Helpers.Forum();
 
@@ -111,7 +126,9 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void ConfirmEdition() {
+            ActivityIndicator = true;
             if (IsAnyFieldBlank()) {
+                ActivityIndicator = false;
                 EditionFailed();
             } else {
                 await EditForum();
@@ -121,8 +138,10 @@ namespace ForumDEG.ViewModels {
 
         public async Task EditForum() {
             if (await _forumService.PutForumAsync(Forum.RemoteId, Forum) ){
+                ActivityIndicator = false;
                 await _pageService.DisplayAlert("Editar Fórum", "O fórum foi editado com sucesso!", "OK", "Cancelar");
             } else {
+                ActivityIndicator = false;
                 await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser editado. Tente novamente!", "OK", "Cancelar");
             }
         }

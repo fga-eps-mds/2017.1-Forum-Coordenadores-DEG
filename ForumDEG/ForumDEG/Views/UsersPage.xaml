@@ -5,9 +5,19 @@
              x:Name="PageUsersPage"
              AutomationId="PageUsersPage"
              Title="Usuários">
-    
-    <ContentPage.Content>
-        <StackLayout>
+
+    <StackLayout Orientation="Vertical">
+        <StackLayout Margin="50"
+                     HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand"
+                IsVisible="{Binding ActivityIndicator}">
+            <ActivityIndicator 
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    IsRunning="{Binding ActivityIndicator}"/>
+        </StackLayout>
+
+        <StackLayout IsVisible="{Binding IsLoaded}">
             <Label Text="Administradores: "></Label>
             <ListView SeparatorVisibility="Default"
                   ItemsSource="{Binding Administrators}"
@@ -21,7 +31,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            
+
                             <StackLayout Orientation="Horizontal" Padding="5">
                                 <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
                                     <Label Text="{Binding Name}" TextColor="Black" />
@@ -39,7 +49,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
             <Label Text="Coordenadores: "></Label>
             <ListView SeparatorVisibility="Default"
                   ItemsSource="{Binding Coordinators}"
@@ -72,5 +82,5 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-    </ContentPage.Content>
+    </StackLayout>
 </ContentPage>

@@ -48,6 +48,20 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        private bool _activityIndicator;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         private readonly IPageService _pageService;
         private readonly Helpers.Forum _forumService;
 
@@ -57,8 +71,9 @@ namespace ForumDEG.ViewModels {
         public ForumsViewModel(IPageService pageService) {
             _pageService = pageService;
             _forumService = new Helpers.Forum();
-            _forumVisibility = true;
-            _noForumWarning = false;
+            ForumVisibility = false;
+            NoForumWarning = false;
+            ActivityIndicator = false;
             SelectForumCommand = new Command<ForumDetailViewModel>(async vm => await SelectForum(vm));
         }
 
@@ -75,7 +90,9 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void UpdateForumsList() {
+            ActivityIndicator = true;
             Forums = new ObservableCollection<ForumDetailViewModel>();
+            Debug.WriteLine("[FORUMS LIST]: starts looking for forums" + ActivityIndicator);
             try {
                 var forumsList = await _forumService.GetForumsAsync();
 
@@ -89,14 +106,19 @@ namespace ForumDEG.ViewModels {
                         Registration = forum.Id, // local id
                         RemoteId = forum.RemoteId // remote id, ideally should only use this one
                     });
+                    ActivityIndicator = false;
+                    Debug.WriteLine("[FORUMS LIST]: finishes looking for forums" + ActivityIndicator);
                 }
+
                 if(forumsList.Count == 0) {
-                    _noForumWarning = true;
-                    _forumVisibility = false;
+                    NoForumWarning = true;
+                    ForumVisibility = false;
+                    ActivityIndicator = false;
                 }
                 else {
-                    _noForumWarning = false;
-                    _forumVisibility = true;
+                    NoForumWarning = false;
+                    ForumVisibility = true;
+                    ActivityIndicator = false;
                 }
             } catch (Exception ex) {
                 Debug.WriteLine("[Update forums list] " + ex.Message);

@@ -2,30 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ForumDEG.Views.FormsPage"
-    Padding="15, 25, 15, 25"
              BackgroundColor="White"
+             Padding="15, 25, 15, 25"
              Title="Formulários"
              x:Name="PageFormsPage"
              AutomationId="PageFormsPage">
 
-    <ScrollView>
-        <StackLayout>
+    <StackLayout Orientation="Vertical" Margin="5">
+        <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand" IsVisible="{Binding ActivityIndicator}">
+            <ActivityIndicator IsRunning="{Binding ActivityIndicator}"/>
+        </StackLayout>
+        <StackLayout Orientation="Vertical">
             <StackLayout IsVisible="{Binding NoFormWarning}" Margin="20">
                 <Label Text="Não existem formuários disponíveis" 
                        FontSize="Large"/>
             </StackLayout>
-            <StackLayout IsVisible="{Binding FormVisibility}">
+            <StackLayout IsVisible="{Binding FormVisibility}" VerticalOptions="FillAndExpand">
                 <ListView ItemsSource="{Binding Forms}"
-                  HasUnevenRows="True"
-                  RowHeight="60"
-                  IsPullToRefreshEnabled="True"
-                  SelectedItem="{Binding SelectedForm, Mode=TwoWay}"
-                  ItemSelected="ItemSelected"
-                  SeparatorColor="Gray"
-                  AutomationId="FormsListPage">
+                        RowHeight="60"
+                        SelectedItem="{Binding SelectedForm, Mode=TwoWay}"
+                        ItemSelected="ItemSelected"
+                        SeparatorColor="Gray"
+                        AutomationId="FormsListPage"
+                        VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell >
+                            <ViewCell>
                                 <StackLayout Orientation="Horizontal" Padding="5">
                                     <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
                                         <Label Text="{Binding Title}" TextColor="Black" 
@@ -47,5 +49,5 @@
                 </ListView>
             </StackLayout>
         </StackLayout>
-    </ScrollView>
+    </StackLayout>
 </ContentPage>

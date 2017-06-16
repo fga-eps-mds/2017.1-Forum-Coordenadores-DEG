@@ -33,6 +33,20 @@ namespace ForumDEG.ViewModels {
         string passwordIn;
         string courseIn = "Coordenador";
 
+        private bool _activityIndicator = false;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         public int UserTypeIn {
             get {
                 return userTypeIn;
@@ -42,7 +56,8 @@ namespace ForumDEG.ViewModels {
                     userTypeIn = value;
                     if (userTypeIn == 0) {
                         IsCoord = true;
-                    } else {
+                    }
+                    else {
                         IsCoord = false;
                         CourseIn = null;
                     }
@@ -124,6 +139,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public UserEditViewModel(IPageService pageService, bool IsCoordinator) {
+            ActivityIndicator = false;
             _pageService = pageService;
             _coordinatorService = new Helpers.Coordinator();
             _administratorService = new Helpers.Administrator();
@@ -134,7 +150,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void setOldAdministratorFields(string OldAdministratorId) {
-           
+
 
             Debug.WriteLine("[Administrator edition]" + OldAdministratorId);
             var _oldAdministrator = await _administratorService.GetAdministratorAsync(OldAdministratorId);
@@ -147,7 +163,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public async void setOldCoordinatorFields(string OldCoordinatorId) {
-
+            ActivityIndicator = true;
             Debug.WriteLine("[Coordinator edition]" + OldCoordinatorId);
 
             var _oldCoordinator = await _coordinatorService.GetCoordinatorAsync(OldCoordinatorId);
@@ -157,14 +173,16 @@ namespace ForumDEG.ViewModels {
             PasswordIn = _oldCoordinator.Password;
             RegistrationIn = _oldCoordinator.Registration;
             CourseIn = _oldCoordinator.Course;
+
+            ActivityIndicator = false;
         }
 
         public bool IsAnyFieldBlank() {
-            return (String.IsNullOrWhiteSpace(NameIn) ||
+            return ( String.IsNullOrWhiteSpace(NameIn) ||
                     String.IsNullOrWhiteSpace(RegistrationIn) ||
                     String.IsNullOrWhiteSpace(EmailIn) ||
                     String.IsNullOrWhiteSpace(PasswordIn) ||
-            (IsCoord && String.IsNullOrWhiteSpace(CourseIn)));
+            ( IsCoord && String.IsNullOrWhiteSpace(CourseIn) ) );
         }
 
         public bool ValidateEmail() {
@@ -176,7 +194,8 @@ namespace ForumDEG.ViewModels {
             if (!match.Success) {
                 Debug.WriteLine("[User Email]: Invalid!");
                 return false;
-            } else {
+            }
+            else {
                 Debug.WriteLine("[User Email]: Valid!");
                 return true;
             }
@@ -192,33 +211,41 @@ namespace ForumDEG.ViewModels {
             if (!match.Success) {
                 Debug.WriteLine("[User Password]: Invalid!");
                 return false;
-            } else {
+            }
+            else {
                 Debug.WriteLine("[User Password]: Valid!");
                 return true;
             }
         }
 
         public async void ConfirmEdition() {
+            ActivityIndicator = true;
             if (!IsAnyFieldBlank()) {
                 if (ValidateEmail()) {
                     if (ValidatePassword()) {
                         await EditUser();
                         await _pageService.PopAsync();
 
-                    } else {
+                    }
+                    else {
+                        ActivityIndicator = false;
                         await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", "ok", "cancel");
                     }
-                } else {
+                }
+                else {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
                 }
-            } else {
+            }
+            else {
+                ActivityIndicator = false;
                 await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
             }
-        }    
-    
+        }
+
 
         public async Task EditUser() {
-
+            ActivityIndicator = true;
             if (isCoord) {
                 Coordinator.Name = NameIn;
                 Coordinator.Email = EmailIn;
@@ -227,26 +254,34 @@ namespace ForumDEG.ViewModels {
                 Coordinator.Course = CourseIn;
 
                 if (await _coordinatorService.PutCoordinatorAsync(Coordinator.Registration, Coordinator)) {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Editar Usuário", "Usuário editado com sucesso!", "OK", "Cancelar");
-                } else {
+                }
+                else {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", "OK", "Cancelar");
                 }
 
-            } else {
+            }
+            else {
                 Administrator.Name = NameIn;
                 Administrator.Email = EmailIn;
                 Administrator.Registration = RegistrationIn;
                 Administrator.Password = PasswordIn;
 
-            if (await _administratorService.PutAdministratorAsync(Administrator.Registration, Administrator)) {
-                await _pageService.DisplayAlert("Editar Usuário", "Usuário editado com sucesso!", "OK", "Cancelar");
-            } else {
-                await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", "OK", "Cancelar");
-            }
+                if (await _administratorService.PutAdministratorAsync(Administrator.Registration, Administrator)) {
+                    ActivityIndicator = false;
+                    await _pageService.DisplayAlert("Editar Usuário", "Usuário editado com sucesso!", "OK", "Cancelar");
+                }
+                else {
+                    ActivityIndicator = false;
+                    await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", "OK", "Cancelar");
+                }
             }
         }
 
         public async void EditionFailed() {
+            ActivityIndicator = false;
             await _pageService.DisplayAlert("Erro na Edição"
                 , "O usuário não foi editado. Você deve preencher todos os campos."
                 , "OK", "cancel");

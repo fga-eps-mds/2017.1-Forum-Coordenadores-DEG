@@ -72,6 +72,13 @@
             </StackLayout>
         </Frame>
 
+        <StackLayout IsVisible="{Binding IsCurrentUserAdmin}">
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                    IsRunning="{Binding ActivityIndicator}"/>
+        </StackLayout>
+
 
     </StackLayout>
 
