@@ -28,7 +28,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orstatientation="Horizontal" Padding="5">
+                                <StackLayout Orientation="Horizontal" Padding="5">
                                     <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand"  >
                                         <Label Text="{Binding Title}" TextColor="Black" 
                                         x:Name="LbTitleFormsPage"

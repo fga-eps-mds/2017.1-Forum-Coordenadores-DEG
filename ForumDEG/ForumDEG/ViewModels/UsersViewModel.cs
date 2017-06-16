@@ -66,9 +66,38 @@ namespace ForumDEG.ViewModels {
             await _pageService.PushAsync(new UserDetailPage(coordinator));
         }
 
+        private bool _activityIndicator;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
+        private bool _isLoaded;
+        public bool IsLoaded {
+            get {
+                return _isLoaded;
+            }
+            set {
+                if (_isLoaded != value) {
+                    _isLoaded = value;
+
+                    OnPropertyChanged("IsLoaded");
+                }
+            }
+        }
+
 
         public async void UpdateUsersList() {
-
+            ActivityIndicator = true;
+            IsLoaded = false;
             Administrators = new ObservableCollection<UserDetailViewModel>();
             Coordinators = new ObservableCollection<UserDetailViewModel>();
 
@@ -108,7 +137,12 @@ namespace ForumDEG.ViewModels {
                         IsCoordinator = false
                     });
                 }
-            } catch (Exception ex) {
+                ActivityIndicator = false;
+                IsLoaded = true;
+            }
+            catch (Exception ex) {
+                ActivityIndicator = false;
+                IsLoaded = true;
                 Debug.WriteLine("[Update users list] " + ex.Message);
                 await _pageService.DisplayAlert("Falha ao carregar usuários",
                                           "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
