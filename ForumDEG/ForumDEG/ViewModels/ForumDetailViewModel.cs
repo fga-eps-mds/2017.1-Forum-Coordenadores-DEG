@@ -160,9 +160,8 @@ namespace ForumDEG.ViewModels {
                 ActivityIndicator = true;
                 if (await _forumService.DeleteForumAsync(RemoteId)) {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Fórum deletado", "O fórum foi excluído com sucesso", "OK", "CANCELAR");
-                    await Application.Current.MainPage.Navigation.PopToRootAsync();
-                    await _pageService.PopAsync();
+                    await _pageService.DisplayAlert("Fórum deletado", "O fórum foi excluído com sucesso", null ,"OK" );
+                    await _pageService.PopToRootAsync();
                 }
                 else {
                     ActivityIndicator = false;

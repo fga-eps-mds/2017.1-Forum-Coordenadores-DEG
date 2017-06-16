@@ -38,15 +38,12 @@ namespace UnitTest.AutomatedTests {
             public void CreateNewForum() {
                 app.Tap("ButtonPlusAppMasterPageDetail");
                 app.Tap("ButtonNewForumAppMasterPageDetail");
-
                 app.EnterText("EtTitleNewForumPage", "Forum Teste");
                 app.EnterText("EtPlaceNewForumPage", "Local Teste");
                 app.EnterText("EdScheduleNewForumPage", "Pauta Teste. 123.");
                 app.DismissKeyboard();
                 app.ScrollDown();
                 app.Tap("ButtonCriarForumPageNewForunsPage");
-
-                //app.Repl();
                 Assert.IsNotNull(app.Query("OK"));
 
             }
@@ -81,7 +78,7 @@ namespace UnitTest.AutomatedTests {
                 app.Tap("Ver detalhes");
                 app.Tap("Remover Usuário");
                 app.Tap("SIM");
-                Assert.IsNotNull("USUÁRIOS");
+                Assert.IsNotNull("OK");
             }
 
             [Test]
