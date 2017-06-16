@@ -24,6 +24,8 @@
             <StackLayout AutomationId="SLButtonsForumEdiPage"
                          Orientation="Horizontal"
                          HorizontalOptions="End">
+                <ActivityIndicator
+                    IsRunning="{Binding ActivityIndicator}"/>
                 <Button AutomationId="BtCancelForumEdiPage"
                         Text="Cancelar" 
                         TextColor="White"
