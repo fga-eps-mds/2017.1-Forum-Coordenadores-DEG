@@ -27,6 +27,20 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        private bool _activityIndicator = false;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    OnPropertyChanged("ActivityIndicator");
+                }
+            }
+        }
+
         public ICommand PlusButtonClickedCommand { get; set; }
         public ICommand NewMultipleQuestionCommand { get; set; }
         public ICommand NewMultipleAnswersCommand { get; set; }
@@ -36,7 +50,8 @@ namespace ForumDEG.ViewModels {
         public ICommand NewDiscursiveQuestionCommand { get; set; }
         private readonly IUserDialogs _dialog;
 
-        public NewFormViewModel(IUserDialogs dialog, IPageService _pageService) { 
+        public NewFormViewModel(IUserDialogs dialog, IPageService _pageService) {
+            ActivityIndicator = false;
             NewMultipleQuestionCommand = new Command(async () => await NewMultipleQuestion());
             NewMultipleAnswersCommand = new Command(async () => await NewMultipleAnswers());
             NewDiscursiveQuestionCommand = new Command(async () => await NewDiscursiveQuestion());
@@ -88,14 +103,18 @@ namespace ForumDEG.ViewModels {
         }
 
         private async Task SaveQuestion() {
+            ActivityIndicator = true;
             if (IsFieldBlank(Title)) {
-               await _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir título", "ok");
+                ActivityIndicator = false;
+                await _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir título", "ok");
             } else if (await _formService.PostFormAsync(this)) {
+                ActivityIndicator = false;
                 await _dialog.AlertAsync("O formulário foi criado com sucesso. Os coordenadores serão notificados em breve."
                 , "Formulário Criado"
                 , "OK");
                 await _pageService.PopAsync();
             } else {
+                ActivityIndicator = false;
                 await _pageService.DisplayAlert("Formulário não pode ser criado", "Não foi possível estabelecer" +
                                            " conexão com o banco de dados. Por favor tente novamente.", "ok");
             }

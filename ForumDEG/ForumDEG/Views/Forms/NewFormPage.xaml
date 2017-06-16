@@ -142,6 +142,8 @@
 
             <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">
+                <ActivityIndicator
+                                    IsRunning="{Binding ActivityIndicator}"/>
                 <Button Text="Cancelar" 
                         TextColor="White"
                         BackgroundColor="Orange"
