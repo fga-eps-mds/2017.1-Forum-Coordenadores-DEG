@@ -168,6 +168,7 @@ namespace ForumDEG.ViewModels {
                     await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser deletado, tente novamente.", "OK", "CANCELAR");
                 }
             }
+            ActivityIndicator = false;
         }
     }
 }

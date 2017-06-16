@@ -16,7 +16,7 @@
                        BackgroundColor="Transparent" />
                 <Label Text="Deletar Formulário" TextColor="#3366BB" FontSize="Small"
                                    HorizontalOptions="EndAndExpand" VerticalOptions="Start"
-                                   BackgroundColor="White"  IsVisible="{Binding IsCurrentUserAdmin}"
+                                   BackgroundColor="Transparent"  IsVisible="{Binding IsCurrentUserAdmin}"
                                    x:Name="LabelDeletarFormulárioFormDetailPage"
                                    AutomationId="LabelDeletarFormulárioFormDetailPage">
                     <Label.GestureRecognizers>
@@ -120,6 +120,8 @@
                         <StackLayout Orientation="Horizontal"
                                         HorizontalOptions="End" 
                                         Margin="10">
+                            <ActivityIndicator
+                                    IsRunning="{Binding ActivityIndicator}"/>   
                             <Button Text="Cancelar" 
                                                 TextColor="White"
                                                 BackgroundColor="Orange"

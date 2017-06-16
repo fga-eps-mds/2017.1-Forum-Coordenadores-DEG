@@ -29,6 +29,20 @@ namespace ForumDEG.ViewModels {
             get { return (DiscursiveQuestions.Count + MultipleChoiceQuestions.Count); }
         }
 
+        private bool _activityIndicator = false;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ActivityIndicator"));
+                }
+            }
+        }
+
         public ICommand CancelCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
         public ICommand DeleteCommand { get; private set; }
@@ -39,6 +53,7 @@ namespace ForumDEG.ViewModels {
         public List<Models.SingleAnswerQuestion> SingleAnswerQuestions { get; set; }
 
         public FormDetailViewModel(IPageService pageService) {
+            ActivityIndicator = false;
             _pageService = pageService;
             MultipleAnswersQuestions = new List<Models.MultipleAnswersQuestion>();
             SingleAnswerQuestions = new List<Models.SingleAnswerQuestion>();
@@ -49,7 +64,7 @@ namespace ForumDEG.ViewModels {
             DeleteCommand = new Command(DeleteForm);
         }
         public void SplitMultipleChoiceQuestions() {
-
+            ActivityIndicator = true;
             var multipleChoiceQuestions = MultipleChoiceQuestions;
 
             foreach (Models.MultipleChoiceQuestion multipleQuestion in multipleChoiceQuestions) {
@@ -70,9 +85,12 @@ namespace ForumDEG.ViewModels {
                     SingleAnswerQuestions.Add(singleAnswerQuestion);
                 }
             }
+            ActivityIndicator = false;
         }
 
         private async void Submit() {
+            ActivityIndicator = true;
+
             List<MultipleChoiceAnswer> multipleChoiceAnswers = new List<MultipleChoiceAnswer>();
 
             foreach (DiscursiveQuestion discursiveQuestion in DiscursiveQuestions) {
@@ -97,9 +115,13 @@ namespace ForumDEG.ViewModels {
             /* Uncomment after API is implemented
              * await _formService.PostFormAnswerAsync(formAnswer);
              */
+
+            ActivityIndicator = false;
         }
 
         public bool CheckBoxValidation(List<MultipleChoiceAnswer> multipleChoiceAnswers) {
+            ActivityIndicator = true;
+
             foreach (MultipleAnswersQuestion checkBoxQuestion in MultipleAnswersQuestions) {
                 Debug.WriteLine("[Submit] Question: " + checkBoxQuestion.Question);
                 List<string> selectedOptions = new List<string>();
@@ -115,6 +137,7 @@ namespace ForumDEG.ViewModels {
                     }
                 }
                 if (validateCheckbox == false) {
+                    ActivityIndicator = false;
                     return false;
                 }
 
@@ -124,13 +147,17 @@ namespace ForumDEG.ViewModels {
                 };
                 multipleChoiceAnswers.Add(answer);
             }
+
+            ActivityIndicator = false;
             return true;
         }
 
         public bool RadioButtonValidation(List<MultipleChoiceAnswer> multipleChoiceAnswers) {
+            ActivityIndicator = true;
             foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
                 if (radioButtonQuestion.SelectedOption == -1) {
                     Debug.WriteLine("nenhuma questï¿½o selecionada");
+                    ActivityIndicator = false;
                     return false;
                 }
 
@@ -146,6 +173,7 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Submit] Question: " + radioButtonQuestion.Question);
                 Debug.WriteLine("[Submit] Answer: " + radioButtonQuestion.Options[answerIndex]);
             }
+            ActivityIndicator = false;
             return true;
         }
 
@@ -154,21 +182,26 @@ namespace ForumDEG.ViewModels {
         }
 
         public async Task blankAnswerAsync() {
+            ActivityIndicator = false;
             await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opção!", "ok", "cancel");
         }
 
         private async void DeleteForm() {
             var answer = await _pageService.DisplayAlert("Deletar Formulário", "Tem certeza que deseja deletar o Formulário existente? Esta alteração não poderá ser desfeita.", "Sim", "Não");
+            ActivityIndicator = true;
             Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
                 if (await _formService.DeleteFormAsync(RemoteId)) {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Formulário Deletado !", "O Formulário foi deletado com sucesso.", null, "OK");
                     await _pageService.PopAsync();
                 }
                 else {
+                    ActivityIndicator = false;
                     await _pageService.DisplayAlert("Erro!", "O formulário não pode ser deletado, tente novamente.", "OK", "Cancelar");
                 }
             }
+            ActivityIndicator = false;
         }
     }
 }
