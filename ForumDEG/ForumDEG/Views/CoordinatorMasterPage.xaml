@@ -6,7 +6,16 @@
              NavigationPage.HasBackButton="False"
              Title="Início">
     <ScrollView>
-        <StackLayout Padding="40,30,30,30" Spacing="30" BackgroundColor="White">
+        <StackLayout
+                IsVisible="{Binding ActivityIndicator}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand">
+            <ActivityIndicator
+                    IsRunning="{Binding ActivityIndicator}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+        <StackLayout Padding="40,30,30,30" Spacing="30" BackgroundColor="White" IsVisible="{Binding IsLoaded}">
             <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray" IsVisible="{Binding NoForumWarning, Mode=TwoWay}">
                 <StackLayout BackgroundColor="Transparent" Padding="5,5,0,25">
                     <Label Text="Não há nenhum novo fórum disponível" 

@@ -111,6 +111,34 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+        private bool _activityIndicator;
+        public bool ActivityIndicator {
+            get {
+                return _activityIndicator;
+            }
+            set {
+                if (_activityIndicator != value) {
+                    _activityIndicator = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ActivityIndicator"));
+                }
+            }
+        }
+
+        private bool _isLoaded;
+        public bool IsLoaded {
+            get {
+                return _isLoaded;
+            }
+            set {
+                if (_isLoaded != value) {
+                    _isLoaded = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsLoaded"));
+                }
+            }
+        }
+
         private static CoordinatorMasterPageViewModel _instance = null;
         public ObservableCollection<ForumDetailViewModel> Forums { get; private set; }
         public ForumDetailViewModel SelectedForum { get; private set; }
@@ -123,6 +151,8 @@ namespace ForumDEG.ViewModels {
         public CoordinatorMasterPageViewModel(IPageService pageService) {
             ForumVisibility = false;
             NoForumWarning = false;
+            ActivityIndicator = false;
+            IsLoaded = false;
             _pageService = pageService;
             _forumService = new Helpers.Forum();
             DetailPageCommand = new Command(SeeDetailPage);
@@ -141,6 +171,7 @@ namespace ForumDEG.ViewModels {
         }
 
         public Forum GetLatestForum(List<Forum> forums) {
+            ActivityIndicator = true;
             Forum latestForum = null;
             foreach (Forum forum in forums) {
                 Debug.WriteLine("[SelectNextForum]: picks a new forum");
@@ -156,6 +187,7 @@ namespace ForumDEG.ViewModels {
                     }
                 }
             }
+            ActivityIndicator = false;
             return latestForum;
         }
 
@@ -195,6 +227,8 @@ namespace ForumDEG.ViewModels {
                     Hour = latestForum.Hour,
                     RemoteId = latestForum.RemoteId
                 };
+
+                IsLoaded = true;
 
                 Debug.WriteLine("[SelectNextForum]: title " + SelectedForum.Title);
                 Debug.WriteLine("[SelectNextForum]: place " + SelectedForum.Place);
