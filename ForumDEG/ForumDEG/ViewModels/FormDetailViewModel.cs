@@ -183,22 +183,22 @@ namespace ForumDEG.ViewModels {
 
         public async Task blankAnswerAsync() {
             ActivityIndicator = false;
-            await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opção!", "ok", "cancel");
+            await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma opï¿½ï¿½o!", "ok", "cancel");
         }
 
         private async void DeleteForm() {
-            var answer = await _pageService.DisplayAlert("Deletar Formulário", "Tem certeza que deseja deletar o Formulário existente? Esta alteração não poderá ser desfeita.", "Sim", "Não");
+            var answer = await _pageService.DisplayAlert("Deletar Formulï¿½rio", "Tem certeza que deseja deletar o Formulï¿½rio existente? Esta alteraï¿½ï¿½o nï¿½o poderï¿½ ser desfeita.", "Sim", "Nï¿½o");
             ActivityIndicator = true;
             Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
                 if (await _formService.DeleteFormAsync(RemoteId)) {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Formulário Deletado !", "O Formulário foi deletado com sucesso.", null, "OK");
-                    await _pageService.PopAsync();
+                    await _pageService.DisplayAlert("Formulï¿½rio Deletado !", "O Formulï¿½rio foi deletado com sucesso.", null, "OK");
+                    await _pageService.PopToRootAsync();
                 }
                 else {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Erro!", "O formulário não pode ser deletado, tente novamente.", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Erro!", "O formulï¿½rio nï¿½o pode ser deletado, tente novamente.", "OK", "Cancelar");
                 }
             }
             ActivityIndicator = false;
