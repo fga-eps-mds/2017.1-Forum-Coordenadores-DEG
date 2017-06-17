@@ -81,7 +81,7 @@ namespace UnitTest.AutomatedTests {
                 app.Tap("Ver detalhes");
                 app.Tap("Remover Usuário");
                 app.Tap("SIM");
-                Assert.IsNotNull("Usuários");
+                Assert.IsNotNull("USUÁRIOS");
             }
 
             [Test]
@@ -91,7 +91,9 @@ namespace UnitTest.AutomatedTests {
                 app.Tap("ButtonDeletarForumForumDetailPage");
                 app.Tap(c => c.Marked("Sim"));
                 app.WaitForNoElement("Sim");
-                Assert.IsNotNull("Fóruns");
+                app.Tap(c => c.Marked("OK"));
+                app.WaitForNoElement("OK");
+                Assert.IsNotNull("ButtonForunsAppMasterPageDetail");
             }
 
             [Test]
