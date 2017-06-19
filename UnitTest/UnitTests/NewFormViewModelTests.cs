@@ -38,5 +38,25 @@ namespace Tests {
             viewModel.SelectedQuestion = test;
             Assert.AreSame(test, viewModel.SelectedQuestion);
         }
+        [Test()]
+        public void NewFormViewModel_QuestionsListsValidation_EmptyLists() {
+            Assert.True(viewModel.AreQuestionsListsEmpty());
+        }
+        [Test()]
+        public void NewFormViewModel_QuestionsListsValidation_EmptyDiscursive() {
+            viewModel.MultipleChoiceQuestions.Add(new QuestionDetailViewModel {
+                Title = "test",
+                MultipleAnswers = true,
+                Options = new System.Collections.ObjectModel.ObservableCollection<string> {
+                    "test"
+                }
+            });
+            Assert.False(viewModel.AreQuestionsListsEmpty());
+        }
+        [Test()]
+        public void NewFormViewModel_QuestionsListsValidation_EmptyMultipleChoice() {
+            viewModel.DiscursiveQuestionsTitles.Add("questão");
+            Assert.False(viewModel.AreQuestionsListsEmpty());
+        }
     }
 }

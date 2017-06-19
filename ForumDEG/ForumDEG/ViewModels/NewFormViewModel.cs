@@ -107,6 +107,11 @@ namespace ForumDEG.ViewModels {
             if (IsFieldBlank(Title)) {
                 ActivityIndicator = false;
                 await _pageService.DisplayAlert("Formulário não pode ser criado", "O formulário deve possuir título", "ok");
+                return;
+            } else if (AreQuestionsListsEmpty()) {
+                ActivityIndicator = false;
+                await _pageService.DisplayAlert("Formulário não pode ser criado", "É necessário criar ao menos uma pergunta", "ok");
+                return; 
             } else if (await _formService.PostFormAsync(this)) {
                 ActivityIndicator = false;
                 await _dialog.AlertAsync("O formulário foi criado com sucesso. Os coordenadores serão notificados em breve."
@@ -121,5 +126,11 @@ namespace ForumDEG.ViewModels {
             
         }
         
+        public bool AreQuestionsListsEmpty() {
+            if (MultipleChoiceQuestions.Count == 0 && DiscursiveQuestionsTitles.Count == 0) {
+                return true;
+            }
+            return false;
+        }
     }
 }
