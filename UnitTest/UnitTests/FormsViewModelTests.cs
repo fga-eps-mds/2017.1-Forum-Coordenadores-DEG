@@ -30,5 +30,11 @@ namespace UnitTest.UnitTests {
             _viewModel.SelectedForm = test;
             Assert.AreSame(test, _viewModel.SelectedForm);
         }
+
+        [Test()]
+        public void FormsViewModel_ActivityIndicatorTrueWhenLookingForForms() {
+            _viewModel.UpdateFormsList();
+            Assert.True(_viewModel.ActivityIndicator);
+        }
     }
 }

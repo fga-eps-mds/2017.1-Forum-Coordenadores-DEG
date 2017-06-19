@@ -36,6 +36,18 @@ namespace Tests {
 
                 Assert.AreSame(coordinator, _viewModel.SelectedCoordinator);
             }
+
+            [Test()]
+            public void UsersViewModel_ActivityIndicatorTrueWhenLookingForUsers() {
+                _viewModel.UpdateUsersList();
+                Assert.True(_viewModel.ActivityIndicator);
+            }
+
+            [Test()]
+            public void UsersViewModel_IsLoadedFalse_WhenLookingForUsers() {
+                _viewModel.UpdateUsersList();
+                Assert.False(_viewModel.IsLoaded);
+            }
         }
     }
 }
