@@ -145,8 +145,7 @@ namespace ForumDEG.ViewModels {
                 IsLoaded = true;
                 Debug.WriteLine("[Update users list] " + ex.Message);
                 await _pageService.DisplayAlert("Falha ao carregar usuários",
-                                          "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
-                                          "Ok", "Cancel");
+                                          "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.", null, "OK");
                 await _pageService.PopAsync();
 
             }

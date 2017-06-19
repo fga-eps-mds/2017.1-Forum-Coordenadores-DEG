@@ -237,23 +237,23 @@ namespace ForumDEG.ViewModels {
                         }
                         else {
                             ActivityIndicator = false;
-                            await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", "ok", "cancel");
+                            await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", null, "OK");
                         }
 
                     }
                     else {
                         ActivityIndicator = false;
-                        await _pageService.DisplayAlert("Erro!", "Matrícula Inválida!", "ok", "cancel");
+                        await _pageService.DisplayAlert("Erro!", "Matrícula Inválida!", null, "OK");
                     }
                 }
                 else {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
+                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", null, "OK");
                 }
             }
             else {
                 ActivityIndicator = false;
-                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
+                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", null, "OK");
             }
         }
 
@@ -269,14 +269,12 @@ namespace ForumDEG.ViewModels {
             if (await _administratorService.PostAdministratorAsync(Admin)) {
                 ActivityIndicator = false;
                 await _pageService.DisplayAlert("Registrar novo usuário",
-                                                "Você salvou um novo adminstrador com sucesso! ",
-                                                "ok", "cancel");
+                                                "Você salvou um novo adminstrador com sucesso! ", null, "OK");
             }
             else {
                 ActivityIndicator = false;
                 await _pageService.DisplayAlert("Falha na conexão com o servidor",
-                                                "Não foi possível cadastrar o administrador. Por favor tente novamente.",
-                                                "ok", "cancel");
+                                                "Não foi possível cadastrar o administrador. Por favor tente novamente.", null, "OK");
                 Debug.WriteLine("[URVM] Couldn't save.");
             }
         }
@@ -293,14 +291,12 @@ namespace ForumDEG.ViewModels {
             if (await _coordinatorService.PostCoordinatorAsync(Coord)) {
                 ActivityIndicator = false;
                 await _pageService.DisplayAlert("Registrar novo usuário",
-                                                "Você salvou um novo Coordenador com sucesso!",
-                                                "ok", "cancel");
+                                                "Você salvou um novo Coordenador com sucesso!", null, "OK");
             }
             else {
                 ActivityIndicator = false;
                 await _pageService.DisplayAlert("Falha na conexão com o servidor",
-                                                "Não foi possível cadastrar o coordenador. Por favor tente novamente.",
-                                                "ok", "cancel");
+                                                "Não foi possível cadastrar o coordenador. Por favor tente novamente.", null, "OK");
                 Debug.WriteLine("[URVM] Couldn't save.");
             }
         }

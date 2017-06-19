@@ -156,7 +156,7 @@ namespace ForumDEG.ViewModels {
             ActivityIndicator = true;
             foreach (SingleAnswerQuestion radioButtonQuestion in SingleAnswerQuestions) {
                 if (radioButtonQuestion.SelectedOption == -1) {
-                    Debug.WriteLine("nenhuma quest�o selecionada");
+                    Debug.WriteLine("nenhuma questão selecionada");
                     ActivityIndicator = false;
                     return false;
                 }
@@ -183,22 +183,22 @@ namespace ForumDEG.ViewModels {
 
         public async Task blankAnswerAsync() {
             ActivityIndicator = false;
-            await _pageService.DisplayAlert("Erro!", "Voce deve selecionar pelo menos uma op��o!", "ok", "cancel");
+            await _pageService.DisplayAlert("Erro!", "Você deve selecionar pelo menos uma opção", "ok", "cancel");
         }
 
         private async void DeleteForm() {
-            var answer = await _pageService.DisplayAlert("Deletar Formul�rio", "Tem certeza que deseja deletar o Formul�rio existente? Esta altera��o n�o poder� ser desfeita.", "Sim", "N�o");
+            var answer = await _pageService.DisplayAlert("Deletar Formulário", "Tem certeza que deseja deletar o Formulário existente? Esta alteração não poderá ser desfeita.", "Sim", "Não");
             ActivityIndicator = true;
             Debug.WriteLine("Answer: " + answer);
             if (answer == true) {
                 if (await _formService.DeleteFormAsync(RemoteId)) {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Formul�rio Deletado !", "O Formul�rio foi deletado com sucesso.", null, "OK");
+                    await _pageService.DisplayAlert("Formulário Deletado !", "O Formulário foi deletado com sucesso.", null, "OK");
                     await _pageService.PopToRootAsync();
                 }
                 else {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Erro!", "O formul�rio n�o pode ser deletado, tente novamente.", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Erro!", "O formulário não pode ser deletado, tente novamente.", "OK", "Cancelar");
                 }
             }
             ActivityIndicator = false;

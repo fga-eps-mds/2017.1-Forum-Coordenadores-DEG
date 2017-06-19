@@ -125,7 +125,7 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Update forms list] " + ex.Message + "\n" + ex.StackTrace);
                 await _pageService.DisplayAlert("Falha ao carregar formulários",
                                           "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
-                                          "Ok", "Cancel");
+                                          null, "OK");
                 await _pageService.PopAsync();
             }
         }
