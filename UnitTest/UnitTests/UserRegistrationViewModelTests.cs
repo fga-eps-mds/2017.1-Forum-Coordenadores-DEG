@@ -62,6 +62,7 @@ namespace Tests {
         [Test()]
         public void UserRegistrationViewModelTests_ValidateRegisterNumber_ValidRegisterNumber() {
             Assert.True(viewModel.ValidateRegisterNumber());
+            Assert.True(viewModel.ActivityIndicator);
         }
 
         [Test()]
@@ -73,6 +74,7 @@ namespace Tests {
             // too many numbers
             viewModel.RegistrationIn = "1234678910111213";
             Assert.False(viewModel.ValidateRegisterNumber());
+            Assert.False(viewModel.ActivityIndicator);
         }
 
         [Test()]

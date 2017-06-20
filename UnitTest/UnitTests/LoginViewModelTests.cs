@@ -49,5 +49,12 @@ namespace Tests {
             _viewModel._userPassword = "123";
             Assert.False(_viewModel.ValidateLogin().Result);
         }
+
+        [Test()]
+        public void LoginViewModel_ValidateLogin_ActivityIndicator_FalseAfterValidating() {
+            var result = _viewModel.ValidateLogin().Result;
+
+            Assert.False(_viewModel.ActivityIndicator);
+        }
     }
 }

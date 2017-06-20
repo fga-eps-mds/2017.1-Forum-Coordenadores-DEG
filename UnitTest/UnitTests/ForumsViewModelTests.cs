@@ -23,5 +23,11 @@ namespace Tests {
 
             Assert.AreSame(forum, _viewModel.SelectedForum);
         }
+
+        [Test()]
+        public void ForumsViewModel_ActivityIndicatorTrueWhenLookingForForums() {
+            _viewModel.UpdateForumsList();
+            Assert.True(_viewModel.ActivityIndicator);
+        }
     }
 }

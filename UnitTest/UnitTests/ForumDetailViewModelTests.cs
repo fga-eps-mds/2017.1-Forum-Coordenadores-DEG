@@ -62,5 +62,16 @@ namespace Tests {
             Assert.True(_viewModel.IsConfirmed);
         }
 
+        [Test()]
+        public void ForumDetailViewModel_ActivityIndicatorFalse_HandleButtonUI() {
+            _viewModel.HandleButtonUI();
+            Assert.False(_viewModel.ActivityIndicator);
+        }
+
+        [Test()]
+        public void ForumDetailViewModel_ActivityIndicatorTrue_WhileLoadingConfirmationStatus() {
+            _viewModel.GetConfirmation();
+            Assert.True(_viewModel.ActivityIndicator);
+        }
     }
 }
