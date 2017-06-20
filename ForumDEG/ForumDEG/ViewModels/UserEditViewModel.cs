@@ -229,17 +229,17 @@ namespace ForumDEG.ViewModels {
                     }
                     else {
                         ActivityIndicator = false;
-                        await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", "ok", "cancel");
+                        await _pageService.DisplayAlert("Erro!", "A senha deve conter de 8 a 15 caracteres, pelo menos uma letra maiúscula e uma minúscula, e pelo menos um número.", null, "OK");
                     }
                 }
                 else {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", "ok", "cancel");
+                    await _pageService.DisplayAlert("Erro!", "Email Inválido! Insira-o novamente.", null, "OK");
                 }
             }
             else {
                 ActivityIndicator = false;
-                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", "ok", "cancel");
+                await _pageService.DisplayAlert("Erro!", "Você deve preencher todos os campos disponíveis!", null, "OK");
             }
         }
 
@@ -255,11 +255,11 @@ namespace ForumDEG.ViewModels {
 
                 if (await _coordinatorService.PutCoordinatorAsync(Coordinator.Registration, Coordinator)) {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Editar Usuário", "Usuário editado com sucesso!", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Editar Usuário", "Usuário editado com sucesso!", null, "OK");
                 }
                 else {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", null, "OK");
                 }
 
             }
@@ -271,11 +271,11 @@ namespace ForumDEG.ViewModels {
 
                 if (await _administratorService.PutAdministratorAsync(Administrator.Registration, Administrator)) {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Editar Usuário", "Usuário editado com sucesso!", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Editar Usuário", "Usuário editado com sucesso!", null, "OK");
                 }
                 else {
                     ActivityIndicator = false;
-                    await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", "OK", "Cancelar");
+                    await _pageService.DisplayAlert("Editar Usuário", "O usuário selecionado não pôde ser editado. Tente novamente!", null, "OK");
                 }
             }
         }
@@ -284,7 +284,7 @@ namespace ForumDEG.ViewModels {
             ActivityIndicator = false;
             await _pageService.DisplayAlert("Erro na Edição"
                 , "O usuário não foi editado. Você deve preencher todos os campos."
-                , "OK", "cancel");
+                , null, "OK");
         }
 
         public async void Cancel() {

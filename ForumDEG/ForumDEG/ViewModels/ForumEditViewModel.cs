@@ -139,17 +139,17 @@ namespace ForumDEG.ViewModels {
         public async Task EditForum() {
             if (await _forumService.PutForumAsync(Forum.RemoteId, Forum) ){
                 ActivityIndicator = false;
-                await _pageService.DisplayAlert("Editar Fórum", "O fórum foi editado com sucesso!", "OK", "Cancelar");
+                await _pageService.DisplayAlert("Editar Fórum", "O fórum foi editado com sucesso!", null ,"OK");
             } else {
                 ActivityIndicator = false;
-                await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser editado. Tente novamente!", "OK", "Cancelar");
+                await _pageService.DisplayAlert("Erro!", "O fórum não pôde ser editado. Tente novamente!", null, "OK");
             }
         }
 
         public async void EditionFailed() {
             await _pageService.DisplayAlert("Erro na Edição"
                 , "O fórum não foi editado. Você deve preencher todos os campos."
-                , "OK", "cancel");
+                , null ,"OK");
         }
 
         public async void Cancel() {

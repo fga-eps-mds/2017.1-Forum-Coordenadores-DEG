@@ -124,7 +124,7 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[Update forums list] " + ex.Message);
                 await _pageService.DisplayAlert("Falha ao carregar fóruns",
                                           "Houve um erro ao estabelecer conexão com o servidor. Por favor, tente novamente.",
-                                          "Ok", "Cancel");
+                                          null ,"Ok");
                 await _pageService.PopAsync();
             }
         }

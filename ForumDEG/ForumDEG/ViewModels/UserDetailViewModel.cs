@@ -70,11 +70,11 @@ namespace ForumDEG.ViewModels {
                     ActivityIndicator = true;
                     if (await _administratorService.DeleteAdministratorAsync(Registration)) {
                         ActivityIndicator = false;
-                        await _pageService.DisplayAlert("Usuário deletado", "O usuário foi excluído do sistema com sucesso.", "OK");
+                        await _pageService.DisplayAlert("Usuário deletado", "O usuário foi excluído do sistema com sucesso.", null,"OK");
                         await _pageService.PopToRootAsync();
                     } else {
                         ActivityIndicator = false;
-                        await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.", "OK");
+                        await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.",null ,"OK");
                     }
                 }
                       //LOCAL DATABASE//
@@ -95,11 +95,11 @@ namespace ForumDEG.ViewModels {
                     if (await _coordinatorService.DeleteCoordinatorAsync(Registration)) {
                         ActivityIndicator = false;
                         await _pageService.PopAsync();
-                        await _pageService.DisplayAlert("Usuário deletado", "O usuário foi excluído do sistema com sucesso.", "OK");
+                        await _pageService.DisplayAlert("Usuário deletado", "O usuário foi excluído do sistema com sucesso.", null,"OK");
                         await _pageService.PopToRootAsync();
                     } else {
                         ActivityIndicator = false;
-                        await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.", "OK", "Cancelar");
+                        await _pageService.DisplayAlert("Erro!", "O usuário não pôde ser deletado, tente novamente.", null, "OK");
                     }
                 }
                 //LOCAL DATABASE//
