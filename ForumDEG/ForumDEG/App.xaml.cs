@@ -1,4 +1,5 @@
-﻿using ForumDEG.DAO;
+﻿using Com.OneSignal;
+using ForumDEG.DAO;
 using ForumDEG.Models;
 using ForumDEG.Utils;
 using ForumDEG.Views;
@@ -28,6 +29,9 @@ namespace ForumDEG {
                     BarBackgroundColor = Color.FromHex("#ff8924")
                 };
             }
+
+            OneSignal.Current.StartInit("1db3eed2-14b5-43d3-a18c-25ad02a69de2")
+                .EndInit();
         }
 
         protected override void OnStart() {
