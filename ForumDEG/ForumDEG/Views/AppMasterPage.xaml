@@ -143,22 +143,6 @@
 
                         <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
                         <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
-                            <Image Source="changepassword_icon.jpg" Scale="0.4"/>
-                            <Label Margin="0, 5, 25, 5" Text="Alterar Senha" FontSize="Medium"
-                               TextColor="#a2a2a2" HorizontalTextAlignment="Start"
-                               HorizontalOptions="FillAndExpand"
-                               VerticalOptions="Center"
-                                   x:Name="LabelChangePasswordAppMasterPageMaster"
-                                   AutomationId="LabelChangePasswordAppMasterPageMaster">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                    Command="{Binding ChangePasswordClickedCommand}"
-                                    NumberOfTapsRequired="1" />
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>
-                        <BoxView HeightRequest="1" Color="#a2a2a2" Margin="15,0,15,0" HorizontalOptions="FillAndExpand"/>
-                        <StackLayout Orientation="Horizontal" Margin="15, 0, 0, 0">
                             <Image Source="logout_icon.jpg" Scale="0.4"/>
                             <Label Margin="0, 5, 25, 5" Text="Sair" FontSize="Medium"
                                TextColor="#a2a2a2" HorizontalTextAlignment="Start"

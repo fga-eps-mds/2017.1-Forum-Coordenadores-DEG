@@ -17,7 +17,6 @@ namespace ForumDEG.ViewModels {
         public ICommand NewForumClickedCommand { get; private set; }
         public ICommand RegisterUserClickedCommand { get; private set; }
         public ICommand NewFormClickedCommand { get; private set; }
-        public ICommand ChangePasswordClickedCommand { get; set; }
         public ICommand PlusButtonClickedCommand { get; set; }
         public ICommand CoodinatorViewCommand { get; set; }
         public ICommand LogoutClickedCommand { get; set; }
@@ -64,7 +63,6 @@ namespace ForumDEG.ViewModels {
             NewForumClickedCommand = new Command(async () => await NewForumClicked());
             RegisterUserClickedCommand = new Command(async () => await RegisterUserClicked());
             NewFormClickedCommand = new Command(async () => await NewFormClicked());
-            ChangePasswordClickedCommand = new Command(async () => await ChangePasswordClicked());
             LogoutClickedCommand = new Command(async () => await LogoutClicked());
             PlusButtonClickedCommand = new Command(async () => await PlusButtonClicked());
 
@@ -118,10 +116,6 @@ namespace ForumDEG.ViewModels {
                 ExtraButtonsVisibility = false;
             }
             await _pageService.PushAsync(new Views.Forms.NewFormPage());
-        }
-
-        private async Task ChangePasswordClicked() {
-            await _pageService.PushAsync(new ChangePasswordPage());
         }
 
         private async Task LogoutClicked() {
