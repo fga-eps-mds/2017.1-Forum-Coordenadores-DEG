@@ -10,6 +10,7 @@ using ForumDEG.Helpers;
 
 namespace ForumDEG.ViewModels {
     public class ChangePasswordViewModel {
+        public Models.Coordinator ChangedCoordinator { get; private set; }
         public Models.Coordinator LoggedCoordinator { get; private set; }
 
         public ICommand ChangePasswordClickedCommand { get; private set; }
@@ -44,10 +45,13 @@ namespace ForumDEG.ViewModels {
 
         private async void UpdatePassword() {
             if (MakeVerifications()) {
-                if (await _coordinatorService.PutCoordinatorAsync(LoggedCoordinator.Registration, LoggedCoordinator)) {
+                ChangedCoordinator = LoggedCoordinator;
+                ChangedCoordinator.Password = NewPassword;
+                if (await _coordinatorService.PutCoordinatorAsync(ChangedCoordinator.Registration, ChangedCoordinator)) {
                     await _pageService.DisplayAlert("Editar Senha", "A sua senha foi editada com sucesso!", null, "OK");
+                    await _pageService.PopAsync();
                 } else {
-                    await _pageService.DisplayAlert("Editar Senha", "O sua senha não pôde ser editado. Tente novamente!", null, "OK");
+                    await _pageService.DisplayAlert("Editar Senha", "A sua senha não pôde ser editada. Tente novamente!", null, "OK");
                 }
             }
         }
@@ -73,6 +77,7 @@ namespace ForumDEG.ViewModels {
         }
 
         private bool ValidateFields(string field) {
+            Debug.WriteLine("[User Password] ValidateFields: " + field);
             if (string.IsNullOrWhiteSpace(field))
                 return false;
             return true;
