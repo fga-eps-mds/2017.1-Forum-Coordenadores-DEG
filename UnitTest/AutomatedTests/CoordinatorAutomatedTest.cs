@@ -32,26 +32,53 @@ namespace UnitTest.AutomatedTests {
             }
 
             [Test]
-            public void EnterForumDetailAndConfirmPresence() {
+            public void bListsForumsForCoordinators() {
+                app.Tap("Fóruns");
+                Assert.IsNotNull(app.Query("Forum Teste"));
+            }
+
+            [Test]
+            public void cShowForumDetailForCoordinators() {
+                app.Tap("Fóruns");
+                app.Tap("Forum Teste");
+                Assert.IsNotNull(app.Query("Ver Fórum"));
+            }
+
+            [Test]
+            public void eInformPresence() {
                 app.Tap(c=>c.Marked("Fóruns"));
-                app.Tap("Ver detalhes");
+                app.Tap("Forum Teste");
                 app.Tap("ButtonConfirmPresenceForumDetailPage");
                 Assert.IsNotNull(app.Query("PageForumDetailPage"));
             }
 
             [Test]
-            public void ListsFormsForCoordinators() {
-                //goes to forms
+            public void hListsFormsForCoordinators() {
                 app.Tap("Formulários");
                 Assert.IsNotNull(app.Query("Ver detalhes"));
             }
 
             [Test]
-            public void ShowFormDetailForCoordinators() {
+            public void iShowFormDetailForCoordinators() {
                 app.Tap("Formulários");
                 app.Tap("Ver detalhes");
                 Assert.IsNotNull(app.Query("Formulário"));
             }
+
+            /*
+            [Test]
+            public void jSubmitForm() {
+                app.Tap("Formulários");
+                app.Tap("Ver detalhes");
+                app.EnterText("Resposta", "Resposta");
+                app.ScrollDown();
+                app.ScrollDown();
+                app.ScrollDown();
+                app.ScrollDown();
+                app.Tap("Submeter");
+                Assert.IsNotNull(app.Query("Submeter"));
+            }
+            */
         }
     }
 }
