@@ -372,6 +372,7 @@ namespace ForumDEG.ViewModels {
 
 
         private async Task ChangePassword() {
+            Debug.WriteLine("[Coord. Main] - Inside ChangePassword");
             await _pageService.PushAsync(new ChangePasswordPage());
         }
     }
