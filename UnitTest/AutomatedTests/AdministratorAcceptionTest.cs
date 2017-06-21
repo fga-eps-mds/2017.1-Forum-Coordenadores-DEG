@@ -33,9 +33,8 @@ namespace UnitTest.AutomatedTests {
             }
 
 
-
             [Test]
-            public void CreateNewForum() {
+            public void aCreateNewForum() {
                 app.Tap("ButtonPlusAppMasterPageDetail");
                 app.Tap("ButtonNewForumAppMasterPageDetail");
                 app.EnterText("EtTitleNewForumPage", "Forum Teste");
@@ -45,44 +44,44 @@ namespace UnitTest.AutomatedTests {
                 app.ScrollDown();
                 app.Tap("ButtonCriarForumPageNewForunsPage");
                 Assert.IsNotNull(app.Query("OK"));
-
             }
+
             [Test]
-            public void UserRegistration() {
-                app.Tap(e => e.Marked("ButtonPlusAppMasterPageDetail"));
-                app.Tap(e => e.Marked("ButtonNewCoordenadorAppMasterPageDetail"));
-                app.EnterText("LabelNomeCompletoUserRegistrationPage", "Nome Teste");
-                app.EnterText("LabelEmailUserRegistrationPage", "teste@email.com");
-                app.EnterText("LabelMatriculaUserRegistrationPage", "246813579");
-                app.EnterText("LabelSenhaUserRegistrationPage", "Pb12345678");
+            public void aCreateNewForumBlankSpaces() {
+                app.Tap("ButtonPlusAppMasterPageDetail");
+                app.Tap("ButtonNewForumAppMasterPageDetail");
                 app.DismissKeyboard();
                 app.ScrollDown();
-                app.Tap("PickerCursoUserRegistrationPage");
-                app.Tap("Engenharias");
-                app.Tap(e => e.Marked("ButtonConfirmarUserRegistrationPage"));
-                app.Tap(e => e.Marked("button1"));
-                Assert.IsNotNull("Registrar novo usuário");
+                app.Tap("ButtonCriarForumPageNewForunsPage");
+                Assert.IsNotNull(app.Query("O fóum não pôde ser criado"));
             }
 
             [Test]
-            public void ShowUser() {
-                app.Tap("USUÁRIOS");
-                app.WaitForElement("Ver detalhes");
-                app.Tap("Ver detalhes");
-                Assert.IsNotNull("Remover Usuário");
+            public void bListsForumsForAdministrators() {
+                app.Tap("Fóruns");
+                Assert.IsNotNull(app.Query("Forum Teste"));
             }
 
             [Test]
-            public void RemoveUser() {
-                app.Tap("USUÁRIOS");
-                app.Tap("Ver detalhes");
-                app.Tap("Remover Usuário");
-                app.Tap("SIM");
-                Assert.IsNotNull("OK");
+            public void cShowForumDetailForAdministrators() {
+                app.Tap("Fóruns");
+                app.Tap("Forum Teste");
+                Assert.IsNotNull(app.Query("Ver Fórum"));
             }
 
             [Test]
-            public void RemoveForum() {
+            public void dEditForum() {
+                app.Tap("ButtonForunsAppMasterPageDetail");
+                app.Tap("Forum Teste");
+                app.Tap("Editar Fórum");
+                app.ScrollDown();
+                app.ScrollDown();
+                app.Tap("Editar Forum");
+                Assert.IsNotNull(app.Query("O fórum foi editado com sucesso!"));
+            }
+
+            [Test]
+            public void fRemoveForum() {
                 app.Tap("ButtonForunsAppMasterPageDetail");
                 app.Tap(c => c.Marked("Ver detalhes"));
                 app.Tap("ButtonDeletarForumForumDetailPage");
@@ -94,25 +93,114 @@ namespace UnitTest.AutomatedTests {
             }
 
             [Test]
-            public void ListsFormsForAdministrators() {
+            public void gCreateNewForm() {
+                app.Tap(e => e.Marked("ButtonPlusAppMasterPageDetail"));
+                app.Tap("Criar Formulário");
+                app.EnterText("Título", "Formulario Teste");
+                app.ScrollDown();
+                app.Tap("Adicionar nova pergunta discursiva");
+                app.EnterText("Pergunta", "Pergunta teste");
+                app.Tap("Adicionar Pergunta");
+                app.ScrollDown();
+                app.Tap("Criar formulário");
+                Assert.IsNotNull("Formulário Criado");
+            }
+
+            [Test]
+            public void hListsFormsForAdministrators() {
                 app.Tap("Formulários");
                 Assert.IsNotNull(app.Query("Ver detalhes"));
             }
 
             [Test]
-            public void ShowFormDetailForAdministrators() {
+            public void iShowFormDetailForAdministrators() {
                 app.Tap("Formulários");
                 app.Tap("Ver detalhes");
                 Assert.IsNotNull(app.Query("Formulário"));
             }
 
             [Test]
-            public void DeleteForm() {
+            public void kRemoveForm() {
                 app.Tap("Formulários");
-                app.Tap("Ver detalhes");
+                app.Tap("Formulario Teste");
                 app.Tap("Deletar Formulário");
-                app.Tap("SIM");
-                Assert.IsNotNull(app.Query("Formulário Deletado !"));
+                app.Tap(c => c.Marked("Sim"));
+                Assert.IsNotNull("Formulário Deletado !");
+            }
+
+            [Test]
+            public void lUserRegistrationCoord() {
+                app.Tap(e => e.Marked("ButtonPlusAppMasterPageDetail"));
+                app.Tap(e => e.Marked("ButtonNewCoordenadorAppMasterPageDetail"));
+                app.EnterText("LabelNomeCompletoUserRegistrationPage", "Nome Teste");
+                app.EnterText("LabelEmailUserRegistrationPage", "teste@email.com");
+                app.EnterText("LabelMatriculaUserRegistrationPage", "246813579");
+                app.EnterText("LabelSenhaUserRegistrationPage", "Pb12345678");
+                app.DismissKeyboard();
+                app.ScrollDown();
+                app.Tap("PickerCursoUserRegistrationPage");
+                app.Tap("Engenharias");
+                app.Tap(e => e.Marked("ButtonConfirmarUserRegistrationPage"));
+                Assert.IsNotNull(app.Query("Você salvou um novo Coordenador com sucesso!"));
+            }
+
+            [Test]
+            public void mUserRegistrationAdmin() {
+                app.Tap(e => e.Marked("ButtonPlusAppMasterPageDetail"));
+                app.Tap(e => e.Marked("ButtonNewCoordenadorAppMasterPageDetail"));
+                app.EnterText("LabelNomeCompletoUserRegistrationPage", "Nome Teste");
+                app.EnterText("LabelEmailUserRegistrationPage", "teste@email.com");
+                app.EnterText("LabelMatriculaUserRegistrationPage", "146813579");
+                app.EnterText("LabelSenhaUserRegistrationPage", "Pb12345678");
+                app.DismissKeyboard();
+                app.ScrollDown();
+                app.Tap("Coordenador");
+                app.Tap("Administrador");
+                app.Tap(e => e.Marked("ButtonConfirmarUserRegistrationPage"));
+                Assert.IsNotNull(app.Query("Você salvou um novo adminstrador com sucesso! "));
+            }
+
+            public void mUserRegistrationUnsuccessfull() {
+                app.Tap(e => e.Marked("ButtonPlusAppMasterPageDetail"));
+                app.Tap(e => e.Marked("ButtonNewCoordenadorAppMasterPageDetail"));
+                app.ScrollDown();
+                app.Tap("PickerCursoUserRegistrationPage");
+                app.Tap("Engenharias");
+                app.Tap(e => e.Marked("ButtonConfirmarUserRegistrationPage"));
+                app.Repl();
+                //Assert.IsNotNull(app.Query("Você salvou um novo Coordenador com sucesso!"));
+            }
+
+            [Test]
+            public void nListsUsers() {
+                app.Tap("Usuários");
+                Assert.IsNotNull(app.Query("Nome Teste"));
+            }
+
+            [Test]
+            public void oShowUser() {
+                app.Tap("Usuários");
+                app.Tap("Nome Teste");
+                Assert.IsNotNull("Ver Usuário");
+            }
+
+            [Test]
+            public void pEditUser() {
+                app.Tap("Usuários");
+                app.Tap("Nome Teste");
+                app.Tap("Editar Usuário");
+                app.ScrollDown();
+                app.Tap("Confirmar");
+                Assert.IsNotNull("Usuário editado com sucesso!");
+            }
+
+            [Test]
+            public void qRemoveUser() {
+                app.Tap("Usuários");
+                app.Tap("Nome Teste");
+                app.Tap("Remover Usuário");
+                app.Tap("Sim");
+                Assert.IsNotNull("Usuário deletado");
             }
 
         }

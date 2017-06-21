@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="AutomatedTests\AdministratorAcceptionTest.cs" />
-    <None Include="AutomatedTests\AppInitializer.cs" />
+    <Compile Include="AutomatedTests\AdministratorAcceptionTest.cs" />
+    <Compile Include="AutomatedTests\AppInitializer.cs" />
     <None Include="AutomatedTests\CoordinatorAutomatedTest.cs" />
     <None Include="AutomatedTests\LoginAcceptanceTest.cs" />
     <Compile Include="UnitTests\AdministratorParserTests.cs" />
