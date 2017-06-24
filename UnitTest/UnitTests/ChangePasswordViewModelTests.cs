@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using ForumDEG.Interfaces;
+using ForumDEG.Models;
 using ForumDEG.ViewModels;
 using Moq;
 using NUnit.Framework;
@@ -18,6 +19,9 @@ namespace UnitTest.UnitTests {
             _viewmodel.CurrentPassword = "123456aA";
             _viewmodel.NewPassword = "123456bB";
             _viewmodel.RepeatedPassword = "123456bB";
+            _viewmodel.LoggedCoordinator = new Coordinator() {
+                Password = "123456aA"
+            };
         }
 
         [Test]
@@ -36,8 +40,8 @@ namespace UnitTest.UnitTests {
         }
 
         [Test]
-        public void ChangePasswordViewModelTests_VerifyActualPassword() {
-            _viewmodel.CurrentPassword = "123456aB";
+        public void ChangePasswordViewModelTests_VerifyCurrentPassword() {
+            _viewmodel.CurrentPassword = "123456aC";
             _viewmodel.ChangePasswordClickedCommand.Execute(null);
             Assert.IsNull(_viewmodel.ChangedCoordinator);
         }

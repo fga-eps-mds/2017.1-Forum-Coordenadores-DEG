@@ -11,7 +11,7 @@ using ForumDEG.Helpers;
 namespace ForumDEG.ViewModels {
     public class ChangePasswordViewModel {
         public Models.Coordinator ChangedCoordinator { get; private set; }
-        public Models.Coordinator LoggedCoordinator { get; private set; }
+        public Models.Coordinator LoggedCoordinator { get; set; }
 
         public ICommand ChangePasswordClickedCommand { get; private set; }
         public ICommand CancelClickedCommand { get; private set; }
