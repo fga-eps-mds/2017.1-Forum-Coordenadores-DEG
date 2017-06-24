@@ -37,6 +37,7 @@ namespace Tests {
             Assert.AreEqual(result, latestForum);
         }
 
+
         [Test()]
         public void CoordinatorMasterPageTests_GetLatestForum_WhenCalled_ShouldReturnNull_IfNoForumsAvailable() {
             Forum passedForum = new Forum {
@@ -99,5 +100,47 @@ namespace Tests {
         public void CoordinatorMasterPageTests_GetInstance() {
             Assert.IsInstanceOf<CoordinatorMasterPageViewModel>(CoordinatorMasterPageViewModel.GetInstance());
         }
+
+        [Test()]
+        public void CoordinatorMasterPageTests_GetLatestForm() {
+            Assert.Null(_viewModel.GetLatestForm(null));
+            Assert.Null(_viewModel.GetLatestForm(new List<Form>()));
+            List<Form> test = new List<Form>();
+            Form form = new Form();
+            test.Add(form);
+            Assert.AreSame(form,_viewModel.GetLatestForm(test));
+        }
+
+        [Test()]
+        public void CoordinatorMasterPageTests_SetLatestFormFields() {
+            Form form = null;
+            _viewModel.SetLatestFormFields(form);
+            Assert.False(_viewModel.FormVisibility);
+            Assert.True(_viewModel.NoFormWarning);
+            form = new Form();
+            form.Title = "teste";
+            form.MultipleChoiceQuestions = new List<MultipleChoiceQuestion>();
+            form.DiscursiveQuestions = new List<DiscursiveQuestion>();
+            _viewModel.SetLatestFormFields(form);
+            Assert.True(_viewModel.FormVisibility);
+            Assert.False(_viewModel.NoFormWarning);
+            Assert.AreEqual(form.Title, _viewModel.FormTitle);
+        }
+        [Test()]
+        public void CoordinatorMasterPageTests_ActivityIndicator_GetandSet() {
+            _viewModel.ActivityIndicator = true;
+            Assert.True(_viewModel.ActivityIndicator);
+            _viewModel.ActivityIndicator = false;
+            Assert.False(_viewModel.ActivityIndicator);
+        }
+
+        [Test()]
+        public void CoordinatorMasterPageTests_IsLoaded_GetandSet() {
+            _viewModel.IsLoaded = true;
+            Assert.True(_viewModel.IsLoaded);
+            _viewModel.IsLoaded = false;
+            Assert.False(_viewModel.IsLoaded);
+        }
+
     }
 }

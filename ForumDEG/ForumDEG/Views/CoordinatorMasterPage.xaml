@@ -49,6 +49,14 @@
                     </Label>
                 </StackLayout>
             </Frame>
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray" IsVisible="{Binding NoForumWarning, Mode=TwoWay}">
+                <StackLayout BackgroundColor="Transparent" Padding="5,5,0,25">
+                    <Label Text="Não há nenhum formulário disponível" 
+                       TextColor="White" FontSize="Large"
+                       HorizontalOptions="Start" VerticalOptions="StartAndExpand"
+                       BackgroundColor="Transparent"/>
+                </StackLayout>
+            </Frame>
             <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray" IsVisible="{Binding FormVisibility, Mode=TwoWay}">
                 <StackLayout BackgroundColor="Transparent" Padding="5,5,0,0">
                     <Label Text="{Binding FormTitle}" 

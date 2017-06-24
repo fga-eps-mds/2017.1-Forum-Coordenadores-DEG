@@ -234,18 +234,6 @@ namespace ForumDEG.ViewModels {
             return GetLatestForum(listForum);
         }
 
-        public async Task<Form> SelectNextForm() {
-            var listForm = await _formService.GetFormsAsync();
-
-            return GetLatestForm(listForm);
-        }
-
-        public Form GetLatestForm(List<Form> forms) {
-            if (forms.Count == 0)
-                return null;
-            return forms[0];
-        }
-
 
         public Forum GetLatestForum(List<Forum> forums) {
             ActivityIndicator = true;
@@ -268,13 +256,6 @@ namespace ForumDEG.ViewModels {
             return latestForum;
         }
 
-        public async void SelectForm() {
-            Debug.WriteLine("[SelectForm]");
-            Form latestForm = null;
-            latestForm = await SelectNextForm();
-
-            SetLatestFormFields(latestForm);
-        }
 
         public async void SelectForum() {
             Debug.WriteLine("[SelectForum]");
@@ -284,41 +265,6 @@ namespace ForumDEG.ViewModels {
             SetLatestForumFields(latestForum);
         }
 
-
-        public void SetLatestFormFields(Form latestForm) {
-     
-            if (latestForm == null) {
-                FormVisibility = false;
-                NoFormWarning = true;
-                Debug.WriteLine("[SelectForm]: noFormWarning is set to: " + _noFormWarning);
-            } else {
-                FormVisibility = true;
-                NoFormWarning = false;
-
-                FormTitle = latestForm.Title;
-                int size = latestForm.MultipleChoiceQuestions.Count + latestForm.DiscursiveQuestions.Count;
-
-                if (size > 1)
-                    FormQuestions = (size).ToString() + " Questões";
-                else
-                    FormQuestions = (size).ToString() + " Questão";
-            }
-
-            Debug.WriteLine("[SelectForm]: gets a non null forum");
-                Debug.WriteLine("[SelectForm]: title: " + FormTitle);
-                Debug.WriteLine("[SelectForm]: questions: " + FormQuestions);
-   
-
-                SelectedForm = new FormDetailViewModel(_pageService) {
-                    Title = latestForm.Title,
-                    MultipleChoiceQuestions = latestForm.MultipleChoiceQuestions,
-                    DiscursiveQuestions = latestForm.DiscursiveQuestions
-                };
-
-                IsLoaded = true;
-
-                Debug.WriteLine("[SelectNextForm]: title " + SelectedForm.Title);
-        }
 
 
         public void SetLatestForumFields(Forum latestForum) {
@@ -356,6 +302,60 @@ namespace ForumDEG.ViewModels {
                 Debug.WriteLine("[SelectNextForum]: place " + SelectedForum.Place);
                 Debug.WriteLine("[SelectNextForum]: schedules " + SelectedForum.Schedules);
             }
+        }
+
+        public async Task<Form> SelectNextForm() {
+            var listForm = await _formService.GetFormsAsync();
+
+            return GetLatestForm(listForm);
+        }
+
+        public Form GetLatestForm(List<Form> forms) {
+            if (forms == null)
+                return null;
+            if (forms.Count == 0)
+                return null;
+            return forms[0];
+        }
+
+        public async void SelectForm() {
+            Debug.WriteLine("[SelectForm]");
+            Form latestForm = null;
+            latestForm = await SelectNextForm();
+
+            SetLatestFormFields(latestForm);
+        }
+
+        public void SetLatestFormFields(Form latestForm) {
+
+            if (latestForm == null) {
+                FormVisibility = false;
+                NoFormWarning = true;
+                Debug.WriteLine("[SelectForm]: noFormWarning is set to: " + _noFormWarning);
+                return;
+            } else {
+                FormVisibility = true;
+                NoFormWarning = false;
+
+                FormTitle = latestForm.Title;
+                int size = latestForm.MultipleChoiceQuestions.Count + latestForm.DiscursiveQuestions.Count;
+                FormQuestions = (size).ToString() + " Questões";
+            }
+
+            Debug.WriteLine("[SelectForm]: gets a non null forum");
+            Debug.WriteLine("[SelectForm]: title: " + FormTitle);
+            Debug.WriteLine("[SelectForm]: questions: " + FormQuestions);
+
+
+            SelectedForm = new FormDetailViewModel(_pageService) {
+                Title = latestForm.Title,
+                MultipleChoiceQuestions = latestForm.MultipleChoiceQuestions,
+                DiscursiveQuestions = latestForm.DiscursiveQuestions
+            };
+
+            IsLoaded = true;
+
+            Debug.WriteLine("[SelectNextForm]: title " + SelectedForm.Title);
         }
 
         public async void SeeForumDetailPage() {
