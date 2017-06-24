@@ -10,75 +10,105 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using ForumDEG.Views.Forms;
 
 namespace ForumDEG.ViewModels {
     public class CoordinatorMasterPageViewModel : PageService, INotifyPropertyChanged {
-        private string _title;
-        public string Title {
+        private string _forumTitle;
+        public string ForumTitle {
             get {
-                return _title;
+                return _forumTitle;
             }
             set {
-                if (_title != value) {
-                    _title = value;
+                if (_forumTitle != value) {
+                    _forumTitle = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Title"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ForumTitle"));
                 }
             }
         }
 
-        private string _place;
-        public string Place {
+        private string _formTitle;
+        public string FormTitle {
             get {
-                return _place;
+                return _formTitle;
             }
             set {
-                if (_place != value) {
-                    _place = value;
+                if (_formTitle != value) {
+                    _formTitle = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Place"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormTitle"));
                 }
             }
         }
 
-        private string _schedules;
-        public string Schedules {
+        private string _formQuestions;
+        public string FormQuestions {
             get {
-                return _schedules;
+
+                return _formQuestions;
             }
             set {
-                if (_schedules != value) {
-                    _schedules = value;
+                if (_formQuestions != value) {
+                    _formQuestions = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Schedules"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormQuestions"));
                 }
             }
         }
 
-        private DateTime _date;
-        public DateTime Date {
+        private string _forumPlace;
+        public string ForumPlace {
             get {
-                return _date;
+                return _forumPlace;
             }
             set {
-                if (_date != value) {
-                    _date = value;
+                if (_forumPlace != value) {
+                    _forumPlace = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Date"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ForumPlace"));
                 }
             }
         }
 
-        private TimeSpan _hour;
-        public TimeSpan Hour {
+        private string _forumSchedules;
+        public string ForumSchedules {
             get {
-                return _hour;
+                return _forumSchedules;
             }
             set {
-                if (_hour != value) {
-                    _hour = value;
+                if (_forumSchedules != value) {
+                    _forumSchedules = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Hour"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ForumSchedules"));
+                }
+            }
+        }
+
+        private DateTime _forumDate;
+        public DateTime ForumDate {
+            get {
+                return _forumDate;
+            }
+            set {
+                if (_forumDate != value) {
+                    _forumDate = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ForumDate"));
+                }
+            }
+        }
+
+        private TimeSpan _forumHour;
+        public TimeSpan ForumHour {
+            get {
+                return _forumHour;
+            }
+            set {
+                if (_forumHour != value) {
+                    _forumHour = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ForumHour"));
                 }
             }
         }
@@ -97,6 +127,21 @@ namespace ForumDEG.ViewModels {
             }
         }
 
+
+        private bool _formVisibility;
+        public bool FormVisibility {
+            get {
+                return _formVisibility;
+            }
+            set {
+                if (_formVisibility != value) {
+                    _formVisibility = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormVisibility"));
+                }
+            }
+        }
+
         private bool _noForumWarning;
         public bool NoForumWarning {
             get {
@@ -107,6 +152,20 @@ namespace ForumDEG.ViewModels {
                     _noForumWarning = value;
 
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NoForumWarning"));
+                }
+            }
+        }
+
+        private bool _noFormWarning;
+        public bool NoFormWarning {
+            get {
+                return _noFormWarning;
+            }
+            set {
+                if (_noFormWarning != value) {
+                    _noFormWarning = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NoFormWarning"));
                 }
             }
         }
@@ -142,11 +201,14 @@ namespace ForumDEG.ViewModels {
         private static CoordinatorMasterPageViewModel _instance = null;
         public ObservableCollection<ForumDetailViewModel> Forums { get; private set; }
         public ForumDetailViewModel SelectedForum { get; private set; }
+        public FormDetailViewModel SelectedForm { get; private set; }
         private readonly IPageService _pageService;
         private readonly Helpers.Forum _forumService;
+        private readonly Helpers.Form _formService;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public ICommand DetailPageCommand { get; set; }
+        public ICommand ForumDetailPageCommand { get; set; }
+        public ICommand FormDetailPageCommand { get; set; }
 
         public CoordinatorMasterPageViewModel(IPageService pageService) {
             ForumVisibility = false;
@@ -155,7 +217,9 @@ namespace ForumDEG.ViewModels {
             IsLoaded = false;
             _pageService = pageService;
             _forumService = new Helpers.Forum();
-            DetailPageCommand = new Command(SeeDetailPage);
+            _formService = new Helpers.Form();
+            ForumDetailPageCommand = new Command(SeeForumDetailPage);
+            FormDetailPageCommand = new Command(SeeFormDetailPage);
         }
 
         public static CoordinatorMasterPageViewModel GetInstance() {
@@ -169,6 +233,7 @@ namespace ForumDEG.ViewModels {
 
             return GetLatestForum(listForum);
         }
+
 
         public Forum GetLatestForum(List<Forum> forums) {
             ActivityIndicator = true;
@@ -191,6 +256,7 @@ namespace ForumDEG.ViewModels {
             return latestForum;
         }
 
+
         public async void SelectForum() {
             Debug.WriteLine("[SelectForum]");
             Forum latestForum = null;
@@ -198,6 +264,8 @@ namespace ForumDEG.ViewModels {
 
             SetLatestForumFields(latestForum);
         }
+
+
 
         public void SetLatestForumFields(Forum latestForum) {
             if (latestForum == null) {
@@ -208,16 +276,16 @@ namespace ForumDEG.ViewModels {
                 ForumVisibility = true;
                 NoForumWarning = false;
 
-                Title = latestForum.Title;
-                Place = latestForum.Place;
-                Schedules = latestForum.Schedules;
-                Date = latestForum.Date;
-                Hour = latestForum.Hour;
+                ForumTitle = latestForum.Title;
+                ForumPlace = latestForum.Place;
+                ForumSchedules = latestForum.Schedules;
+                ForumDate = latestForum.Date;
+                ForumHour = latestForum.Hour;
 
                 Debug.WriteLine("[SelectForum]: gets a non null forum");
-                Debug.WriteLine("[SelectForum]: title: " + Title);
-                Debug.WriteLine("[SelectForum]: place: " + Place);
-                Debug.WriteLine("[SelectForum]: schedules: " + Schedules);
+                Debug.WriteLine("[SelectForum]: title: " + ForumTitle);
+                Debug.WriteLine("[SelectForum]: place: " + ForumPlace);
+                Debug.WriteLine("[SelectForum]: schedules: " + ForumSchedules);
 
                 SelectedForum = new ForumDetailViewModel(_pageService) {
                     Title = latestForum.Title,
@@ -236,9 +304,68 @@ namespace ForumDEG.ViewModels {
             }
         }
 
-        public async void SeeDetailPage() {
-            Debug.WriteLine("[Coord. Main] - Inside SeeDetailPage");
+        public async Task<Form> SelectNextForm() {
+            var listForm = await _formService.GetFormsAsync();
+
+            return GetLatestForm(listForm);
+        }
+
+        public Form GetLatestForm(List<Form> forms) {
+            if (forms == null)
+                return null;
+            if (forms.Count == 0)
+                return null;
+            return forms[0];
+        }
+
+        public async void SelectForm() {
+            Debug.WriteLine("[SelectForm]");
+            Form latestForm = null;
+            latestForm = await SelectNextForm();
+
+            SetLatestFormFields(latestForm);
+        }
+
+        public void SetLatestFormFields(Form latestForm) {
+
+            if (latestForm == null) {
+                FormVisibility = false;
+                NoFormWarning = true;
+                Debug.WriteLine("[SelectForm]: noFormWarning is set to: " + _noFormWarning);
+                return;
+            } else {
+                FormVisibility = true;
+                NoFormWarning = false;
+
+                FormTitle = latestForm.Title;
+                int size = latestForm.MultipleChoiceQuestions.Count + latestForm.DiscursiveQuestions.Count;
+                FormQuestions = (size).ToString() + " Questões";
+            }
+
+            Debug.WriteLine("[SelectForm]: gets a non null forum");
+            Debug.WriteLine("[SelectForm]: title: " + FormTitle);
+            Debug.WriteLine("[SelectForm]: questions: " + FormQuestions);
+
+
+            SelectedForm = new FormDetailViewModel(_pageService) {
+                Title = latestForm.Title,
+                MultipleChoiceQuestions = latestForm.MultipleChoiceQuestions,
+                DiscursiveQuestions = latestForm.DiscursiveQuestions
+            };
+
+            IsLoaded = true;
+
+            Debug.WriteLine("[SelectNextForm]: title " + SelectedForm.Title);
+        }
+
+        public async void SeeForumDetailPage() {
+            Debug.WriteLine("[Coord. Main] - Inside SeeForumDetailPage");
             await _pageService.PushAsync(new ForumDetailPage(SelectedForum));
         }
+        public async void SeeFormDetailPage() {
+            Debug.WriteLine("[Coord. Main] - Inside SeeFormDetailPage");
+            await _pageService.PushAsync(new FormDetailPage(SelectedForm));
+        }
+
     }
 }
