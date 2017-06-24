@@ -88,11 +88,11 @@ namespace Tests {
             };
             _viewModel.SetLatestForumFields(latestForum);
 
-            Assert.AreEqual(latestForum.Title, _viewModel.Title);
-            Assert.AreEqual(latestForum.Place, _viewModel.Place);
-            Assert.AreEqual(latestForum.Schedules, _viewModel.Schedules);
-            Assert.AreEqual(latestForum.Date, _viewModel.Date);
-            Assert.AreEqual(latestForum.Hour, _viewModel.Hour);
+            Assert.AreEqual(latestForum.Title, _viewModel.ForumTitle);
+            Assert.AreEqual(latestForum.Place, _viewModel.ForumPlace);
+            Assert.AreEqual(latestForum.Schedules, _viewModel.ForumSchedules);
+            Assert.AreEqual(latestForum.Date, _viewModel.ForumDate);
+            Assert.AreEqual(latestForum.Hour, _viewModel.ForumHour);
             Assert.NotNull(_viewModel.SelectedForum);
         }
         [Test()]

@@ -18,6 +18,7 @@ namespace ForumDEG.Views {
             ViewModel = CoordinatorMasterPageViewModel.GetInstance();
             BindingContext = ViewModel;
             ViewModel.SelectForum();
+            ViewModel.SelectForm();
             Debug.WriteLine("[CoordinatorMasterPage]: goes to select forum");
             InitializeComponent();  
         }

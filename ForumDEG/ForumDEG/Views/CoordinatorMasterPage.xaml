@@ -26,15 +26,15 @@
             </Frame>
             <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray" IsVisible="{Binding ForumVisibility, Mode=TwoWay}">
                 <StackLayout BackgroundColor="Transparent" Padding="5,5,0,0">
-                    <Label Text="{Binding Title}" 
+                    <Label Text="{Binding ForumTitle}" 
                        TextColor="White" FontSize="Large"
                        HorizontalOptions="Start" VerticalOptions="StartAndExpand"
                        BackgroundColor="Transparent"/>
-                    <Label Text="{Binding Date, StringFormat='Data {0:dd/MM/yyyy}'}"
+                    <Label Text="{Binding ForumDate, StringFormat='Data {0:dd/MM/yyyy}'}"
                        TextColor="White"
                        HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                        BackgroundColor="Transparent"/>
-                    <Label Text="{Binding Hour, StringFormat='Horário {0}'}" 
+                    <Label Text="{Binding ForumHour, StringFormat='Horário {0}'}" 
                         TextColor="White"
                         HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
                         BackgroundColor="Transparent"/>
@@ -43,24 +43,28 @@
                            HorizontalOptions="End" VerticalOptions="CenterAndExpand">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding DetailPageCommand }"
+                                Command="{Binding ForumDetailPageCommand }"
                                 NumberOfTapsRequired="1"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
             </Frame>
-            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray">
+            <Frame OutlineColor="Black" HasShadow="True" BackgroundColor="LightGray" IsVisible="{Binding FormVisibility, Mode=TwoWay}">
                 <StackLayout BackgroundColor="Transparent" Padding="5,5,0,0">
-                    <Label Text="Há um novo formulário disponível" 
+                    <Label Text="{Binding FormTitle}" 
                        TextColor="White" FontSize="Large"
                        HorizontalOptions="Start" VerticalOptions="StartAndExpand"
-                       BackgroundColor="Transparent" />
-                    <Label Text="Responder"
+                       BackgroundColor="Transparent"/>
+                    <Label Text="{Binding FormQuestions}"
+                       TextColor="White"
+                       HorizontalOptions="Start" VerticalOptions="CenterAndExpand"
+                       BackgroundColor="Transparent"/>
+                    <Label Text="Ver Detalhes"
                            TextColor="White"
                            HorizontalOptions="End" VerticalOptions="CenterAndExpand">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command=""
+                                Command="{Binding FormDetailPageCommand }"
                                 NumberOfTapsRequired="1"/>
                         </Label.GestureRecognizers>
                     </Label>
