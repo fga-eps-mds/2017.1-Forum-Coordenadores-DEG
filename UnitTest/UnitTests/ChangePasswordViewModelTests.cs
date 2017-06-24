@@ -1,14 +1,8 @@
 ﻿using Acr.UserDialogs;
 using ForumDEG.Interfaces;
-using ForumDEG.Models;
 using ForumDEG.ViewModels;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnitTest.UnitTests {
     class ChangePasswordViewModelTests {
@@ -21,62 +15,44 @@ namespace UnitTest.UnitTests {
             _pageService = new Mock<IPageService>();
             _dialog = new Mock<IUserDialogs>();
             _viewmodel = new ChangePasswordViewModel(_pageService.Object, _dialog.Object);
-            _viewmodel._actualPassword = "123456aA";
-            _viewmodel._newPassword = "123456bB";
-            _viewmodel._repeatedPassword = "123456bB";
+            _viewmodel.CurrentPassword = "123456aA";
+            _viewmodel.NewPassword = "123456bB";
+            _viewmodel.RepeatedPassword = "123456bB";
         }
 
-        [Test]
-        public void ChangePasswordViewModelTests_GetLoggedUser() {
-            Coordinator LoggedUser = new Coordinator();
-            LoggedUser.Id = 123;
-            LoggedUser.Course = "Engenharia";
-            LoggedUser.Email = "email@email.com";
-            LoggedUser.Name = "Marigué";
-            LoggedUser.Password = "123456aA";
-            LoggedUser.Registration = "150151624";
-
-            Assert.AreEqual(LoggedUser.Registration, _viewmodel.User.Registration);
-        }
         [Test]
         public void ChangePasswordViewModelTests_ValidateFields() {
-            _viewmodel._newPassword = " ";
-            _viewmodel._repeatedPassword = " ";
+            _viewmodel.NewPassword = " ";
+            _viewmodel.RepeatedPassword = " ";
             _viewmodel.ChangePasswordClickedCommand.Execute(null);
-            Assert.AreNotEqual(_viewmodel.User.Password, _viewmodel._newPassword);
+            Assert.IsNull(_viewmodel.ChangedCoordinator);
         }
 
         [Test]
         public void ChangePasswordViewModelTests_MatchPasswords() {
-            _viewmodel._repeatedPassword = "123456bN";
+            _viewmodel.RepeatedPassword = "123456bN";
             _viewmodel.ChangePasswordClickedCommand.Execute(null);
-            Assert.AreNotEqual(_viewmodel.User.Password, _viewmodel._newPassword);
+            Assert.IsNull(_viewmodel.ChangedCoordinator);
         }
 
         [Test]
         public void ChangePasswordViewModelTests_VerifyActualPassword() {
-            _viewmodel._actualPassword = "123456aB";
+            _viewmodel.CurrentPassword = "123456aB";
             _viewmodel.ChangePasswordClickedCommand.Execute(null);
-            Assert.AreNotEqual(_viewmodel.User.Password, _viewmodel._newPassword);
+            Assert.IsNull(_viewmodel.ChangedCoordinator);
         }
 
         [Test]
         public void ChangePasswordViewModelTests_ValidatePassword() {
-            _viewmodel._newPassword = "123456bb";
-            _viewmodel._repeatedPassword = "123456bb";
+            _viewmodel.NewPassword = "123456bb";
+            _viewmodel.RepeatedPassword = "123456bb";
             _viewmodel.ChangePasswordClickedCommand.Execute(null);
-            Assert.AreNotEqual(_viewmodel.User.Password, _viewmodel._newPassword);
+            Assert.IsNull(_viewmodel.ChangedCoordinator);
 
-            _viewmodel._newPassword = "1234Bb";
-            _viewmodel._repeatedPassword = "1234Bb";
+            _viewmodel.NewPassword = "1234Bb";
+            _viewmodel.RepeatedPassword = "1234Bb";
             _viewmodel.ChangePasswordClickedCommand.Execute(null);
-            Assert.AreNotEqual(_viewmodel.User.Password, _viewmodel._newPassword);
-        }
-
-        [Test]
-        public void ChangePasswordViewModelTests_UpdatePassword() {
-            _viewmodel.ChangePasswordClickedCommand.Execute(null);
-            Assert.AreEqual(_viewmodel.User.Password, _viewmodel._newPassword);
+            Assert.IsNull(_viewmodel.ChangedCoordinator);
         }
     }
 }
