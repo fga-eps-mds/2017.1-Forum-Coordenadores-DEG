@@ -209,6 +209,8 @@ namespace ForumDEG.ViewModels {
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand ForumDetailPageCommand { get; set; }
         public ICommand FormDetailPageCommand { get; set; }
+        public ICommand ChangePasswordCommand { get; set; }
+        public ICommand DetailPageCommand { get; set; }
 
         public CoordinatorMasterPageViewModel(IPageService pageService) {
             ForumVisibility = false;
@@ -220,6 +222,7 @@ namespace ForumDEG.ViewModels {
             _formService = new Helpers.Form();
             ForumDetailPageCommand = new Command(SeeForumDetailPage);
             FormDetailPageCommand = new Command(SeeFormDetailPage);
+            ChangePasswordCommand = new Command(async () => await ChangePassword());
         }
 
         public static CoordinatorMasterPageViewModel GetInstance() {
@@ -367,5 +370,10 @@ namespace ForumDEG.ViewModels {
             await _pageService.PushAsync(new FormDetailPage(SelectedForm));
         }
 
+
+        private async Task ChangePassword() {
+            Debug.WriteLine("[Coord. Main] - Inside ChangePassword");
+            await _pageService.PushAsync(new ChangePasswordPage());
+        }
     }
 }

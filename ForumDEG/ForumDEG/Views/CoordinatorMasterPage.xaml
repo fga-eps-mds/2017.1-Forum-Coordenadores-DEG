@@ -95,6 +95,16 @@
                     </Label>
                 </StackLayout>
             </Frame>
+
+            <Label Text="Alterar senha" TextColor="#3366BB" FontSize="Small"
+                                   HorizontalOptions="EndAndExpand" 
+                                   BackgroundColor="White"
+                                   AutomationId="LabelAlterarSenha">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangePasswordCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
