@@ -37,6 +37,7 @@ namespace ForumDEG.ViewModels {
         public bool IsPast { get; private set; }
         public int Registration { get; set; }
         public string RemoteId { get; set; }
+        public string Confirmations { get; set; }
 
         public bool IsCurrentUserAdmin => Helpers.Settings.IsUserAdmin;
         public bool IsCurrentUserCoord => Helpers.Settings.IsUserCoord;

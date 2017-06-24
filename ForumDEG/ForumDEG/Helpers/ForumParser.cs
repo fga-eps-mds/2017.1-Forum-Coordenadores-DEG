@@ -10,7 +10,7 @@ namespace ForumDEG.Helpers {
     public class ForumParser {
         public static Models.Forum GetForumParser(string content, string id) {
             var obj = JObject.Parse(content);
-
+            
             string title = obj["theme"].ToString();
             string place = obj["place"].ToString();
             string schedules = obj["schedules"].ToString();
@@ -24,14 +24,14 @@ namespace ForumDEG.Helpers {
             Debug.WriteLine("[Forum API]: Forum schedules:" + schedules);
             Debug.WriteLine("[Forum API]: Forum date:" + date.ToString());
             Debug.WriteLine("[Forum API]: Forum hour:" + hour.ToString(@"hh\:mm\:ss"));
-
+            
             Models.Forum forum = new Models.Forum {
                 Title = title,
                 Place = place,
                 Schedules = schedules,
                 Date = date,
                 Hour = hour,
-                RemoteId = remoteId
+                RemoteId = remoteId,
             };
 
             return forum;
@@ -42,6 +42,10 @@ namespace ForumDEG.Helpers {
             var objArray = JArray.Parse(content);
 
             foreach (JObject obj in objArray) {
+                int confirmations = 0;
+                if (obj["coordinators"] != null) {
+                    confirmations = obj["coordinators"].ToObject<int>();
+                }
                 string title = obj["theme"].ToString();
                 string place = obj["place"].ToString();
                 string schedules = obj["schedules"].ToString();
@@ -62,7 +66,8 @@ namespace ForumDEG.Helpers {
                     Schedules = schedules,
                     Date = date,
                     Hour = hour,
-                    RemoteId = remoteId
+                    RemoteId = remoteId,
+                    Confirmations = confirmations
                 });
             }
 

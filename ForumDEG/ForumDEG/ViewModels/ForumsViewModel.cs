@@ -97,12 +97,13 @@ namespace ForumDEG.ViewModels {
                 var forumsList = await _forumService.GetForumsAsync();
 
                 foreach (Forum forum in forumsList) {
-                    Forums.Add(new ForumDetailViewModel (new PageService()) {
+                    Forums.Add(new ForumDetailViewModel(new PageService()) {
                         Title = forum.Title,
                         Place = forum.Place,
                         Schedules = forum.Schedules,
                         Date = forum.Date,
                         Hour = forum.Hour,
+                        Confirmations = forum.Confirmations.ToString(),
                         Registration = forum.Id, // local id
                         RemoteId = forum.RemoteId // remote id, ideally should only use this one
                     });

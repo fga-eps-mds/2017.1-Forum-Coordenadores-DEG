@@ -34,7 +34,7 @@
                                HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                         <Label Text="{Binding Place, StringFormat='Local: {0}'}" TextColor="Gray"
                                HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                        <Label Text="Presença"  TextColor="Gray" HorizontalOptions="Start"
+                        <Label Text="{Binding Confirmations, StringFormat='{0} coordenador(es) comparecerão.'}"  TextColor="Gray" HorizontalOptions="Start"
                                VerticalOptions="EndAndExpand"/>
                     </StackLayout>
 
